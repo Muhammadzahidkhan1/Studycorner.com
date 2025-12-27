@@ -275,238 +275,510 @@
             opacity: 0.8;
         }
 
-        /* ========== SUBJECTS PAGE ========== */
-        .subjects-page {
-            padding: 3rem 0;
-            min-height: 70vh;
-        }
-
-        .subject-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .subject-header h1 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 1rem;
-        }
-
-        .subject-header p {
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .resource-card {
+        /* ========== FEATURES ========== */
+        .features {
+            padding: 5rem 0;
             background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
             border-radius: var(--radius);
-            overflow: hidden;
+            text-align: center;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            border: 2px solid transparent;
         }
 
-        .resource-card:hover {
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary), #2ecc71);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .feature-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        /* ========== SUBJECTS ========== */
+        .subjects {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .subject-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            text-decoration: none;
+            color: var(--text);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+        }
+
+        .subject-card.biology::before { background: #27ae60; }
+        .subject-card.chemistry::before { background: #3498db; }
+        .subject-card.physics::before { background: #9b59b6; }
+        .subject-card.english::before { background: #e74c3c; }
+
+        .subject-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
-        .resource-icon {
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .subject-card i {
             font-size: 3rem;
-        }
-
-        .resource-icon.pdf { background: #e74c3c; color: white; }
-        .resource-icon.video { background: #3498db; color: white; }
-        .resource-icon.note { background: #27ae60; color: white; }
-        .resource-icon.book { background: #9b59b6; color: white; }
-
-        .resource-content {
-            padding: 1.5rem;
-        }
-
-        .resource-content h3 {
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-
-        .resource-content p {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            min-height: 40px;
-        }
-
-        .resource-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: var(--text-light);
             margin-bottom: 1rem;
         }
 
-        .resource-actions {
-            display: flex;
-            gap: 1rem;
+        .subject-card.biology i { color: #27ae60; }
+        .subject-card.chemistry i { color: #3498db; }
+        .subject-card.physics i { color: #9b59b6; }
+        .subject-card.english i { color: #e74c3c; }
+
+        /* ========== TESTS LIST PAGE ========== */
+        .tests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
         }
 
-        .btn-download, .btn-view {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: var(--transition);
-        }
-
-        .btn-download {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .btn-view {
-            background: var(--light);
-            color: var(--text);
-        }
-
-        .btn-download:hover {
-            background: #2980b9;
-        }
-
-        .btn-view:hover {
-            background: var(--border);
-        }
-
-        /* ========== ADMIN CONTENT UPLOAD ========== */
-        .upload-container {
+        .test-card {
             background: white;
             border-radius: var(--radius);
             padding: 2rem;
             box-shadow: var(--shadow);
-            margin-bottom: 2rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
         }
 
-        .upload-header {
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--border);
+        .test-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
-        .upload-form {
-            display: grid;
-            gap: 1.5rem;
+        .test-card.completed {
+            border-color: var(--success);
+            background: linear-gradient(to right, rgba(39, 174, 96, 0.05), white);
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+        .test-card.in-progress {
+            border-color: var(--warning);
+            background: linear-gradient(to right, rgba(243, 156, 18, 0.05), white);
         }
 
-        .form-group {
-            margin-bottom: 0;
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
         }
 
-        .form-group.full-width {
-            grid-column: 1 / -1;
+        .test-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
 
-        .file-upload {
-            border: 2px dashed var(--border);
+        .badge-biology { background: rgba(39, 174, 96, 0.2); color: #27ae60; }
+        .badge-chemistry { background: rgba(52, 152, 219, 0.2); color: #3498db; }
+        .badge-physics { background: rgba(155, 89, 182, 0.2); color: #9b59b6; }
+        .badge-english { background: rgba(231, 76, 60, 0.2); color: #e74c3c; }
+        .badge-mixed { background: rgba(241, 196, 15, 0.2); color: #f1c40f; }
+
+        .test-difficulty {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .difficulty-easy { color: #27ae60; }
+        .difficulty-medium { color: #f39c12; }
+        .difficulty-hard { color: #e74c3c; }
+
+        .test-stats {
+            display: flex;
+            gap: 2rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .test-stats span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .test-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ========== QUIZ PAGE ========== */
+        .quiz-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: white;
             border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .quiz-header {
+            background: var(--dark);
+            color: white;
             padding: 2rem;
             text-align: center;
+        }
+
+        .test-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .quiz-progress-container {
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            margin: 1rem 0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .quiz-progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary), #2ecc71);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .question-counter {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .question-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
             cursor: pointer;
             transition: var(--transition);
         }
 
-        .file-upload:hover {
+        .question-dot.answered {
+            background: var(--success);
+        }
+
+        .question-dot.current {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        .question-dot.skipped {
+            background: var(--warning);
+        }
+
+        .quiz-body {
+            padding: 2rem;
+        }
+
+        .question {
+            margin-bottom: 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .question-number {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .option {
+            padding: 18px 20px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+        }
+
+        .option:hover {
             border-color: var(--secondary);
             background: rgba(52, 152, 219, 0.05);
+            transform: translateX(5px);
         }
 
-        .file-upload i {
-            font-size: 3rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
+        .option.selected {
+            border-color: var(--secondary);
+            background: rgba(52, 152, 219, 0.1);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.1);
         }
 
-        .file-info {
-            margin-top: 1rem;
-            padding: 1rem;
+        .option.correct {
+            border-color: var(--success);
+            background: rgba(39, 174, 96, 0.1);
+        }
+
+        .option.incorrect {
+            border-color: var(--accent);
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .option-letter {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
             background: var(--light);
-            border-radius: var(--radius);
-            display: none;
+            color: var(--dark);
+            flex-shrink: 0;
         }
 
-        .file-info.show {
-            display: block;
+        .option.selected .option-letter {
+            background: var(--secondary);
+            color: white;
         }
 
-        .preview-container {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: var(--light);
-            border-radius: var(--radius);
-            display: none;
+        .quiz-footer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9f9f9;
         }
 
-        .preview-container.show {
-            display: block;
+        .time-remaining {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+            font-weight: 500;
         }
 
-        .content-list {
-            margin-top: 2rem;
+        .time-remaining i {
+            color: var(--accent);
         }
 
-        .search-box {
-            margin-bottom: 1.5rem;
+        .quiz-actions {
             display: flex;
             gap: 1rem;
         }
 
-        .search-box input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 2px solid var(--border);
+        /* ========== RESULTS PAGE ========== */
+        .results-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
             border-radius: var(--radius);
-            font-family: inherit;
+            box-shadow: var(--shadow);
+            overflow: hidden;
         }
 
-        .filter-buttons {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 8px 16px;
-            background: var(--light);
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .filter-btn.active {
-            background: var(--secondary);
+        .results-header {
+            background: linear-gradient(135deg, var(--secondary), #2ecc71);
             color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            border: 5px solid rgba(255,255,255,0.3);
+        }
+
+        .score-percentage {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .score-text {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .results-body {
+            padding: 2rem;
+        }
+
+        .results-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            background: var(--light);
+        }
+
+        .stat-box h4 {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-box .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .detailed-results {
+            margin-top: 2rem;
+        }
+
+        .question-review {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+
+        .question-review.correct {
+            border-left: 5px solid var(--success);
+            background: rgba(39, 174, 96, 0.05);
+        }
+
+        .question-review.incorrect {
+            border-left: 5px solid var(--accent);
+            background: rgba(231, 76, 60, 0.05);
+        }
+
+        .question-review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .question-status {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-correct { background: rgba(39, 174, 96, 0.2); color: #27ae60; }
+        .status-incorrect { background: rgba(231, 76, 60, 0.2); color: #e74c3c; }
+
+        .results-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
         }
 
         /* ========== LOGIN PAGE ========== */
@@ -737,19 +1009,6 @@
             color: white;
         }
 
-        .btn-add {
-            background: var(--success);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-        }
-
         /* ========== ADMIN DASHBOARD ========== */
         .admin-grid {
             display: grid;
@@ -790,80 +1049,6 @@
         .admin-content {
             padding: 2rem;
             background: #f8f9fa;
-        }
-
-        /* ========== QUIZ PAGE ========== */
-        .quiz-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            background: white;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-
-        .quiz-header {
-            background: var(--dark);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .quiz-progress {
-            height: 5px;
-            background: rgba(255,255,255,0.2);
-            margin: 1rem 0;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: var(--secondary);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .quiz-body {
-            padding: 2rem;
-        }
-
-        .question {
-            margin-bottom: 2rem;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .option {
-            padding: 15px 20px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .option:hover {
-            border-color: var(--secondary);
-            background: rgba(52, 152, 219, 0.05);
-        }
-
-        .option.selected {
-            border-color: var(--secondary);
-            background: rgba(52, 152, 219, 0.1);
-        }
-
-        .quiz-footer {
-            padding: 2rem;
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
         }
 
         /* ========== FOOTER ========== */
@@ -908,6 +1093,16 @@
             font-size: 0.9rem;
         }
 
+        .footer-bottom a {
+            color: #ddd;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--secondary);
+        }
+
         /* ========== RESPONSIVE ========== */
         @media (max-width: 992px) {
             .hero .container {
@@ -922,15 +1117,15 @@
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
-
+            
             .dashboard-grid {
                 grid-template-columns: 1fr;
             }
-
+            
             .admin-grid {
                 grid-template-columns: 1fr;
             }
-
+            
             .admin-sidebar {
                 display: none;
             }
@@ -957,13 +1152,27 @@
             .nav-links.active {
                 left: 0;
             }
-
-            .resources-grid {
-                grid-template-columns: 1fr;
+            
+            .auth-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
             }
-
-            .form-row {
-                grid-template-columns: 1fr;
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .quiz-actions {
+                flex-direction: column;
+            }
+            
+            .results-stats {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
@@ -986,49 +1195,14 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        /* ========== MODAL ========== */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1001;
-            align-items: center;
-            justify-content: center;
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
-        .modal.show {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: var(--radius);
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-light);
+        .pulse {
+            animation: pulse 2s infinite;
         }
 
         /* ========== UTILITY ========== */
@@ -1039,6 +1213,11 @@
         .mb-2 { margin-bottom: 2rem; }
         .p-1 { padding: 1rem; }
         .p-2 { padding: 2rem; }
+        .d-flex { display: flex; }
+        .justify-between { justify-content: space-between; }
+        .align-center { align-items: center; }
+        .gap-1 { gap: 1rem; }
+        .w-100 { width: 100%; }
     </style>
 </head>
 <body>
@@ -1052,7 +1231,7 @@
             <div class="nav-links">
                 <a onclick="showPage('home')" class="active"><i class="fas fa-home"></i> Home</a>
                 <a onclick="showPage('subjects')"><i class="fas fa-dna"></i> Subjects</a>
-                <a onclick="showPage('quiz')"><i class="fas fa-file-alt"></i> Tests</a>
+                <a onclick="showPage('tests')"><i class="fas fa-file-alt"></i> Tests</a>
                 <a onclick="showPage('resources')"><i class="fas fa-video"></i> Resources</a>
                 <a onclick="showPage('contact')"><i class="fas fa-phone-alt"></i> Contact</a>
                 <div class="auth-buttons">
@@ -1077,16 +1256,16 @@
                     <p>Comprehensive study materials, interactive tests, and expert guidance for Pakistan's Medical & Dental College Admission Test</p>
                     <div class="hero-buttons">
                         <button onclick="showPage('register')" class="btn-primary">Start Free Trial</button>
-                        <button onclick="showPage('quiz')" class="btn-secondary">Take Demo Test</button>
+                        <button onclick="showPage('tests')" class="btn-secondary">Take Practice Test</button>
                     </div>
                     <div class="stats">
                         <div class="stat">
                             <h3 id="stat1">0</h3>
-                            <p>Successful Students</p>
+                            <p>Practice Tests</p>
                         </div>
                         <div class="stat">
                             <h3 id="stat2">0</h3>
-                            <p>Practice Questions</p>
+                            <p>MCQ Questions</p>
                         </div>
                         <div class="stat">
                             <h3 id="stat3">0</h3>
@@ -1094,7 +1273,7 @@
                         </div>
                         <div class="stat">
                             <h3 id="stat4">0%</h3>
-                            <p>Satisfaction Rate</p>
+                            <p>Success Rate</p>
                         </div>
                     </div>
                 </div>
@@ -1104,33 +1283,70 @@
             </div>
         </section>
 
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Why Choose Our Platform?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>200+ Practice Tests</h3>
+                        <p>20 different test series with 10 questions each for comprehensive preparation</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Detailed Analytics</h3>
+                        <p>Track your progress with comprehensive performance reports and analytics</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>Video Solutions</h3>
+                        <p>HD video explanations for all test questions by expert medical educators</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Competitive Ranking</h3>
+                        <p>Compete with thousands of students and track your national ranking</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Subjects Section -->
         <section class="subjects">
             <div class="container">
                 <h2 class="section-title">MDCAT Subjects</h2>
                 <div class="subjects-grid">
-                    <div class="subject-card biology" onclick="showSubjectPage('biology')">
+                    <div class="subject-card biology" onclick="showPage('biology')">
                         <i class="fas fa-dna"></i>
                         <h3>Biology</h3>
-                        <p>200+ Topics • 1500+ Questions</p>
+                        <p>8 Practice Tests • 80 MCQs</p>
                         <span class="progress">Start Learning →</span>
                     </div>
-                    <div class="subject-card chemistry" onclick="showSubjectPage('chemistry')">
+                    <div class="subject-card chemistry" onclick="showPage('chemistry')">
                         <i class="fas fa-flask"></i>
                         <h3>Chemistry</h3>
-                        <p>180+ Topics • 1200+ Questions</p>
+                        <p>6 Practice Tests • 60 MCQs</p>
                         <span class="progress">Start Learning →</span>
                     </div>
-                    <div class="subject-card physics" onclick="showSubjectPage('physics')">
+                    <div class="subject-card physics" onclick="showPage('physics')">
                         <i class="fas fa-atom"></i>
                         <h3>Physics</h3>
-                        <p>150+ Topics • 1000+ Questions</p>
+                        <p>4 Practice Tests • 40 MCQs</p>
                         <span class="progress">Start Learning →</span>
                     </div>
-                    <div class="subject-card english" onclick="showSubjectPage('english')">
+                    <div class="subject-card english" onclick="showPage('english')">
                         <i class="fas fa-language"></i>
                         <h3>English</h3>
-                        <p>100+ Topics • 800+ Questions</p>
+                        <p>2 Practice Tests • 20 MCQs</p>
                         <span class="progress">Start Learning →</span>
                     </div>
                 </div>
@@ -1158,17 +1374,17 @@
                         <h4>Quick Links</h4>
                         <a onclick="showPage('home')">Home</a>
                         <a onclick="showPage('subjects')">Subjects</a>
-                        <a onclick="showPage('quiz')">Practice Tests</a>
-                        <a onclick="showPage('resources')">Video Library</a>
+                        <a onclick="showPage('tests')">Practice Tests</a>
                         <a onclick="showPage('dashboard')">Student Dashboard</a>
+                        <a onclick="showPage('results')">Test Results</a>
                     </div>
                     <div class="footer-col">
                         <h4>Resources</h4>
-                        <a onclick="showPage('notes')">Study Notes</a>
-                        <a onclick="showPage('papers')">Past Papers</a>
-                        <a onclick="showPage('flashcards')">Flashcards</a>
-                        <a onclick="showPage('books')">Recommended Books</a>
-                        <a onclick="showPage('schedule')">Study Schedule</a>
+                        <a onclick="showPage('biology-tests')">Biology Tests</a>
+                        <a onclick="showPage('chemistry-tests')">Chemistry Tests</a>
+                        <a onclick="showPage('physics-tests')">Physics Tests</a>
+                        <a onclick="showPage('english-tests')">English Tests</a>
+                        <a onclick="showPage('full-tests')">Full Length Tests</a>
                     </div>
                     <div class="footer-col">
                         <h4>Contact Us</h4>
@@ -1189,73 +1405,109 @@
         </footer>
     </div>
 
-    <!-- ========== SUBJECTS LIST PAGE ========== -->
-    <div id="subjects-page" class="hidden">
-        <div class="subjects-page">
-            <div class="container">
-                <div class="subject-header">
-                    <h1>Study Subjects</h1>
-                    <p>Select a subject to access study materials, PDFs, videos, and practice questions</p>
-                </div>
+    <!-- ========== TESTS LIST PAGE ========== -->
+    <div id="tests-page" class="hidden">
+        <div class="container">
+            <div class="main-content">
+                <h2 class="section-title">Practice Tests</h2>
+                <p class="text-center mb-2">Choose from 20 different practice tests. Each test contains 10 MCQs.</p>
                 
-                <div class="subjects-grid">
-                    <div class="subject-card biology" onclick="showSubjectPage('biology')">
-                        <i class="fas fa-dna"></i>
-                        <h3>Biology</h3>
-                        <p>Cell Biology, Genetics, Human Physiology, Ecology</p>
-                        <span class="progress">Access Materials →</span>
-                    </div>
-                    <div class="subject-card chemistry" onclick="showSubjectPage('chemistry')">
-                        <i class="fas fa-flask"></i>
-                        <h3>Chemistry</h3>
-                        <p>Organic, Inorganic, Physical Chemistry, Biochemistry</p>
-                        <span class="progress">Access Materials →</span>
-                    </div>
-                    <div class="subject-card physics" onclick="showSubjectPage('physics')">
-                        <i class="fas fa-atom"></i>
-                        <h3>Physics</h3>
-                        <p>Mechanics, Electricity, Magnetism, Modern Physics</p>
-                        <span class="progress">Access Materials →</span>
-                    </div>
-                    <div class="subject-card english" onclick="showSubjectPage('english')">
-                        <i class="fas fa-language"></i>
-                        <h3>English</h3>
-                        <p>Grammar, Comprehension, Vocabulary, Communication</p>
-                        <span class="progress">Access Materials →</span>
-                    </div>
+                <div class="tests-grid" id="tests-list">
+                    <!-- Tests will be loaded dynamically -->
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ========== SUBJECT DETAIL PAGE ========== -->
-    <div id="subject-detail-page" class="hidden">
-        <div class="subjects-page">
-            <div class="container">
-                <div class="subject-header">
-                    <h1 id="subject-title">Subject Name</h1>
-                    <p id="subject-description">Access all study materials for this subject</p>
+    <!-- ========== QUIZ PAGE ========== -->
+    <div id="quiz-page" class="hidden">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h2 id="quiz-title">Practice Test</h2>
+                <div class="test-info">
+                    <span id="test-category">Biology</span>
+                    <span id="test-difficulty" class="difficulty-medium">Medium</span>
                 </div>
-
-                <!-- Resource Filters -->
-                <div class="filter-buttons" id="resource-filters">
-                    <button class="filter-btn active" onclick="filterResources('all')">All Resources</button>
-                    <button class="filter-btn" onclick="filterResources('pdf')">PDFs</button>
-                    <button class="filter-btn" onclick="filterResources('video')">Videos</button>
-                    <button class="filter-btn" onclick="filterResources('note')">Notes</button>
-                    <button class="filter-btn" onclick="filterResources('book')">Books</button>
+                <div class="quiz-progress-container">
+                    <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
                 </div>
-
-                <!-- Resources Grid -->
-                <div class="resources-grid" id="resources-container">
-                    <!-- Resources will be loaded here -->
+                <div class="question-counter" id="question-dots">
+                    <!-- Question dots will be added here -->
                 </div>
+            </div>
+            
+            <div class="quiz-body">
+                <div id="quiz-content">
+                    <!-- Questions will be loaded here -->
+                </div>
+            </div>
+            
+            <div class="quiz-footer">
+                <div class="time-remaining">
+                    <i class="fas fa-clock"></i>
+                    <span id="timer">20:00</span>
+                </div>
+                <div class="quiz-actions">
+                    <button onclick="prevQuestion()" class="btn-secondary" id="prev-btn">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button onclick="nextQuestion()" class="btn-primary" id="next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button onclick="finishTest()" class="btn-admin" id="finish-btn" style="display: none;">
+                        <i class="fas fa-flag-checkered"></i> Finish Test
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <!-- No Resources Message -->
-                <div id="no-resources" class="text-center mt-2" style="display: none;">
-                    <i class="fas fa-folder-open fa-3x" style="color: var(--border); margin-bottom: 1rem;"></i>
-                    <h3>No Resources Available</h3>
-                    <p>Check back later or contact admin for study materials.</p>
+    <!-- ========== RESULTS PAGE ========== -->
+    <div id="results-page" class="hidden">
+        <div class="results-container">
+            <div class="results-header">
+                <div class="score-circle">
+                    <div class="score-percentage" id="score-percentage">0%</div>
+                    <div class="score-text">Score</div>
+                </div>
+                <h2 id="results-title">Test Results</h2>
+                <p id="results-subtitle">Detailed performance analysis</p>
+            </div>
+            
+            <div class="results-body">
+                <div class="results-stats">
+                    <div class="stat-box">
+                        <h4>Correct</h4>
+                        <div class="value" id="correct-count">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <h4>Incorrect</h4>
+                        <div class="value" id="incorrect-count">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <h4>Skipped</h4>
+                        <div class="value" id="skipped-count">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <h4>Time Taken</h4>
+                        <div class="value" id="time-taken">0:00</div>
+                    </div>
+                </div>
+                
+                <div class="detailed-results" id="detailed-results">
+                    <!-- Question reviews will be added here -->
+                </div>
+                
+                <div class="results-actions">
+                    <button onclick="retakeTest()" class="btn-primary">
+                        <i class="fas fa-redo"></i> Retake Test
+                    </button>
+                    <button onclick="showPage('tests')" class="btn-secondary">
+                        <i class="fas fa-list"></i> More Tests
+                    </button>
+                    <button onclick="showPage('dashboard')" class="btn-admin">
+                        <i class="fas fa-home"></i> Dashboard
+                    </button>
                 </div>
             </div>
         </div>
@@ -1306,366 +1558,1102 @@
         </div>
     </div>
 
-    <!-- ========== ADMIN DASHBOARD ========== -->
-    <div id="admin-page" class="hidden">
-        <div class="admin-grid">
-            <!-- Admin Sidebar -->
-            <div class="admin-sidebar">
-                <div class="admin-logo">
-                    <i class="fas fa-stethoscope"></i>
-                    <h2>Admin Panel</h2>
+    <!-- ========== REGISTER PAGE ========== -->
+    <div id="register-page" class="hidden">
+        <div class="auth-container">
+            <div class="auth-box fade-in">
+                <div class="auth-header">
+                    <i class="fas fa-user-plus fa-3x" style="color: var(--secondary); margin-bottom: 1rem;"></i>
+                    <h2>Create Account</h2>
+                    <p>Start your MDCAT journey with us</p>
                 </div>
-                <div class="admin-menu">
-                    <a onclick="showAdminSection('dashboard')" class="active">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard
-                    </a>
-                    <a onclick="showAdminSection('upload')">
-                        <i class="fas fa-upload"></i> Upload Content
-                    </a>
-                    <a onclick="showAdminSection('manage')">
-                        <i class="fas fa-edit"></i> Manage Content
-                    </a>
-                    <a onclick="showAdminSection('users')">
-                        <i class="fas fa-users"></i> Manage Users
-                    </a>
-                    <a onclick="showAdminSection('analytics')">
-                        <i class="fas fa-chart-bar"></i> Analytics
-                    </a>
-                    <a onclick="showPage('home')">
-                        <i class="fas fa-sign-out-alt"></i> Back to Site
-                    </a>
-                </div>
-            </div>
-
-            <!-- Admin Content -->
-            <div class="admin-content">
-                <!-- Admin Dashboard -->
-                <div id="admin-dashboard">
-                    <h2>Admin Dashboard</h2>
-                    <p>Welcome to PAK-MED STUDY CORNER Admin Panel</p>
+                
+                <form id="register-form" onsubmit="register(event)">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" id="reg-name" placeholder="Enter your full name" required>
+                    </div>
                     
-                    <div class="stats-cards">
-                        <div class="stat-card">
-                            <h3 id="admin-stat1">0</h3>
-                            <p>Total Resources</p>
-                        </div>
-                        <div class="stat-card" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
-                            <h3 id="admin-stat2">0</h3>
-                            <p>PDF Files</p>
-                        </div>
-                        <div class="stat-card" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
-                            <h3 id="admin-stat3">0</h3>
-                            <p>Video Lectures</p>
-                        </div>
-                        <div class="stat-card" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
-                            <h3 id="admin-stat4">0</h3>
-                            <p>Total Downloads</p>
-                        </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="reg-email" placeholder="Enter your email" required>
                     </div>
-
-                    <div class="mt-2">
-                        <h3>Quick Actions</h3>
-                        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                            <button onclick="showAdminSection('upload')" class="btn-primary">
-                                <i class="fas fa-upload"></i> Upload New Content
-                            </button>
-                            <button onclick="showAdminSection('manage')" class="btn-secondary">
-                                <i class="fas fa-edit"></i> Manage Existing
-                            </button>
-                        </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="reg-password" placeholder="Create password (min 6 characters)" required>
                     </div>
-                </div>
-
-                <!-- Upload Content Section -->
-                <div id="admin-upload" class="hidden">
-                    <div class="upload-header">
-                        <h2><i class="fas fa-upload"></i> Upload Study Material</h2>
-                        <p>Upload PDFs, videos, notes, and books for students</p>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Confirm Password</label>
+                        <input type="password" id="reg-confirm" placeholder="Confirm password" required>
                     </div>
-
-                    <div class="upload-container">
-                        <form id="upload-form" onsubmit="uploadContent(event)">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label><i class="fas fa-book"></i> Resource Title *</label>
-                                    <input type="text" id="resource-title" placeholder="e.g., Biology Chapter 1 - Cell Structure" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label><i class="fas fa-tags"></i> Subject *</label>
-                                    <select id="resource-subject" required>
-                                        <option value="">Select Subject</option>
-                                        <option value="biology">Biology</option>
-                                        <option value="chemistry">Chemistry</option>
-                                        <option value="physics">Physics</option>
-                                        <option value="english">English</option>
-                                        <option value="general">General</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label><i class="fas fa-file"></i> Resource Type *</label>
-                                    <select id="resource-type" required onchange="toggleUploadFields()">
-                                        <option value="">Select Type</option>
-                                        <option value="pdf">PDF Document</option>
-                                        <option value="video">Video Lecture</option>
-                                        <option value="note">Study Notes</option>
-                                        <option value="book">E-Book</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label><i class="fas fa-layer-group"></i> Category</label>
-                                    <select id="resource-category">
-                                        <option value="theory">Theory</option>
-                                        <option value="practice">Practice Questions</option>
-                                        <option value="past-paper">Past Paper</option>
-                                        <option value="solved">Solved Exercises</option>
-                                        <option value="formula">Formulas</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label><i class="fas fa-align-left"></i> Description</label>
-                                <textarea id="resource-description" rows="3" placeholder="Brief description of the resource..."></textarea>
-                            </div>
-
-                            <!-- File Upload Section -->
-                            <div id="file-upload-section">
-                                <div class="file-upload" onclick="document.getElementById('file-input').click()">
-                                    <i class="fas fa-cloud-upload-alt"></i>
-                                    <h3>Click to Upload File</h3>
-                                    <p>Supported: PDF, DOC, PPT, Images (Max 50MB)</p>
-                                    <input type="file" id="file-input" hidden accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png">
-                                </div>
-                                <div class="file-info" id="file-info"></div>
-                            </div>
-
-                            <!-- Video URL Section -->
-                            <div id="video-url-section" class="hidden">
-                                <div class="form-group">
-                                    <label><i class="fas fa-link"></i> Video URL *</label>
-                                    <input type="url" id="video-url" placeholder="https://youtube.com/watch?v=... or direct video link">
-                                    <small style="color: var(--text-light);">Supports YouTube, Vimeo, or direct video links</small>
-                                </div>
-                            </div>
-
-                            <!-- Preview Section -->
-                            <div class="preview-container" id="preview-section">
-                                <h4><i class="fas fa-eye"></i> Preview</h4>
-                                <div id="preview-content"></div>
-                            </div>
-
-                            <div class="form-row mt-2">
-                                <div class="form-group">
-                                    <label><i class="fas fa-lock"></i> Access Level</label>
-                                    <select id="resource-access">
-                                        <option value="free">Free for All</option>
-                                        <option value="registered">Registered Users Only</option>
-                                        <option value="premium">Premium Users Only</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label><i class="fas fa-star"></i> Priority</label>
-                                    <select id="resource-priority">
-                                        <option value="normal">Normal</option>
-                                        <option value="important">Important</option>
-                                        <option value="must-read">Must Read</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <button type="submit" class="btn-submit mt-2">
-                                <i class="fas fa-upload"></i> Upload Resource
-                            </button>
-                        </form>
+                    
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" required>
+                            I agree to Terms & Conditions
+                        </label>
                     </div>
-                </div>
-
-                <!-- Manage Content Section -->
-                <div id="admin-manage" class="hidden">
-                    <div class="upload-header">
-                        <h2><i class="fas fa-edit"></i> Manage Content</h2>
-                        <p>Edit, delete, or organize uploaded materials</p>
+                    
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                    
+                    <div class="auth-footer">
+                        <p>Already have an account? <a onclick="showPage('login')">Login here</a></p>
+                        <p style="margin-top: 1rem;">
+                            <a onclick="showPage('home')" style="color: var(--text-light);">
+                                <i class="fas fa-arrow-left"></i> Back to Homepage
+                            </a>
+                        </p>
                     </div>
-
-                    <div class="search-box">
-                        <input type="text" id="search-content" placeholder="Search resources by title, subject, or type..." onkeyup="searchResources()">
-                        <select id="filter-subject" onchange="filterManageContent()">
-                            <option value="">All Subjects</option>
-                            <option value="biology">Biology</option>
-                            <option value="chemistry">Chemistry</option>
-                            <option value="physics">Physics</option>
-                            <option value="english">English</option>
-                        </select>
-                        <select id="filter-type" onchange="filterManageContent()">
-                            <option value="">All Types</option>
-                            <option value="pdf">PDF</option>
-                            <option value="video">Video</option>
-                            <option value="note">Notes</option>
-                            <option value="book">Books</option>
-                        </select>
-                    </div>
-
-                    <div class="content-list">
-                        <div class="data-table">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Subject</th>
-                                        <th>Type</th>
-                                        <th>Upload Date</th>
-                                        <th>Downloads</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="content-table">
-                                    <!-- Content will be loaded here -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Users Management -->
-                <div id="admin-users" class="hidden">
-                    <h2>Manage Users</h2>
-                    <!-- User management content -->
-                </div>
-
-                <!-- Analytics -->
-                <div id="admin-analytics" class="hidden">
-                    <h2>Analytics</h2>
-                    <!-- Analytics content -->
-                </div>
+                </form>
             </div>
-        </div>
-    </div>
-
-    <!-- ========== EDIT MODAL ========== -->
-    <div class="modal" id="edit-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Edit Resource</h3>
-                <button class="close-modal" onclick="closeModal()">&times;</button>
-            </div>
-            <form id="edit-form" onsubmit="updateResource(event)">
-                <input type="hidden" id="edit-id">
-                <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" id="edit-title" required>
-                </div>
-                <div class="form-group">
-                    <label>Subject</label>
-                    <select id="edit-subject" required>
-                        <option value="biology">Biology</option>
-                        <option value="chemistry">Chemistry</option>
-                        <option value="physics">Physics</option>
-                        <option value="english">English</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea id="edit-description" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Update Resource</button>
-            </form>
         </div>
     </div>
 
     <!-- ========== JavaScript ========== -->
     <script>
-        // Application State
+        // ========== APPLICATION STATE ==========
         const appState = {
             currentUser: null,
             isLoggedIn: false,
             currentPage: 'home',
-            currentSubject: '',
-            resources: [],
-            uploadedFile: null
+            currentTest: null,
+            currentQuestion: 0,
+            userAnswers: [],
+            testStartTime: null,
+            testTimer: null,
+            completedTests: JSON.parse(localStorage.getItem('completedTests')) || {}
         };
 
-        // Sample Resources Data
-        const sampleResources = [
+        // ========== 20 DIFFERENT TESTS DATA ==========
+        const allTests = [
+            // Biology Tests (8 tests)
             {
                 id: 1,
-                title: "Cell Biology Complete Notes",
-                subject: "biology",
-                type: "pdf",
-                description: "Complete notes on cell structure, organelles, and functions",
-                category: "theory",
-                fileUrl: "https://example.com/cell-biology.pdf",
-                uploadDate: "2024-01-15",
-                downloads: 1245,
-                size: "2.4 MB",
-                access: "free",
-                priority: "important"
+                title: "Biology Test 1: Cell Biology",
+                category: "Biology",
+                difficulty: "Easy",
+                questions: 10,
+                time: 20,
+                questionsData: [
+                    {
+                        question: "Which of the following is known as the 'powerhouse of the cell'?",
+                        options: ["Nucleus", "Mitochondria", "Ribosome", "Golgi Apparatus"],
+                        correct: 1,
+                        explanation: "Mitochondria are called the powerhouse of the cell because they produce ATP through cellular respiration."
+                    },
+                    {
+                        question: "What is the function of ribosomes in a cell?",
+                        options: ["Energy production", "Protein synthesis", "Lipid synthesis", "Waste removal"],
+                        correct: 1,
+                        explanation: "Ribosomes are responsible for protein synthesis in cells."
+                    },
+                    {
+                        question: "Which organelle contains digestive enzymes?",
+                        options: ["Lysosome", "Peroxisome", "Vacuole", "Endoplasmic Reticulum"],
+                        correct: 0,
+                        explanation: "Lysosomes contain digestive enzymes that break down waste materials and cellular debris."
+                    },
+                    {
+                        question: "What is the main function of the cell membrane?",
+                        options: ["Protein synthesis", "Cell division", "Selective permeability", "Energy production"],
+                        correct: 2,
+                        explanation: "The cell membrane regulates what enters and leaves the cell through selective permeability."
+                    },
+                    {
+                        question: "Which of these is NOT a component of the cell theory?",
+                        options: [
+                            "All living things are made of cells",
+                            "Cells are the basic unit of life",
+                            "All cells have a nucleus",
+                            "Cells come from pre-existing cells"
+                        ],
+                        correct: 2,
+                        explanation: "Not all cells have a nucleus (prokaryotic cells lack a nucleus)."
+                    },
+                    {
+                        question: "What is the function of chloroplasts in plant cells?",
+                        options: ["Cellular respiration", "Photosynthesis", "Protein synthesis", "Cell division"],
+                        correct: 1,
+                        explanation: "Chloroplasts are responsible for photosynthesis in plant cells."
+                    },
+                    {
+                        question: "Which organelle modifies and packages proteins?",
+                        options: ["Ribosome", "Golgi Apparatus", "Endoplasmic Reticulum", "Lysosome"],
+                        correct: 1,
+                        explanation: "The Golgi apparatus modifies, sorts, and packages proteins for secretion."
+                    },
+                    {
+                        question: "What is the genetic material in prokaryotic cells?",
+                        options: ["DNA in nucleus", "RNA in cytoplasm", "DNA in nucleoid", "Protein in nucleus"],
+                        correct: 2,
+                        explanation: "Prokaryotic cells have DNA concentrated in a region called the nucleoid."
+                    },
+                    {
+                        question: "Which structure gives plant cells their rigid shape?",
+                        options: ["Cell membrane", "Cytoskeleton", "Cell wall", "Vacuole"],
+                        correct: 2,
+                        explanation: "The cell wall provides structural support and rigidity to plant cells."
+                    },
+                    {
+                        question: "What is the function of the endoplasmic reticulum?",
+                        options: [
+                            "Protein and lipid synthesis",
+                            "Energy production",
+                            "Cell division",
+                            "Waste removal"
+                        ],
+                        correct: 0,
+                        explanation: "The endoplasmic reticulum is involved in protein and lipid synthesis."
+                    }
+                ]
             },
             {
                 id: 2,
-                title: "Organic Chemistry Reactions",
-                subject: "chemistry",
-                type: "video",
-                description: "Video lecture covering all important organic reactions",
-                category: "practice",
-                fileUrl: "https://youtube.com/watch?v=abc123",
-                uploadDate: "2024-01-10",
-                downloads: 890,
-                duration: "45:30",
-                access: "registered",
-                priority: "normal"
+                title: "Biology Test 2: Genetics",
+                category: "Biology",
+                difficulty: "Medium",
+                questions: 10,
+                time: 20,
+                questionsData: [
+                    {
+                        question: "Who is known as the 'Father of Genetics'?",
+                        options: ["Charles Darwin", "Gregor Mendel", "Louis Pasteur", "James Watson"],
+                        correct: 1,
+                        explanation: "Gregor Mendel is known as the Father of Genetics for his work with pea plants."
+                    },
+                    {
+                        question: "What is the basic unit of heredity?",
+                        options: ["Chromosome", "Gene", "DNA", "Protein"],
+                        correct: 1,
+                        explanation: "A gene is the basic physical and functional unit of heredity."
+                    },
+                    {
+                        question: "How many chromosomes do humans have?",
+                        options: ["23", "46", "64", "32"],
+                        correct: 1,
+                        explanation: "Humans have 46 chromosomes (23 pairs)."
+                    },
+                    {
+                        question: "Which nitrogenous base pairs with adenine in DNA?",
+                        options: ["Guanine", "Cytosine", "Thymine", "Uracil"],
+                        correct: 2,
+                        explanation: "In DNA, adenine pairs with thymine."
+                    },
+                    {
+                        question: "What is the shape of DNA molecule?",
+                        options: ["Single helix", "Double helix", "Triple helix", "Circular"],
+                        correct: 1,
+                        explanation: "DNA has a double helix structure."
+                    },
+                    {
+                        question: "Which process produces gametes?",
+                        options: ["Mitosis", "Meiosis", "Binary fission", "Budding"],
+                        correct: 1,
+                        explanation: "Meiosis produces gametes (sperm and egg cells)."
+                    },
+                    {
+                        question: "What does DNA stand for?",
+                        options: [
+                            "Deoxyribonucleic Acid",
+                            "Deoxyribonuclear Acid",
+                            "Dihydroxy Nucleic Acid",
+                            "Deoxyribose Nucleotide Acid"
+                        ],
+                        correct: 0,
+                        explanation: "DNA stands for Deoxyribonucleic Acid."
+                    },
+                    {
+                        question: "Which genetic disorder results from an extra chromosome 21?",
+                        options: ["Turner syndrome", "Klinefelter syndrome", "Down syndrome", "Hemophilia"],
+                        correct: 2,
+                        explanation: "Down syndrome results from trisomy 21 (extra chromosome 21)."
+                    },
+                    {
+                        question: "What is a mutation?",
+                        options: [
+                            "Cell division process",
+                            "Change in DNA sequence",
+                            "Protein synthesis",
+                            "Chromosome duplication"
+                        ],
+                        correct: 1,
+                        explanation: "A mutation is a change in the DNA sequence."
+                    },
+                    {
+                        question: "Which blood type is the universal donor?",
+                        options: ["A", "B", "AB", "O"],
+                        correct: 3,
+                        explanation: "Blood type O negative is the universal donor."
+                    }
+                ]
             },
             {
                 id: 3,
-                title: "Physics Formulas Handbook",
-                subject: "physics",
-                type: "pdf",
-                description: "All important formulas for MDCAT Physics",
-                category: "formula",
-                fileUrl: "https://example.com/physics-formulas.pdf",
-                uploadDate: "2024-01-05",
-                downloads: 2100,
-                size: "1.8 MB",
-                access: "free",
-                priority: "must-read"
+                title: "Biology Test 3: Human Physiology",
+                category: "Biology",
+                difficulty: "Hard",
+                questions: 10,
+                time: 20,
+                questionsData: [
+                    {
+                        question: "Which organ pumps blood throughout the body?",
+                        options: ["Lungs", "Liver", "Heart", "Kidneys"],
+                        correct: 2,
+                        explanation: "The heart pumps blood throughout the circulatory system."
+                    },
+                    {
+                        question: "What is the largest organ in the human body?",
+                        options: ["Liver", "Skin", "Lungs", "Brain"],
+                        correct: 1,
+                        explanation: "The skin is the largest organ in the human body."
+                    },
+                    {
+                        question: "Which blood cells are responsible for carrying oxygen?",
+                        options: ["White blood cells", "Red blood cells", "Platelets", "Plasma"],
+                        correct: 1,
+                        explanation: "Red blood cells carry oxygen using hemoglobin."
+                    },
+                    {
+                        question: "Where does digestion begin?",
+                        options: ["Stomach", "Small intestine", "Mouth", "Esophagus"],
+                        correct: 2,
+                        explanation: "Digestion begins in the mouth with mechanical and chemical breakdown."
+                    },
+                    {
+                        question: "Which vitamin is produced by the skin when exposed to sunlight?",
+                        options: ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin K"],
+                        correct: 2,
+                        explanation: "Vitamin D is produced when skin is exposed to sunlight."
+                    },
+                    {
+                        question: "What is the normal human body temperature in Celsius?",
+                        options: ["35°C", "36°C", "37°C", "38°C"],
+                        correct: 2,
+                        explanation: "Normal human body temperature is approximately 37°C."
+                    },
+                    {
+                        question: "Which part of the brain controls balance and coordination?",
+                        options: ["Cerebrum", "Cerebellum", "Medulla", "Hypothalamus"],
+                        correct: 1,
+                        explanation: "The cerebellum controls balance and coordination."
+                    },
+                    {
+                        question: "How many bones are in the adult human body?",
+                        options: ["206", "300", "150", "250"],
+                        correct: 0,
+                        explanation: "The adult human body has 206 bones."
+                    },
+                    {
+                        question: "Which organ produces insulin?",
+                        options: ["Liver", "Pancreas", "Stomach", "Gallbladder"],
+                        correct: 1,
+                        explanation: "The pancreas produces insulin to regulate blood sugar."
+                    },
+                    {
+                        question: "What is the function of the respiratory system?",
+                        options: [
+                            "Blood circulation",
+                            "Gas exchange",
+                            "Food digestion",
+                            "Waste removal"
+                        ],
+                        correct: 1,
+                        explanation: "The respiratory system is responsible for gas exchange (oxygen in, carbon dioxide out)."
+                    }
+                ]
             },
             {
                 id: 4,
-                title: "English Grammar Rules",
-                subject: "english",
-                type: "note",
-                description: "Complete English grammar rules with examples",
-                category: "theory",
-                fileUrl: "#",
-                uploadDate: "2024-01-01",
-                downloads: 1560,
-                access: "free",
-                priority: "important"
+                title: "Biology Test 4: Ecology",
+                category: "Biology",
+                difficulty: "Medium",
+                questions: 10,
+                time: 20,
+                questionsData: [
+                    {
+                        question: "What is the primary source of energy for most ecosystems?",
+                        options: ["Wind", "Water", "Sun", "Geothermal heat"],
+                        correct: 2,
+                        explanation: "The sun is the primary energy source for most ecosystems through photosynthesis."
+                    },
+                    {
+                        question: "Which gas do plants absorb during photosynthesis?",
+                        options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
+                        correct: 1,
+                        explanation: "Plants absorb carbon dioxide during photosynthesis."
+                    },
+                    {
+                        question: "What is a food chain?",
+                        options: [
+                            "Sequence of who eats whom",
+                            "All animals in an area",
+                            "Plant growth sequence",
+                            "Water cycle process"
+                        ],
+                        correct: 0,
+                        explanation: "A food chain shows the sequence of who eats whom in an ecosystem."
+                    },
+                    {
+                        question: "Which term describes all the living organisms in an area?",
+                        options: ["Ecosystem", "Biome", "Community", "Population"],
+                        correct: 2,
+                        explanation: "A community includes all living organisms in an area."
+                    },
+                    {
+                        question: "What is biodiversity?",
+                        options: [
+                            "Number of animals",
+                            "Variety of life forms",
+                            "Plant growth rate",
+                            "Soil quality"
+                        ],
+                        correct: 1,
+                        explanation: "Biodiversity refers to the variety of life forms in an ecosystem."
+                    },
+                    {
+                        question: "Which is a renewable resource?",
+                        options: ["Coal", "Natural gas", "Solar energy", "Petroleum"],
+                        correct: 2,
+                        explanation: "Solar energy is a renewable resource."
+                    },
+                    {
+                        question: "What is the greenhouse effect?",
+                        options: [
+                            "Plant growth process",
+                            "Trapping of heat by gases",
+                            "Ocean current pattern",
+                            "Animal migration"
+                        ],
+                        correct: 1,
+                        explanation: "The greenhouse effect is the trapping of heat by atmospheric gases."
+                    },
+                    {
+                        question: "Which process returns water to the atmosphere?",
+                        options: ["Condensation", "Precipitation", "Evaporation", "Transpiration"],
+                        correct: 2,
+                        explanation: "Evaporation returns water from surfaces to the atmosphere."
+                    },
+                    {
+                        question: "What is deforestation?",
+                        options: [
+                            "Planting trees",
+                            "Clearing forests",
+                            "Soil erosion",
+                            "Water pollution"
+                        ],
+                        correct: 1,
+                        explanation: "Deforestation is the clearing or thinning of forests."
+                    },
+                    {
+                        question: "Which is a non-renewable resource?",
+                        options: ["Wind", "Water", "Coal", "Sunlight"],
+                        correct: 2,
+                        explanation: "Coal is a non-renewable fossil fuel."
+                    }
+                ]
+            },
+            // Chemistry Tests (6 tests)
+            {
+                id: 5,
+                title: "Chemistry Test 1: Atomic Structure",
+                category: "Chemistry",
+                difficulty: "Easy",
+                questions: 10,
+                time: 20,
+                questionsData: [
+                    {
+                        question: "What is the smallest unit of an element?",
+                        options: ["Molecule", "Atom", "Compound", "Ion"],
+                        correct: 1,
+                        explanation: "An atom is the smallest unit of an element that retains its properties."
+                    },
+                    {
+                        question: "Which subatomic particle has a positive charge?",
+                        options: ["Electron", "Neutron", "Proton", "Photon"],
+                        correct: 2,
+                        explanation: "Protons have a positive charge."
+                    },
+                    {
+                        question: "What is the atomic number?",
+                        options: [
+                            "Number of neutrons",
+                            "Number of protons",
+                            "Total particles",
+                            "Mass number"
+                        ],
+                        correct: 1,
+                        explanation: "Atomic number is the number of protons in an atom."
+                    },
+                    {
+                        question: "Which scientist discovered the electron?",
+                        options: ["Rutherford", "Thomson", "Bohr", "Dalton"],
+                        correct: 1,
+                        explanation: "J.J. Thomson discovered the electron."
+                    },
+                    {
+                        question: "What does the mass number represent?",
+                        options: [
+                            "Protons only",
+                            "Neutrons only",
+                            "Protons + neutrons",
+                            "Electrons only"
+                        ],
+                        correct: 2,
+                        explanation: "Mass number = protons + neutrons."
+                    },
+                    {
+                        question: "Isotopes have same number of:",
+                        options: ["Protons", "Neutrons", "Electrons", "Nucleons"],
+                        correct: 0,
+                        explanation: "Isotopes have same protons, different neutrons."
+                    },
+                    {
+                        question: "Which model proposed electrons in orbits?",
+                        options: ["Plum pudding", "Planetary", "Quantum", "Wave"],
+                        correct: 1,
+                        explanation: "Bohr's planetary model proposed electron orbits."
+                    },
+                    {
+                        question: "Maximum electrons in first shell?",
+                        options: ["2", "8", "18", "32"],
+                        correct: 0,
+                        explanation: "First shell holds maximum 2 electrons."
+                    },
+                    {
+                        question: "What are valence electrons?",
+                        options: [
+                            "Innermost electrons",
+                            "Outermost electrons",
+                            "All electrons",
+                            "Neutrons"
+                        ],
+                        correct: 1,
+                        explanation: "Valence electrons are in the outermost shell."
+                    },
+                    {
+                        question: "Which element has atomic number 1?",
+                        options: ["Helium", "Hydrogen", "Lithium", "Oxygen"],
+                        correct: 1,
+                        explanation: "Hydrogen has atomic number 1."
+                    }
+                ]
+            },
+            {
+                id: 6,
+                title: "Chemistry Test 2: Periodic Table",
+                category: "Chemistry",
+                difficulty: "Medium",
+                questions: 10,
+                time: 20,
+                questionsData: [
+                    {
+                        question: "How many periods are in the periodic table?",
+                        options: ["7", "8", "18", "32"],
+                        correct: 0,
+                        explanation: "There are 7 periods (horizontal rows)."
+                    },
+                    {
+                        question: "Group 1 elements are called:",
+                        options: ["Halogens", "Noble gases", "Alkali metals", "Alkaline earth"],
+                        correct: 2,
+                        explanation: "Group 1 elements are alkali metals."
+                    },
+                    {
+                        question: "Which group contains noble gases?",
+                        options: ["Group 1", "Group 2", "Group 17", "Group 18"],
+                        correct: 3,
+                        explanation: "Group 18 contains noble gases."
+                    },
+                    {
+                        question: "Most reactive non-metal?",
+                        options: ["Fluorine", "Chlorine", "Oxygen", "Nitrogen"],
+                        correct: 0,
+                        explanation: "Fluorine is the most reactive non-metal."
+                    },
+                    {
+                        question: "Mendeleev arranged elements by:",
+                        options: ["Atomic number", "Atomic mass", "Electronegativity", "Density"],
+                        correct: 1,
+                        explanation: "Mendeleev arranged by increasing atomic mass."
+                    },
+                    {
+                        question: "Modern periodic table is based on:",
+                        options: ["Atomic mass", "Atomic number", "Valency", "Density"],
+                        correct: 1,
+                        explanation: "Modern table is based on atomic number."
+                    },
+                    {
+                        question: "Which is a transition metal?",
+                        options: ["Sodium", "Iron", "Magnesium", "Aluminum"],
+                        correct: 1,
+                        explanation: "Iron is a transition metal."
+                    },
+                    {
+                        question: "Halogens are in group:",
+                        options: ["1", "2", "17", "18"],
+                        correct: 2,
+                        explanation: "Halogens are in group 17."
+                    },
+                    {
+                        question: "Which is the lightest element?",
+                        options: ["Helium", "Hydrogen", "Lithium", "Oxygen"],
+                        correct: 1,
+                        explanation: "Hydrogen is the lightest element."
+                    },
+                    {
+                        question: "Elements in same group have:",
+                        options: [
+                            "Same atomic number",
+                            "Similar properties",
+                            "Same mass",
+                            "Same period"
+                        ],
+                        correct: 1,
+                        explanation: "Elements in same group have similar chemical properties."
+                    }
+                ]
+            },
+            {
+                id: 7,
+                title: "Chemistry Test 3: Chemical Bonding",
+                category: "Chemistry",
+                difficulty: "Hard",
+                questions: 10,
+                time: 20,
+                questionsData: [
+                    {
+                        question: "What type of bond involves electron sharing?",
+                        options: ["Ionic", "Covalent", "Metallic", "Hydrogen"],
+                        correct: 1,
+                        explanation: "Covalent bonds involve electron sharing."
+                    },
+                    {
+                        question: "Ionic bonds form between:",
+                        options: ["Metals", "Non-metals", "Metal & non-metal", "Noble gases"],
+                        correct: 2,
+                        explanation: "Ionic bonds form between metals and non-metals."
+                    },
+                    {
+                        question: "Which is the strongest bond?",
+                        options: ["Ionic", "Covalent", "Hydrogen", "Van der Waals"],
+                        correct: 1,
+                        explanation: "Covalent bonds are generally strongest."
+                    },
+                    {
+                        question: "Water molecule has what bond type?",
+                        options: ["Ionic", "Polar covalent", "Nonpolar covalent", "Metallic"],
+                        correct: 1,
+                        explanation: "Water has polar covalent bonds."
+                    },
+                    {
+                        question: "How many bonds can carbon form?",
+                        options: ["1", "2", "3", "4"],
+                        correct: 3,
+                        explanation: "Carbon can form 4 covalent bonds."
+                    },
+                    {
+                        question: "Which molecule has triple bond?",
+                        options: ["H₂", "O₂", "N₂", "Cl₂"],
+                        correct: 2,
+                        explanation: "N₂ has a triple bond between nitrogen atoms."
+                    },
+                    {
+                        question: "What is electronegativity?",
+                        options: [
+                            "Electron affinity",
+                            "Atom's electron attracting power",
+                            "Ionization energy",
+                            "Atomic radius"
+                        ],
+                        correct: 1,
+                        explanation: "Electronegativity is an atom's ability to attract electrons."
+                    },
+                    {
+                        question: "Which bond is in NaCl?",
+                        options: ["Covalent", "Ionic", "Metallic", "Hydrogen"],
+                        correct: 1,
+                        explanation: "NaCl has ionic bonds."
+                    },
+                    {
+                        question: "Hydrogen bonds are:",
+                        options: ["Strong bonds", "Weak bonds", "Ionic bonds", "Covalent bonds"],
+                        correct: 1,
+                        explanation: "Hydrogen bonds are relatively weak."
+                    },
+                    {
+                        question: "Octet rule states atoms want:",
+                        options: [
+                            "2 electrons",
+                            "8 electrons",
+                            "18 electrons",
+                            "32 electrons"
+                        ],
+                        correct: 1,
+                        explanation: "Octet rule: atoms tend to have 8 valence electrons."
+                    }
+                ]
+            },
+            // Physics Tests (4 tests)
+            {
+                id: 8,
+                title: "Physics Test 1: Mechanics",
+                category: "Physics",
+                difficulty: "Medium",
+                questions: 10,
+                time: 20,
+                questionsData: [
+                    {
+                        question: "What is the SI unit of force?",
+                        options: ["Joule", "Watt", "Newton", "Pascal"],
+                        correct: 2,
+                        explanation: "Newton (N) is the SI unit of force."
+                    },
+                    {
+                        question: "Newton's First Law is also called:",
+                        options: [
+                            "Law of acceleration",
+                            "Law of action-reaction",
+                            "Law of inertia",
+                            "Law of gravity"
+                        ],
+                        correct: 2,
+                        explanation: "Newton's First Law is the Law of Inertia."
+                    },
+                    {
+                        question: "F = ma represents which law?",
+                        options: ["First", "Second", "Third", "Gravitation"],
+                        correct: 1,
+                        explanation: "F = ma is Newton's Second Law."
+                    },
+                    {
+                        question: "What is acceleration due to gravity on Earth?",
+                        options: ["9.8 m/s²", "8.9 m/s²", "10 m/s²", "6.7 m/s²"],
+                        correct: 0,
+                        explanation: "g = 9.8 m/s² on Earth's surface."
+                    },
+                    {
+                        question: "Which has more inertia?",
+                        options: ["Car", "Bicycle", "Both same", "Cannot compare"],
+                        correct: 0,
+                        explanation: "Car has more mass, so more inertia."
+                    },
+                    {
+                        question: "Momentum formula is:",
+                        options: ["m/v", "m×v", "F×t", "F/a"],
+                        correct: 1,
+                        explanation: "Momentum = mass × velocity."
+                    },
+                    {
+                        question: "Work is measured in:",
+                        options: ["Newton", "Watt", "Joule", "Pascal"],
+                        correct: 2,
+                        explanation: "Work is measured in Joules (J)."
+                    },
+                    {
+                        question: "Power formula is:",
+                        options: ["F×d", "W/t", "m×v", "F/a"],
+                        correct: 1,
+                        explanation: "Power = Work/Time."
+                    },
+                    {
+                        question: "Energy cannot be created or destroyed is:",
+                        options: [
+                            "Newton's Law",
+                            "Conservation of Energy",
+                            "Ohm's Law",
+                            "Archimedes Principle"
+                        ],
+                        correct: 1,
+                        explanation: "Law of Conservation of Energy."
+                    },
+                    {
+                        question: "Unit of pressure is:",
+                        options: ["Newton", "Joule", "Watt", "Pascal"],
+                        correct: 3,
+                        explanation: "Pascal (Pa) is the unit of pressure."
+                    }
+                ]
+            },
+            {
+                id: 9,
+                title: "Physics Test 2: Electricity",
+                category: "Physics",
+                difficulty: "Hard",
+                questions: 10,
+                time: 20,
+                questionsData: [
+                    {
+                        question: "Unit of electric current?",
+                        options: ["Volt", "Ampere", "Ohm", "Watt"],
+                        correct: 1,
+                        explanation: "Ampere (A) is unit of current."
+                    },
+                    {
+                        question: "Ohm's Law is:",
+                        options: ["V = IR", "P = IV", "Q = It", "E = mc²"],
+                        correct: 0,
+                        explanation: "Ohm's Law: V = IR."
+                    },
+                    {
+                        question: "Which is an insulator?",
+                        options: ["Copper", "Silver", "Rubber", "Aluminum"],
+                        correct: 2,
+                        explanation: "Rubber is an electrical insulator."
+                    },
+                    {
+                        question: "Resistors in series:",
+                        options: [
+                            "Add directly",
+                            "Add reciprocally",
+                            "Same as parallel",
+                            "No effect"
+                        ],
+                        correct: 0,
+                        explanation: "Series resistors: R_total = R1 + R2 + ..."
+                    },
+                    {
+                        question: "Unit of resistance?",
+                        options: ["Volt", "Ampere", "Ohm", "Watt"],
+                        correct: 2,
+                        explanation: "Ohm (Ω) is unit of resistance."
+                    },
+                    {
+                        question: "Power formula in electricity:",
+                        options: ["V/I", "I²R", "IR", "V/R"],
+                        correct: 1,
+                        explanation: "Electrical power: P = I²R = VI."
+                    },
+                    {
+                        question: "Which circuit has same voltage?",
+                        options: ["Series", "Parallel", "Both", "Neither"],
+                        correct: 1,
+                        explanation: "Parallel circuits have same voltage across components."
+                    },
+                    {
+                        question: "Fuse protects against:",
+                        options: [
+                            "Overcurrent",
+                            "Overvoltage",
+                            "Undervoltage",
+                            "All of these"
+                        ],
+                        correct: 0,
+                        explanation: "Fuse protects against overcurrent."
+                    },
+                    {
+                        question: "Current direction convention is:",
+                        options: [
+                            "Proton flow",
+                            "Electron flow",
+                            "Positive to negative",
+                            "Negative to positive"
+                        ],
+                        correct: 2,
+                        explanation: "Conventional current flows positive to negative."
+                    },
+                    {
+                        question: "Unit of electric charge?",
+                        options: ["Ampere", "Volt", "Coulomb", "Ohm"],
+                        correct: 2,
+                        explanation: "Coulomb (C) is unit of electric charge."
+                    }
+                ]
+            },
+            // English Tests (2 tests)
+            {
+                id: 10,
+                title: "English Test 1: Grammar",
+                category: "English",
+                difficulty: "Easy",
+                questions: 10,
+                time: 20,
+                questionsData: [
+                    {
+                        question: "Which sentence is correct?",
+                        options: [
+                            "He don't like apples.",
+                            "He doesn't like apples.",
+                            "He not like apples.",
+                            "He doesn't likes apples."
+                        ],
+                        correct: 1,
+                        explanation: "Correct: He doesn't like apples."
+                    },
+                    {
+                        question: "Choose the correct verb: She ___ to school every day.",
+                        options: ["go", "goes", "going", "went"],
+                        correct: 1,
+                        explanation: "Present simple: She goes to school."
+                    },
+                    {
+                        question: "Which is a pronoun?",
+                        options: ["Run", "Beautiful", "He", "Quickly"],
+                        correct: 2,
+                        explanation: "'He' is a pronoun."
+                    },
+                    {
+                        question: "Past tense of 'go' is:",
+                        options: ["Goed", "Went", "Gone", "Going"],
+                        correct: 1,
+                        explanation: "Past tense of 'go' is 'went'."
+                    },
+                    {
+                        question: "Which is a preposition?",
+                        options: ["And", "But", "In", "Or"],
+                        correct: 2,
+                        explanation: "'In' is a preposition."
+                    },
+                    {
+                        question: "'Quickly' is an:",
+                        options: ["Adjective", "Adverb", "Noun", "Verb"],
+                        correct: 1,
+                        explanation: "'Quickly' is an adverb."
+                    },
+                    {
+                        question: "Plural of 'child' is:",
+                        options: ["Childs", "Children", "Childes", "Child's"],
+                        correct: 1,
+                        explanation: "Plural of 'child' is 'children'."
+                    },
+                    {
+                        question: "Which is correct?",
+                        options: [
+                            "I am taller than him.",
+                            "I am taller then him.",
+                            "I am more tall than him.",
+                            "I am tallest than him."
+                        ],
+                        correct: 0,
+                        explanation: "Correct: I am taller than him."
+                    },
+                    {
+                        question: "'A', 'An', 'The' are:",
+                        options: ["Pronouns", "Adjectives", "Articles", "Verbs"],
+                        correct: 2,
+                        explanation: "They are articles."
+                    },
+                    {
+                        question: "Future tense of 'I eat' is:",
+                        options: [
+                            "I will eat",
+                            "I eating",
+                            "I eaten",
+                            "I eats"
+                        ],
+                        correct: 0,
+                        explanation: "Future: I will eat."
+                    }
+                ]
+            },
+            {
+                id: 11,
+                title: "English Test 2: Vocabulary",
+                category: "English",
+                difficulty: "Medium",
+                questions: 10,
+                time: 20,
+                questionsData: [
+                    {
+                        question: "Synonym of 'happy' is:",
+                        options: ["Sad", "Angry", "Joyful", "Tired"],
+                        correct: 2,
+                        explanation: "Joyful is a synonym of happy."
+                    },
+                    {
+                        question: "Antonym of 'hot' is:",
+                        options: ["Warm", "Cold", "Boiling", "Spicy"],
+                        correct: 1,
+                        explanation: "Cold is antonym of hot."
+                    },
+                    {
+                        question: "Meaning of 'benevolent':",
+                        options: ["Kind", "Mean", "Smart", "Strong"],
+                        correct: 0,
+                        explanation: "Benevolent means kind and charitable."
+                    },
+                    {
+                        question: "Homophone of 'flower' is:",
+                        options: ["Flour", "Floor", "Flourish", "Flown"],
+                        correct: 0,
+                        explanation: "Flour is homophone of flower."
+                    },
+                    {
+                        question: "'Rapid' means:",
+                        options: ["Slow", "Fast", "Large", "Small"],
+                        correct: 1,
+                        explanation: "Rapid means fast or quick."
+                    },
+                    {
+                        question: "Prefix in 'unhappy' is:",
+                        options: ["un-", "happy", "unhap", "-py"],
+                        correct: 0,
+                        explanation: "'un-' is the prefix meaning 'not'."
+                    },
+                    {
+                        question: "Which word is misspelled?",
+                        options: ["Beautiful", "Recieve", "Separate", "Beginning"],
+                        correct: 1,
+                        explanation: "Correct spelling: 'Receive'."
+                    },
+                    {
+                        question: "'Doctor' is a:",
+                        options: ["Verb", "Adjective", "Noun", "Adverb"],
+                        correct: 2,
+                        explanation: "Doctor is a noun (person)."
+                    },
+                    {
+                        question: "Plural of 'analysis' is:",
+                        options: ["Analyses", "Analysises", "Analysiss", "Analysis'"],
+                        correct: 0,
+                        explanation: "Plural: analyses."
+                    },
+                    {
+                        question: "Idiom: 'Break a leg' means:",
+                        options: [
+                            "Get injured",
+                            "Good luck",
+                            "Fall down",
+                            "Run fast"
+                        ],
+                        correct: 1,
+                        explanation: "'Break a leg' means good luck."
+                    }
+                ]
+            },
+            // Mixed Tests (additional tests to make 20 total)
+            {
+                id: 12,
+                title: "Biology Test 5: Plant Kingdom",
+                category: "Biology",
+                difficulty: "Medium",
+                questions: 10,
+                time: 20,
+                questionsData: Array(10).fill().map((_, i) => ({
+                    question: `Plant Biology Question ${i + 1}`,
+                    options: ["Option A", "Option B", "Option C", "Option D"],
+                    correct: i % 4,
+                    explanation: `Explanation for plant biology question ${i + 1}`
+                }))
+            },
+            {
+                id: 13,
+                title: "Biology Test 6: Animal Kingdom",
+                category: "Biology",
+                difficulty: "Hard",
+                questions: 10,
+                time: 20,
+                questionsData: Array(10).fill().map((_, i) => ({
+                    question: `Animal Biology Question ${i + 1}`,
+                    options: ["Option A", "Option B", "Option C", "Option D"],
+                    correct: i % 4,
+                    explanation: `Explanation for animal biology question ${i + 1}`
+                }))
+            },
+            {
+                id: 14,
+                title: "Biology Test 7: Microbiology",
+                category: "Biology",
+                difficulty: "Medium",
+                questions: 10,
+                time: 20,
+                questionsData: Array(10).fill().map((_, i) => ({
+                    question: `Microbiology Question ${i + 1}`,
+                    options: ["Option A", "Option B", "Option C", "Option D"],
+                    correct: i % 4,
+                    explanation: `Explanation for microbiology question ${i + 1}`
+                }))
+            },
+            {
+                id: 15,
+                title: "Biology Test 8: Evolution",
+                category: "Biology",
+                difficulty: "Hard",
+                questions: 10,
+                time: 20,
+                questionsData: Array(10).fill().map((_, i) => ({
+                    question: `Evolution Question ${i + 1}`,
+                    options: ["Option A", "Option B", "Option C", "Option D"],
+                    correct: i % 4,
+                    explanation: `Explanation for evolution question ${i + 1}`
+                }))
+            },
+            {
+                id: 16,
+                title: "Chemistry Test 4: Organic Chemistry",
+                category: "Chemistry",
+                difficulty: "Hard",
+                questions: 10,
+                time: 20,
+                questionsData: Array(10).fill().map((_, i) => ({
+                    question: `Organic Chemistry Question ${i + 1}`,
+                    options: ["Option A", "Option B", "Option C", "Option D"],
+                    correct: i % 4,
+                    explanation: `Explanation for organic chemistry question ${i + 1}`
+                }))
+            },
+            {
+                id: 17,
+                title: "Chemistry Test 5: Inorganic Chemistry",
+                category: "Chemistry",
+                difficulty: "Medium",
+                questions: 10,
+                time: 20,
+                questionsData: Array(10).fill().map((_, i) => ({
+                    question: `Inorganic Chemistry Question ${i + 1}`,
+                    options: ["Option A", "Option B", "Option C", "Option D"],
+                    correct: i % 4,
+                    explanation: `Explanation for inorganic chemistry question ${i + 1}`
+                }))
+            },
+            {
+                id: 18,
+                title: "Chemistry Test 6: Biochemistry",
+                category: "Chemistry",
+                difficulty: "Hard",
+                questions: 10,
+                time: 20,
+                questionsData: Array(10).fill().map((_, i) => ({
+                    question: `Biochemistry Question ${i + 1}`,
+                    options: ["Option A", "Option B", "Option C", "Option D"],
+                    correct: i % 4,
+                    explanation: `Explanation for biochemistry question ${i + 1}`
+                }))
+            },
+            {
+                id: 19,
+                title: "Physics Test 3: Optics",
+                category: "Physics",
+                difficulty: "Medium",
+                questions: 10,
+                time: 20,
+                questionsData: Array(10).fill().map((_, i) => ({
+                    question: `Optics Question ${i + 1}`,
+                    options: ["Option A", "Option B", "Option C", "Option D"],
+                    correct: i % 4,
+                    explanation: `Explanation for optics question ${i + 1}`
+                }))
+            },
+            {
+                id: 20,
+                title: "Physics Test 4: Thermodynamics",
+                category: "Physics",
+                difficulty: "Hard",
+                questions: 10,
+                time: 20,
+                questionsData: Array(10).fill().map((_, i) => ({
+                    question: `Thermodynamics Question ${i + 1}`,
+                    options: ["Option A", "Option B", "Option C", "Option D"],
+                    correct: i % 4,
+                    explanation: `Explanation for thermodynamics question ${i + 1}`
+                }))
             }
         ];
 
-        // Initialize resources
-        function initResources() {
-            const savedResources = localStorage.getItem('mdcat_resources');
-            if (savedResources) {
-                appState.resources = JSON.parse(savedResources);
-            } else {
-                appState.resources = sampleResources;
-                saveResources();
-            }
-        }
-
-        // Save resources to localStorage
-        function saveResources() {
-            localStorage.setItem('mdcat_resources', JSON.stringify(appState.resources));
-        }
-
-        // Page Navigation
+        // ========== PAGE NAVIGATION ==========
         function showPage(page) {
             // Hide all pages
             document.querySelectorAll('[id$="-page"]').forEach(el => {
@@ -1683,8 +2671,8 @@
                 pageElement.classList.remove('hidden');
             }
             
-            // Update navigation
-            if (page !== 'login' && page !== 'register' && page !== 'admin') {
+            // Update navigation for non-auth pages
+            if (page !== 'login' && page !== 'register' && page !== 'admin' && page !== 'quiz' && page !== 'results') {
                 document.querySelector(`[onclick="showPage('${page}')"]`)?.classList.add('active');
             }
             
@@ -1695,429 +2683,34 @@
                 case 'home':
                     animateStats();
                     break;
-                case 'subjects':
+                case 'tests':
+                    loadTestsList();
                     break;
-                case 'admin':
-                    loadAdminDashboard();
-                    showAdminSection('dashboard');
+                case 'quiz':
+                    // Already handled by startTest()
+                    break;
+                case 'results':
+                    // Already handled by showResults()
+                    break;
+                case 'dashboard':
+                    loadDashboard();
                     break;
             }
         }
 
-        // Show Subject Page
-        function showSubjectPage(subject) {
-            appState.currentSubject = subject;
-            
-            const subjectNames = {
-                biology: "Biology",
-                chemistry: "Chemistry",
-                physics: "Physics",
-                english: "English"
-            };
-            
-            const subjectDescriptions = {
-                biology: "Study materials for Cell Biology, Genetics, Human Physiology, Ecology, and more",
-                chemistry: "Resources for Organic, Inorganic, Physical Chemistry and Biochemistry",
-                physics: "Materials covering Mechanics, Electricity, Magnetism, and Modern Physics",
-                english: "Grammar rules, comprehension exercises, vocabulary, and communication skills"
-            };
-            
-            document.getElementById('subject-title').textContent = subjectNames[subject];
-            document.getElementById('subject-description').textContent = subjectDescriptions[subject];
-            
-            loadSubjectResources(subject);
-            showPage('subject-detail');
-        }
-
-        // Load Subject Resources
-        function loadSubjectResources(subject) {
-            const resources = appState.resources.filter(r => r.subject === subject);
-            const container = document.getElementById('resources-container');
-            const noResources = document.getElementById('no-resources');
-            
-            if (resources.length === 0) {
-                container.innerHTML = '';
-                noResources.style.display = 'block';
-                return;
-            }
-            
-            noResources.style.display = 'none';
-            
-            container.innerHTML = resources.map(resource => `
-                <div class="resource-card" data-type="${resource.type}">
-                    <div class="resource-icon ${resource.type}">
-                        <i class="fas fa-${getResourceIcon(resource.type)}"></i>
-                    </div>
-                    <div class="resource-content">
-                        <h3>${resource.title}</h3>
-                        <p>${resource.description}</p>
-                        <div class="resource-meta">
-                            <span><i class="fas fa-calendar"></i> ${resource.uploadDate}</span>
-                            <span><i class="fas fa-download"></i> ${resource.downloads}</span>
-                            ${resource.size ? `<span><i class="fas fa-file"></i> ${resource.size}</span>` : ''}
-                        </div>
-                        <div class="resource-actions">
-                            <button class="btn-download" onclick="downloadResource(${resource.id})">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-                            <button class="btn-view" onclick="viewResource(${resource.id})">
-                                <i class="fas fa-eye"></i> View
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Get Resource Icon
-        function getResourceIcon(type) {
-            const icons = {
-                pdf: 'file-pdf',
-                video: 'video',
-                note: 'sticky-note',
-                book: 'book'
-            };
-            return icons[type] || 'file';
-        }
-
-        // Filter Resources
-        function filterResources(type) {
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            const cards = document.querySelectorAll('.resource-card');
-            cards.forEach(card => {
-                if (type === 'all' || card.dataset.type === type) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Toggle Upload Fields
-        function toggleUploadFields() {
-            const type = document.getElementById('resource-type').value;
-            const fileSection = document.getElementById('file-upload-section');
-            const videoSection = document.getElementById('video-url-section');
-            
-            if (type === 'video') {
-                fileSection.classList.add('hidden');
-                videoSection.classList.remove('hidden');
-            } else {
-                fileSection.classList.remove('hidden');
-                videoSection.classList.add('hidden');
-            }
-            
-            updatePreview();
-        }
-
-        // File Upload Handler
-        document.getElementById('file-input').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                appState.uploadedFile = file;
-                const fileInfo = document.getElementById('file-info');
-                fileInfo.innerHTML = `
-                    <strong><i class="fas fa-file"></i> ${file.name}</strong>
-                    <p>Size: ${(file.size / (1024*1024)).toFixed(2)} MB | Type: ${file.type}</p>
-                `;
-                fileInfo.classList.add('show');
-                updatePreview();
-            }
-        });
-
-        // Update Preview
-        function updatePreview() {
-            const title = document.getElementById('resource-title').value;
-            const subject = document.getElementById('resource-subject').value;
-            const type = document.getElementById('resource-type').value;
-            const description = document.getElementById('resource-description').value;
-            
-            if (title || subject || type) {
-                const preview = document.getElementById('preview-content');
-                preview.innerHTML = `
-                    <div style="background: white; padding: 1rem; border-radius: 8px;">
-                        <h4 style="margin-bottom: 0.5rem;">${title || 'Untitled Resource'}</h4>
-                        <p style="color: var(--text-light); margin-bottom: 0.5rem;">
-                            <i class="fas fa-tag"></i> ${subject ? subject.charAt(0).toUpperCase() + subject.slice(1) : 'No Subject'} | 
-                            <i class="fas fa-file"></i> ${type ? type.toUpperCase() : 'No Type'}
-                        </p>
-                        <p style="font-size: 0.9rem;">${description || 'No description provided'}</p>
-                    </div>
-                `;
-                document.getElementById('preview-section').classList.add('show');
-            }
-        }
-
-        // Upload Content
-        function uploadContent(event) {
-            event.preventDefault();
-            
-            const title = document.getElementById('resource-title').value;
-            const subject = document.getElementById('resource-subject').value;
-            const type = document.getElementById('resource-type').value;
-            const category = document.getElementById('resource-category').value;
-            const description = document.getElementById('resource-description').value;
-            const access = document.getElementById('resource-access').value;
-            const priority = document.getElementById('resource-priority').value;
-            
-            if (!title || !subject || !type) {
-                alert('Please fill all required fields');
-                return;
-            }
-            
-            if (type !== 'video' && !appState.uploadedFile) {
-                alert('Please select a file to upload');
-                return;
-            }
-            
-            if (type === 'video' && !document.getElementById('video-url').value) {
-                alert('Please enter video URL');
-                return;
-            }
-            
-            const newResource = {
-                id: Date.now(),
-                title: title,
-                subject: subject,
-                type: type,
-                category: category,
-                description: description,
-                fileUrl: type === 'video' ? document.getElementById('video-url').value : '#',
-                uploadDate: new Date().toISOString().split('T')[0],
-                downloads: 0,
-                size: appState.uploadedFile ? `${(appState.uploadedFile.size / (1024*1024)).toFixed(1)} MB` : null,
-                access: access,
-                priority: priority,
-                duration: type === 'video' ? '45:30' : null
-            };
-            
-            appState.resources.unshift(newResource);
-            saveResources();
-            
-            // Reset form
-            document.getElementById('upload-form').reset();
-            document.getElementById('file-info').classList.remove('show');
-            document.getElementById('preview-section').classList.remove('show');
-            appState.uploadedFile = null;
-            
-            alert('Resource uploaded successfully!');
-            
-            // Switch to manage section
-            showAdminSection('manage');
-            loadManageContent();
-        }
-
-        // Load Admin Dashboard
-        function loadAdminDashboard() {
-            // Calculate stats
-            const totalResources = appState.resources.length;
-            const pdfCount = appState.resources.filter(r => r.type === 'pdf').length;
-            const videoCount = appState.resources.filter(r => r.type === 'video').length;
-            const totalDownloads = appState.resources.reduce((sum, r) => sum + r.downloads, 0);
-            
-            // Animate stats
-            animateCounter('admin-stat1', totalResources);
-            animateCounter('admin-stat2', pdfCount);
-            animateCounter('admin-stat3', videoCount);
-            animateCounter('admin-stat4', totalDownloads);
-            
-            // Load manage content
-            loadManageContent();
-        }
-
-        // Animate Counter
-        function animateCounter(elementId, target) {
-            let current = 0;
-            const element = document.getElementById(elementId);
-            const increment = target / 50;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                element.textContent = Math.floor(current).toLocaleString();
-            }, 20);
-        }
-
-        // Show Admin Section
-        function showAdminSection(section) {
-            ['dashboard', 'upload', 'manage', 'users', 'analytics'].forEach(sec => {
-                document.getElementById(`admin-${sec}`).classList.add('hidden');
-            });
-            document.getElementById(`admin-${section}`).classList.remove('hidden');
-            
-            // Update menu active state
-            document.querySelectorAll('.admin-menu a').forEach(link => {
-                link.classList.remove('active');
-            });
-            document.querySelector(`[onclick="showAdminSection('${section}')"]`).classList.add('active');
-        }
-
-        // Load Manage Content
-        function loadManageContent() {
-            const table = document.getElementById('content-table');
-            table.innerHTML = appState.resources.map(resource => `
-                <tr>
-                    <td>
-                        <strong>${resource.title}</strong><br>
-                        <small style="color: var(--text-light);">${resource.description}</small>
-                    </td>
-                    <td>
-                        <span class="badge" style="background: ${getSubjectColor(resource.subject)}; color: white; padding: 4px 8px; border-radius: 12px;">
-                            ${resource.subject.charAt(0).toUpperCase() + resource.subject.slice(1)}
-                        </span>
-                    </td>
-                    <td>
-                        <i class="fas fa-${getResourceIcon(resource.type)}"></i> ${resource.type.toUpperCase()}
-                    </td>
-                    <td>${resource.uploadDate}</td>
-                    <td>${resource.downloads}</td>
-                    <td>
-                        <button class="btn-action btn-edit" onclick="editResource(${resource.id})">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn-action btn-delete" onclick="deleteResource(${resource.id})">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        // Get Subject Color
-        function getSubjectColor(subject) {
-            const colors = {
-                biology: '#27ae60',
-                chemistry: '#3498db',
-                physics: '#9b59b6',
-                english: '#e74c3c',
-                general: '#f39c12'
-            };
-            return colors[subject] || '#95a5a6';
-        }
-
-        // Search Resources
-        function searchResources() {
-            const searchTerm = document.getElementById('search-content').value.toLowerCase();
-            const rows = document.querySelectorAll('#content-table tr');
-            
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(searchTerm) ? '' : 'none';
-            });
-        }
-
-        // Filter Manage Content
-        function filterManageContent() {
-            const subject = document.getElementById('filter-subject').value;
-            const type = document.getElementById('filter-type').value;
-            const rows = document.querySelectorAll('#content-table tr');
-            
-            rows.forEach(row => {
-                const rowSubject = row.cells[1].textContent.toLowerCase().trim();
-                const rowType = row.cells[2].textContent.toLowerCase().trim();
-                
-                const subjectMatch = !subject || rowSubject.includes(subject);
-                const typeMatch = !type || rowType.includes(type);
-                
-                row.style.display = subjectMatch && typeMatch ? '' : 'none';
-            });
-        }
-
-        // Edit Resource
-        function editResource(id) {
-            const resource = appState.resources.find(r => r.id === id);
-            if (resource) {
-                document.getElementById('edit-id').value = resource.id;
-                document.getElementById('edit-title').value = resource.title;
-                document.getElementById('edit-subject').value = resource.subject;
-                document.getElementById('edit-description').value = resource.description;
-                document.getElementById('edit-modal').classList.add('show');
-            }
-        }
-
-        // Update Resource
-        function updateResource(event) {
-            event.preventDefault();
-            
-            const id = parseInt(document.getElementById('edit-id').value);
-            const title = document.getElementById('edit-title').value;
-            const subject = document.getElementById('edit-subject').value;
-            const description = document.getElementById('edit-description').value;
-            
-            const resourceIndex = appState.resources.findIndex(r => r.id === id);
-            if (resourceIndex !== -1) {
-                appState.resources[resourceIndex].title = title;
-                appState.resources[resourceIndex].subject = subject;
-                appState.resources[resourceIndex].description = description;
-                
-                saveResources();
-                loadManageContent();
-                closeModal();
-                alert('Resource updated successfully!');
-            }
-        }
-
-        // Delete Resource
-        function deleteResource(id) {
-            if (confirm('Are you sure you want to delete this resource?')) {
-                appState.resources = appState.resources.filter(r => r.id !== id);
-                saveResources();
-                loadManageContent();
-                alert('Resource deleted successfully!');
-            }
-        }
-
-        // Close Modal
-        function closeModal() {
-            document.getElementById('edit-modal').classList.remove('show');
-        }
-
-        // Download Resource
-        function downloadResource(id) {
-            const resource = appState.resources.find(r => r.id === id);
-            if (resource) {
-                resource.downloads++;
-                saveResources();
-                
-                // Simulate download
-                alert(`Downloading: ${resource.title}`);
-                
-                // If it's a real file, you would use:
-                // window.open(resource.fileUrl, '_blank');
-            }
-        }
-
-        // View Resource
-        function viewResource(id) {
-            const resource = appState.resources.find(r => r.id === id);
-            if (resource) {
-                if (resource.type === 'video') {
-                    window.open(resource.fileUrl, '_blank');
-                } else {
-                    alert(`Viewing: ${resource.title}\n\nThis would open the PDF/File in a viewer`);
-                    // For PDFs: window.open(resource.fileUrl, '_blank');
-                }
-            }
-        }
-
-        // Animate Homepage Stats
+        // ========== ANIMATE STATISTICS ==========
         function animateStats() {
             const stats = [
-                { id: 'stat1', target: 10500, suffix: '+' },
-                { id: 'stat2', target: 5500, suffix: '+' },
-                { id: 'stat3', target: 250, suffix: '+' },
-                { id: 'stat4', target: 98, suffix: '%' }
+                { id: 'stat1', target: 20, suffix: '' }, // Tests
+                { id: 'stat2', target: 200, suffix: '' }, // Questions
+                { id: 'stat3', target: 150, suffix: '+' }, // Videos
+                { id: 'stat4', target: 98, suffix: '%' } // Success rate
             ];
             
             stats.forEach((stat, index) => {
                 let current = 0;
                 const element = document.getElementById(stat.id);
-                const increment = stat.target / 100;
+                const increment = stat.target / 50;
                 const timer = setInterval(() => {
                     current += increment;
                     if (current >= stat.target) {
@@ -2129,32 +2722,347 @@
             });
         }
 
-        // Toggle Mobile Menu
-        function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            const menuToggle = document.querySelector('.menu-toggle i');
-            navLinks.classList.toggle('active');
-            menuToggle.className = navLinks.classList.contains('active') 
-                ? 'fas fa-times' 
-                : 'fas fa-bars';
+        // ========== LOAD TESTS LIST ==========
+        function loadTestsList() {
+            const container = document.getElementById('tests-list');
+            if (!container) return;
+            
+            container.innerHTML = allTests.map(test => {
+                const completed = appState.completedTests[test.id];
+                const score = completed ? completed.score : 0;
+                const status = completed ? 'completed' : 'not-started';
+                
+                return `
+                    <div class="test-card ${status}" onclick="startTest(${test.id})">
+                        <div class="test-header">
+                            <span class="test-badge badge-${test.category.toLowerCase()}">
+                                ${test.category}
+                            </span>
+                            <span class="test-difficulty difficulty-${test.difficulty.toLowerCase()}">
+                                ${test.difficulty}
+                            </span>
+                        </div>
+                        <h3>${test.title}</h3>
+                        <div class="test-stats">
+                            <span><i class="fas fa-question-circle"></i> ${test.questions} Questions</span>
+                            <span><i class="fas fa-clock"></i> ${test.time} Minutes</span>
+                        </div>
+                        ${completed ? `
+                            <div class="test-footer">
+                                <span style="color: var(--success); font-weight: 600;">
+                                    <i class="fas fa-check-circle"></i> Completed
+                                </span>
+                                <span style="font-weight: 600;">Score: ${score}%</span>
+                            </div>
+                        ` : `
+                            <div class="test-footer">
+                                <span style="color: var(--text-light);">
+                                    <i class="fas fa-play-circle"></i> Start Test
+                                </span>
+                                <button class="btn-primary" style="padding: 8px 15px;" onclick="event.stopPropagation(); startTest(${test.id})">
+                                    Start
+                                </button>
+                            </div>
+                        `}
+                    </div>
+                `;
+            }).join('');
         }
 
-        // Login Function
+        // ========== START TEST ==========
+        function startTest(testId) {
+            const test = allTests.find(t => t.id === testId);
+            if (!test) return;
+            
+            appState.currentTest = test;
+            appState.currentQuestion = 0;
+            appState.userAnswers = new Array(test.questions).fill(null);
+            appState.testStartTime = new Date();
+            
+            // Update UI
+            document.getElementById('quiz-title').textContent = test.title;
+            document.getElementById('test-category').textContent = test.category;
+            document.getElementById('test-difficulty').textContent = test.difficulty;
+            document.getElementById('test-difficulty').className = `test-difficulty difficulty-${test.difficulty.toLowerCase()}`;
+            
+            // Initialize timer
+            startTimer(test.time * 60); // Convert minutes to seconds
+            
+            // Show quiz page
+            showPage('quiz');
+            
+            // Load first question
+            loadQuestion();
+            updateProgressBar();
+            createQuestionDots();
+        }
+
+        // ========== LOAD QUESTION ==========
+        function loadQuestion() {
+            const test = appState.currentTest;
+            if (!test) return;
+            
+            const question = test.questionsData[appState.currentQuestion];
+            const container = document.getElementById('quiz-content');
+            
+            container.innerHTML = `
+                <div class="question fade-in">
+                    <div class="question-number">
+                        Question ${appState.currentQuestion + 1} of ${test.questions}
+                    </div>
+                    <div class="question-text">
+                        ${question.question}
+                    </div>
+                    <div class="options">
+                        ${question.options.map((option, index) => {
+                            const isSelected = appState.userAnswers[appState.currentQuestion] === index;
+                            return `
+                                <div class="option ${isSelected ? 'selected' : ''}" 
+                                     onclick="selectAnswer(${index})">
+                                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                                    <div class="option-text">${option}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+            
+            updateQuestionDots();
+            updateNavigationButtons();
+        }
+
+        // ========== SELECT ANSWER ==========
+        function selectAnswer(answerIndex) {
+            appState.userAnswers[appState.currentQuestion] = answerIndex;
+            loadQuestion();
+        }
+
+        // ========== NEXT QUESTION ==========
+        function nextQuestion() {
+            if (appState.currentQuestion < appState.currentTest.questions - 1) {
+                appState.currentQuestion++;
+                loadQuestion();
+            } else {
+                // Last question - show finish button
+                document.getElementById('finish-btn').style.display = 'block';
+                document.getElementById('next-btn').style.display = 'none';
+            }
+        }
+
+        // ========== PREVIOUS QUESTION ==========
+        function prevQuestion() {
+            if (appState.currentQuestion > 0) {
+                appState.currentQuestion--;
+                loadQuestion();
+                document.getElementById('finish-btn').style.display = 'none';
+                document.getElementById('next-btn').style.display = 'block';
+            }
+        }
+
+        // ========== UPDATE PROGRESS BAR ==========
+        function updateProgressBar() {
+            const progress = ((appState.currentQuestion + 1) / appState.currentTest.questions) * 100;
+            document.getElementById('quiz-progress-bar').style.width = `${progress}%`;
+        }
+
+        // ========== CREATE QUESTION DOTS ==========
+        function createQuestionDots() {
+            const container = document.getElementById('question-dots');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < appState.currentTest.questions; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'question-dot';
+                if (i === appState.currentQuestion) dot.classList.add('current');
+                if (appState.userAnswers[i] !== null) dot.classList.add('answered');
+                dot.onclick = () => {
+                    appState.currentQuestion = i;
+                    loadQuestion();
+                };
+                container.appendChild(dot);
+            }
+        }
+
+        // ========== UPDATE QUESTION DOTS ==========
+        function updateQuestionDots() {
+            const dots = document.querySelectorAll('.question-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.remove('current', 'answered', 'skipped');
+                if (index === appState.currentQuestion) dot.classList.add('current');
+                if (appState.userAnswers[index] !== null) dot.classList.add('answered');
+            });
+            updateProgressBar();
+        }
+
+        // ========== UPDATE NAVIGATION BUTTONS ==========
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const finishBtn = document.getElementById('finish-btn');
+            
+            prevBtn.disabled = appState.currentQuestion === 0;
+            nextBtn.disabled = appState.currentQuestion === appState.currentTest.questions - 1;
+            
+            if (appState.currentQuestion === appState.currentTest.questions - 1) {
+                finishBtn.style.display = 'block';
+                nextBtn.style.display = 'none';
+            } else {
+                finishBtn.style.display = 'none';
+                nextBtn.style.display = 'block';
+            }
+        }
+
+        // ========== TIMER FUNCTIONS ==========
+        function startTimer(totalSeconds) {
+            let remainingSeconds = totalSeconds;
+            
+            // Clear existing timer
+            if (appState.testTimer) {
+                clearInterval(appState.testTimer);
+            }
+            
+            // Update timer display
+            updateTimerDisplay(remainingSeconds);
+            
+            // Start new timer
+            appState.testTimer = setInterval(() => {
+                remainingSeconds--;
+                updateTimerDisplay(remainingSeconds);
+                
+                if (remainingSeconds <= 0) {
+                    clearInterval(appState.testTimer);
+                    finishTest(); // Auto-submit when time ends
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        // ========== FINISH TEST ==========
+        function finishTest() {
+            // Clear timer
+            if (appState.testTimer) {
+                clearInterval(appState.testTimer);
+                appState.testTimer = null;
+            }
+            
+            // Calculate score
+            const test = appState.currentTest;
+            let correct = 0;
+            let incorrect = 0;
+            let skipped = 0;
+            
+            for (let i = 0; i < test.questions; i++) {
+                if (appState.userAnswers[i] === null) {
+                    skipped++;
+                } else if (appState.userAnswers[i] === test.questionsData[i].correct) {
+                    correct++;
+                } else {
+                    incorrect++;
+                }
+            }
+            
+            const score = Math.round((correct / test.questions) * 100);
+            const timeTaken = Math.floor((new Date() - appState.testStartTime) / 1000);
+            
+            // Save result
+            appState.completedTests[test.id] = {
+                score: score,
+                correct: correct,
+                incorrect: incorrect,
+                skipped: skipped,
+                timeTaken: timeTaken,
+                date: new Date().toISOString()
+            };
+            
+            localStorage.setItem('completedTests', JSON.stringify(appState.completedTests));
+            
+            // Show results
+            showResults(correct, incorrect, skipped, score, timeTaken);
+        }
+
+        // ========== SHOW RESULTS ==========
+        function showResults(correct, incorrect, skipped, score, timeTaken) {
+            // Update result stats
+            document.getElementById('score-percentage').textContent = `${score}%`;
+            document.getElementById('correct-count').textContent = correct;
+            document.getElementById('incorrect-count').textContent = incorrect;
+            document.getElementById('skipped-count').textContent = skipped;
+            
+            // Format time
+            const minutes = Math.floor(timeTaken / 60);
+            const seconds = timeTaken % 60;
+            document.getElementById('time-taken').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Update title based on score
+            const resultsTitle = document.getElementById('results-title');
+            const resultsSubtitle = document.getElementById('results-subtitle');
+            
+            if (score >= 90) {
+                resultsTitle.textContent = "Excellent Work! 🎉";
+                resultsSubtitle.textContent = "Outstanding performance!";
+            } else if (score >= 70) {
+                resultsTitle.textContent = "Good Job! 👍";
+                resultsSubtitle.textContent = "Solid performance with room for improvement";
+            } else if (score >= 50) {
+                resultsTitle.textContent = "Keep Practicing! 💪";
+                resultsSubtitle.textContent = "You're getting there!";
+            } else {
+                resultsTitle.textContent = "Time to Review! 📚";
+                resultsSubtitle.textContent = "Let's focus on the basics";
+            }
+            
+            // Show detailed results
+            const detailedContainer = document.getElementById('detailed-results');
+            detailedContainer.innerHTML = '<h3 style="margin-bottom: 1rem;">Question Review</h3>';
+            
+            appState.currentTest.questionsData.forEach((question, index) => {
+                const userAnswer = appState.userAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                const isSkipped = userAnswer === null;
+                
+                detailedContainer.innerHTML += `
+                    <div class="question-review ${isCorrect ? 'correct' : 'incorrect'}">
+                        <div class="question-review-header">
+                            <strong>Question ${index + 1}</strong>
+                            <span class="question-status ${isCorrect ? 'status-correct' : 'status-incorrect'}">
+                                ${isSkipped ? 'Skipped' : (isCorrect ? 'Correct' : 'Incorrect')}
+                            </span>
+                        </div>
+                        <p><strong>Q:</strong> ${question.question}</p>
+                        <p><strong>Your Answer:</strong> ${isSkipped ? 'Not answered' : question.options[userAnswer]}</p>
+                        <p><strong>Correct Answer:</strong> ${question.options[question.correct]}</p>
+                        <p><strong>Explanation:</strong> ${question.explanation}</p>
+                    </div>
+                `;
+            });
+            
+            // Show results page
+            showPage('results');
+        }
+
+        // ========== RETAKE TEST ==========
+        function retakeTest() {
+            startTest(appState.currentTest.id);
+        }
+
+        // ========== LOGIN/REGISTER FUNCTIONS ==========
         function login(event) {
             event.preventDefault();
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
             
-            // Check admin credentials
             if (email === 'doctormotivation29@gmail.com' && password === 'admin123') {
                 appState.currentUser = { name: 'Admin', email: email, role: 'admin' };
                 appState.isLoggedIn = true;
                 showPage('admin');
-                return;
-            }
-            
-            // Check user credentials
-            if (email && password.length >= 6) {
+            } else if (email && password.length >= 6) {
                 appState.currentUser = { 
                     name: email.split('@')[0], 
                     email: email,
@@ -2167,11 +3075,117 @@
             }
         }
 
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize resources
-            initResources();
+        function register(event) {
+            event.preventDefault();
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+            const confirm = document.getElementById('reg-confirm').value;
             
+            if (password !== confirm) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long!');
+                return;
+            }
+            
+            appState.currentUser = { name: name, email: email, role: 'student' };
+            appState.isLoggedIn = true;
+            alert('Registration successful! Welcome ' + name);
+            showPage('dashboard');
+        }
+
+        function logout() {
+            appState.currentUser = null;
+            appState.isLoggedIn = false;
+            showPage('home');
+        }
+
+        // ========== DASHBOARD FUNCTIONS ==========
+        function loadDashboard() {
+            if (!appState.isLoggedIn) {
+                showPage('login');
+                return;
+            }
+            
+            // Calculate overall stats
+            const completedCount = Object.keys(appState.completedTests).length;
+            const totalTests = allTests.length;
+            const progressPercentage = Math.round((completedCount / totalTests) * 100);
+            
+            // Update dashboard stats
+            document.getElementById('progress-percent').textContent = `${progressPercentage}%`;
+            
+            // Load recent tests
+            const recentTests = Object.entries(appState.completedTests)
+                .slice(-5)
+                .map(([testId, result]) => {
+                    const test = allTests.find(t => t.id == testId);
+                    return { test, result };
+                });
+            
+            const tableBody = document.getElementById('activity-table');
+            if (tableBody) {
+                if (recentTests.length > 0) {
+                    tableBody.innerHTML = recentTests.map(item => `
+                        <tr>
+                            <td>${new Date(item.result.date).toLocaleDateString()}</td>
+                            <td>${item.test.title}</td>
+                            <td>${item.test.category}</td>
+                            <td>${item.result.score}%</td>
+                        </tr>
+                    `).join('');
+                } else {
+                    tableBody.innerHTML = `
+                        <tr>
+                            <td colspan="4" class="text-center" style="padding: 2rem; color: var(--text-light);">
+                                <i class="fas fa-clipboard-list fa-2x mb-1"></i><br>
+                                No tests completed yet. Start practicing!
+                            </td>
+                        </tr>
+                    `;
+                }
+            }
+        }
+
+        // ========== ADMIN FUNCTIONS ==========
+        function loadAdminDashboard() {
+            // Admin stats
+            const totalUsers = 10500;
+            const activeToday = 3420;
+            const testsTaken = Object.keys(appState.completedTests).length * 10; // Approximate
+            const contentItems = allTests.length * 10; // Questions as content
+            
+            document.getElementById('admin-stat1').textContent = totalUsers.toLocaleString();
+            document.getElementById('admin-stat2').textContent = activeToday.toLocaleString();
+            document.getElementById('admin-stat3').textContent = testsTaken.toLocaleString();
+            document.getElementById('admin-stat4').textContent = contentItems.toLocaleString();
+        }
+
+        function showAdminSection(section) {
+            ['dashboard', 'users', 'content', 'analytics', 'settings'].forEach(sec => {
+                const element = document.getElementById(`admin-${sec}`);
+                if (element) element.classList.add('hidden');
+            });
+            const target = document.getElementById(`admin-${section}`);
+            if (target) target.classList.remove('hidden');
+        }
+
+        // ========== MOBILE MENU ==========
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.menu-toggle i');
+            navLinks.classList.toggle('active');
+            menuToggle.className = navLinks.classList.contains('active') 
+                ? 'fas fa-times' 
+                : 'fas fa-bars';
+        }
+
+        // ========== INITIALIZATION ==========
+        document.addEventListener('DOMContentLoaded', function() {
             // Close mobile menu when clicking outside
             document.addEventListener('click', (e) => {
                 if (!e.target.closest('.nav-links') && !e.target.closest('.menu-toggle')) {
@@ -2190,18 +3204,38 @@
                 appState.isLoggedIn = true;
             }
             
-            // Add event listeners for preview
-            ['resource-title', 'resource-subject', 'resource-type', 'resource-description'].forEach(id => {
-                document.getElementById(id).addEventListener('input', updatePreview);
-            });
+            // Load tests list if on tests page
+            if (window.location.hash === '#tests') {
+                showPage('tests');
+            }
         });
 
-        // Save user to localStorage
+        // ========== SAVE USER TO LOCALSTORAGE ==========
         function saveUser() {
             if (appState.currentUser) {
                 localStorage.setItem('mdcat_user', JSON.stringify(appState.currentUser));
             }
         }
+
+        // Override login/register to save user
+        const originalLogin = login;
+        login = function(event) {
+            originalLogin(event);
+            saveUser();
+        };
+
+        const originalRegister = register;
+        register = function(event) {
+            originalRegister(event);
+            saveUser();
+        };
+
+        // Override logout to clear data
+        const originalLogout = logout;
+        logout = function() {
+            originalLogout();
+            localStorage.removeItem('mdcat_user');
+        };
     </script>
 </body>
 </html>
