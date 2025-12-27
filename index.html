@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -274,123 +275,239 @@
             opacity: 0.8;
         }
 
-        /* ========== FEATURES ========== */
-        .features {
-            padding: 5rem 0;
-            background: white;
+        /* ========== SUBJECTS PAGE ========== */
+        .subjects-page {
+            padding: 3rem 0;
+            min-height: 70vh;
         }
 
-        .section-title {
+        .subject-header {
             text-align: center;
-            font-size: 2.5rem;
             margin-bottom: 3rem;
+        }
+
+        .subject-header h1 {
+            font-size: 2.5rem;
             color: var(--dark);
-            position: relative;
+            margin-bottom: 1rem;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: var(--secondary);
-            border-radius: 2px;
+        .subject-header p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .features-grid {
+        .resources-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
+            margin-top: 2rem;
         }
 
-        .feature-card {
+        .resource-card {
             background: white;
-            padding: 2rem;
             border-radius: var(--radius);
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 2px solid transparent;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--secondary);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--secondary), #2ecc71);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-        }
-
-        .feature-icon i {
-            font-size: 2rem;
-            color: white;
-        }
-
-        /* ========== SUBJECTS ========== */
-        .subjects {
-            padding: 5rem 0;
-            background: var(--light);
-        }
-
-        .subjects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .subject-card {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--radius);
-            text-align: center;
-            text-decoration: none;
-            color: var(--text);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            position: relative;
             overflow: hidden;
-            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
         }
 
-        .subject-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-        }
-
-        .subject-card.biology::before { background: #27ae60; }
-        .subject-card.chemistry::before { background: #3498db; }
-        .subject-card.physics::before { background: #9b59b6; }
-        .subject-card.english::before { background: #e74c3c; }
-
-        .subject-card:hover {
+        .resource-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
-        .subject-card i {
+        .resource-icon {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 3rem;
+        }
+
+        .resource-icon.pdf { background: #e74c3c; color: white; }
+        .resource-icon.video { background: #3498db; color: white; }
+        .resource-icon.note { background: #27ae60; color: white; }
+        .resource-icon.book { background: #9b59b6; color: white; }
+
+        .resource-content {
+            padding: 1.5rem;
+        }
+
+        .resource-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .resource-content p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            min-height: 40px;
+        }
+
+        .resource-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-light);
             margin-bottom: 1rem;
         }
 
-        .subject-card.biology i { color: #27ae60; }
-        .subject-card.chemistry i { color: #3498db; }
-        .subject-card.physics i { color: #9b59b6; }
-        .subject-card.english i { color: #e74c3c; }
+        .resource-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-download, .btn-view {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .btn-download {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-view {
+            background: var(--light);
+            color: var(--text);
+        }
+
+        .btn-download:hover {
+            background: #2980b9;
+        }
+
+        .btn-view:hover {
+            background: var(--border);
+        }
+
+        /* ========== ADMIN CONTENT UPLOAD ========== */
+        .upload-container {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .upload-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .upload-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .file-upload {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .file-upload:hover {
+            border-color: var(--secondary);
+            background: rgba(52, 152, 219, 0.05);
+        }
+
+        .file-upload i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .file-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: var(--radius);
+            display: none;
+        }
+
+        .file-info.show {
+            display: block;
+        }
+
+        .preview-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: var(--radius);
+            display: none;
+        }
+
+        .preview-container.show {
+            display: block;
+        }
+
+        .content-list {
+            margin-top: 2rem;
+        }
+
+        .search-box {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-family: inherit;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: var(--light);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active {
+            background: var(--secondary);
+            color: white;
+        }
 
         /* ========== LOGIN PAGE ========== */
         #login-page {
@@ -620,6 +737,19 @@
             color: white;
         }
 
+        .btn-add {
+            background: var(--success);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
         /* ========== ADMIN DASHBOARD ========== */
         .admin-grid {
             display: grid;
@@ -792,6 +922,18 @@
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-sidebar {
+                display: none;
+            }
         }
 
         @media (max-width: 768px) {
@@ -815,17 +957,13 @@
             .nav-links.active {
                 left: 0;
             }
-            
-            .dashboard-grid {
+
+            .resources-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .admin-grid {
+
+            .form-row {
                 grid-template-columns: 1fr;
-            }
-            
-            .admin-sidebar {
-                display: none;
             }
         }
 
@@ -846,6 +984,51 @@
         @keyframes slideUp {
             from { transform: translateY(20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* ========== MODAL ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
         }
 
         /* ========== UTILITY ========== */
@@ -921,67 +1104,30 @@
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section class="features">
-            <div class="container">
-                <h2 class="section-title">Why Choose Our Platform?</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <h3>Smart Learning</h3>
-                        <p>AI-powered adaptive learning system tailored to your weak areas</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Progress Tracking</h3>
-                        <p>Detailed analytics and performance reports with improvement suggestions</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-video"></i>
-                        </div>
-                        <h3>Video Lectures</h3>
-                        <p>HD video lectures by top medical educators from Pakistan</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <h3>Study Material</h3>
-                        <p>Comprehensive notes, flashcards, and past papers collection</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Subjects Section -->
         <section class="subjects">
             <div class="container">
                 <h2 class="section-title">MDCAT Subjects</h2>
                 <div class="subjects-grid">
-                    <div class="subject-card biology" onclick="showPage('biology')">
+                    <div class="subject-card biology" onclick="showSubjectPage('biology')">
                         <i class="fas fa-dna"></i>
                         <h3>Biology</h3>
                         <p>200+ Topics • 1500+ Questions</p>
                         <span class="progress">Start Learning →</span>
                     </div>
-                    <div class="subject-card chemistry" onclick="showPage('chemistry')">
+                    <div class="subject-card chemistry" onclick="showSubjectPage('chemistry')">
                         <i class="fas fa-flask"></i>
                         <h3>Chemistry</h3>
                         <p>180+ Topics • 1200+ Questions</p>
                         <span class="progress">Start Learning →</span>
                     </div>
-                    <div class="subject-card physics" onclick="showPage('physics')">
+                    <div class="subject-card physics" onclick="showSubjectPage('physics')">
                         <i class="fas fa-atom"></i>
                         <h3>Physics</h3>
                         <p>150+ Topics • 1000+ Questions</p>
                         <span class="progress">Start Learning →</span>
                     </div>
-                    <div class="subject-card english" onclick="showPage('english')">
+                    <div class="subject-card english" onclick="showSubjectPage('english')">
                         <i class="fas fa-language"></i>
                         <h3>English</h3>
                         <p>100+ Topics • 800+ Questions</p>
@@ -1043,6 +1189,78 @@
         </footer>
     </div>
 
+    <!-- ========== SUBJECTS LIST PAGE ========== -->
+    <div id="subjects-page" class="hidden">
+        <div class="subjects-page">
+            <div class="container">
+                <div class="subject-header">
+                    <h1>Study Subjects</h1>
+                    <p>Select a subject to access study materials, PDFs, videos, and practice questions</p>
+                </div>
+                
+                <div class="subjects-grid">
+                    <div class="subject-card biology" onclick="showSubjectPage('biology')">
+                        <i class="fas fa-dna"></i>
+                        <h3>Biology</h3>
+                        <p>Cell Biology, Genetics, Human Physiology, Ecology</p>
+                        <span class="progress">Access Materials →</span>
+                    </div>
+                    <div class="subject-card chemistry" onclick="showSubjectPage('chemistry')">
+                        <i class="fas fa-flask"></i>
+                        <h3>Chemistry</h3>
+                        <p>Organic, Inorganic, Physical Chemistry, Biochemistry</p>
+                        <span class="progress">Access Materials →</span>
+                    </div>
+                    <div class="subject-card physics" onclick="showSubjectPage('physics')">
+                        <i class="fas fa-atom"></i>
+                        <h3>Physics</h3>
+                        <p>Mechanics, Electricity, Magnetism, Modern Physics</p>
+                        <span class="progress">Access Materials →</span>
+                    </div>
+                    <div class="subject-card english" onclick="showSubjectPage('english')">
+                        <i class="fas fa-language"></i>
+                        <h3>English</h3>
+                        <p>Grammar, Comprehension, Vocabulary, Communication</p>
+                        <span class="progress">Access Materials →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== SUBJECT DETAIL PAGE ========== -->
+    <div id="subject-detail-page" class="hidden">
+        <div class="subjects-page">
+            <div class="container">
+                <div class="subject-header">
+                    <h1 id="subject-title">Subject Name</h1>
+                    <p id="subject-description">Access all study materials for this subject</p>
+                </div>
+
+                <!-- Resource Filters -->
+                <div class="filter-buttons" id="resource-filters">
+                    <button class="filter-btn active" onclick="filterResources('all')">All Resources</button>
+                    <button class="filter-btn" onclick="filterResources('pdf')">PDFs</button>
+                    <button class="filter-btn" onclick="filterResources('video')">Videos</button>
+                    <button class="filter-btn" onclick="filterResources('note')">Notes</button>
+                    <button class="filter-btn" onclick="filterResources('book')">Books</button>
+                </div>
+
+                <!-- Resources Grid -->
+                <div class="resources-grid" id="resources-container">
+                    <!-- Resources will be loaded here -->
+                </div>
+
+                <!-- No Resources Message -->
+                <div id="no-resources" class="text-center mt-2" style="display: none;">
+                    <i class="fas fa-folder-open fa-3x" style="color: var(--border); margin-bottom: 1rem;"></i>
+                    <h3>No Resources Available</h3>
+                    <p>Check back later or contact admin for study materials.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ========== LOGIN PAGE ========== -->
     <div id="login-page" class="hidden">
         <div class="auth-container">
@@ -1088,200 +1306,6 @@
         </div>
     </div>
 
-    <!-- ========== REGISTER PAGE ========== -->
-    <div id="register-page" class="hidden">
-        <div class="auth-container">
-            <div class="auth-box fade-in">
-                <div class="auth-header">
-                    <i class="fas fa-user-plus fa-3x" style="color: var(--secondary); margin-bottom: 1rem;"></i>
-                    <h2>Create Account</h2>
-                    <p>Start your MDCAT journey with us</p>
-                </div>
-                
-                <form id="register-form" onsubmit="register(event)">
-                    <div class="form-group">
-                        <label><i class="fas fa-user"></i> Full Name</label>
-                        <input type="text" id="reg-name" placeholder="Enter your full name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-envelope"></i> Email Address</label>
-                        <input type="email" id="reg-email" placeholder="Enter your email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-lock"></i> Password</label>
-                        <input type="password" id="reg-password" placeholder="Create password (min 6 characters)" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-lock"></i> Confirm Password</label>
-                        <input type="password" id="reg-confirm" placeholder="Confirm password" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label style="display: flex; align-items: center; gap: 8px;">
-                            <input type="checkbox" required>
-                            I agree to Terms & Conditions
-                        </label>
-                    </div>
-                    
-                    <button type="submit" class="btn-submit">
-                        <i class="fas fa-user-plus"></i> Create Account
-                    </button>
-                    
-                    <div class="auth-footer">
-                        <p>Already have an account? <a onclick="showPage('login')">Login here</a></p>
-                        <p style="margin-top: 1rem;">
-                            <a onclick="showPage('home')" style="color: var(--text-light);">
-                                <i class="fas fa-arrow-left"></i> Back to Homepage
-                            </a>
-                        </p>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- ========== USER DASHBOARD ========== -->
-    <div id="dashboard-page" class="hidden">
-        <div class="dashboard">
-            <header class="dashboard-header">
-                <div class="container">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div class="logo" onclick="showPage('home')">
-                            <i class="fas fa-stethoscope"></i>
-                            <h1>PAK-MED <span>STUDY CORNER</span> <small>MDCAT</small></h1>
-                        </div>
-                        
-                        <div style="display: flex; align-items: center; gap: 2rem;">
-                            <div class="notification">
-                                <i class="fas fa-bell"></i>
-                                <span class="badge">3</span>
-                            </div>
-                            <div class="user-profile">
-                                <div style="margin-left: 10px;">
-                                    <p style="font-weight: 600; margin: 0;" id="user-name">Student</p>
-                                    <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">MDCAT Aspirant</p>
-                                </div>
-                            </div>
-                            <button onclick="logout()" class="btn-login" style="padding: 8px 15px;">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <div class="dashboard-content">
-                <div class="container">
-                    <div class="dashboard-grid">
-                        <!-- Sidebar -->
-                        <aside class="sidebar">
-                            <div class="sidebar-menu">
-                                <a onclick="showPage('dashboard')" class="active">
-                                    <i class="fas fa-home"></i> Dashboard
-                                </a>
-                                <a onclick="showPage('biology')">
-                                    <i class="fas fa-dna"></i> Biology
-                                </a>
-                                <a onclick="showPage('chemistry')">
-                                    <i class="fas fa-flask"></i> Chemistry
-                                </a>
-                                <a onclick="showPage('physics')">
-                                    <i class="fas fa-atom"></i> Physics
-                                </a>
-                                <a onclick="showPage('english')">
-                                    <i class="fas fa-language"></i> English
-                                </a>
-                                <a onclick="showPage('quiz')">
-                                    <i class="fas fa-file-alt"></i> Practice Tests
-                                </a>
-                                <a onclick="showPage('progress')">
-                                    <i class="fas fa-chart-line"></i> Progress Report
-                                </a>
-                                <a onclick="showPage('notes')">
-                                    <i class="fas fa-book"></i> Study Notes
-                                </a>
-                                <a onclick="showPage('profile')">
-                                    <i class="fas fa-user"></i> Profile Settings
-                                </a>
-                            </div>
-                        </aside>
-
-                        <!-- Main Content -->
-                        <main class="main-content">
-                            <div class="admin-header">
-                                <h2 id="welcome-text">Welcome back!</h2>
-                                <p style="color: var(--text-light);">Here's your study overview</p>
-                            </div>
-                            
-                            <!-- Stats Cards -->
-                            <div class="stats-cards">
-                                <div class="stat-card">
-                                    <i class="fas fa-clock fa-2x" style="margin-bottom: 1rem;"></i>
-                                    <h3>42h 15m</h3>
-                                    <p>Study Time This Week</p>
-                                </div>
-                                <div class="stat-card" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
-                                    <i class="fas fa-check-circle fa-2x" style="margin-bottom: 1rem;"></i>
-                                    <h3 id="progress-percent">0%</h3>
-                                    <p>Overall Progress</p>
-                                </div>
-                                <div class="stat-card" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
-                                    <i class="fas fa-trophy fa-2x" style="margin-bottom: 1rem;"></i>
-                                    <h3>Rank #124</h3>
-                                    <p>Among 10,000 Students</p>
-                                </div>
-                                <div class="stat-card" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
-                                    <i class="fas fa-brain fa-2x" style="margin-bottom: 1rem;"></i>
-                                    <h3>92%</h3>
-                                    <p>Test Accuracy</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Quick Actions -->
-                            <div style="background: var(--light); padding: 1.5rem; border-radius: var(--radius); margin: 2rem 0;">
-                                <h3 style="margin-bottom: 1rem; color: var(--dark);">Quick Actions</h3>
-                                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                                    <button onclick="showPage('quiz')" class="btn-primary" style="padding: 10px 20px;">
-                                        <i class="fas fa-play"></i> Start Quick Quiz
-                                    </button>
-                                    <button onclick="showPage('biology')" class="btn-secondary" style="padding: 10px 20px;">
-                                        <i class="fas fa-video"></i> Watch Next Lecture
-                                    </button>
-                                    <button onclick="addNote()" class="btn-admin" style="padding: 10px 20px;">
-                                        <i class="fas fa-plus"></i> Add New Notes
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <!-- Recent Activity -->
-                            <div>
-                                <h3 style="margin-bottom: 1rem; color: var(--dark);">Recent Activity</h3>
-                                <div class="data-table">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>Activity</th>
-                                                <th>Subject</th>
-                                                <th>Score</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="activity-table">
-                                            <!-- Activities will be added here -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </main>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- ========== ADMIN DASHBOARD ========== -->
     <div id="admin-page" class="hidden">
         <div class="admin-grid">
@@ -1292,20 +1316,20 @@
                     <h2>Admin Panel</h2>
                 </div>
                 <div class="admin-menu">
-                    <a onclick="showPage('admin')" class="active">
+                    <a onclick="showAdminSection('dashboard')" class="active">
                         <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                    <a onclick="showAdminSection('upload')">
+                        <i class="fas fa-upload"></i> Upload Content
+                    </a>
+                    <a onclick="showAdminSection('manage')">
+                        <i class="fas fa-edit"></i> Manage Content
                     </a>
                     <a onclick="showAdminSection('users')">
                         <i class="fas fa-users"></i> Manage Users
                     </a>
-                    <a onclick="showAdminSection('content')">
-                        <i class="fas fa-book"></i> Manage Content
-                    </a>
                     <a onclick="showAdminSection('analytics')">
                         <i class="fas fa-chart-bar"></i> Analytics
-                    </a>
-                    <a onclick="showAdminSection('settings')">
-                        <i class="fas fa-cogs"></i> Settings
                     </a>
                     <a onclick="showPage('home')">
                         <i class="fas fa-sign-out-alt"></i> Back to Site
@@ -1315,6 +1339,7 @@
 
             <!-- Admin Content -->
             <div class="admin-content">
+                <!-- Admin Dashboard -->
                 <div id="admin-dashboard">
                     <h2>Admin Dashboard</h2>
                     <p>Welcome to PAK-MED STUDY CORNER Admin Panel</p>
@@ -1322,115 +1347,234 @@
                     <div class="stats-cards">
                         <div class="stat-card">
                             <h3 id="admin-stat1">0</h3>
-                            <p>Total Users</p>
+                            <p>Total Resources</p>
                         </div>
                         <div class="stat-card" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
                             <h3 id="admin-stat2">0</h3>
-                            <p>Active Today</p>
+                            <p>PDF Files</p>
                         </div>
                         <div class="stat-card" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
                             <h3 id="admin-stat3">0</h3>
-                            <p>Tests Taken</p>
+                            <p>Video Lectures</p>
                         </div>
                         <div class="stat-card" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
                             <h3 id="admin-stat4">0</h3>
-                            <p>Content Items</p>
+                            <p>Total Downloads</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <h3>Quick Actions</h3>
+                        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                            <button onclick="showAdminSection('upload')" class="btn-primary">
+                                <i class="fas fa-upload"></i> Upload New Content
+                            </button>
+                            <button onclick="showAdminSection('manage')" class="btn-secondary">
+                                <i class="fas fa-edit"></i> Manage Existing
+                            </button>
                         </div>
                     </div>
                 </div>
 
+                <!-- Upload Content Section -->
+                <div id="admin-upload" class="hidden">
+                    <div class="upload-header">
+                        <h2><i class="fas fa-upload"></i> Upload Study Material</h2>
+                        <p>Upload PDFs, videos, notes, and books for students</p>
+                    </div>
+
+                    <div class="upload-container">
+                        <form id="upload-form" onsubmit="uploadContent(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label><i class="fas fa-book"></i> Resource Title *</label>
+                                    <input type="text" id="resource-title" placeholder="e.g., Biology Chapter 1 - Cell Structure" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label><i class="fas fa-tags"></i> Subject *</label>
+                                    <select id="resource-subject" required>
+                                        <option value="">Select Subject</option>
+                                        <option value="biology">Biology</option>
+                                        <option value="chemistry">Chemistry</option>
+                                        <option value="physics">Physics</option>
+                                        <option value="english">English</option>
+                                        <option value="general">General</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label><i class="fas fa-file"></i> Resource Type *</label>
+                                    <select id="resource-type" required onchange="toggleUploadFields()">
+                                        <option value="">Select Type</option>
+                                        <option value="pdf">PDF Document</option>
+                                        <option value="video">Video Lecture</option>
+                                        <option value="note">Study Notes</option>
+                                        <option value="book">E-Book</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label><i class="fas fa-layer-group"></i> Category</label>
+                                    <select id="resource-category">
+                                        <option value="theory">Theory</option>
+                                        <option value="practice">Practice Questions</option>
+                                        <option value="past-paper">Past Paper</option>
+                                        <option value="solved">Solved Exercises</option>
+                                        <option value="formula">Formulas</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label><i class="fas fa-align-left"></i> Description</label>
+                                <textarea id="resource-description" rows="3" placeholder="Brief description of the resource..."></textarea>
+                            </div>
+
+                            <!-- File Upload Section -->
+                            <div id="file-upload-section">
+                                <div class="file-upload" onclick="document.getElementById('file-input').click()">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <h3>Click to Upload File</h3>
+                                    <p>Supported: PDF, DOC, PPT, Images (Max 50MB)</p>
+                                    <input type="file" id="file-input" hidden accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png">
+                                </div>
+                                <div class="file-info" id="file-info"></div>
+                            </div>
+
+                            <!-- Video URL Section -->
+                            <div id="video-url-section" class="hidden">
+                                <div class="form-group">
+                                    <label><i class="fas fa-link"></i> Video URL *</label>
+                                    <input type="url" id="video-url" placeholder="https://youtube.com/watch?v=... or direct video link">
+                                    <small style="color: var(--text-light);">Supports YouTube, Vimeo, or direct video links</small>
+                                </div>
+                            </div>
+
+                            <!-- Preview Section -->
+                            <div class="preview-container" id="preview-section">
+                                <h4><i class="fas fa-eye"></i> Preview</h4>
+                                <div id="preview-content"></div>
+                            </div>
+
+                            <div class="form-row mt-2">
+                                <div class="form-group">
+                                    <label><i class="fas fa-lock"></i> Access Level</label>
+                                    <select id="resource-access">
+                                        <option value="free">Free for All</option>
+                                        <option value="registered">Registered Users Only</option>
+                                        <option value="premium">Premium Users Only</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label><i class="fas fa-star"></i> Priority</label>
+                                    <select id="resource-priority">
+                                        <option value="normal">Normal</option>
+                                        <option value="important">Important</option>
+                                        <option value="must-read">Must Read</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-submit mt-2">
+                                <i class="fas fa-upload"></i> Upload Resource
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Manage Content Section -->
+                <div id="admin-manage" class="hidden">
+                    <div class="upload-header">
+                        <h2><i class="fas fa-edit"></i> Manage Content</h2>
+                        <p>Edit, delete, or organize uploaded materials</p>
+                    </div>
+
+                    <div class="search-box">
+                        <input type="text" id="search-content" placeholder="Search resources by title, subject, or type..." onkeyup="searchResources()">
+                        <select id="filter-subject" onchange="filterManageContent()">
+                            <option value="">All Subjects</option>
+                            <option value="biology">Biology</option>
+                            <option value="chemistry">Chemistry</option>
+                            <option value="physics">Physics</option>
+                            <option value="english">English</option>
+                        </select>
+                        <select id="filter-type" onchange="filterManageContent()">
+                            <option value="">All Types</option>
+                            <option value="pdf">PDF</option>
+                            <option value="video">Video</option>
+                            <option value="note">Notes</option>
+                            <option value="book">Books</option>
+                        </select>
+                    </div>
+
+                    <div class="content-list">
+                        <div class="data-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Subject</th>
+                                        <th>Type</th>
+                                        <th>Upload Date</th>
+                                        <th>Downloads</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="content-table">
+                                    <!-- Content will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users Management -->
                 <div id="admin-users" class="hidden">
                     <h2>Manage Users</h2>
-                    <div class="data-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="users-table">
-                                <!-- Users will be added here -->
-                            </tbody>
-                        </table>
-                    </div>
+                    <!-- User management content -->
                 </div>
 
-                <div id="admin-content" class="hidden">
-                    <h2>Manage Content</h2>
-                    <button onclick="addContent()" class="btn-add">
-                        <i class="fas fa-plus"></i> Add New Content
-                    </button>
+                <!-- Analytics -->
+                <div id="admin-analytics" class="hidden">
+                    <h2>Analytics</h2>
+                    <!-- Analytics content -->
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ========== QUIZ PAGE ========== -->
-    <div id="quiz-page" class="hidden">
-        <div class="container">
-            <div class="quiz-container">
-                <div class="quiz-header">
-                    <h2>MDCAT Practice Quiz</h2>
-                    <p>Test your knowledge with these sample questions</p>
-                    <div class="quiz-progress">
-                        <div class="progress-bar" id="quiz-progress"></div>
-                    </div>
-                    <p>Question <span id="current-question">1</span> of <span id="total-questions">5</span></p>
-                </div>
-                
-                <div class="quiz-body">
-                    <div id="quiz-content">
-                        <!-- Questions will be loaded here -->
-                    </div>
-                </div>
-                
-                <div class="quiz-footer">
-                    <button onclick="prevQuestion()" class="btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Previous
-                    </button>
-                    <button onclick="nextQuestion()" class="btn-primary">
-                        Next <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
+    <!-- ========== EDIT MODAL ========== -->
+    <div class="modal" id="edit-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Resource</h3>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
             </div>
-        </div>
-    </div>
-
-    <!-- ========== SUBJECT PAGES ========== -->
-    <div id="subject-page" class="hidden">
-        <div class="container">
-            <div class="main-content">
-                <h2 id="subject-title">Subject</h2>
-                <div id="subject-content">
-                    <!-- Subject content will be loaded here -->
+            <form id="edit-form" onsubmit="updateResource(event)">
+                <input type="hidden" id="edit-id">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="edit-title" required>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ========== PROGRESS PAGE ========== -->
-    <div id="progress-page" class="hidden">
-        <div class="container">
-            <div class="main-content">
-                <h2>Your Progress Report</h2>
-                <canvas id="progress-chart" width="400" height="200"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <!-- ========== NOTES PAGE ========== -->
-    <div id="notes-page" class="hidden">
-        <div class="container">
-            <div class="main-content">
-                <h2>Study Notes</h2>
-                <div id="notes-list">
-                    <!-- Notes will be added here -->
+                <div class="form-group">
+                    <label>Subject</label>
+                    <select id="edit-subject" required>
+                        <option value="biology">Biology</option>
+                        <option value="chemistry">Chemistry</option>
+                        <option value="physics">Physics</option>
+                        <option value="english">English</option>
+                    </select>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="edit-description" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Update Resource</button>
+            </form>
         </div>
     </div>
 
@@ -1441,70 +1585,85 @@
             currentUser: null,
             isLoggedIn: false,
             currentPage: 'home',
-            currentQuestion: 0,
-            quizAnswers: [],
-            userProgress: 0
+            currentSubject: '',
+            resources: [],
+            uploadedFile: null
         };
 
-        // Sample Data
-        const quizData = [
+        // Sample Resources Data
+        const sampleResources = [
             {
-                question: "Which of the following is the basic unit of life?",
-                options: ["Cell", "Tissue", "Organ", "Molecule"],
-                correct: 0
+                id: 1,
+                title: "Cell Biology Complete Notes",
+                subject: "biology",
+                type: "pdf",
+                description: "Complete notes on cell structure, organelles, and functions",
+                category: "theory",
+                fileUrl: "https://example.com/cell-biology.pdf",
+                uploadDate: "2024-01-15",
+                downloads: 1245,
+                size: "2.4 MB",
+                access: "free",
+                priority: "important"
             },
             {
-                question: "The process of converting light energy to chemical energy is called?",
-                options: ["Respiration", "Photosynthesis", "Digestion", "Fermentation"],
-                correct: 1
+                id: 2,
+                title: "Organic Chemistry Reactions",
+                subject: "chemistry",
+                type: "video",
+                description: "Video lecture covering all important organic reactions",
+                category: "practice",
+                fileUrl: "https://youtube.com/watch?v=abc123",
+                uploadDate: "2024-01-10",
+                downloads: 890,
+                duration: "45:30",
+                access: "registered",
+                priority: "normal"
             },
             {
-                question: "Which organelle is known as the power house of the cell?",
-                options: ["Nucleus", "Mitochondria", "Ribosome", "Golgi Apparatus"],
-                correct: 1
+                id: 3,
+                title: "Physics Formulas Handbook",
+                subject: "physics",
+                type: "pdf",
+                description: "All important formulas for MDCAT Physics",
+                category: "formula",
+                fileUrl: "https://example.com/physics-formulas.pdf",
+                uploadDate: "2024-01-05",
+                downloads: 2100,
+                size: "1.8 MB",
+                access: "free",
+                priority: "must-read"
             },
             {
-                question: "DNA replication occurs during which phase of the cell cycle?",
-                options: ["G1 Phase", "S Phase", "G2 Phase", "M Phase"],
-                correct: 1
-            },
-            {
-                question: "Which vitamin is produced by the human skin when exposed to sunlight?",
-                options: ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin K"],
-                correct: 2
+                id: 4,
+                title: "English Grammar Rules",
+                subject: "english",
+                type: "note",
+                description: "Complete English grammar rules with examples",
+                category: "theory",
+                fileUrl: "#",
+                uploadDate: "2024-01-01",
+                downloads: 1560,
+                access: "free",
+                priority: "important"
             }
         ];
 
-        const subjectsData = {
-            biology: {
-                title: "Biology",
-                content: `<h3>Biology - The Study of Life</h3>
-                <p>Biology is the natural science that studies life and living organisms.</p>
-                <h4>Topics Covered:</h4>
-                <ul>
-                    <li>Cell Biology</li>
-                    <li>Genetics</li>
-                    <li>Evolution</li>
-                    <li>Human Physiology</li>
-                    <li>Ecology</li>
-                </ul>`
-            },
-            chemistry: {
-                title: "Chemistry",
-                content: `<h3>Chemistry - Matter and its Interactions</h3>
-                <p>Study of matter, its properties, composition, and changes.</p>`
-            },
-            physics: {
-                title: "Physics",
-                content: `<h3>Physics - The Fundamental Science</h3>
-                <p>Study of matter, energy, and their interactions.</p>`
-            },
-            english: {
-                title: "English",
-                content: `<h3>English Language and Comprehension</h3>
-                <p>Essential for medical studies and communication.</p>`
+        // Initialize resources
+        function initResources() {
+            const savedResources = localStorage.getItem('mdcat_resources');
+            if (savedResources) {
+                appState.resources = JSON.parse(savedResources);
+            } else {
+                appState.resources = sampleResources;
+                saveResources();
             }
-        };
+        }
+
+        // Save resources to localStorage
+        function saveResources() {
+            localStorage.setItem('mdcat_resources', JSON.stringify(appState.resources));
+        }
 
         // Page Navigation
         function showPage(page) {
@@ -1519,7 +1678,10 @@
             });
             
             // Show requested page
-            document.getElementById(`${page}-page`).classList.remove('hidden');
+            const pageElement = document.getElementById(`${page}-page`);
+            if (pageElement) {
+                pageElement.classList.remove('hidden');
+            }
             
             // Update navigation
             if (page !== 'login' && page !== 'register' && page !== 'admin') {
@@ -1533,35 +1695,417 @@
                 case 'home':
                     animateStats();
                     break;
-                case 'dashboard':
-                    loadDashboard();
+                case 'subjects':
                     break;
                 case 'admin':
                     loadAdminDashboard();
-                    break;
-                case 'quiz':
-                    loadQuiz();
-                    break;
-                case 'biology':
-                case 'chemistry':
-                case 'physics':
-                case 'english':
-                    showSubject(page);
+                    showAdminSection('dashboard');
                     break;
             }
         }
 
-        // Toggle Mobile Menu
-        function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            const menuToggle = document.querySelector('.menu-toggle i');
-            navLinks.classList.toggle('active');
-            menuToggle.className = navLinks.classList.contains('active') 
-                ? 'fas fa-times' 
-                : 'fas fa-bars';
+        // Show Subject Page
+        function showSubjectPage(subject) {
+            appState.currentSubject = subject;
+            
+            const subjectNames = {
+                biology: "Biology",
+                chemistry: "Chemistry",
+                physics: "Physics",
+                english: "English"
+            };
+            
+            const subjectDescriptions = {
+                biology: "Study materials for Cell Biology, Genetics, Human Physiology, Ecology, and more",
+                chemistry: "Resources for Organic, Inorganic, Physical Chemistry and Biochemistry",
+                physics: "Materials covering Mechanics, Electricity, Magnetism, and Modern Physics",
+                english: "Grammar rules, comprehension exercises, vocabulary, and communication skills"
+            };
+            
+            document.getElementById('subject-title').textContent = subjectNames[subject];
+            document.getElementById('subject-description').textContent = subjectDescriptions[subject];
+            
+            loadSubjectResources(subject);
+            showPage('subject-detail');
         }
 
-        // Animate Statistics
+        // Load Subject Resources
+        function loadSubjectResources(subject) {
+            const resources = appState.resources.filter(r => r.subject === subject);
+            const container = document.getElementById('resources-container');
+            const noResources = document.getElementById('no-resources');
+            
+            if (resources.length === 0) {
+                container.innerHTML = '';
+                noResources.style.display = 'block';
+                return;
+            }
+            
+            noResources.style.display = 'none';
+            
+            container.innerHTML = resources.map(resource => `
+                <div class="resource-card" data-type="${resource.type}">
+                    <div class="resource-icon ${resource.type}">
+                        <i class="fas fa-${getResourceIcon(resource.type)}"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>${resource.title}</h3>
+                        <p>${resource.description}</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-calendar"></i> ${resource.uploadDate}</span>
+                            <span><i class="fas fa-download"></i> ${resource.downloads}</span>
+                            ${resource.size ? `<span><i class="fas fa-file"></i> ${resource.size}</span>` : ''}
+                        </div>
+                        <div class="resource-actions">
+                            <button class="btn-download" onclick="downloadResource(${resource.id})">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                            <button class="btn-view" onclick="viewResource(${resource.id})">
+                                <i class="fas fa-eye"></i> View
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Get Resource Icon
+        function getResourceIcon(type) {
+            const icons = {
+                pdf: 'file-pdf',
+                video: 'video',
+                note: 'sticky-note',
+                book: 'book'
+            };
+            return icons[type] || 'file';
+        }
+
+        // Filter Resources
+        function filterResources(type) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const cards = document.querySelectorAll('.resource-card');
+            cards.forEach(card => {
+                if (type === 'all' || card.dataset.type === type) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Toggle Upload Fields
+        function toggleUploadFields() {
+            const type = document.getElementById('resource-type').value;
+            const fileSection = document.getElementById('file-upload-section');
+            const videoSection = document.getElementById('video-url-section');
+            
+            if (type === 'video') {
+                fileSection.classList.add('hidden');
+                videoSection.classList.remove('hidden');
+            } else {
+                fileSection.classList.remove('hidden');
+                videoSection.classList.add('hidden');
+            }
+            
+            updatePreview();
+        }
+
+        // File Upload Handler
+        document.getElementById('file-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                appState.uploadedFile = file;
+                const fileInfo = document.getElementById('file-info');
+                fileInfo.innerHTML = `
+                    <strong><i class="fas fa-file"></i> ${file.name}</strong>
+                    <p>Size: ${(file.size / (1024*1024)).toFixed(2)} MB | Type: ${file.type}</p>
+                `;
+                fileInfo.classList.add('show');
+                updatePreview();
+            }
+        });
+
+        // Update Preview
+        function updatePreview() {
+            const title = document.getElementById('resource-title').value;
+            const subject = document.getElementById('resource-subject').value;
+            const type = document.getElementById('resource-type').value;
+            const description = document.getElementById('resource-description').value;
+            
+            if (title || subject || type) {
+                const preview = document.getElementById('preview-content');
+                preview.innerHTML = `
+                    <div style="background: white; padding: 1rem; border-radius: 8px;">
+                        <h4 style="margin-bottom: 0.5rem;">${title || 'Untitled Resource'}</h4>
+                        <p style="color: var(--text-light); margin-bottom: 0.5rem;">
+                            <i class="fas fa-tag"></i> ${subject ? subject.charAt(0).toUpperCase() + subject.slice(1) : 'No Subject'} | 
+                            <i class="fas fa-file"></i> ${type ? type.toUpperCase() : 'No Type'}
+                        </p>
+                        <p style="font-size: 0.9rem;">${description || 'No description provided'}</p>
+                    </div>
+                `;
+                document.getElementById('preview-section').classList.add('show');
+            }
+        }
+
+        // Upload Content
+        function uploadContent(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('resource-title').value;
+            const subject = document.getElementById('resource-subject').value;
+            const type = document.getElementById('resource-type').value;
+            const category = document.getElementById('resource-category').value;
+            const description = document.getElementById('resource-description').value;
+            const access = document.getElementById('resource-access').value;
+            const priority = document.getElementById('resource-priority').value;
+            
+            if (!title || !subject || !type) {
+                alert('Please fill all required fields');
+                return;
+            }
+            
+            if (type !== 'video' && !appState.uploadedFile) {
+                alert('Please select a file to upload');
+                return;
+            }
+            
+            if (type === 'video' && !document.getElementById('video-url').value) {
+                alert('Please enter video URL');
+                return;
+            }
+            
+            const newResource = {
+                id: Date.now(),
+                title: title,
+                subject: subject,
+                type: type,
+                category: category,
+                description: description,
+                fileUrl: type === 'video' ? document.getElementById('video-url').value : '#',
+                uploadDate: new Date().toISOString().split('T')[0],
+                downloads: 0,
+                size: appState.uploadedFile ? `${(appState.uploadedFile.size / (1024*1024)).toFixed(1)} MB` : null,
+                access: access,
+                priority: priority,
+                duration: type === 'video' ? '45:30' : null
+            };
+            
+            appState.resources.unshift(newResource);
+            saveResources();
+            
+            // Reset form
+            document.getElementById('upload-form').reset();
+            document.getElementById('file-info').classList.remove('show');
+            document.getElementById('preview-section').classList.remove('show');
+            appState.uploadedFile = null;
+            
+            alert('Resource uploaded successfully!');
+            
+            // Switch to manage section
+            showAdminSection('manage');
+            loadManageContent();
+        }
+
+        // Load Admin Dashboard
+        function loadAdminDashboard() {
+            // Calculate stats
+            const totalResources = appState.resources.length;
+            const pdfCount = appState.resources.filter(r => r.type === 'pdf').length;
+            const videoCount = appState.resources.filter(r => r.type === 'video').length;
+            const totalDownloads = appState.resources.reduce((sum, r) => sum + r.downloads, 0);
+            
+            // Animate stats
+            animateCounter('admin-stat1', totalResources);
+            animateCounter('admin-stat2', pdfCount);
+            animateCounter('admin-stat3', videoCount);
+            animateCounter('admin-stat4', totalDownloads);
+            
+            // Load manage content
+            loadManageContent();
+        }
+
+        // Animate Counter
+        function animateCounter(elementId, target) {
+            let current = 0;
+            const element = document.getElementById(elementId);
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current).toLocaleString();
+            }, 20);
+        }
+
+        // Show Admin Section
+        function showAdminSection(section) {
+            ['dashboard', 'upload', 'manage', 'users', 'analytics'].forEach(sec => {
+                document.getElementById(`admin-${sec}`).classList.add('hidden');
+            });
+            document.getElementById(`admin-${section}`).classList.remove('hidden');
+            
+            // Update menu active state
+            document.querySelectorAll('.admin-menu a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`[onclick="showAdminSection('${section}')"]`).classList.add('active');
+        }
+
+        // Load Manage Content
+        function loadManageContent() {
+            const table = document.getElementById('content-table');
+            table.innerHTML = appState.resources.map(resource => `
+                <tr>
+                    <td>
+                        <strong>${resource.title}</strong><br>
+                        <small style="color: var(--text-light);">${resource.description}</small>
+                    </td>
+                    <td>
+                        <span class="badge" style="background: ${getSubjectColor(resource.subject)}; color: white; padding: 4px 8px; border-radius: 12px;">
+                            ${resource.subject.charAt(0).toUpperCase() + resource.subject.slice(1)}
+                        </span>
+                    </td>
+                    <td>
+                        <i class="fas fa-${getResourceIcon(resource.type)}"></i> ${resource.type.toUpperCase()}
+                    </td>
+                    <td>${resource.uploadDate}</td>
+                    <td>${resource.downloads}</td>
+                    <td>
+                        <button class="btn-action btn-edit" onclick="editResource(${resource.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-action btn-delete" onclick="deleteResource(${resource.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Get Subject Color
+        function getSubjectColor(subject) {
+            const colors = {
+                biology: '#27ae60',
+                chemistry: '#3498db',
+                physics: '#9b59b6',
+                english: '#e74c3c',
+                general: '#f39c12'
+            };
+            return colors[subject] || '#95a5a6';
+        }
+
+        // Search Resources
+        function searchResources() {
+            const searchTerm = document.getElementById('search-content').value.toLowerCase();
+            const rows = document.querySelectorAll('#content-table tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        }
+
+        // Filter Manage Content
+        function filterManageContent() {
+            const subject = document.getElementById('filter-subject').value;
+            const type = document.getElementById('filter-type').value;
+            const rows = document.querySelectorAll('#content-table tr');
+            
+            rows.forEach(row => {
+                const rowSubject = row.cells[1].textContent.toLowerCase().trim();
+                const rowType = row.cells[2].textContent.toLowerCase().trim();
+                
+                const subjectMatch = !subject || rowSubject.includes(subject);
+                const typeMatch = !type || rowType.includes(type);
+                
+                row.style.display = subjectMatch && typeMatch ? '' : 'none';
+            });
+        }
+
+        // Edit Resource
+        function editResource(id) {
+            const resource = appState.resources.find(r => r.id === id);
+            if (resource) {
+                document.getElementById('edit-id').value = resource.id;
+                document.getElementById('edit-title').value = resource.title;
+                document.getElementById('edit-subject').value = resource.subject;
+                document.getElementById('edit-description').value = resource.description;
+                document.getElementById('edit-modal').classList.add('show');
+            }
+        }
+
+        // Update Resource
+        function updateResource(event) {
+            event.preventDefault();
+            
+            const id = parseInt(document.getElementById('edit-id').value);
+            const title = document.getElementById('edit-title').value;
+            const subject = document.getElementById('edit-subject').value;
+            const description = document.getElementById('edit-description').value;
+            
+            const resourceIndex = appState.resources.findIndex(r => r.id === id);
+            if (resourceIndex !== -1) {
+                appState.resources[resourceIndex].title = title;
+                appState.resources[resourceIndex].subject = subject;
+                appState.resources[resourceIndex].description = description;
+                
+                saveResources();
+                loadManageContent();
+                closeModal();
+                alert('Resource updated successfully!');
+            }
+        }
+
+        // Delete Resource
+        function deleteResource(id) {
+            if (confirm('Are you sure you want to delete this resource?')) {
+                appState.resources = appState.resources.filter(r => r.id !== id);
+                saveResources();
+                loadManageContent();
+                alert('Resource deleted successfully!');
+            }
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('edit-modal').classList.remove('show');
+        }
+
+        // Download Resource
+        function downloadResource(id) {
+            const resource = appState.resources.find(r => r.id === id);
+            if (resource) {
+                resource.downloads++;
+                saveResources();
+                
+                // Simulate download
+                alert(`Downloading: ${resource.title}`);
+                
+                // If it's a real file, you would use:
+                // window.open(resource.fileUrl, '_blank');
+            }
+        }
+
+        // View Resource
+        function viewResource(id) {
+            const resource = appState.resources.find(r => r.id === id);
+            if (resource) {
+                if (resource.type === 'video') {
+                    window.open(resource.fileUrl, '_blank');
+                } else {
+                    alert(`Viewing: ${resource.title}\n\nThis would open the PDF/File in a viewer`);
+                    // For PDFs: window.open(resource.fileUrl, '_blank');
+                }
+            }
+        }
+
+        // Animate Homepage Stats
         function animateStats() {
             const stats = [
                 { id: 'stat1', target: 10500, suffix: '+' },
@@ -1583,6 +2127,16 @@
                     element.textContent = Math.floor(current) + stat.suffix;
                 }, 20);
             });
+        }
+
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.menu-toggle i');
+            navLinks.classList.toggle('active');
+            menuToggle.className = navLinks.classList.contains('active') 
+                ? 'fas fa-times' 
+                : 'fas fa-bars';
         }
 
         // Login Function
@@ -1613,232 +2167,11 @@
             }
         }
 
-        // Register Function
-        function register(event) {
-            event.preventDefault();
-            const name = document.getElementById('reg-name').value;
-            const email = document.getElementById('reg-email').value;
-            const password = document.getElementById('reg-password').value;
-            const confirm = document.getElementById('reg-confirm').value;
-            
-            if (password !== confirm) {
-                alert('Passwords do not match!');
-                return;
-            }
-            
-            if (password.length < 6) {
-                alert('Password must be at least 6 characters long!');
-                return;
-            }
-            
-            appState.currentUser = { name: name, email: email, role: 'student' };
-            appState.isLoggedIn = true;
-            alert('Registration successful! Welcome ' + name);
-            showPage('dashboard');
-        }
-
-        // Logout Function
-        function logout() {
-            appState.currentUser = null;
-            appState.isLoggedIn = false;
-            showPage('home');
-        }
-
-        // Load Dashboard
-        function loadDashboard() {
-            if (!appState.isLoggedIn) {
-                showPage('login');
-                return;
-            }
-            
-            document.getElementById('user-name').textContent = appState.currentUser?.name || 'Student';
-            document.getElementById('welcome-text').textContent = `Welcome back, ${appState.currentUser?.name || 'Student'}!`;
-            
-            // Generate random progress
-            appState.userProgress = Math.floor(Math.random() * 40) + 60;
-            document.getElementById('progress-percent').textContent = appState.userProgress + '%';
-            
-            // Load activities
-            const activities = [
-                { date: 'Today', activity: 'Biology Quiz - Cell Structure', subject: 'Biology', score: '92%' },
-                { date: 'Yesterday', activity: 'Chemistry Video Lecture', subject: 'Chemistry', score: '-' },
-                { date: 'Nov 15', activity: 'Full Length Test', subject: 'All', score: '85%' }
-            ];
-            
-            const table = document.getElementById('activity-table');
-            table.innerHTML = activities.map(act => `
-                <tr>
-                    <td>${act.date}</td>
-                    <td>${act.activity}</td>
-                    <td>${act.subject}</td>
-                    <td>${act.score}</td>
-                </tr>
-            `).join('');
-        }
-
-        // Load Admin Dashboard
-        function loadAdminDashboard() {
-            // Admin stats animation
-            const adminStats = [
-                { id: 'admin-stat1', target: 10500 },
-                { id: 'admin-stat2', target: 3420 },
-                { id: 'admin-stat3', target: 52400 },
-                { id: 'admin-stat4', target: 850 }
-            ];
-            
-            adminStats.forEach((stat, index) => {
-                let current = 0;
-                const element = document.getElementById(stat.id);
-                const increment = stat.target / 50;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= stat.target) {
-                        current = stat.target;
-                        clearInterval(timer);
-                    }
-                    element.textContent = Math.floor(current).toLocaleString();
-                }, 30);
-            });
-            
-            // Load users table
-            const users = [
-                { id: 1, name: 'Ahmad Raza', email: 'ahmad@example.com', status: 'Active' },
-                { id: 2, name: 'Sara Khan', email: 'sara@example.com', status: 'Active' },
-                { id: 3, name: 'Ali Hassan', email: 'ali@example.com', status: 'Inactive' }
-            ];
-            
-            const table = document.getElementById('users-table');
-            table.innerHTML = users.map(user => `
-                <tr>
-                    <td>${user.id}</td>
-                    <td>${user.name}</td>
-                    <td>${user.email}</td>
-                    <td><span style="color: ${user.status === 'Active' ? 'green' : 'red'}">${user.status}</span></td>
-                    <td>
-                        <button class="btn-action btn-edit">Edit</button>
-                        <button class="btn-action btn-delete">Delete</button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        // Show Admin Section
-        function showAdminSection(section) {
-            ['dashboard', 'users', 'content', 'analytics', 'settings'].forEach(sec => {
-                document.getElementById(`admin-${sec}`).classList.add('hidden');
-            });
-            document.getElementById(`admin-${section}`).classList.remove('hidden');
-        }
-
-        // Load Quiz
-        function loadQuiz() {
-            appState.currentQuestion = 0;
-            appState.quizAnswers = new Array(quizData.length).fill(null);
-            showQuestion();
-        }
-
-        // Show Question
-        function showQuestion() {
-            const question = quizData[appState.currentQuestion];
-            const content = document.getElementById('quiz-content');
-            const currentElement = document.getElementById('current-question');
-            const totalElement = document.getElementById('total-questions');
-            const progressBar = document.getElementById('quiz-progress');
-            
-            currentElement.textContent = appState.currentQuestion + 1;
-            totalElement.textContent = quizData.length;
-            progressBar.style.width = `${((appState.currentQuestion + 1) / quizData.length) * 100}%`;
-            
-            content.innerHTML = `
-                <div class="question">
-                    <h3>${question.question}</h3>
-                    <div class="options">
-                        ${question.options.map((opt, index) => `
-                            <div class="option ${appState.quizAnswers[appState.currentQuestion] === index ? 'selected' : ''}" 
-                                 onclick="selectAnswer(${index})">
-                                <span>${String.fromCharCode(65 + index)}.</span> ${opt}
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        // Select Answer
-        function selectAnswer(index) {
-            appState.quizAnswers[appState.currentQuestion] = index;
-            showQuestion();
-        }
-
-        // Next Question
-        function nextQuestion() {
-            if (appState.currentQuestion < quizData.length - 1) {
-                appState.currentQuestion++;
-                showQuestion();
-            } else {
-                showQuizResults();
-            }
-        }
-
-        // Previous Question
-        function prevQuestion() {
-            if (appState.currentQuestion > 0) {
-                appState.currentQuestion--;
-                showQuestion();
-            }
-        }
-
-        // Show Quiz Results
-        function showQuizResults() {
-            let score = 0;
-            quizData.forEach((q, index) => {
-                if (appState.quizAnswers[index] === q.correct) {
-                    score++;
-                }
-            });
-            
-            const percentage = (score / quizData.length) * 100;
-            
-            document.getElementById('quiz-content').innerHTML = `
-                <div class="text-center">
-                    <h3>Quiz Completed!</h3>
-                    <div style="font-size: 4rem; color: var(--success); margin: 2rem 0;">
-                        ${percentage}%
-                    </div>
-                    <p>You scored ${score} out of ${quizData.length} questions</p>
-                    <button onclick="loadQuiz()" class="btn-primary mt-2">
-                        <i class="fas fa-redo"></i> Retake Quiz
-                    </button>
-                    <button onclick="showPage('dashboard')" class="btn-secondary mt-2">
-                        <i class="fas fa-home"></i> Back to Dashboard
-                    </button>
-                </div>
-            `;
-        }
-
-        // Show Subject
-        function showSubject(subject) {
-            const data = subjectsData[subject];
-            document.getElementById('subject-title').textContent = data.title;
-            document.getElementById('subject-content').innerHTML = data.content;
-            showPage('subject');
-        }
-
-        // Add Note
-        function addNote() {
-            const note = prompt('Enter your study note:');
-            if (note) {
-                alert('Note added successfully!');
-            }
-        }
-
-        // Add Content (Admin)
-        function addContent() {
-            alert('Add new content feature - Connect to backend for full functionality');
-        }
-
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize resources
+            initResources();
+            
             // Close mobile menu when clicking outside
             document.addEventListener('click', (e) => {
                 if (!e.target.closest('.nav-links') && !e.target.closest('.menu-toggle')) {
@@ -1856,6 +2189,11 @@
                 appState.currentUser = JSON.parse(savedUser);
                 appState.isLoggedIn = true;
             }
+            
+            // Add event listeners for preview
+            ['resource-title', 'resource-subject', 'resource-type', 'resource-description'].forEach(id => {
+                document.getElementById(id).addEventListener('input', updatePreview);
+            });
         });
 
         // Save user to localStorage
@@ -1864,25 +2202,6 @@
                 localStorage.setItem('mdcat_user', JSON.stringify(appState.currentUser));
             }
         }
-
-        // Auto-save user when logging in
-        const originalLogin = login;
-        login = function(event) {
-            originalLogin(event);
-            saveUser();
-        };
-
-        const originalRegister = register;
-        register = function(event) {
-            originalRegister(event);
-            saveUser();
-        };
-
-        const originalLogout = logout;
-        logout = function() {
-            originalLogout();
-            localStorage.removeItem('mdcat_user');
-        };
     </script>
 </body>
 </html>
