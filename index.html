@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAK-MED STUDY CORNER MDCAT - Complete Platform</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========== RESET & BASE STYLES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333;
+            --text-light: #666;
+            --border: #ddd;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --radius: 10px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* ========== NAVIGATION ========== */
+        .navbar {
+            background: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .logo small {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            background: var(--light);
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-left: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--secondary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-login, .btn-register, .btn-admin {
+            padding: 8px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-login {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .btn-register {
+            background: var(--secondary);
+            color: white;
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-admin {
+            background: var(--accent);
+            color: white;
+            border: 2px solid var(--accent);
+        }
+
+        .btn-login:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-register:hover {
+            background: transparent;
+            color: var(--secondary);
+        }
+
+        .btn-admin:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ========== HOMEPAGE ========== */
+        #home-page {
+            display: block;
+        }
+
+        .hero {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-family: 'Roboto Slab', serif;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .highlight {
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: #ffd700;
+            color: #333;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--secondary);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat h3 {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .stat p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* ========== FEATURES ========== */
+        .features {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary), #2ecc71);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .feature-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        /* ========== SUBJECTS ========== */
+        .subjects {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .subject-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            text-decoration: none;
+            color: var(--text);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+        }
+
+        .subject-card.biology::before { background: #27ae60; }
+        .subject-card.chemistry::before { background: #3498db; }
+        .subject-card.physics::before { background: #9b59b6; }
+        .subject-card.english::before { background: #e74c3c; }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .subject-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .subject-card.biology i { color: #27ae60; }
+        .subject-card.chemistry i { color: #3498db; }
+        .subject-card.physics i { color: #9b59b6; }
+        .subject-card.english i { color: #e74c3c; }
+
+        /* ========== LOGIN PAGE ========== */
+        #login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+        }
+
+        .auth-box {
+            background: white;
+            border-radius: var(--radius);
+            padding: 3rem;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h2 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-header p {
+            color: var(--text-light);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-light);
+        }
+
+        .auth-footer a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ========== DASHBOARD ========== */
+        .dashboard {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .dashboard-header {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .dashboard-content {
+            padding: 2rem 0;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .sidebar-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .sidebar-menu a {
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--text);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: var(--light);
+            color: var(--secondary);
+        }
+
+        .main-content {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--secondary), #2ecc71);
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .data-table {
+            width: 100%;
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .data-table th {
+            background: var(--light);
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .data-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .btn-action {
+            padding: 5px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-edit {
+            background: var(--warning);
+            color: white;
+        }
+
+        .btn-delete {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* ========== ADMIN DASHBOARD ========== */
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            min-height: 100vh;
+        }
+
+        .admin-sidebar {
+            background: var(--dark);
+            color: white;
+            padding: 2rem;
+        }
+
+        .admin-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .admin-menu a {
+            padding: 15px 20px;
+            color: #ddd;
+            text-decoration: none;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .admin-menu a:hover,
+        .admin-menu a.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .admin-content {
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+
+        /* ========== QUIZ PAGE ========== */
+        .quiz-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .quiz-header {
+            background: var(--dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .quiz-progress {
+            height: 5px;
+            background: rgba(255,255,255,0.2);
+            margin: 1rem 0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--secondary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .quiz-body {
+            padding: 2rem;
+        }
+
+        .question {
+            margin-bottom: 2rem;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            padding: 15px 20px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option:hover {
+            border-color: var(--secondary);
+            background: rgba(52, 152, 219, 0.05);
+        }
+
+        .option.selected {
+            border-color: var(--secondary);
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .quiz-footer {
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #ffd700;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #ddd;
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .footer-col a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 992px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem;
+                transition: var(--transition);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-sidebar {
+                display: none;
+            }
+        }
+
+        /* ========== ANIMATIONS ========== */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* ========== UTILITY ========== */
+        .text-center { text-align: center; }
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .p-1 { padding: 1rem; }
+        .p-2 { padding: 2rem; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo" onclick="showPage('home')">
+                <i class="fas fa-stethoscope"></i>
+                <h1>PAK-MED <span>STUDY CORNER</span> <small>MDCAT</small></h1>
+            </div>
+            <div class="nav-links">
+                <a onclick="showPage('home')" class="active"><i class="fas fa-home"></i> Home</a>
+                <a onclick="showPage('subjects')"><i class="fas fa-dna"></i> Subjects</a>
+                <a onclick="showPage('quiz')"><i class="fas fa-file-alt"></i> Tests</a>
+                <a onclick="showPage('resources')"><i class="fas fa-video"></i> Resources</a>
+                <a onclick="showPage('contact')"><i class="fas fa-phone-alt"></i> Contact</a>
+                <div class="auth-buttons">
+                    <a onclick="showPage('login')" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a onclick="showPage('register')" class="btn-register"><i class="fas fa-user-plus"></i> Register</a>
+                    <a onclick="showPage('admin')" class="btn-admin"><i class="fas fa-cogs"></i> Admin</a>
+                </div>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== HOMEPAGE ========== -->
+    <div id="home-page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Ace Your <span class="highlight">MDCAT 2024</span> Exam</h1>
+                    <p>Comprehensive study materials, interactive tests, and expert guidance for Pakistan's Medical & Dental College Admission Test</p>
+                    <div class="hero-buttons">
+                        <button onclick="showPage('register')" class="btn-primary">Start Free Trial</button>
+                        <button onclick="showPage('quiz')" class="btn-secondary">Take Demo Test</button>
+                    </div>
+                    <div class="stats">
+                        <div class="stat">
+                            <h3 id="stat1">0</h3>
+                            <p>Successful Students</p>
+                        </div>
+                        <div class="stat">
+                            <h3 id="stat2">0</h3>
+                            <p>Practice Questions</p>
+                        </div>
+                        <div class="stat">
+                            <h3 id="stat3">0</h3>
+                            <p>Video Lectures</p>
+                        </div>
+                        <div class="stat">
+                            <h3 id="stat4">0%</h3>
+                            <p>Satisfaction Rate</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1586773860418-dc22f8b874bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Medical Study" style="width:100%;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.3);">
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Why Choose Our Platform?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Smart Learning</h3>
+                        <p>AI-powered adaptive learning system tailored to your weak areas</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Progress Tracking</h3>
+                        <p>Detailed analytics and performance reports with improvement suggestions</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>Video Lectures</h3>
+                        <p>HD video lectures by top medical educators from Pakistan</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h3>Study Material</h3>
+                        <p>Comprehensive notes, flashcards, and past papers collection</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subjects Section -->
+        <section class="subjects">
+            <div class="container">
+                <h2 class="section-title">MDCAT Subjects</h2>
+                <div class="subjects-grid">
+                    <div class="subject-card biology" onclick="showPage('biology')">
+                        <i class="fas fa-dna"></i>
+                        <h3>Biology</h3>
+                        <p>200+ Topics • 1500+ Questions</p>
+                        <span class="progress">Start Learning →</span>
+                    </div>
+                    <div class="subject-card chemistry" onclick="showPage('chemistry')">
+                        <i class="fas fa-flask"></i>
+                        <h3>Chemistry</h3>
+                        <p>180+ Topics • 1200+ Questions</p>
+                        <span class="progress">Start Learning →</span>
+                    </div>
+                    <div class="subject-card physics" onclick="showPage('physics')">
+                        <i class="fas fa-atom"></i>
+                        <h3>Physics</h3>
+                        <p>150+ Topics • 1000+ Questions</p>
+                        <span class="progress">Start Learning →</span>
+                    </div>
+                    <div class="subject-card english" onclick="showPage('english')">
+                        <i class="fas fa-language"></i>
+                        <h3>English</h3>
+                        <p>100+ Topics • 800+ Questions</p>
+                        <span class="progress">Start Learning →</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <div class="logo">
+                            <i class="fas fa-stethoscope"></i>
+                            <h3>PAK-MED STUDY CORNER</h3>
+                        </div>
+                        <p>Your trusted partner for MDCAT preparation since 2020. We've helped thousands of students achieve their medical dreams.</p>
+                        <div class="social">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <a onclick="showPage('home')">Home</a>
+                        <a onclick="showPage('subjects')">Subjects</a>
+                        <a onclick="showPage('quiz')">Practice Tests</a>
+                        <a onclick="showPage('resources')">Video Library</a>
+                        <a onclick="showPage('dashboard')">Student Dashboard</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Resources</h4>
+                        <a onclick="showPage('notes')">Study Notes</a>
+                        <a onclick="showPage('papers')">Past Papers</a>
+                        <a onclick="showPage('flashcards')">Flashcards</a>
+                        <a onclick="showPage('books')">Recommended Books</a>
+                        <a onclick="showPage('schedule')">Study Schedule</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <p><i class="fas fa-envelope"></i> doctormotivation29@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> +92 300 1234567</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Lahore, Pakistan</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 PAK-MED STUDY CORNER MDCAT. All rights reserved.</p>
+                    <div>
+                        <a href="#">Privacy Policy</a> | 
+                        <a href="#">Terms of Service</a> | 
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ========== LOGIN PAGE ========== -->
+    <div id="login-page" class="hidden">
+        <div class="auth-container">
+            <div class="auth-box fade-in">
+                <div class="auth-header">
+                    <i class="fas fa-stethoscope fa-3x" style="color: var(--secondary); margin-bottom: 1rem;"></i>
+                    <h2>Welcome Back!</h2>
+                    <p>Login to continue your MDCAT preparation</p>
+                </div>
+                
+                <form id="login-form" onsubmit="login(event)">
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="login-email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="remember">
+                            Remember me
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+                    </button>
+                    
+                    <div class="auth-footer">
+                        <p>Don't have an account? <a onclick="showPage('register')">Sign up here</a></p>
+                        <p style="margin-top: 1rem;">
+                            <a onclick="showPage('home')" style="color: var(--text-light);">
+                                <i class="fas fa-arrow-left"></i> Back to Homepage
+                            </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== REGISTER PAGE ========== -->
+    <div id="register-page" class="hidden">
+        <div class="auth-container">
+            <div class="auth-box fade-in">
+                <div class="auth-header">
+                    <i class="fas fa-user-plus fa-3x" style="color: var(--secondary); margin-bottom: 1rem;"></i>
+                    <h2>Create Account</h2>
+                    <p>Start your MDCAT journey with us</p>
+                </div>
+                
+                <form id="register-form" onsubmit="register(event)">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" id="reg-name" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="reg-email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="reg-password" placeholder="Create password (min 6 characters)" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Confirm Password</label>
+                        <input type="password" id="reg-confirm" placeholder="Confirm password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" required>
+                            I agree to Terms & Conditions
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                    
+                    <div class="auth-footer">
+                        <p>Already have an account? <a onclick="showPage('login')">Login here</a></p>
+                        <p style="margin-top: 1rem;">
+                            <a onclick="showPage('home')" style="color: var(--text-light);">
+                                <i class="fas fa-arrow-left"></i> Back to Homepage
+                            </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== USER DASHBOARD ========== -->
+    <div id="dashboard-page" class="hidden">
+        <div class="dashboard">
+            <header class="dashboard-header">
+                <div class="container">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="logo" onclick="showPage('home')">
+                            <i class="fas fa-stethoscope"></i>
+                            <h1>PAK-MED <span>STUDY CORNER</span> <small>MDCAT</small></h1>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 2rem;">
+                            <div class="notification">
+                                <i class="fas fa-bell"></i>
+                                <span class="badge">3</span>
+                            </div>
+                            <div class="user-profile">
+                                <div style="margin-left: 10px;">
+                                    <p style="font-weight: 600; margin: 0;" id="user-name">Student</p>
+                                    <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">MDCAT Aspirant</p>
+                                </div>
+                            </div>
+                            <button onclick="logout()" class="btn-login" style="padding: 8px 15px;">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="container">
+                    <div class="dashboard-grid">
+                        <!-- Sidebar -->
+                        <aside class="sidebar">
+                            <div class="sidebar-menu">
+                                <a onclick="showPage('dashboard')" class="active">
+                                    <i class="fas fa-home"></i> Dashboard
+                                </a>
+                                <a onclick="showPage('biology')">
+                                    <i class="fas fa-dna"></i> Biology
+                                </a>
+                                <a onclick="showPage('chemistry')">
+                                    <i class="fas fa-flask"></i> Chemistry
+                                </a>
+                                <a onclick="showPage('physics')">
+                                    <i class="fas fa-atom"></i> Physics
+                                </a>
+                                <a onclick="showPage('english')">
+                                    <i class="fas fa-language"></i> English
+                                </a>
+                                <a onclick="showPage('quiz')">
+                                    <i class="fas fa-file-alt"></i> Practice Tests
+                                </a>
+                                <a onclick="showPage('progress')">
+                                    <i class="fas fa-chart-line"></i> Progress Report
+                                </a>
+                                <a onclick="showPage('notes')">
+                                    <i class="fas fa-book"></i> Study Notes
+                                </a>
+                                <a onclick="showPage('profile')">
+                                    <i class="fas fa-user"></i> Profile Settings
+                                </a>
+                            </div>
+                        </aside>
+
+                        <!-- Main Content -->
+                        <main class="main-content">
+                            <div class="admin-header">
+                                <h2 id="welcome-text">Welcome back!</h2>
+                                <p style="color: var(--text-light);">Here's your study overview</p>
+                            </div>
+                            
+                            <!-- Stats Cards -->
+                            <div class="stats-cards">
+                                <div class="stat-card">
+                                    <i class="fas fa-clock fa-2x" style="margin-bottom: 1rem;"></i>
+                                    <h3>42h 15m</h3>
+                                    <p>Study Time This Week</p>
+                                </div>
+                                <div class="stat-card" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                                    <i class="fas fa-check-circle fa-2x" style="margin-bottom: 1rem;"></i>
+                                    <h3 id="progress-percent">0%</h3>
+                                    <p>Overall Progress</p>
+                                </div>
+                                <div class="stat-card" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                                    <i class="fas fa-trophy fa-2x" style="margin-bottom: 1rem;"></i>
+                                    <h3>Rank #124</h3>
+                                    <p>Among 10,000 Students</p>
+                                </div>
+                                <div class="stat-card" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                                    <i class="fas fa-brain fa-2x" style="margin-bottom: 1rem;"></i>
+                                    <h3>92%</h3>
+                                    <p>Test Accuracy</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Quick Actions -->
+                            <div style="background: var(--light); padding: 1.5rem; border-radius: var(--radius); margin: 2rem 0;">
+                                <h3 style="margin-bottom: 1rem; color: var(--dark);">Quick Actions</h3>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                    <button onclick="showPage('quiz')" class="btn-primary" style="padding: 10px 20px;">
+                                        <i class="fas fa-play"></i> Start Quick Quiz
+                                    </button>
+                                    <button onclick="showPage('biology')" class="btn-secondary" style="padding: 10px 20px;">
+                                        <i class="fas fa-video"></i> Watch Next Lecture
+                                    </button>
+                                    <button onclick="addNote()" class="btn-admin" style="padding: 10px 20px;">
+                                        <i class="fas fa-plus"></i> Add New Notes
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Recent Activity -->
+                            <div>
+                                <h3 style="margin-bottom: 1rem; color: var(--dark);">Recent Activity</h3>
+                                <div class="data-table">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Activity</th>
+                                                <th>Subject</th>
+                                                <th>Score</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="activity-table">
+                                            <!-- Activities will be added here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== ADMIN DASHBOARD ========== -->
+    <div id="admin-page" class="hidden">
+        <div class="admin-grid">
+            <!-- Admin Sidebar -->
+            <div class="admin-sidebar">
+                <div class="admin-logo">
+                    <i class="fas fa-stethoscope"></i>
+                    <h2>Admin Panel</h2>
+                </div>
+                <div class="admin-menu">
+                    <a onclick="showPage('admin')" class="active">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                    <a onclick="showAdminSection('users')">
+                        <i class="fas fa-users"></i> Manage Users
+                    </a>
+                    <a onclick="showAdminSection('content')">
+                        <i class="fas fa-book"></i> Manage Content
+                    </a>
+                    <a onclick="showAdminSection('analytics')">
+                        <i class="fas fa-chart-bar"></i> Analytics
+                    </a>
+                    <a onclick="showAdminSection('settings')">
+                        <i class="fas fa-cogs"></i> Settings
+                    </a>
+                    <a onclick="showPage('home')">
+                        <i class="fas fa-sign-out-alt"></i> Back to Site
+                    </a>
+                </div>
+            </div>
+
+            <!-- Admin Content -->
+            <div class="admin-content">
+                <div id="admin-dashboard">
+                    <h2>Admin Dashboard</h2>
+                    <p>Welcome to PAK-MED STUDY CORNER Admin Panel</p>
+                    
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <h3 id="admin-stat1">0</h3>
+                            <p>Total Users</p>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                            <h3 id="admin-stat2">0</h3>
+                            <p>Active Today</p>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                            <h3 id="admin-stat3">0</h3>
+                            <p>Tests Taken</p>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                            <h3 id="admin-stat4">0</h3>
+                            <p>Content Items</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="admin-users" class="hidden">
+                    <h2>Manage Users</h2>
+                    <div class="data-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table">
+                                <!-- Users will be added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="admin-content" class="hidden">
+                    <h2>Manage Content</h2>
+                    <button onclick="addContent()" class="btn-add">
+                        <i class="fas fa-plus"></i> Add New Content
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== QUIZ PAGE ========== -->
+    <div id="quiz-page" class="hidden">
+        <div class="container">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h2>MDCAT Practice Quiz</h2>
+                    <p>Test your knowledge with these sample questions</p>
+                    <div class="quiz-progress">
+                        <div class="progress-bar" id="quiz-progress"></div>
+                    </div>
+                    <p>Question <span id="current-question">1</span> of <span id="total-questions">5</span></p>
+                </div>
+                
+                <div class="quiz-body">
+                    <div id="quiz-content">
+                        <!-- Questions will be loaded here -->
+                    </div>
+                </div>
+                
+                <div class="quiz-footer">
+                    <button onclick="prevQuestion()" class="btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button onclick="nextQuestion()" class="btn-primary">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== SUBJECT PAGES ========== -->
+    <div id="subject-page" class="hidden">
+        <div class="container">
+            <div class="main-content">
+                <h2 id="subject-title">Subject</h2>
+                <div id="subject-content">
+                    <!-- Subject content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== PROGRESS PAGE ========== -->
+    <div id="progress-page" class="hidden">
+        <div class="container">
+            <div class="main-content">
+                <h2>Your Progress Report</h2>
+                <canvas id="progress-chart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== NOTES PAGE ========== -->
+    <div id="notes-page" class="hidden">
+        <div class="container">
+            <div class="main-content">
+                <h2>Study Notes</h2>
+                <div id="notes-list">
+                    <!-- Notes will be added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== JavaScript ========== -->
+    <script>
+        // Application State
+        const appState = {
+            currentUser: null,
+            isLoggedIn: false,
+            currentPage: 'home',
+            currentQuestion: 0,
+            quizAnswers: [],
+            userProgress: 0
+        };
+
+        // Sample Data
+        const quizData = [
+            {
+                question: "Which of the following is the basic unit of life?",
+                options: ["Cell", "Tissue", "Organ", "Molecule"],
+                correct: 0
+            },
+            {
+                question: "The process of converting light energy to chemical energy is called?",
+                options: ["Respiration", "Photosynthesis", "Digestion", "Fermentation"],
+                correct: 1
+            },
+            {
+                question: "Which organelle is known as the power house of the cell?",
+                options: ["Nucleus", "Mitochondria", "Ribosome", "Golgi Apparatus"],
+                correct: 1
+            },
+            {
+                question: "DNA replication occurs during which phase of the cell cycle?",
+                options: ["G1 Phase", "S Phase", "G2 Phase", "M Phase"],
+                correct: 1
+            },
+            {
+                question: "Which vitamin is produced by the human skin when exposed to sunlight?",
+                options: ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin K"],
+                correct: 2
+            }
+        ];
+
+        const subjectsData = {
+            biology: {
+                title: "Biology",
+                content: `<h3>Biology - The Study of Life</h3>
+                <p>Biology is the natural science that studies life and living organisms.</p>
+                <h4>Topics Covered:</h4>
+                <ul>
+                    <li>Cell Biology</li>
+                    <li>Genetics</li>
+                    <li>Evolution</li>
+                    <li>Human Physiology</li>
+                    <li>Ecology</li>
+                </ul>`
+            },
+            chemistry: {
+                title: "Chemistry",
+                content: `<h3>Chemistry - Matter and its Interactions</h3>
+                <p>Study of matter, its properties, composition, and changes.</p>`
+            },
+            physics: {
+                title: "Physics",
+                content: `<h3>Physics - The Fundamental Science</h3>
+                <p>Study of matter, energy, and their interactions.</p>`
+            },
+            english: {
+                title: "English",
+                content: `<h3>English Language and Comprehension</h3>
+                <p>Essential for medical studies and communication.</p>`
+            }
+        };
+
+        // Page Navigation
+        function showPage(page) {
+            // Hide all pages
+            document.querySelectorAll('[id$="-page"]').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // Update navigation active state
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show requested page
+            document.getElementById(`${page}-page`).classList.remove('hidden');
+            
+            // Update navigation
+            if (page !== 'login' && page !== 'register' && page !== 'admin') {
+                document.querySelector(`[onclick="showPage('${page}')"]`)?.classList.add('active');
+            }
+            
+            appState.currentPage = page;
+            
+            // Initialize page specific content
+            switch(page) {
+                case 'home':
+                    animateStats();
+                    break;
+                case 'dashboard':
+                    loadDashboard();
+                    break;
+                case 'admin':
+                    loadAdminDashboard();
+                    break;
+                case 'quiz':
+                    loadQuiz();
+                    break;
+                case 'biology':
+                case 'chemistry':
+                case 'physics':
+                case 'english':
+                    showSubject(page);
+                    break;
+            }
+        }
+
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.menu-toggle i');
+            navLinks.classList.toggle('active');
+            menuToggle.className = navLinks.classList.contains('active') 
+                ? 'fas fa-times' 
+                : 'fas fa-bars';
+        }
+
+        // Animate Statistics
+        function animateStats() {
+            const stats = [
+                { id: 'stat1', target: 10500, suffix: '+' },
+                { id: 'stat2', target: 5500, suffix: '+' },
+                { id: 'stat3', target: 250, suffix: '+' },
+                { id: 'stat4', target: 98, suffix: '%' }
+            ];
+            
+            stats.forEach((stat, index) => {
+                let current = 0;
+                const element = document.getElementById(stat.id);
+                const increment = stat.target / 100;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= stat.target) {
+                        current = stat.target;
+                        clearInterval(timer);
+                    }
+                    element.textContent = Math.floor(current) + stat.suffix;
+                }, 20);
+            });
+        }
+
+        // Login Function
+        function login(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Check admin credentials
+            if (email === 'doctormotivation29@gmail.com' && password === 'admin123') {
+                appState.currentUser = { name: 'Admin', email: email, role: 'admin' };
+                appState.isLoggedIn = true;
+                showPage('admin');
+                return;
+            }
+            
+            // Check user credentials
+            if (email && password.length >= 6) {
+                appState.currentUser = { 
+                    name: email.split('@')[0], 
+                    email: email,
+                    role: 'student'
+                };
+                appState.isLoggedIn = true;
+                showPage('dashboard');
+            } else {
+                alert('Please enter valid credentials (password must be at least 6 characters)');
+            }
+        }
+
+        // Register Function
+        function register(event) {
+            event.preventDefault();
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+            const confirm = document.getElementById('reg-confirm').value;
+            
+            if (password !== confirm) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long!');
+                return;
+            }
+            
+            appState.currentUser = { name: name, email: email, role: 'student' };
+            appState.isLoggedIn = true;
+            alert('Registration successful! Welcome ' + name);
+            showPage('dashboard');
+        }
+
+        // Logout Function
+        function logout() {
+            appState.currentUser = null;
+            appState.isLoggedIn = false;
+            showPage('home');
+        }
+
+        // Load Dashboard
+        function loadDashboard() {
+            if (!appState.isLoggedIn) {
+                showPage('login');
+                return;
+            }
+            
+            document.getElementById('user-name').textContent = appState.currentUser?.name || 'Student';
+            document.getElementById('welcome-text').textContent = `Welcome back, ${appState.currentUser?.name || 'Student'}!`;
+            
+            // Generate random progress
+            appState.userProgress = Math.floor(Math.random() * 40) + 60;
+            document.getElementById('progress-percent').textContent = appState.userProgress + '%';
+            
+            // Load activities
+            const activities = [
+                { date: 'Today', activity: 'Biology Quiz - Cell Structure', subject: 'Biology', score: '92%' },
+                { date: 'Yesterday', activity: 'Chemistry Video Lecture', subject: 'Chemistry', score: '-' },
+                { date: 'Nov 15', activity: 'Full Length Test', subject: 'All', score: '85%' }
+            ];
+            
+            const table = document.getElementById('activity-table');
+            table.innerHTML = activities.map(act => `
+                <tr>
+                    <td>${act.date}</td>
+                    <td>${act.activity}</td>
+                    <td>${act.subject}</td>
+                    <td>${act.score}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Load Admin Dashboard
+        function loadAdminDashboard() {
+            // Admin stats animation
+            const adminStats = [
+                { id: 'admin-stat1', target: 10500 },
+                { id: 'admin-stat2', target: 3420 },
+                { id: 'admin-stat3', target: 52400 },
+                { id: 'admin-stat4', target: 850 }
+            ];
+            
+            adminStats.forEach((stat, index) => {
+                let current = 0;
+                const element = document.getElementById(stat.id);
+                const increment = stat.target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= stat.target) {
+                        current = stat.target;
+                        clearInterval(timer);
+                    }
+                    element.textContent = Math.floor(current).toLocaleString();
+                }, 30);
+            });
+            
+            // Load users table
+            const users = [
+                { id: 1, name: 'Ahmad Raza', email: 'ahmad@example.com', status: 'Active' },
+                { id: 2, name: 'Sara Khan', email: 'sara@example.com', status: 'Active' },
+                { id: 3, name: 'Ali Hassan', email: 'ali@example.com', status: 'Inactive' }
+            ];
+            
+            const table = document.getElementById('users-table');
+            table.innerHTML = users.map(user => `
+                <tr>
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td><span style="color: ${user.status === 'Active' ? 'green' : 'red'}">${user.status}</span></td>
+                    <td>
+                        <button class="btn-action btn-edit">Edit</button>
+                        <button class="btn-action btn-delete">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Show Admin Section
+        function showAdminSection(section) {
+            ['dashboard', 'users', 'content', 'analytics', 'settings'].forEach(sec => {
+                document.getElementById(`admin-${sec}`).classList.add('hidden');
+            });
+            document.getElementById(`admin-${section}`).classList.remove('hidden');
+        }
+
+        // Load Quiz
+        function loadQuiz() {
+            appState.currentQuestion = 0;
+            appState.quizAnswers = new Array(quizData.length).fill(null);
+            showQuestion();
+        }
+
+        // Show Question
+        function showQuestion() {
+            const question = quizData[appState.currentQuestion];
+            const content = document.getElementById('quiz-content');
+            const currentElement = document.getElementById('current-question');
+            const totalElement = document.getElementById('total-questions');
+            const progressBar = document.getElementById('quiz-progress');
+            
+            currentElement.textContent = appState.currentQuestion + 1;
+            totalElement.textContent = quizData.length;
+            progressBar.style.width = `${((appState.currentQuestion + 1) / quizData.length) * 100}%`;
+            
+            content.innerHTML = `
+                <div class="question">
+                    <h3>${question.question}</h3>
+                    <div class="options">
+                        ${question.options.map((opt, index) => `
+                            <div class="option ${appState.quizAnswers[appState.currentQuestion] === index ? 'selected' : ''}" 
+                                 onclick="selectAnswer(${index})">
+                                <span>${String.fromCharCode(65 + index)}.</span> ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Select Answer
+        function selectAnswer(index) {
+            appState.quizAnswers[appState.currentQuestion] = index;
+            showQuestion();
+        }
+
+        // Next Question
+        function nextQuestion() {
+            if (appState.currentQuestion < quizData.length - 1) {
+                appState.currentQuestion++;
+                showQuestion();
+            } else {
+                showQuizResults();
+            }
+        }
+
+        // Previous Question
+        function prevQuestion() {
+            if (appState.currentQuestion > 0) {
+                appState.currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        // Show Quiz Results
+        function showQuizResults() {
+            let score = 0;
+            quizData.forEach((q, index) => {
+                if (appState.quizAnswers[index] === q.correct) {
+                    score++;
+                }
+            });
+            
+            const percentage = (score / quizData.length) * 100;
+            
+            document.getElementById('quiz-content').innerHTML = `
+                <div class="text-center">
+                    <h3>Quiz Completed!</h3>
+                    <div style="font-size: 4rem; color: var(--success); margin: 2rem 0;">
+                        ${percentage}%
+                    </div>
+                    <p>You scored ${score} out of ${quizData.length} questions</p>
+                    <button onclick="loadQuiz()" class="btn-primary mt-2">
+                        <i class="fas fa-redo"></i> Retake Quiz
+                    </button>
+                    <button onclick="showPage('dashboard')" class="btn-secondary mt-2">
+                        <i class="fas fa-home"></i> Back to Dashboard
+                    </button>
+                </div>
+            `;
+        }
+
+        // Show Subject
+        function showSubject(subject) {
+            const data = subjectsData[subject];
+            document.getElementById('subject-title').textContent = data.title;
+            document.getElementById('subject-content').innerHTML = data.content;
+            showPage('subject');
+        }
+
+        // Add Note
+        function addNote() {
+            const note = prompt('Enter your study note:');
+            if (note) {
+                alert('Note added successfully!');
+            }
+        }
+
+        // Add Content (Admin)
+        function addContent() {
+            alert('Add new content feature - Connect to backend for full functionality');
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.nav-links') && !e.target.closest('.menu-toggle')) {
+                    document.querySelector('.nav-links').classList.remove('active');
+                    document.querySelector('.menu-toggle i').className = 'fas fa-bars';
+                }
+            });
+            
+            // Initialize stats
+            setTimeout(animateStats, 500);
+            
+            // Check if user is already logged in
+            const savedUser = localStorage.getItem('mdcat_user');
+            if (savedUser) {
+                appState.currentUser = JSON.parse(savedUser);
+                appState.isLoggedIn = true;
+            }
+        });
+
+        // Save user to localStorage
+        function saveUser() {
+            if (appState.currentUser) {
+                localStorage.setItem('mdcat_user', JSON.stringify(appState.currentUser));
+            }
+        }
+
+        // Auto-save user when logging in
+        const originalLogin = login;
+        login = function(event) {
+            originalLogin(event);
+            saveUser();
+        };
+
+        const originalRegister = register;
+        register = function(event) {
+            originalRegister(event);
+            saveUser();
+        };
+
+        const originalLogout = logout;
+        logout = function() {
+            originalLogout();
+            localStorage.removeItem('mdcat_user');
+        };
+    </script>
+</body>
+</html>
