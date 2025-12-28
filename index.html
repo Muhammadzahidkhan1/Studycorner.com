@@ -12,10 +12,8 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         /* ========== VARIABLES & RESET ========== */
@@ -62,6 +60,79 @@
             min-height: 100vh;
             overflow-x: hidden;
         }
+
+        /* ========== ANIMATIONS ========== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes particleMove {
+            from { transform: translateY(0px) rotate(0deg); }
+            to { transform: translateY(-1000px) rotate(720deg); }
+        }
+
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .shimmer-text {
+            background: linear-gradient(90deg, var(--secondary), var(--accent), var(--secondary));
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+
+        /* Particle Animation */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: particleMove 20s linear infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 6s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 8s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 10s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 12s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 14s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 16s; }
+        .particle:nth-child(10) { left: 95%; animation-delay: 18s; }
 
         /* ========== CUSTOM SCROLLBAR ========== */
         ::-webkit-scrollbar {
@@ -124,11 +195,13 @@
             z-index: 1000;
             padding: 1rem 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            transition: var(--transition);
         }
 
         .navbar.scrolled {
             background: rgba(255, 255, 255, 0.98);
             box-shadow: var(--shadow);
+            transform: translateY(-5px);
         }
 
         .nav-container {
@@ -149,7 +222,7 @@
         }
 
         .logo:hover {
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.05);
         }
 
         .logo-icon {
@@ -163,6 +236,7 @@
             color: white;
             font-size: 24px;
             box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            animation: pulse 3s infinite;
         }
 
         .logo-text {
@@ -175,6 +249,7 @@
             font-weight: 800;
             color: var(--primary);
             line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .logo-text span {
@@ -182,6 +257,10 @@
             color: var(--secondary);
             font-weight: 600;
             letter-spacing: 1px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .nav-menu {
@@ -353,6 +432,12 @@
 
         .modal.active {
             display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-content {
@@ -370,11 +455,11 @@
         @keyframes modalSlideIn {
             from {
                 opacity: 0;
-                transform: translateY(-50px);
+                transform: translateY(-50px) scale(0.9);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
 
@@ -389,6 +474,10 @@
             font-size: 2rem;
             font-weight: 700;
             color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .close-modal {
@@ -405,6 +494,7 @@
         .close-modal:hover {
             background: rgba(0, 0, 0, 0.1);
             color: var(--danger);
+            transform: rotate(90deg);
         }
 
         .form-group {
@@ -433,6 +523,7 @@
             outline: none;
             border-color: var(--secondary);
             box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
+            transform: translateY(-2px);
         }
 
         .social-login {
@@ -456,6 +547,11 @@
             gap: 10px;
         }
 
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
         .social-btn.facebook {
             color: #1877f2;
             border-color: #1877f2;
@@ -476,35 +572,26 @@
             color: white;
         }
 
-        .otp-container {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 1rem;
+        .guest-login-btn {
+            background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+            color: white;
+            border: none;
         }
 
-        .otp-input {
-            width: 50px;
-            height: 50px;
-            text-align: center;
-            font-size: 1.5rem;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            transition: var(--transition);
-        }
-
-        .otp-input:focus {
-            border-color: var(--secondary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
+        .guest-login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
         }
 
         /* ========== HERO SECTION ========== */
         #home-page {
             padding-top: 80px;
+            position: relative;
+            overflow: hidden;
         }
 
         .hero {
-            padding: 6rem 0;
+            padding: 8rem 0;
             background: linear-gradient(135deg, rgba(26, 35, 126, 0.9), rgba(0, 188, 212, 0.8)),
                         url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
@@ -523,12 +610,7 @@
             width: 100%;
             height: 100%;
             background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
-            animation: float 20s linear infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-1000px) rotate(720deg); }
+            animation: particleMove 20s linear infinite;
         }
 
         .hero-content {
@@ -549,6 +631,7 @@
             background: linear-gradient(135deg, #ffffff 0%, #e0f7fa 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: float 6s ease-in-out infinite;
         }
 
         .hero-subtitle {
@@ -558,6 +641,7 @@
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            animation: fadeIn 1s ease 0.5s both;
         }
 
         .hero-buttons {
@@ -566,6 +650,7 @@
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 4rem;
+            animation: fadeIn 1s ease 1s both;
         }
 
         .stats {
@@ -578,6 +663,7 @@
             backdrop-filter: blur(10px);
             border-radius: var(--radius);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1s ease 1.5s both;
         }
 
         .stat-item {
@@ -607,10 +693,12 @@
             opacity: 0.9;
         }
 
-        /* ========== FEATURES ========== */
+        /* ========== ANIMATED FEATURES ========== */
         .features {
             padding: 8rem 0;
             background: white;
+            position: relative;
+            overflow: hidden;
         }
 
         .section-header {
@@ -637,6 +725,12 @@
             height: 4px;
             background: var(--secondary);
             border-radius: 2px;
+            animation: widthPulse 2s infinite;
+        }
+
+        @keyframes widthPulse {
+            0%, 100% { width: 80px; }
+            50% { width: 120px; }
         }
 
         .section-subtitle {
@@ -672,6 +766,7 @@
             width: 100%;
             height: 5px;
             background: var(--gradient-primary);
+            animation: gradientShift 3s infinite;
         }
 
         .feature-card:hover {
@@ -691,6 +786,7 @@
             font-size: 2.5rem;
             color: white;
             box-shadow: 0 10px 30px rgba(0, 188, 212, 0.3);
+            animation: float 4s ease-in-out infinite;
         }
 
         .feature-title {
@@ -710,6 +806,7 @@
         .subjects {
             padding: 8rem 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
         }
 
         .subjects-grid {
@@ -766,6 +863,7 @@
             color: white;
             box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
             transition: var(--transition);
+            animation: pulse 3s infinite;
         }
 
         .subject-card:hover .subject-icon {
@@ -810,106 +908,41 @@
             color: var(--text-light);
         }
 
-        /* ========== TESTS PAGE ========== */
-        #tests-page {
-            padding-top: 100px;
-            min-height: 100vh;
-        }
-
-        .tests-container {
-            padding: 3rem 0;
-        }
-
-        .filters {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 10px 24px;
-            background: white;
-            border: 2px solid var(--border);
-            border-radius: 50px;
-            font-weight: 600;
-            color: var(--text);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: var(--secondary);
-            border-color: var(--secondary);
+        /* ========== QUIZ SECTION ========== */
+        .quiz-section {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            transform: translateY(-2px);
+            position: relative;
         }
 
-        .tests-grid {
+        .quiz-categories {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
         }
 
-        .test-card {
-            background: white;
+        .quiz-category {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             border-radius: var(--radius);
             padding: 2rem;
-            box-shadow: var(--shadow);
+            text-align: center;
+            cursor: pointer;
             transition: var(--transition);
-            border: 2px solid transparent;
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
-        .test-card:hover {
+        .quiz-category:hover {
             transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--secondary);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: white;
         }
 
-        .test-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .test-tag {
-            padding: 6px 16px;
-            background: var(--gradient-success);
-            color: white;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .test-title {
-            font-size: 1.5rem;
-            font-weight: 700;
+        .quiz-category-icon {
+            font-size: 3rem;
             margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .test-description {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        .test-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-light);
-            font-size: 0.9rem;
+            color: white;
         }
 
         /* ========== TEST TAKING ========== */
@@ -928,6 +961,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .test-progress {
@@ -947,6 +986,7 @@
             background: var(--gradient-secondary);
             border-radius: 5px;
             transition: width 0.3s ease;
+            animation: gradientShift 3s infinite;
         }
 
         .test-question-container {
@@ -955,6 +995,12 @@
             padding: 3rem;
             box-shadow: var(--shadow);
             margin-bottom: 2rem;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .question-number {
@@ -997,6 +1043,7 @@
         .option.selected {
             border-color: var(--secondary);
             background: rgba(0, 188, 212, 0.1);
+            transform: translateX(10px);
         }
 
         .option-letter {
@@ -1023,114 +1070,131 @@
             margin-top: 2rem;
         }
 
-        /* ========== ADMIN DASHBOARD ========== */
-        .admin-dashboard {
-            padding-top: 100px;
+        /* ========== RESULT PAGE ========== */
+        .result-container {
+            padding: 100px 0;
             min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
 
-        .admin-container {
-            padding: 3rem 0;
-        }
-
-        .admin-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .admin-stat-card {
+        .result-card {
             background: white;
             border-radius: var(--radius);
-            padding: 2rem;
-            box-shadow: var(--shadow);
+            padding: 4rem;
+            box-shadow: var(--shadow-lg);
             text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease;
         }
 
-        .admin-stat-number {
+        .result-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 3rem;
+            color: white;
+            margin: 0 auto 2rem;
+            box-shadow: 0 15px 35px rgba(76, 175, 80, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .score-display {
+            font-size: 5rem;
             font-weight: 800;
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #00bcd4 0%, #ff4081 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
         }
 
-        .admin-stat-label {
-            color: var(--text-light);
-            font-size: 1rem;
-        }
-
-        .users-table-container {
-            background: white;
-            border-radius: var(--radius);
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            overflow-x: auto;
-        }
-
-        .users-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .users-table th,
-        .users-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .users-table th {
-            background: var(--light);
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .user-status {
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .user-status.online {
-            background: rgba(76, 175, 80, 0.1);
-            color: var(--success);
-        }
-
-        .user-status.offline {
-            background: rgba(244, 67, 54, 0.1);
-            color: var(--danger);
-        }
-
-        /* ========== PROGRESS REPORT ========== */
-        .progress-report {
-            padding-top: 100px;
-            min-height: 100vh;
-        }
-
-        .progress-container {
-            padding: 3rem 0;
-        }
-
-        .progress-summary {
+        .score-breakdown {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 2rem;
-            margin-bottom: 3rem;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: var(--radius);
         }
 
-        .progress-card {
+        /* ========== RESOURCE UPLOAD ========== */
+        .resource-upload {
             background: white;
             border-radius: var(--radius);
             padding: 2rem;
             box-shadow: var(--shadow);
+            margin-bottom: 2rem;
         }
 
-        .progress-chart {
-            width: 100%;
-            height: 200px;
-            margin-top: 1rem;
+        .upload-area {
+            border: 3px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .upload-area:hover {
+            border-color: var(--secondary);
+            background: rgba(0, 188, 212, 0.05);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ========== NOTIFICATION ========== */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .notification.error {
+            border-left: 4px solid var(--danger);
+        }
+
+        .notification.warning {
+            border-left: 4px solid var(--warning);
         }
 
         /* ========== DROPDOWN MENU ========== */
@@ -1152,6 +1216,7 @@
         .dropdown-toggle:hover {
             background: rgba(0, 188, 212, 0.1);
             color: var(--secondary);
+            transform: rotate(90deg);
         }
 
         .dropdown-menu {
@@ -1171,11 +1236,6 @@
             animation: fadeIn 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .dropdown-item {
             display: block;
             padding: 1rem;
@@ -1192,6 +1252,7 @@
         .dropdown-item:hover {
             background: rgba(0, 188, 212, 0.1);
             color: var(--secondary);
+            transform: translateX(5px);
         }
 
         /* ========== RESPONSIVE ========== */
@@ -1246,47 +1307,9 @@
                 font-size: 2rem;
             }
             
-            .tests-grid {
-                grid-template-columns: 1fr;
+            .score-display {
+                font-size: 3rem;
             }
-            
-            .test-navigation {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
-
-        /* ========== NOTIFICATION ========== */
-        .notification {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        .notification.success {
-            border-left: 4px solid var(--success);
-        }
-
-        .notification.error {
-            border-left: 4px solid var(--danger);
-        }
-
-        .notification.warning {
-            border-left: 4px solid var(--warning);
         }
     </style>
 </head>
@@ -1320,13 +1343,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#progress-report" class="nav-link" onclick="showPage('progress-report')">
-                        <i class="fas fa-chart-line"></i> Progress Report
+                    <a href="#quiz-page" class="nav-link" onclick="showPage('quiz-page')">
+                        <i class="fas fa-brain"></i> Online Quiz
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#admin-dashboard" class="nav-link hidden" id="admin-link" onclick="showPage('admin-dashboard')">
-                        <i class="fas fa-cog"></i> Admin
+                    <a href="#resources-page" class="nav-link" onclick="showPage('resources-page')">
+                        <i class="fas fa-book"></i> Study Resources
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#progress-report" class="nav-link" onclick="showPage('progress-report')">
+                        <i class="fas fa-chart-line"></i> Progress Report
                     </a>
                 </li>
                 <li class="nav-item dropdown">
@@ -1337,11 +1365,14 @@
                         <a href="#" class="dropdown-item" onclick="showBooks()">
                             <i class="fas fa-book"></i> Books & Notes
                         </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-video"></i> Video Lectures
+                        <a href="#guess-papers" class="dropdown-item" onclick="showPage('guess-papers')">
+                            <i class="fas fa-file-pdf"></i> Guess Papers
                         </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-question-circle"></i> Help Center
+                        <a href="#old-tests" class="dropdown-item" onclick="showPage('old-tests')">
+                            <i class="fas fa-history"></i> Old Tests
+                        </a>
+                        <a href="#admin-dashboard" class="dropdown-item hidden" id="admin-link" onclick="showPage('admin-dashboard')">
+                            <i class="fas fa-cog"></i> Admin Panel
                         </a>
                     </div>
                 </li>
@@ -1375,12 +1406,12 @@
             </div>
             <form id="login-form">
                 <div class="form-group">
-                    <label class="form-label">Email or Mobile Number</label>
-                    <input type="text" class="form-control" id="login-identifier" required>
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" id="login-email" placeholder="Enter your email" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control" id="login-password" required>
+                    <input type="password" class="form-control" id="login-password" placeholder="Enter your password" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">
                     <i class="fas fa-sign-in-alt"></i> Login
@@ -1388,60 +1419,20 @@
             </form>
 
             <div class="social-login">
-                <button class="social-btn facebook" onclick="loginWithFacebook()">
+                <button class="social-btn facebook" onclick="simulateFacebookLogin()">
                     <i class="fab fa-facebook-f"></i> Continue with Facebook
                 </button>
-                <button class="social-btn google" onclick="loginWithGoogle()">
+                <button class="social-btn google" onclick="simulateGoogleLogin()">
                     <i class="fab fa-google"></i> Continue with Google
+                </button>
+                <button class="social-btn guest-login-btn" onclick="guestLogin()">
+                    <i class="fas fa-user-friends"></i> Continue as Guest
                 </button>
             </div>
 
             <div class="mt-2 text-center">
-                <a href="#" onclick="showMobileLogin()" style="color: var(--secondary); text-decoration: none;">
-                    <i class="fas fa-mobile-alt"></i> Login with Mobile OTP
-                </a>
+                <p>Don't have an account? <a href="#" onclick="showRegisterModal()" style="color: var(--secondary);">Register here</a></p>
             </div>
-        </div>
-    </div>
-
-    <!-- Mobile OTP Modal -->
-    <div class="modal" id="mobile-otp-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Mobile OTP Login</h3>
-                <button class="close-modal" onclick="closeModal('mobile-otp-modal')">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <form id="mobile-otp-form">
-                <div class="form-group">
-                    <label class="form-label">Mobile Number</label>
-                    <input type="tel" class="form-control" id="mobile-number" required>
-                </div>
-                <button type="button" class="btn btn-secondary w-100" onclick="sendOTP()">
-                    <i class="fas fa-paper-plane"></i> Send OTP
-                </button>
-
-                <div class="form-group mt-2 hidden" id="otp-input-group">
-                    <label class="form-label">Enter OTP</label>
-                    <div class="otp-container">
-                        <input type="text" class="otp-input" maxlength="1" data-index="0">
-                        <input type="text" class="otp-input" maxlength="1" data-index="1">
-                        <input type="text" class="otp-input" maxlength="1" data-index="2">
-                        <input type="text" class="otp-input" maxlength="1" data-index="3">
-                        <input type="text" class="otp-input" maxlength="1" data-index="4">
-                        <input type="text" class="otp-input" maxlength="1" data-index="5">
-                    </div>
-                    <div class="mt-1 text-center">
-                        <a href="#" onclick="autoFillOTP()" style="color: var(--secondary); text-decoration: none;">
-                            <i class="fas fa-bolt"></i> Auto-fill OTP
-                        </a>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100 mt-2">
-                        <i class="fas fa-check"></i> Verify OTP
-                    </button>
-                </div>
-            </form>
         </div>
     </div>
 
@@ -1457,23 +1448,23 @@
             <form id="register-form">
                 <div class="form-group">
                     <label class="form-label">Full Name</label>
-                    <input type="text" class="form-control" id="register-name" required>
+                    <input type="text" class="form-control" id="register-name" placeholder="Enter your full name" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-control" id="register-email" required>
+                    <input type="email" class="form-control" id="register-email" placeholder="Enter your email" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Mobile Number</label>
-                    <input type="tel" class="form-control" id="register-mobile" required>
+                    <input type="tel" class="form-control" id="register-mobile" placeholder="Enter your mobile number">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control" id="register-password" required>
+                    <input type="password" class="form-control" id="register-password" placeholder="Create a password" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" id="register-confirm-password" required>
+                    <input type="password" class="form-control" id="register-confirm-password" placeholder="Confirm your password" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">
                     <i class="fas fa-user-plus"></i> Create Account
@@ -1481,27 +1472,40 @@
             </form>
 
             <div class="social-login">
-                <button class="social-btn facebook" onclick="registerWithFacebook()">
+                <button class="social-btn facebook" onclick="simulateFacebookSignup()">
                     <i class="fab fa-facebook-f"></i> Sign up with Facebook
                 </button>
-                <button class="social-btn google" onclick="registerWithGoogle()">
+                <button class="social-btn google" onclick="simulateGoogleSignup()">
                     <i class="fab fa-google"></i> Sign up with Google
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Books & Notes Modal -->
-    <div class="modal" id="books-modal">
-        <div class="modal-content" style="max-width: 800px;">
+    <!-- Admin Login Modal -->
+    <div class="modal" id="admin-login-modal">
+        <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Books & Notes</h3>
-                <button class="close-modal" onclick="closeModal('books-modal')">
+                <h3 class="modal-title">Admin Login</h3>
+                <button class="close-modal" onclick="closeModal('admin-login-modal')">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div id="books-content">
-                <!-- Books will be loaded here -->
+            <form id="admin-login-form">
+                <div class="form-group">
+                    <label class="form-label">Admin ID</label>
+                    <input type="text" class="form-control" id="admin-id" placeholder="Enter admin ID" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Admin Password</label>
+                    <input type="password" class="form-control" id="admin-password" placeholder="Enter admin password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-lock"></i> Login as Admin
+                </button>
+            </form>
+            <div class="mt-2 text-center">
+                <p><strong>Default Admin:</strong> admin / Admin@1234</p>
             </div>
         </div>
     </div>
@@ -1509,34 +1513,46 @@
     <!-- Home Page -->
     <section id="home-page" class="page active">
         <div class="hero">
+            <div class="particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
             <div class="hero-content">
-                <h1 class="hero-title">Ace Your MDCAT with Confidence</h1>
+                <h1 class="hero-title float-animation">Ace Your MDCAT with Confidence</h1>
                 <p class="hero-subtitle">Comprehensive study materials, practice tests, and personalized progress tracking for Pakistan's top medical aspirants.</p>
                 
                 <div class="hero-buttons">
-                    <button class="btn btn-primary btn-lg" onclick="showPage('tests-page')">
+                    <button class="btn btn-primary btn-lg pulse-animation" onclick="showPage('tests-page')">
                         <i class="fas fa-play-circle"></i> Start Practice Test
                     </button>
-                    <button class="btn btn-secondary btn-lg" onclick="showRegisterModal()">
-                        <i class="fas fa-rocket"></i> Join Free Trial
+                    <button class="btn btn-secondary btn-lg" onclick="showPage('quiz-page')">
+                        <i class="fas fa-brain"></i> Take Online Quiz
                     </button>
                 </div>
 
                 <div class="stats">
                     <div class="stat-item">
-                        <div class="stat-number">5000+</div>
+                        <div class="stat-number shimmer-text">5000+</div>
                         <div class="stat-label">Practice Questions</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">95%</div>
+                        <div class="stat-number shimmer-text">95%</div>
                         <div class="stat-label">Success Rate</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">100+</div>
+                        <div class="stat-number shimmer-text">100+</div>
                         <div class="stat-label">Video Lectures</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">24/7</div>
+                        <div class="stat-number shimmer-text">24/7</div>
                         <div class="stat-label">Expert Support</div>
                     </div>
                 </div>
@@ -1627,7 +1643,25 @@
                             <i class="fas fa-dna"></i>
                         </div>
                         <h3 class="subject-title">Biology</h3>
-                        <p class="subject-description">Complete biological concepts with diagrams and memorization techniques.</p>
+                        <p class="feature-description">Complete biological concepts with diagrams and memorization techniques.</p>
+                        <div class="subject-stats">
+                            <div class="stat">
+                                <span class="stat-number">5</span>
+                                <span class="stat-label">Tests</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">200+</span>
+                                <span class="stat-label">Questions</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subject-card" onclick="showSubjectTests('english')">
+                        <div class="subject-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3 class="subject-title">English</h3>
+                        <p class="subject-description">Vocabulary, grammar, and comprehension practice for MDCAT English section.</p>
                         <div class="subject-stats">
                             <div class="stat">
                                 <span class="stat-number">5</span>
@@ -1644,13 +1678,13 @@
         </section>
     </section>
 
-    <!-- Tests Page -->
+    <!-- Practice Tests Page -->
     <section id="tests-page" class="page hidden">
         <div class="tests-container">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Practice Tests</h2>
-                    <p class="section-subtitle">Select a subject and start your practice test</p>
+                    <p class="section-subtitle">Select a subject and start your practice test (10 minutes each)</p>
                 </div>
 
                 <div class="filters">
@@ -1658,51 +1692,102 @@
                     <button class="filter-btn" onclick="filterTests('physics')">Physics</button>
                     <button class="filter-btn" onclick="filterTests('chemistry')">Chemistry</button>
                     <button class="filter-btn" onclick="filterTests('biology')">Biology</button>
+                    <button class="filter-btn" onclick="filterTests('english')">English</button>
                 </div>
 
                 <div class="tests-grid" id="tests-grid">
-                    <!-- Tests will be loaded here dynamically -->
+                    <!-- Tests loaded dynamically -->
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Test Taking Page -->
-    <section id="test-taking-page" class="page hidden">
+    <!-- Online Quiz Page -->
+    <section id="quiz-page" class="page hidden">
+        <div class="quiz-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Online Quiz Challenge</h2>
+                    <p class="section-subtitle">Test your knowledge with our 10-minute timed quizzes</p>
+                </div>
+
+                <div class="quiz-categories">
+                    <div class="quiz-category" onclick="startQuiz('physics')">
+                        <div class="quiz-category-icon">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <h3>Physics Quiz</h3>
+                        <p>5 tests × 10 questions each</p>
+                        <p><strong>Time:</strong> 10 minutes per test</p>
+                    </div>
+
+                    <div class="quiz-category" onclick="startQuiz('chemistry')">
+                        <div class="quiz-category-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3>Chemistry Quiz</h3>
+                        <p>5 tests × 10 questions each</p>
+                        <p><strong>Time:</strong> 10 minutes per test</p>
+                    </div>
+
+                    <div class="quiz-category" onclick="startQuiz('biology')">
+                        <div class="quiz-category-icon">
+                            <i class="fas fa-dna"></i>
+                        </div>
+                        <h3>Biology Quiz</h3>
+                        <p>5 tests × 10 questions each</p>
+                        <p><strong>Time:</strong> 10 minutes per test</p>
+                    </div>
+
+                    <div class="quiz-category" onclick="startQuiz('english')">
+                        <div class="quiz-category-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3>English Quiz</h3>
+                        <p>5 tests × 10 questions each</p>
+                        <p><strong>Time:</strong> 10 minutes per test</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Taking Page -->
+    <section id="quiz-taking-page" class="page hidden">
         <div class="test-taking-container">
             <div class="container">
                 <div class="test-header-bar">
                     <div class="test-timer">
                         <i class="fas fa-clock"></i>
-                        <span id="timer">20:00</span>
+                        <span id="quiz-timer">10:00</span>
                     </div>
                     <div class="test-progress">
                         <div class="progress-bar">
-                            <div class="progress-fill" id="progress-fill"></div>
+                            <div class="progress-fill" id="quiz-progress-fill"></div>
                         </div>
                     </div>
                     <div class="question-counter">
-                        <span id="current-question">1</span>/<span id="total-questions">10</span>
+                        <span id="quiz-current-question">1</span>/<span id="quiz-total-questions">10</span>
                     </div>
                 </div>
 
                 <div class="test-question-container">
-                    <div class="question-number" id="question-number">Question 1</div>
-                    <div class="question-text" id="question-text"></div>
+                    <div class="question-number" id="quiz-question-number">Question 1</div>
+                    <div class="question-text" id="quiz-question-text"></div>
                     
-                    <div class="options-container" id="options-container">
-                        <!-- Options will be loaded here -->
+                    <div class="options-container" id="quiz-options-container">
+                        <!-- Options loaded dynamically -->
                     </div>
                     
                     <div class="test-navigation">
-                        <button class="btn btn-outline" onclick="previousQuestion()">
+                        <button class="btn btn-outline" onclick="previousQuizQuestion()">
                             <i class="fas fa-arrow-left"></i> Previous
                         </button>
-                        <button class="btn btn-secondary" onclick="nextQuestion()">
+                        <button class="btn btn-secondary" onclick="nextQuizQuestion()">
                             Next <i class="fas fa-arrow-right"></i>
                         </button>
-                        <button class="btn btn-primary hidden" id="submit-btn" onclick="submitTest()">
-                            <i class="fas fa-paper-plane"></i> Submit Test
+                        <button class="btn btn-primary hidden" id="quiz-submit-btn" onclick="submitQuiz()">
+                            <i class="fas fa-paper-plane"></i> Submit Quiz
                         </button>
                     </div>
                 </div>
@@ -1710,35 +1795,112 @@
         </div>
     </section>
 
-    <!-- Progress Report Page -->
-    <section id="progress-report" class="page hidden">
-        <div class="progress-container">
+    <!-- Result Page -->
+    <section id="result-page" class="page hidden">
+        <div class="result-container">
+            <div class="container">
+                <div class="result-card">
+                    <div class="result-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h2 class="section-title">Quiz Completed!</h2>
+                    <div class="score-display" id="final-score">0%</div>
+                    <p class="section-subtitle" id="score-message"></p>
+                    
+                    <div class="score-breakdown">
+                        <div>
+                            <h3>Correct</h3>
+                            <div class="admin-stat-number" id="correct-count">0</div>
+                        </div>
+                        <div>
+                            <h3>Wrong</h3>
+                            <div class="admin-stat-number text-danger" id="wrong-count">0</div>
+                        </div>
+                        <div>
+                            <h3>Score</h3>
+                            <div class="admin-stat-number" id="score-percentage">0%</div>
+                        </div>
+                        <div>
+                            <h3>Time</h3>
+                            <div class="admin-stat-number" id="time-taken">0:00</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <button class="btn btn-primary btn-lg" onclick="showPage('quiz-page')">
+                            <i class="fas fa-redo"></i> Take Another Quiz
+                        </button>
+                        <button class="btn btn-secondary btn-lg" onclick="showPage('home-page')">
+                            <i class="fas fa-home"></i> Back to Home
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study Resources Page -->
+    <section id="resources-page" class="page hidden">
+        <div class="tests-container">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Your Progress Report</h2>
-                    <p class="section-subtitle">Track your performance and improvement over time</p>
+                    <h2 class="section-title">Study Resources</h2>
+                    <p class="section-subtitle">Upload and access books, videos, PDFs, and study materials</p>
                 </div>
 
-                <div class="progress-summary">
-                    <div class="progress-card">
-                        <h3>Overall Score</h3>
-                        <div class="admin-stat-number" id="overall-score">0%</div>
-                        <canvas class="progress-chart" id="score-chart"></canvas>
+                <div class="resource-upload">
+                    <h3>Upload New Resource</h3>
+                    <div class="upload-area" onclick="document.getElementById('resource-file').click()">
+                        <i class="fas fa-cloud-upload-alt fa-3x mb-2" style="color: var(--secondary);"></i>
+                        <p>Click to upload or drag and drop</p>
+                        <p class="text-sm text-gray">PDF, DOC, PPT, MP4, YouTube Links, Drive Links</p>
                     </div>
+                    <input type="file" id="resource-file" class="hidden" onchange="handleResourceUpload()">
                     
-                    <div class="progress-card">
-                        <h3>Subject-wise Performance</h3>
-                        <div id="subject-performance">
-                            <!-- Subject performance will be loaded here -->
-                        </div>
+                    <div class="form-group mt-2">
+                        <input type="text" class="form-control" id="resource-link" placeholder="Or paste YouTube/Drive link here">
                     </div>
-                    
-                    <div class="progress-card">
-                        <h3>Test History</h3>
-                        <div id="test-history">
-                            <!-- Test history will be loaded here -->
-                        </div>
-                    </div>
+                    <button class="btn btn-primary" onclick="addResourceFromLink()">
+                        <i class="fas fa-link"></i> Add Link
+                    </button>
+                </div>
+
+                <div class="resources-grid" id="resources-grid">
+                    <!-- Resources loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guess Papers Page -->
+    <section id="guess-papers" class="page hidden">
+        <div class="tests-container">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Guess Papers</h2>
+                    <p class="section-subtitle">Important questions and predicted papers for MDCAT 2024</p>
+                </div>
+                <div class="text-center p-5">
+                    <i class="fas fa-file-pdf fa-5x text-danger mb-3"></i>
+                    <h3>Coming Soon!</h3>
+                    <p>Guess papers will be uploaded before exams</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Old Tests Page -->
+    <section id="old-tests" class="page hidden">
+        <div class="tests-container">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Past Papers & Old Tests</h2>
+                    <p class="section-subtitle">Previous years MDCAT papers for practice</p>
+                </div>
+                <div class="text-center p-5">
+                    <i class="fas fa-history fa-5x text-primary mb-3"></i>
+                    <h3>Coming Soon!</h3>
+                    <p>Previous years papers will be added soon</p>
                 </div>
             </div>
         </div>
@@ -1750,45 +1912,20 @@
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Admin Dashboard</h2>
-                    <p class="section-subtitle">Manage users, tests, and platform analytics</p>
+                    <p class="section-subtitle">Manage platform content and users</p>
                 </div>
-
-                <div class="admin-stats">
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-number" id="total-users">0</div>
-                        <div class="admin-stat-label">Total Users</div>
+                <div class="text-center p-5">
+                    <i class="fas fa-cog fa-5x text-secondary mb-3"></i>
+                    <h3>Admin Panel</h3>
+                    <p>Manage users, content, and platform settings</p>
+                    <div class="mt-3">
+                        <button class="btn btn-primary" onclick="manageUsers()">
+                            <i class="fas fa-users"></i> Manage Users
+                        </button>
+                        <button class="btn btn-secondary" onclick="manageContent()">
+                            <i class="fas fa-book"></i> Manage Content
+                        </button>
                     </div>
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-number" id="online-users">0</div>
-                        <div class="admin-stat-label">Online Users</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-number" id="total-tests">0</div>
-                        <div class="admin-stat-label">Tests Taken</div>
-                    </div>
-                    <div class="admin-stat-card">
-                        <div class="admin-stat-number" id="avg-score">0%</div>
-                        <div class="admin-stat-label">Average Score</div>
-                    </div>
-                </div>
-
-                <div class="users-table-container mt-3">
-                    <h3>All Users</h3>
-                    <table class="users-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Mobile</th>
-                                <th>Status</th>
-                                <th>Tests Taken</th>
-                                <th>Average Score</th>
-                            </tr>
-                        </thead>
-                        <tbody id="users-table-body">
-                            <!-- Users will be loaded here -->
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
@@ -1800,176 +1937,251 @@
         <span id="notification-text"></span>
     </div>
 
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <script>
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyC4R6AN1F7RZQlQpD8qYQJw3BqKQvXvT8Y",
-            authDomain: "pak-med-study-corner.firebaseapp.com",
-            projectId: "pak-med-study-corner",
-            storageBucket: "pak-med-study-corner.appspot.com",
-            messagingSenderId: "123456789012",
-            appId: "1:123456789012:web:abcdef1234567890"
-        };
+        // Initialize AOS animations
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-
-        // State Management
+        // Application State
         let currentUser = null;
         let currentTest = null;
+        let currentQuiz = null;
         let currentQuestionIndex = 0;
         let userAnswers = [];
         let timerInterval = null;
-        let timeLeft = 1200; // 20 minutes in seconds
+        let quizTimeLeft = 600; // 10 minutes in seconds
+        let quizStartTime = null;
+        let isGuest = false;
+        let isAdmin = false;
 
-        // Test Data (Each subject has 5 tests, each test has 10 unique questions)
-        const testData = {
+        // Admin Configuration
+        const ADMIN_CREDENTIALS = {
+            id: "admin",
+            password: "Admin@1234",
+            email: "admin@pakmed.com"
+        };
+
+        // Mock Database (In production, use Firebase or backend)
+        let usersDB = JSON.parse(localStorage.getItem('pakmed_users')) || [];
+        let testResultsDB = JSON.parse(localStorage.getItem('pakmed_results')) || [];
+        let resourcesDB = JSON.parse(localStorage.getItem('pakmed_resources')) || [];
+        let quizResultsDB = JSON.parse(localStorage.getItem('pakmed_quiz_results')) || [];
+
+        // Quiz Data - Each subject has 5 tests, each test has 10 unique questions
+        const QUIZ_DATA = {
             physics: [
                 {
                     id: 1,
-                    title: "Physics Test 1: Mechanics",
-                    description: "Covering kinematics, dynamics, and laws of motion",
+                    title: "Physics Quiz 1: Mechanics",
                     questions: [
-                        {
-                            id: 1,
-                            text: "What is the SI unit of force?",
-                            options: [
-                                { id: 'A', text: 'Newton', correct: true },
-                                { id: 'B', text: 'Joule', correct: false },
-                                { id: 'C', text: 'Watt', correct: false },
-                                { id: 'D', text: 'Pascal', correct: false }
-                            ]
-                        },
-                        {
-                            id: 2,
-                            text: "Which law states that for every action there is an equal and opposite reaction?",
-                            options: [
-                                { id: 'A', text: 'Newton\'s First Law', correct: false },
-                                { id: 'B', text: 'Newton\'s Second Law', correct: false },
-                                { id: 'C', text: 'Newton\'s Third Law', correct: true },
-                                { id: 'D', text: 'Law of Conservation of Energy', correct: false }
-                            ]
-                        },
-                        // Add 8 more unique questions...
+                        { id: 1, text: "What is the SI unit of force?", 
+                          options: ["Newton", "Joule", "Watt", "Pascal"], 
+                          correct: 0 },
+                        { id: 2, text: "Which law states F=ma?", 
+                          options: ["Newton's 1st", "Newton's 2nd", "Newton's 3rd", "Ohm's Law"], 
+                          correct: 1 },
+                        { id: 3, text: "What is acceleration due to gravity?", 
+                          options: ["9.8 m/s²", "10 m/s²", "8.9 m/s²", "11 m/s²"], 
+                          correct: 0 },
+                        { id: 4, text: "Unit of energy is?", 
+                          options: ["Newton", "Joule", "Watt", "Pascal"], 
+                          correct: 1 },
+                        { id: 5, text: "Speed of light is?", 
+                          options: ["3x10⁸ m/s", "3x10⁶ m/s", "3x10⁵ m/s", "3x10⁷ m/s"], 
+                          correct: 0 },
+                        { id: 6, text: "Formula for kinetic energy?", 
+                          options: ["½mv²", "mgh", "Fd", "Pt"], 
+                          correct: 0 },
+                        { id: 7, text: "Unit of power?", 
+                          options: ["Newton", "Joule", "Watt", "Pascal"], 
+                          correct: 2 },
+                        { id: 8, text: "What is inertia?", 
+                          options: ["Resistance to motion change", "Force", "Energy", "Speed"], 
+                          correct: 0 },
+                        { id: 9, text: "Ohm's Law formula?", 
+                          options: ["V=IR", "P=VI", "F=ma", "E=mc²"], 
+                          correct: 0 },
+                        { id: 10, text: "Frequency unit?", 
+                          options: ["Hertz", "Watt", "Newton", "Joule"], 
+                          correct: 0 }
                     ]
                 },
-                // Add 4 more physics tests...
+                // 4 more physics quizzes...
             ],
             chemistry: [
                 {
                     id: 1,
-                    title: "Chemistry Test 1: Atomic Structure",
-                    description: "Covering atomic models, electron configuration, and periodic table",
+                    title: "Chemistry Quiz 1: Atomic Structure",
                     questions: [
-                        {
-                            id: 1,
-                            text: "What is the atomic number of Carbon?",
-                            options: [
-                                { id: 'A', text: '6', correct: true },
-                                { id: 'B', text: '12', correct: false },
-                                { id: 'C', text: '14', correct: false },
-                                { id: 'D', text: '8', correct: false }
-                            ]
-                        },
-                        {
-                            id: 2,
-                            text: "Which element has the electron configuration 1s²2s²2p⁶3s²3p⁶4s²?",
-                            options: [
-                                { id: 'A', text: 'Calcium', correct: true },
-                                { id: 'B', text: 'Potassium', correct: false },
-                                { id: 'C', text: 'Argon', correct: false },
-                                { id: 'D', text: 'Titanium', correct: false }
-                            ]
-                        },
-                        // Add 8 more unique questions...
+                        { id: 1, text: "Atomic number of Carbon?", 
+                          options: ["6", "12", "14", "8"], 
+                          correct: 0 },
+                        { id: 2, text: "pH of pure water?", 
+                          options: ["7", "0", "14", "1"], 
+                          correct: 0 },
+                        { id: 3, text: "Most abundant gas in air?", 
+                          options: ["Nitrogen", "Oxygen", "CO₂", "Argon"], 
+                          correct: 0 },
+                        { id: 4, text: "Formula of water?", 
+                          options: ["H₂O", "HO", "H₂O₂", "H₃O"], 
+                          correct: 0 },
+                        { id: 5, text: "Acid turns litmus?", 
+                          options: ["Red", "Blue", "Green", "Yellow"], 
+                          correct: 0 },
+                        { id: 6, text: "Atomic mass unit?", 
+                          options: ["amu", "g", "kg", "mol"], 
+                          correct: 0 },
+                        { id: 7, text: "Number of periods in periodic table?", 
+                          options: ["7", "6", "8", "5"], 
+                          correct: 0 },
+                        { id: 8, text: "Noble gases are?", 
+                          options: ["Inert", "Reactive", "Metals", "Acidic"], 
+                          correct: 0 },
+                        { id: 9, text: "pH stands for?", 
+                          options: ["Power of Hydrogen", "Potential Hydrogen", "Both", "None"], 
+                          correct: 2 },
+                        { id: 10, text: "Salt formed from HCl + NaOH?", 
+                          options: ["NaCl", "KCl", "Na₂SO₄", "CaCO₃"], 
+                          correct: 0 }
                     ]
                 },
-                // Add 4 more chemistry tests...
+                // 4 more chemistry quizzes...
             ],
             biology: [
                 {
                     id: 1,
-                    title: "Biology Test 1: Cell Biology",
-                    description: "Covering cell structure, organelles, and cellular processes",
+                    title: "Biology Quiz 1: Cell Biology",
                     questions: [
-                        {
-                            id: 1,
-                            text: "What is the powerhouse of the cell?",
-                            options: [
-                                { id: 'A', text: 'Mitochondria', correct: true },
-                                { id: 'B', text: 'Nucleus', correct: false },
-                                { id: 'C', text: 'Ribosome', correct: false },
-                                { id: 'D', text: 'Golgi Apparatus', correct: false }
-                            ]
-                        },
-                        {
-                            id: 2,
-                            text: "Which organelle is responsible for protein synthesis?",
-                            options: [
-                                { id: 'A', text: 'Ribosome', correct: true },
-                                { id: 'B', text: 'Lysosome', correct: false },
-                                { id: 'C', text: 'Endoplasmic Reticulum', correct: false },
-                                { id: 'D', text: 'Vacuole', correct: false }
-                            ]
-                        },
-                        // Add 8 more unique questions...
+                        { id: 1, text: "Powerhouse of cell?", 
+                          options: ["Mitochondria", "Nucleus", "Ribosome", "Golgi"], 
+                          correct: 0 },
+                        { id: 2, text: "Protein synthesis site?", 
+                          options: ["Ribosome", "Mitochondria", "Nucleus", "ER"], 
+                          correct: 0 },
+                        { id: 3, text: "Control center of cell?", 
+                          options: ["Nucleus", "Mitochondria", "Ribosome", "Golgi"], 
+                          correct: 0 },
+                        { id: 4, text: "Cell wall in plant cells is made of?", 
+                          options: ["Cellulose", "Chitin", "Protein", "Lipid"], 
+                          correct: 0 },
+                        { id: 5, text: "Photosynthesis occurs in?", 
+                          options: ["Chloroplast", "Mitochondria", "Nucleus", "Vacuole"], 
+                          correct: 0 },
+                        { id: 6, text: "Blood cells are produced in?", 
+                          options: ["Bone marrow", "Liver", "Spleen", "Kidney"], 
+                          correct: 0 },
+                        { id: 7, text: "Largest organ in human body?", 
+                          options: ["Skin", "Liver", "Brain", "Lungs"], 
+                          correct: 0 },
+                        { id: 8, text: "Number of chromosomes in humans?", 
+                          options: ["46", "23", "48", "24"], 
+                          correct: 0 },
+                        { id: 9, text: "Enzyme breaking down starch?", 
+                          options: ["Amylase", "Pepsin", "Lipase", "Trypsin"], 
+                          correct: 0 },
+                        { id: 10, text: "Blood group universal donor?", 
+                          options: ["O-", "O+", "AB+", "A-"], 
+                          correct: 0 }
                     ]
                 },
-                // Add 4 more biology tests...
+                // 4 more biology quizzes...
+            ],
+            english: [
+                {
+                    id: 1,
+                    title: "English Quiz 1: Vocabulary",
+                    questions: [
+                        { id: 1, text: "Synonym of 'beautiful'?", 
+                          options: ["Pretty", "Ugly", "Big", "Small"], 
+                          correct: 0 },
+                        { id: 2, text: "Antonym of 'hot'?", 
+                          options: ["Cold", "Warm", "Sweet", "High"], 
+                          correct: 0 },
+                        { id: 3, text: "Plural of 'child'?", 
+                          options: ["Children", "Childs", "Childes", "Childer"], 
+                          correct: 0 },
+                        { id: 4, text: "Past tense of 'go'?", 
+                          options: ["Went", "Gone", "Goed", "Going"], 
+                          correct: 0 },
+                        { id: 5, text: "Correct: He ___ to school.", 
+                          options: ["goes", "go", "going", "went"], 
+                          correct: 0 },
+                        { id: 6, text: "Article before 'hour'?", 
+                          options: ["an", "a", "the", "none"], 
+                          correct: 0 },
+                        { id: 7, text: "Comparative of 'good'?", 
+                          options: ["better", "gooder", "more good", "best"], 
+                          correct: 0 },
+                        { id: 8, text: "Opposite of 'begin'?", 
+                          options: ["End", "Start", "Continue", "Middle"], 
+                          correct: 0 },
+                        { id: 9, text: "'I am hungry' is?", 
+                          options: ["Statement", "Question", "Command", "Exclamation"], 
+                          correct: 0 },
+                        { id: 10, text: "Capital of Pakistan?", 
+                          options: ["Islamabad", "Karachi", "Lahore", "Peshawar"], 
+                          correct: 0 }
+                    ]
+                },
+                // 4 more english quizzes...
             ]
         };
 
         // Initialize Application
         document.addEventListener('DOMContentLoaded', function() {
             initializeApp();
-            setupEventListeners();
             loadTests();
-            checkAuthState();
+            loadResources();
+            checkLoginStatus();
         });
 
         function initializeApp() {
             // Setup dropdown menus
-            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-            dropdownToggles.forEach(toggle => {
+            document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
                 toggle.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    const menu = this.nextElementSibling;
-                    menu.classList.toggle('active');
+                    this.nextElementSibling.classList.toggle('active');
                 });
             });
 
             // Close dropdowns when clicking outside
-            document.addEventListener('click', function() {
+            document.addEventListener('click', () => {
                 document.querySelectorAll('.dropdown-menu').forEach(menu => {
                     menu.classList.remove('active');
                 });
             });
 
             // Mobile menu
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            mobileMenuBtn.addEventListener('click', function() {
+            document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
                 const navMenu = document.querySelector('.nav-menu');
                 navMenu.classList.toggle('active');
                 this.innerHTML = navMenu.classList.contains('active') ? 
                     '<i class="fas fa-times"></i>' : 
                     '<i class="fas fa-bars"></i>';
             });
+
+            // Setup forms
+            setupForms();
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
+            });
         }
 
-        function setupEventListeners() {
+        function setupForms() {
             // Login form
             document.getElementById('login-form').addEventListener('submit', function(e) {
                 e.preventDefault();
-                const identifier = document.getElementById('login-identifier').value;
+                const email = document.getElementById('login-email').value;
                 const password = document.getElementById('login-password').value;
-                
-                if (identifier.includes('@')) {
-                    loginWithEmail(identifier, password);
-                } else {
-                    loginWithMobile(identifier, password);
-                }
+                loginUser(email, password);
             });
 
             // Register form
@@ -1986,201 +2198,152 @@
                     return;
                 }
                 
-                registerWithEmail(name, email, mobile, password);
+                registerUser(name, email, mobile, password);
             });
 
-            // Mobile OTP form
-            document.getElementById('mobile-otp-form').addEventListener('submit', function(e) {
+            // Admin login form
+            document.getElementById('admin-login-form').addEventListener('submit', function(e) {
                 e.preventDefault();
-                verifyOTP();
-            });
-
-            // OTP input auto-focus
-            const otpInputs = document.querySelectorAll('.otp-input');
-            otpInputs.forEach((input, index) => {
-                input.addEventListener('input', function(e) {
-                    if (this.value.length === 1 && index < otpInputs.length - 1) {
-                        otpInputs[index + 1].focus();
-                    }
-                });
-                
-                input.addEventListener('keydown', function(e) {
-                    if (e.key === 'Backspace' && !this.value && index > 0) {
-                        otpInputs[index - 1].focus();
-                    }
-                });
+                const adminId = document.getElementById('admin-id').value;
+                const password = document.getElementById('admin-password').value;
+                adminLogin(adminId, password);
             });
         }
 
-        // Authentication Functions
-        async function loginWithEmail(email, password) {
-            try {
-                const userCredential = await auth.signInWithEmailAndPassword(email, password);
-                currentUser = userCredential.user;
-                showNotification('Login successful!', 'success');
-                closeModal('login-modal');
+        // User Management
+        function checkLoginStatus() {
+            const user = JSON.parse(localStorage.getItem('current_user'));
+            if (user) {
+                currentUser = user;
                 updateUIForUser();
-                saveUserToFirestore();
-            } catch (error) {
+            }
+        }
+
+        function loginUser(email, password) {
+            const user = usersDB.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('current_user', JSON.stringify(user));
+                updateUIForUser();
+                closeModal('login-modal');
+                showNotification('Login successful!', 'success');
+            } else {
                 showNotification('Invalid email or password!', 'error');
             }
         }
 
-        async function loginWithMobile(mobile, password) {
-            // In a real app, you would verify mobile with your backend
-            showNotification('Mobile login coming soon!', 'warning');
-        }
-
-        async function registerWithEmail(name, email, mobile, password) {
-            try {
-                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-                currentUser = userCredential.user;
-                
-                // Update user profile
-                await currentUser.updateProfile({
-                    displayName: name
-                });
-                
-                // Save additional user data to Firestore
-                await db.collection('users').doc(currentUser.uid).set({
-                    name: name,
-                    email: email,
-                    mobile: mobile,
-                    role: 'user',
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
-                    progress: {}
-                });
-                
-                showNotification('Registration successful!', 'success');
-                closeModal('register-modal');
-                updateUIForUser();
-            } catch (error) {
-                showNotification(error.message, 'error');
-            }
-        }
-
-        function loginWithFacebook() {
-            showNotification('Redirecting to Facebook login...', 'warning');
-            // In production, implement Facebook OAuth
-            // const provider = new firebase.auth.FacebookAuthProvider();
-            // auth.signInWithPopup(provider);
-        }
-
-        function loginWithGoogle() {
-            showNotification('Redirecting to Google login...', 'warning');
-            // In production, implement Google OAuth
-            // const provider = new firebase.auth.GoogleAuthProvider();
-            // auth.signInWithPopup(provider);
-        }
-
-        function registerWithFacebook() {
-            loginWithFacebook(); // Same as login for now
-        }
-
-        function registerWithGoogle() {
-            loginWithGoogle(); // Same as login for now
-        }
-
-        function showMobileLogin() {
-            closeModal('login-modal');
-            showModal('mobile-otp-modal');
-        }
-
-        function sendOTP() {
-            const mobile = document.getElementById('mobile-number').value;
-            if (!mobile) {
-                showNotification('Please enter mobile number!', 'error');
+        function registerUser(name, email, mobile, password) {
+            // Check if user already exists
+            if (usersDB.find(u => u.email === email)) {
+                showNotification('User already exists!', 'error');
                 return;
             }
-            
-            showNotification('OTP sent to your mobile!', 'success');
-            document.getElementById('otp-input-group').classList.remove('hidden');
-        }
 
-        function autoFillOTP() {
-            // Simulate auto-filling OTP
-            const otpInputs = document.querySelectorAll('.otp-input');
-            const otp = '123456'; // Demo OTP
-            otpInputs.forEach((input, index) => {
-                input.value = otp[index];
-            });
-            showNotification('OTP auto-filled!', 'success');
-        }
-
-        function verifyOTP() {
-            // Simulate OTP verification
-            showNotification('OTP verified successfully!', 'success');
-            closeModal('mobile-otp-modal');
-            simulateMobileLogin();
-        }
-
-        function simulateMobileLogin() {
-            currentUser = {
-                uid: 'mobile-user-' + Date.now(),
-                displayName: 'Mobile User',
-                email: 'mobile@example.com'
+            const newUser = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                mobile: mobile,
+                password: password,
+                role: 'user',
+                createdAt: new Date().toISOString()
             };
-            updateUIForUser();
-            showNotification('Mobile login successful!', 'success');
-        }
 
-        async function saveUserToFirestore() {
-            if (!currentUser) return;
+            usersDB.push(newUser);
+            localStorage.setItem('pakmed_users', JSON.stringify(usersDB));
             
-            await db.collection('users').doc(currentUser.uid).update({
-                lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
-                status: 'online'
-            });
+            currentUser = newUser;
+            localStorage.setItem('current_user', JSON.stringify(newUser));
+            
+            updateUIForUser();
+            closeModal('register-modal');
+            showNotification('Registration successful! Welcome!', 'success');
         }
 
-        function checkAuthState() {
-            auth.onAuthStateChanged(async (user) => {
-                if (user) {
-                    currentUser = user;
-                    updateUIForUser();
-                    
-                    // Check if user is admin
-                    const userDoc = await db.collection('users').doc(user.uid).get();
-                    if (userDoc.exists && userDoc.data().role === 'admin') {
-                        document.getElementById('admin-link').classList.remove('hidden');
-                    }
-                    
-                    // Load user progress
-                    loadUserProgress();
-                } else {
-                    currentUser = null;
-                    updateUIForGuest();
-                }
-            });
+        function guestLogin() {
+            currentUser = {
+                id: 'guest_' + Date.now(),
+                name: 'Guest User',
+                email: 'guest@example.com',
+                role: 'guest',
+                isGuest: true
+            };
+            
+            isGuest = true;
+            localStorage.setItem('current_user', JSON.stringify(currentUser));
+            updateUIForUser();
+            closeModal('login-modal');
+            showNotification('Welcome Guest! You can take quizzes.', 'success');
+        }
+
+        function logout() {
+            currentUser = null;
+            isGuest = false;
+            isAdmin = false;
+            localStorage.removeItem('current_user');
+            updateUIForGuest();
+            showNotification('Logged out successfully!', 'success');
         }
 
         function updateUIForUser() {
             document.querySelectorAll('.auth-buttons .btn').forEach(btn => btn.classList.add('hidden'));
             document.getElementById('user-info').classList.remove('hidden');
             
-            if (currentUser.displayName) {
-                document.getElementById('user-name').textContent = currentUser.displayName;
+            if (currentUser.name) {
+                document.getElementById('user-name').textContent = currentUser.name;
             }
             
-            // Show user-specific content
-            document.querySelectorAll('.user-only').forEach(el => el.classList.remove('hidden'));
+            // Show admin link if admin
+            if (currentUser.role === 'admin' || isAdmin) {
+                document.getElementById('admin-link').classList.remove('hidden');
+            }
         }
 
         function updateUIForGuest() {
             document.querySelectorAll('.auth-buttons .btn').forEach(btn => btn.classList.remove('hidden'));
             document.getElementById('user-info').classList.add('hidden');
-            
-            // Hide user-specific content
-            document.querySelectorAll('.user-only').forEach(el => el.classList.add('hidden'));
             document.getElementById('admin-link').classList.add('hidden');
         }
 
-        function logout() {
-            auth.signOut();
-            currentUser = null;
-            updateUIForGuest();
-            showNotification('Logged out successfully!', 'success');
+        // Simulated Social Logins
+        function simulateFacebookLogin() {
+            showNotification('Facebook login would redirect to Facebook OAuth', 'info');
+            guestLogin(); // Fallback to guest for demo
+        }
+
+        function simulateGoogleLogin() {
+            showNotification('Google login would redirect to Google OAuth', 'info');
+            guestLogin(); // Fallback to guest for demo
+        }
+
+        function simulateFacebookSignup() {
+            showNotification('Facebook signup would redirect to Facebook OAuth', 'info');
+        }
+
+        function simulateGoogleSignup() {
+            showNotification('Google signup would redirect to Google OAuth', 'info');
+        }
+
+        // Admin Functions
+        function adminLogin(adminId, password) {
+            if (adminId === ADMIN_CREDENTIALS.id && password === ADMIN_CREDENTIALS.password) {
+                isAdmin = true;
+                currentUser = {
+                    id: 'admin',
+                    name: 'Administrator',
+                    email: ADMIN_CREDENTIALS.email,
+                    role: 'admin'
+                };
+                
+                localStorage.setItem('current_user', JSON.stringify(currentUser));
+                updateUIForUser();
+                closeModal('admin-login-modal');
+                showPage('admin-dashboard');
+                showNotification('Admin login successful!', 'success');
+            } else {
+                showNotification('Invalid admin credentials!', 'error');
+            }
         }
 
         // Page Navigation
@@ -2194,14 +2357,15 @@
             // Update active nav link
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
+                if (link.getAttribute('onclick')?.includes(pageId)) {
+                    link.classList.add('active');
+                }
             });
             
-            if (pageId === 'tests-page') {
-                loadTests();
-            } else if (pageId === 'progress-report') {
-                loadProgressReport();
-            } else if (pageId === 'admin-dashboard') {
-                loadAdminDashboard();
+            // Special page handling
+            if (pageId === 'admin-dashboard' && !isAdmin) {
+                showAdminLogin();
+                return;
             }
             
             // Close mobile menu
@@ -2226,48 +2390,63 @@
             showModal('register-modal');
         }
 
+        function showAdminLogin() {
+            showModal('admin-login-modal');
+        }
+
         // Tests Functions
         function loadTests() {
             const testsGrid = document.getElementById('tests-grid');
             testsGrid.innerHTML = '';
             
-            Object.keys(testData).forEach(subject => {
-                testData[subject].forEach(test => {
+            // Generate test cards
+            const subjects = ['Physics', 'Chemistry', 'Biology', 'English'];
+            subjects.forEach(subject => {
+                for (let i = 1; i <= 5; i++) {
                     const testCard = document.createElement('div');
                     testCard.className = 'test-card';
+                    testCard.setAttribute('data-subject', subject.toLowerCase());
                     testCard.innerHTML = `
                         <div class="test-header">
                             <span class="test-tag">${subject.toUpperCase()}</span>
                             <span class="test-difficulty">Medium</span>
                         </div>
-                        <h3 class="test-title">${test.title}</h3>
-                        <p class="test-description">${test.description}</p>
+                        <h3 class="test-title">${subject} Test ${i}</h3>
+                        <p class="test-description">Complete ${subject.toLowerCase()} practice test with 10 questions</p>
                         <div class="test-meta">
                             <div class="meta-item">
                                 <i class="fas fa-question-circle"></i>
-                                <span>${test.questions.length} Questions</span>
+                                <span>10 Questions</span>
                             </div>
                             <div class="meta-item">
                                 <i class="fas fa-clock"></i>
-                                <span>20 Minutes</span>
+                                <span>10 Minutes</span>
                             </div>
                         </div>
-                        <button class="btn btn-primary w-100" onclick="startTest('${subject}', ${test.id})">
+                        <button class="btn btn-primary w-100" onclick="startTest('${subject.toLowerCase()}', ${i})">
                             <i class="fas fa-play"></i> Start Test
                         </button>
                     `;
                     testsGrid.appendChild(testCard);
-                });
+                }
             });
         }
 
         function filterTests(subject) {
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            filterBtns.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            const tests = document.querySelectorAll('.test-card');
+            tests.forEach(test => {
+                if (subject === 'all' || test.getAttribute('data-subject') === subject) {
+                    test.style.display = 'block';
+                } else {
+                    test.style.display = 'none';
+                }
+            });
             
-            // In a real app, filter tests by subject
-            loadTests(); // For demo, just reload all tests
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
         }
 
         function showSubjectTests(subject) {
@@ -2275,330 +2454,288 @@
             filterTests(subject);
         }
 
-        function startTest(subject, testId) {
-            if (!currentUser) {
-                showNotification('Please login to take tests!', 'warning');
+        // Quiz Functions
+        function startQuiz(subject) {
+            if (!currentUser && !isGuest) {
+                showNotification('Please login or continue as guest!', 'warning');
                 showLoginModal();
                 return;
             }
             
-            currentTest = testData[subject][testId - 1];
+            // Select random quiz from subject (1-5)
+            const quizIndex = Math.floor(Math.random() * 5);
+            currentQuiz = QUIZ_DATA[subject][quizIndex];
             currentQuestionIndex = 0;
-            userAnswers = [];
-            timeLeft = 1200;
+            userAnswers = new Array(currentQuiz.questions.length).fill(null);
+            quizTimeLeft = 600; // 10 minutes
+            quizStartTime = Date.now();
             
-            showPage('test-taking-page');
-            loadQuestion();
-            startTimer();
+            showPage('quiz-taking-page');
+            loadQuizQuestion();
+            startQuizTimer();
         }
 
-        function loadQuestion() {
-            const question = currentTest.questions[currentQuestionIndex];
-            if (!question) return;
+        function loadQuizQuestion() {
+            const question = currentQuiz.questions[currentQuestionIndex];
             
-            document.getElementById('question-number').textContent = `Question ${currentQuestionIndex + 1}`;
-            document.getElementById('question-text').textContent = question.text;
-            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
-            document.getElementById('total-questions').textContent = currentTest.questions.length;
+            document.getElementById('quiz-question-number').textContent = `Question ${currentQuestionIndex + 1}`;
+            document.getElementById('quiz-question-text').textContent = question.text;
+            document.getElementById('quiz-current-question').textContent = currentQuestionIndex + 1;
+            document.getElementById('quiz-total-questions').textContent = currentQuiz.questions.length;
             
             // Update progress bar
-            const progress = ((currentQuestionIndex + 1) / currentTest.questions.length) * 100;
-            document.getElementById('progress-fill').style.width = `${progress}%`;
+            const progress = ((currentQuestionIndex + 1) / currentQuiz.questions.length) * 100;
+            document.getElementById('quiz-progress-fill').style.width = `${progress}%`;
             
             // Load options
-            const optionsContainer = document.getElementById('options-container');
+            const optionsContainer = document.getElementById('quiz-options-container');
             optionsContainer.innerHTML = '';
             
-            question.options.forEach(option => {
-                const isSelected = userAnswers[currentQuestionIndex] === option.id;
+            question.options.forEach((option, index) => {
+                const isSelected = userAnswers[currentQuestionIndex] === index;
                 const optionDiv = document.createElement('div');
                 optionDiv.className = `option ${isSelected ? 'selected' : ''}`;
                 optionDiv.innerHTML = `
-                    <div class="option-letter">${option.id}</div>
-                    <div class="option-text">${option.text}</div>
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
                 `;
-                optionDiv.onclick = () => selectOption(option.id);
+                optionDiv.onclick = () => selectQuizOption(index);
                 optionsContainer.appendChild(optionDiv);
             });
             
             // Update navigation buttons
-            document.getElementById('submit-btn').classList.add('hidden');
-            if (currentQuestionIndex === currentTest.questions.length - 1) {
-                document.getElementById('submit-btn').classList.remove('hidden');
+            document.getElementById('quiz-submit-btn').classList.add('hidden');
+            if (currentQuestionIndex === currentQuiz.questions.length - 1) {
+                document.getElementById('quiz-submit-btn').classList.remove('hidden');
             }
         }
 
-        function selectOption(optionId) {
-            userAnswers[currentQuestionIndex] = optionId;
-            loadQuestion(); // Reload to show selection
+        function selectQuizOption(optionIndex) {
+            userAnswers[currentQuestionIndex] = optionIndex;
+            loadQuizQuestion(); // Reload to show selection
         }
 
-        function nextQuestion() {
-            if (currentQuestionIndex < currentTest.questions.length - 1) {
+        function nextQuizQuestion() {
+            if (currentQuestionIndex < currentQuiz.questions.length - 1) {
                 currentQuestionIndex++;
-                loadQuestion();
+                loadQuizQuestion();
             }
         }
 
-        function previousQuestion() {
+        function previousQuizQuestion() {
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
-                loadQuestion();
+                loadQuizQuestion();
             }
         }
 
-        function startTimer() {
+        function startQuizTimer() {
             clearInterval(timerInterval);
-            updateTimerDisplay();
+            updateQuizTimerDisplay();
             
             timerInterval = setInterval(() => {
-                timeLeft--;
-                updateTimerDisplay();
+                quizTimeLeft--;
+                updateQuizTimerDisplay();
                 
-                if (timeLeft <= 0) {
+                if (quizTimeLeft <= 0) {
                     clearInterval(timerInterval);
-                    submitTest();
+                    submitQuiz();
                 }
             }, 1000);
         }
 
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            document.getElementById('timer').textContent = 
+        function updateQuizTimerDisplay() {
+            const minutes = Math.floor(quizTimeLeft / 60);
+            const seconds = quizTimeLeft % 60;
+            document.getElementById('quiz-timer').textContent = 
                 `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
 
-        async function submitTest() {
+        function submitQuiz() {
             clearInterval(timerInterval);
             
             // Calculate score
-            let score = 0;
-            currentTest.questions.forEach((question, index) => {
-                const selectedOption = userAnswers[index];
-                const correctOption = question.options.find(opt => opt.correct);
-                if (selectedOption === correctOption?.id) {
-                    score++;
+            let correct = 0;
+            currentQuiz.questions.forEach((question, index) => {
+                if (userAnswers[index] === question.correct) {
+                    correct++;
                 }
             });
             
-            const percentage = (score / currentTest.questions.length) * 100;
+            const totalQuestions = currentQuiz.questions.length;
+            const score = (correct / totalQuestions) * 100;
+            const timeTaken = 600 - quizTimeLeft; // in seconds
             
-            // Save result to Firestore
-            if (currentUser) {
-                await db.collection('testResults').add({
-                    userId: currentUser.uid,
-                    userName: currentUser.displayName,
-                    subject: currentTest.title.split(':')[0].toLowerCase(),
-                    testId: currentTest.id,
-                    score: score,
-                    totalQuestions: currentTest.questions.length,
-                    percentage: percentage,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                    answers: userAnswers
-                });
-                
-                // Update user progress
-                await updateUserProgress(percentage);
-            }
-            
-            showNotification(`Test submitted! Score: ${score}/${currentTest.questions.length} (${percentage.toFixed(1)}%)`, 'success');
-            showPage('tests-page');
-        }
-
-        async function updateUserProgress(score) {
-            if (!currentUser) return;
-            
-            const userRef = db.collection('users').doc(currentUser.uid);
-            const userDoc = await userRef.get();
-            const progress = userDoc.data().progress || {};
-            
-            const subject = currentTest.title.split(':')[0].toLowerCase();
-            if (!progress[subject]) {
-                progress[subject] = [];
-            }
-            
-            progress[subject].push({
+            // Save result
+            const result = {
+                userId: currentUser?.id || 'guest',
+                userName: currentUser?.name || 'Guest',
+                subject: currentQuiz.title,
+                correct: correct,
+                total: totalQuestions,
                 score: score,
-                date: new Date().toISOString(),
-                testId: currentTest.id
-            });
+                timeTaken: timeTaken,
+                timestamp: new Date().toISOString()
+            };
             
-            await userRef.update({ progress: progress });
+            quizResultsDB.push(result);
+            localStorage.setItem('pakmed_quiz_results', JSON.stringify(quizResultsDB));
+            
+            // Show results
+            showQuizResults(correct, totalQuestions, score, timeTaken);
         }
 
-        // Progress Report Functions
-        async function loadProgressReport() {
-            if (!currentUser) {
-                showNotification('Please login to view progress!', 'warning');
+        function showQuizResults(correct, total, score, timeTaken) {
+            const minutes = Math.floor(timeTaken / 60);
+            const seconds = timeTaken % 60;
+            
+            document.getElementById('final-score').textContent = `${score.toFixed(1)}%`;
+            document.getElementById('correct-count').textContent = correct;
+            document.getElementById('wrong-count').textContent = total - correct;
+            document.getElementById('score-percentage').textContent = `${score.toFixed(1)}%`;
+            document.getElementById('time-taken').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Score message
+            let message = '';
+            if (score >= 80) message = 'Excellent! You are ready for MDCAT!';
+            else if (score >= 60) message = 'Good job! Keep practicing!';
+            else if (score >= 40) message = 'Not bad, but needs improvement!';
+            else message = 'Need more practice! Study harder!';
+            
+            document.getElementById('score-message').textContent = message;
+            
+            showPage('result-page');
+        }
+
+        // Resources Functions
+        function loadResources() {
+            const resourcesGrid = document.getElementById('resources-grid');
+            resourcesGrid.innerHTML = '';
+            
+            if (resourcesDB.length === 0) {
+                // Add sample resources
+                resourcesDB = [
+                    {
+                        id: 1,
+                        type: 'pdf',
+                        title: 'Physics Complete Notes',
+                        subject: 'physics',
+                        url: 'https://drive.google.com/file/d/sample-physics-notes',
+                        thumbnail: 'https://cdn-icons-png.flaticon.com/512/337/337946.png'
+                    },
+                    {
+                        id: 2,
+                        type: 'video',
+                        title: 'Chemistry Organic Reactions',
+                        subject: 'chemistry',
+                        url: 'https://youtube.com/watch?v=sample-chemistry',
+                        thumbnail: 'https://cdn-icons-png.flaticon.com/512/1077/1077046.png'
+                    },
+                    {
+                        id: 3,
+                        type: 'pdf',
+                        title: 'Biology Diagrams',
+                        subject: 'biology',
+                        url: 'https://drive.google.com/file/d/sample-biology',
+                        thumbnail: 'https://cdn-icons-png.flaticon.com/512/337/337946.png'
+                    },
+                    {
+                        id: 4,
+                        type: 'link',
+                        title: 'English Grammar Guide',
+                        subject: 'english',
+                        url: 'https://drive.google.com/file/d/sample-english',
+                        thumbnail: 'https://cdn-icons-png.flaticon.com/512/1006/1006771.png'
+                    }
+                ];
+                localStorage.setItem('pakmed_resources', JSON.stringify(resourcesDB));
+            }
+            
+            resourcesDB.forEach(resource => {
+                const resourceCard = document.createElement('div');
+                resourceCard.className = 'resource-card';
+                resourceCard.innerHTML = `
+                    <div class="d-flex align-center gap-2 mb-2">
+                        <i class="fas fa-${resource.type === 'pdf' ? 'file-pdf' : resource.type === 'video' ? 'video' : 'link'} text-danger fa-2x"></i>
+                        <div>
+                            <h4>${resource.title}</h4>
+                            <span class="test-tag">${resource.subject.toUpperCase()}</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-outline w-100" onclick="openResource('${resource.url}')">
+                        <i class="fas fa-download"></i> Open
+                    </button>
+                `;
+                resourcesGrid.appendChild(resourceCard);
+            });
+        }
+
+        function handleResourceUpload() {
+            const file = document.getElementById('resource-file').files[0];
+            if (!file) return;
+            
+            // Simulate upload
+            showNotification(`Uploading ${file.name}...`, 'info');
+            
+            setTimeout(() => {
+                const newResource = {
+                    id: Date.now(),
+                    type: file.type.includes('pdf') ? 'pdf' : file.type.includes('video') ? 'video' : 'file',
+                    title: file.name,
+                    subject: 'general',
+                    url: URL.createObjectURL(file),
+                    uploadedAt: new Date().toISOString()
+                };
+                
+                resourcesDB.push(newResource);
+                localStorage.setItem('pakmed_resources', JSON.stringify(resourcesDB));
+                loadResources();
+                showNotification('Resource uploaded successfully!', 'success');
+            }, 1500);
+        }
+
+        function addResourceFromLink() {
+            const link = document.getElementById('resource-link').value;
+            if (!link) {
+                showNotification('Please enter a link!', 'error');
                 return;
             }
             
-            const userDoc = await db.collection('users').doc(currentUser.uid).get();
-            const progress = userDoc.data().progress || {};
+            const type = link.includes('youtube') ? 'video' : 
+                        link.includes('drive.google.com') ? 'pdf' : 'link';
             
-            // Calculate overall score
-            let totalScore = 0;
-            let totalTests = 0;
+            const newResource = {
+                id: Date.now(),
+                type: type,
+                title: type === 'video' ? 'YouTube Video' : 'Google Drive File',
+                subject: 'general',
+                url: link,
+                uploadedAt: new Date().toISOString()
+            };
             
-            Object.values(progress).forEach(subjectTests => {
-                subjectTests.forEach(test => {
-                    totalScore += test.score;
-                    totalTests++;
-                });
-            });
-            
-            const overallScore = totalTests > 0 ? (totalScore / totalTests).toFixed(1) : 0;
-            document.getElementById('overall-score').textContent = `${overallScore}%`;
-            
-            // Load subject performance
-            const subjectPerformance = document.getElementById('subject-performance');
-            subjectPerformance.innerHTML = '';
-            
-            Object.keys(progress).forEach(subject => {
-                const subjectTests = progress[subject];
-                const subjectScore = subjectTests.reduce((sum, test) => sum + test.score, 0) / subjectTests.length;
-                
-                const subjectDiv = document.createElement('div');
-                subjectDiv.className = 'mt-1';
-                subjectDiv.innerHTML = `
-                    <div class="d-flex justify-between align-center">
-                        <span>${subject.charAt(0).toUpperCase() + subject.slice(1)}</span>
-                        <span class="font-bold">${subjectScore.toFixed(1)}%</span>
-                    </div>
-                    <div class="progress-bar mt-1">
-                        <div class="progress-fill" style="width: ${subjectScore}%"></div>
-                    </div>
-                `;
-                subjectPerformance.appendChild(subjectDiv);
-            });
-            
-            // Load test history
-            const testHistory = document.getElementById('test-history');
-            testHistory.innerHTML = '';
-            
-            const testResults = await db.collection('testResults')
-                .where('userId', '==', currentUser.uid)
-                .orderBy('timestamp', 'desc')
-                .limit(10)
-                .get();
-            
-            testResults.forEach(doc => {
-                const result = doc.data();
-                const testDiv = document.createElement('div');
-                testDiv.className = 'p-2 border-bottom';
-                testDiv.innerHTML = `
-                    <div class="d-flex justify-between">
-                        <span>${result.subject} Test ${result.testId}</span>
-                        <span class="font-bold">${result.percentage.toFixed(1)}%</span>
-                    </div>
-                    <div class="text-sm text-gray">${new Date(result.timestamp?.toDate()).toLocaleDateString()}</div>
-                `;
-                testHistory.appendChild(testDiv);
-            });
+            resourcesDB.push(newResource);
+            localStorage.setItem('pakmed_resources', JSON.stringify(resourcesDB));
+            document.getElementById('resource-link').value = '';
+            loadResources();
+            showNotification('Resource link added successfully!', 'success');
+        }
+
+        function openResource(url) {
+            window.open(url, '_blank');
+        }
+
+        // Test Functions (Similar to Quiz)
+        function startTest(subject, testNumber) {
+            startQuiz(subject); // Use same quiz system for tests
         }
 
         // Admin Functions
-        async function loadAdminDashboard() {
-            if (!currentUser) {
-                showNotification('Please login as admin!', 'warning');
-                return;
-            }
-            
-            // Check if user is admin
-            const userDoc = await db.collection('users').doc(currentUser.uid).get();
-            if (userDoc.data().role !== 'admin') {
-                showNotification('Access denied! Admin only.', 'error');
-                showPage('home-page');
-                return;
-            }
-            
-            // Load user statistics
-            const usersSnapshot = await db.collection('users').get();
-            const testResultsSnapshot = await db.collection('testResults').get();
-            
-            const totalUsers = usersSnapshot.size;
-            const onlineUsers = usersSnapshot.docs.filter(doc => doc.data().status === 'online').length;
-            const totalTests = testResultsSnapshot.size;
-            
-            // Calculate average score
-            let totalScore = 0;
-            testResultsSnapshot.forEach(doc => {
-                totalScore += doc.data().percentage;
-            });
-            const avgScore = totalTests > 0 ? (totalScore / totalTests).toFixed(1) : 0;
-            
-            document.getElementById('total-users').textContent = totalUsers;
-            document.getElementById('online-users').textContent = onlineUsers;
-            document.getElementById('total-tests').textContent = totalTests;
-            document.getElementById('avg-score').textContent = `${avgScore}%`;
-            
-            // Load users table
-            const usersTableBody = document.getElementById('users-table-body');
-            usersTableBody.innerHTML = '';
-            
-            usersSnapshot.forEach(doc => {
-                const user = doc.data();
-                const userTests = testResultsSnapshot.docs.filter(testDoc => testDoc.data().userId === doc.id);
-                const avgUserScore = userTests.length > 0 ? 
-                    (userTests.reduce((sum, test) => sum + test.data().percentage, 0) / userTests.length).toFixed(1) : 0;
-                
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${user.name || 'N/A'}</td>
-                    <td>${user.email || 'N/A'}</td>
-                    <td>${user.mobile || 'N/A'}</td>
-                    <td>
-                        <span class="user-status ${user.status === 'online' ? 'online' : 'offline'}">
-                            ${user.status || 'offline'}
-                        </span>
-                    </td>
-                    <td>${userTests.length}</td>
-                    <td>${avgUserScore}%</td>
-                `;
-                usersTableBody.appendChild(row);
-            });
+        function manageUsers() {
+            showNotification(`Total Users: ${usersDB.length}`, 'info');
         }
 
-        // Books & Notes Functions
-        async function showBooks() {
-            showModal('books-modal');
-            
-            const booksContent = document.getElementById('books-content');
-            booksContent.innerHTML = `
-                <div class="text-center p-3">
-                    <i class="fas fa-book fa-3x text-secondary mb-2"></i>
-                    <h3>Books & Notes Library</h3>
-                    <p class="text-gray">Upload and manage your study materials</p>
-                    
-                    <div class="mt-3">
-                        <button class="btn btn-primary" onclick="uploadBook()">
-                            <i class="fas fa-upload"></i> Upload New Book
-                        </button>
-                    </div>
-                    
-                    <div class="mt-3">
-                        <div class="book-card p-3 border rounded">
-                            <div class="d-flex align-center gap-2">
-                                <i class="fas fa-file-pdf fa-2x text-danger"></i>
-                                <div>
-                                    <h4>MDCAT Chemistry Guide</h4>
-                                    <p class="text-sm text-gray">Complete chemistry syllabus with solved examples</p>
-                                </div>
-                            </div>
-                            <div class="mt-2">
-                                <button class="btn btn-sm btn-outline">
-                                    <i class="fas fa-download"></i> Download
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function uploadBook() {
-            showNotification('Book upload feature coming soon!', 'warning');
+        function manageContent() {
+            showNotification(`Total Resources: ${resourcesDB.length}`, 'info');
         }
 
         // Utility Functions
@@ -2607,39 +2744,17 @@
             const notificationText = document.getElementById('notification-text');
             
             notificationText.textContent = message;
-            notification.className = `notification ${type}`;
-            notification.classList.add('show');
+            notification.className = `notification ${type} show`;
             
             setTimeout(() => {
                 notification.classList.remove('show');
             }, 3000);
         }
 
-        // Scroll effect for navbar
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Prevent default form submission
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-            });
-        });
-
-        // Close modals on outside click
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.classList.remove('active');
-                }
-            });
-        });
+        function showBooks() {
+            showNotification('Books library will open in new tab', 'info');
+            showPage('resources-page');
+        }
     </script>
 </body>
 </html>
