@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAK-MED STUDY CORNER MDCAT - Premium Platform</title>
+    <title>Medical Prep Pro - Premium Platform</title>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,128 +12,11 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Typed.js -->
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <!-- Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        /* ========== ADVANCED ANIMATIONS ========== */
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            33% { transform: translateY(-20px) rotate(120deg); }
-            66% { transform: translateY(10px) rotate(240deg); }
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { 
-                transform: scale(1);
-                box-shadow: 0 0 20px rgba(0, 188, 212, 0.5);
-            }
-            50% { 
-                transform: scale(1.05);
-                box-shadow: 0 0 40px rgba(0, 188, 212, 0.8);
-            }
-        }
-
-        @keyframes medicalFloat {
-            0% { transform: translateY(0) translateX(0); }
-            25% { transform: translateY(-20px) translateX(10px); }
-            50% { transform: translateY(-40px) translateX(-10px); }
-            75% { transform: translateY(-20px) translateX(-5px); }
-            100% { transform: translateY(0) translateX(0); }
-        }
-
-        @keyframes dnaSpin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        @keyframes stethoscopeMove {
-            0%, 100% { transform: translateX(0) rotate(0deg); }
-            50% { transform: translateX(20px) rotate(10deg); }
-        }
-
-        @keyframes bookFlip {
-            0% { transform: perspective(1000px) rotateY(0deg); }
-            100% { transform: perspective(1000px) rotateY(360deg); }
-        }
-
-        @keyframes particleRain {
-            0% { transform: translateY(-100px); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
-
-        /* Medical Elements Animations */
-        .dna-animation {
-            animation: dnaSpin 20s linear infinite;
-        }
-
-        .heartbeat-animation {
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-
-        .stethoscope-animation {
-            animation: stethoscopeMove 3s ease-in-out infinite;
-        }
-
-        .book-flip {
-            animation: bookFlip 8s linear infinite;
-        }
-
-        /* Particle System */
-        .particles-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            animation: particleRain linear infinite;
-        }
-
-        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 15s; }
-        .particle:nth-child(2) { left: 20%; animation-delay: 1s; animation-duration: 18s; }
-        .particle:nth-child(3) { left: 30%; animation-delay: 2s; animation-duration: 12s; }
-        .particle:nth-child(4) { left: 40%; animation-delay: 3s; animation-duration: 20s; }
-        .particle:nth-child(5) { left: 50%; animation-delay: 4s; animation-duration: 16s; }
-        .particle:nth-child(6) { left: 60%; animation-delay: 5s; animation-duration: 14s; }
-        .particle:nth-child(7) { left: 70%; animation-delay: 6s; animation-duration: 19s; }
-        .particle:nth-child(8) { left: 80%; animation-delay: 7s; animation-duration: 13s; }
-        .particle:nth-child(9) { left: 90%; animation-delay: 8s; animation-duration: 17s; }
-        .particle:nth-child(10) { left: 95%; animation-delay: 9s; animation-duration: 11s; }
-
-        /* Medical Icons */
-        .medical-icon {
-            position: absolute;
-            font-size: 2rem;
-            color: rgba(255, 255, 255, 0.3);
-            z-index: 1;
-        }
-
-        /* Typing Animation */
-        .typing-text {
-            border-right: 3px solid var(--secondary);
-            animation: blink 0.7s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { border-color: transparent; }
-            50% { border-color: var(--secondary); }
-        }
-
-        /* ========== VARIABLES & RESET ========== */
+        /* ========== VARIABLES ========== */
         :root {
             --primary: #1a237e;
             --secondary: #00bcd4;
@@ -155,11 +38,10 @@
             --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --gradient-secondary: linear-gradient(135deg, #00bcd4 0%, #00838f 100%);
             --gradient-accent: linear-gradient(135deg, #ff4081 0%, #c2185b 100%);
-            --gradient-success: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
-            --gradient-dark: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
             --gradient-medical: linear-gradient(135deg, #1a237e 0%, #00bcd4 100%);
         }
 
+        /* ========== BASE STYLES ========== */
         * {
             margin: 0;
             padding: 0;
@@ -179,33 +61,9 @@
             overflow-x: hidden;
         }
 
-        /* ========== CUSTOM SCROLLBAR ========== */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--light);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary);
-        }
-
-        /* ========== CONTAINER ========== */
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .container-fluid {
-            width: 100%;
             padding: 0 20px;
         }
 
@@ -274,7 +132,6 @@
             color: white;
             font-size: 24px;
             box-shadow: 0 8px 20px rgba(26, 35, 126, 0.3);
-            animation: pulse-glow 2s infinite;
         }
 
         .logo-text {
@@ -303,10 +160,6 @@
             list-style: none;
         }
 
-        .nav-item {
-            position: relative;
-        }
-
         .nav-link {
             color: var(--text);
             text-decoration: none;
@@ -318,7 +171,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            position: relative;
         }
 
         .nav-link:hover,
@@ -326,24 +178,6 @@
             color: var(--secondary);
             background: rgba(0, 188, 212, 0.1);
             transform: translateY(-2px);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 3px;
-            background: var(--secondary);
-            border-radius: 2px;
-            transition: var(--transition);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 80%;
         }
 
         .auth-buttons {
@@ -365,9 +199,6 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            position: relative;
-            overflow: hidden;
-            font-family: 'Poppins', sans-serif;
         }
 
         .btn:hover {
@@ -414,147 +245,7 @@
             font-size: 18px;
         }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: var(--primary);
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 8px;
-            transition: var(--transition);
-        }
-
-        .mobile-menu-btn:hover {
-            background: rgba(0, 188, 212, 0.1);
-        }
-
-        /* ========== CHAT BOT ========== */
-        .chat-bot-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-medical);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(26, 35, 126, 0.3);
-            z-index: 100;
-            transition: var(--transition);
-            animation: pulse-glow 2s infinite;
-        }
-
-        .chat-bot-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .chat-bot-container {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 350px;
-            height: 500px;
-            background: white;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
-            z-index: 100;
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .chat-bot-container.active {
-            display: flex;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .chat-header {
-            background: var(--gradient-medical);
-            color: white;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 1rem;
-            overflow-y: auto;
-            background: #f8f9fa;
-        }
-
-        .message {
-            margin-bottom: 1rem;
-            padding: 10px 15px;
-            border-radius: 18px;
-            max-width: 80%;
-            word-wrap: break-word;
-        }
-
-        .message.user {
-            background: var(--secondary);
-            color: white;
-            margin-left: auto;
-            border-bottom-right-radius: 5px;
-        }
-
-        .message.bot {
-            background: white;
-            color: var(--text);
-            margin-right: auto;
-            border-bottom-left-radius: 5px;
-            box-shadow: var(--shadow);
-        }
-
-        .chat-input {
-            padding: 1rem;
-            border-top: 1px solid var(--border);
-            background: white;
-        }
-
-        .chat-input form {
-            display: flex;
-            gap: 10px;
-        }
-
-        .chat-input input {
-            flex: 1;
-            padding: 10px 15px;
-            border: 2px solid var(--border);
-            border-radius: 50px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* ========== ADMIN LOGIN ========== */
-        .admin-login-modal .modal-content {
-            max-width: 400px;
-        }
-
-        .admin-badge {
-            display: inline-block;
-            background: var(--gradient-accent);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        /* ========== MODAL ========== */
+        /* ========== MODAL STYLES ========== */
         .modal {
             display: none;
             position: fixed;
@@ -582,18 +273,6 @@
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            animation: modalSlideIn 0.3s ease;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .modal-header {
@@ -653,324 +332,129 @@
             box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
         }
 
-        /* ========== HERO SECTION ========== */
-        #home-page {
-            padding-top: 80px;
-        }
-
-        .hero {
-            padding: 8rem 0;
-            background: linear-gradient(135deg, rgba(26, 35, 126, 0.9), rgba(0, 188, 212, 0.8)),
-                        url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .hero-title {
-            font-size: 4.5rem;
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-            font-family: 'Montserrat', sans-serif;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(135deg, #ffffff 0%, #e0f7fa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-subtitle {
-            font-size: 1.4rem;
-            margin-bottom: 3rem;
-            opacity: 0.95;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-buttons {
+        /* ========== FREE TRIAL MODAL ========== */
+        .trial-options {
             display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 4rem;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-            padding: 3rem;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: var(--radius);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .stat-item {
-            text-align: center;
+        .trial-option {
             padding: 1.5rem;
+            border: 2px solid var(--border);
             border-radius: var(--radius);
-            background: rgba(255, 255, 255, 0.1);
+            text-align: center;
+            cursor: pointer;
             transition: var(--transition);
         }
 
-        .stat-item:hover {
+        .trial-option:hover {
+            border-color: var(--secondary);
+            background: rgba(0, 188, 212, 0.05);
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.2);
         }
 
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 800;
+        .trial-option h4 {
+            color: var(--primary);
             margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #00bcd4 0%, #ff4081 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
-        .stat-label {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* Medical Animation Elements in Hero */
-        .medical-animation-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
-
-        .floating-icon {
-            position: absolute;
-            font-size: 3rem;
-            color: rgba(255, 255, 255, 0.2);
-            animation: medicalFloat 10s ease-in-out infinite;
-        }
-
-        .floating-icon:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
-        .floating-icon:nth-child(2) { top: 60%; left: 15%; animation-delay: 2s; }
-        .floating-icon:nth-child(3) { top: 30%; right: 10%; animation-delay: 4s; }
-        .floating-icon:nth-child(4) { bottom: 20%; right: 15%; animation-delay: 6s; }
-        .floating-icon:nth-child(5) { top: 40%; left: 20%; animation-delay: 8s; }
-
-        /* ========== QUIZ SECTION ========== */
-        #quiz-page {
+        /* ========== USER DASHBOARD ========== */
+        .user-dashboard {
             padding-top: 100px;
             min-height: 100vh;
         }
 
-        .quiz-container {
-            padding: 3rem 0;
-        }
-
-        .quiz-categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .quiz-category {
+        .dashboard-header {
             background: white;
             border-radius: var(--radius);
-            padding: 2.5rem 2rem;
-            text-align: center;
+            padding: 2rem;
+            margin-bottom: 2rem;
             box-shadow: var(--shadow);
-            transition: var(--transition);
-            cursor: pointer;
-            border: 3px solid transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .quiz-category:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--secondary);
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
         }
 
-        .quiz-category-icon {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 1.5rem;
+        .user-avatar {
+            width: 80px;
+            height: 80px;
             background: var(--gradient-medical);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
             color: white;
-            box-shadow: 0 15px 35px rgba(26, 35, 126, 0.3);
-            animation: pulse-glow 2s infinite;
+            font-size: 2rem;
         }
 
-        .quiz-tests-grid {
+        .trial-badge {
+            display: inline-block;
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
         }
 
-        .quiz-test-card {
+        .dashboard-card {
             background: white;
             border-radius: var(--radius);
             padding: 2rem;
             box-shadow: var(--shadow);
-            transition: var(--transition);
         }
 
-        .quiz-test-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
+        .dashboard-card h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
         }
 
-        /* ========== QUIZ TAKING ========== */
-        .quiz-taking-container {
-            padding: 100px 0;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        .test-results {
+            max-height: 400px;
+            overflow-y: auto;
         }
 
-        .quiz-header-bar {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
+        .test-result-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .quiz-progress {
-            flex: 1;
-            margin: 0 2rem;
-        }
-
-        .progress-bar {
-            height: 10px;
-            background: var(--border);
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient-secondary);
-            border-radius: 5px;
-            transition: width 0.3s ease;
-        }
-
-        .quiz-question-container {
-            background: white;
-            border-radius: var(--radius);
-            padding: 3rem;
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-        }
-
-        .question-number {
-            font-size: 0.9rem;
-            color: var(--secondary);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .question-text {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .option {
-            padding: 1.5rem;
-            border: 2px solid var(--border);
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .option:hover {
-            border-color: var(--secondary);
-            background: rgba(0, 188, 212, 0.05);
-            transform: translateX(10px);
-        }
-
-        .option.selected {
-            border-color: var(--secondary);
-            background: rgba(0, 188, 212, 0.1);
-        }
-
-        .option-letter {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            transition: var(--transition);
-        }
-
-        .option.selected .option-letter {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .quiz-navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 2rem;
         }
 
         /* ========== ADMIN DASHBOARD ========== */
         .admin-dashboard {
             padding-top: 100px;
             min-height: 100vh;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
-        }
-
-        .admin-container {
-            padding: 3rem 0;
         }
 
         .admin-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .admin-stat-card {
             background: white;
             border-radius: var(--radius);
-            padding: 2rem;
+            padding: 1.5rem;
             box-shadow: var(--shadow);
             text-align: center;
             transition: var(--transition);
@@ -993,43 +477,51 @@
             font-size: 1rem;
         }
 
-        .admin-tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .admin-tab {
-            padding: 12px 24px;
+        .users-table {
+            width: 100%;
             background: white;
-            border: 2px solid var(--border);
-            border-radius: 50px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .users-table th,
+        .users-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .users-table th {
+            background: var(--light);
             font-weight: 600;
-            color: var(--text);
-            cursor: pointer;
-            transition: var(--transition);
+            color: var(--primary);
         }
 
-        .admin-tab.active,
-        .admin-tab:hover {
-            background: var(--secondary);
-            border-color: var(--secondary);
-            color: white;
+        .user-status {
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
-        .admin-content {
+        .user-status.online {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--success);
+        }
+
+        .user-status.offline {
+            background: rgba(244, 67, 54, 0.1);
+            color: var(--danger);
+        }
+
+        /* ========== FILE UPLOAD SYSTEM ========== */
+        .upload-container {
             background: white;
             border-radius: var(--radius);
             padding: 2rem;
             box-shadow: var(--shadow);
-            min-height: 500px;
-        }
-
-        /* Upload Form */
-        .upload-form {
-            max-width: 600px;
-            margin: 0 auto;
+            margin-top: 2rem;
         }
 
         .upload-area {
@@ -1037,7 +529,6 @@
             border-radius: var(--radius);
             padding: 3rem;
             text-align: center;
-            margin-bottom: 2rem;
             cursor: pointer;
             transition: var(--transition);
         }
@@ -1047,75 +538,79 @@
             background: rgba(0, 188, 212, 0.05);
         }
 
-        .upload-preview {
-            margin-top: 1rem;
-            max-height: 200px;
-            overflow: hidden;
-            border-radius: var(--radius-sm);
+        .file-list {
+            margin-top: 2rem;
         }
 
-        .upload-preview img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: var(--radius-sm);
-        }
-
-        /* Messages Table */
-        .messages-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .messages-table th,
-        .messages-table td {
+        .file-item {
             padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .messages-table th {
-            background: var(--light);
-            font-weight: 600;
-            color: var(--primary);
+        .file-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-right: 1rem;
+        }
+
+        .copy-link {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .copy-link:hover {
+            background: var(--primary);
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.9), rgba(0, 188, 212, 0.8));
+            color: white;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         /* ========== RESPONSIVE ========== */
         @media (max-width: 992px) {
             .hero-title {
-                font-size: 3.5rem;
+                font-size: 3rem;
             }
             
             .nav-menu {
                 display: none;
-            }
-            
-            .nav-menu.active {
-                display: flex;
-                position: fixed;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background: white;
-                flex-direction: column;
-                padding: 2rem;
-                box-shadow: var(--shadow);
-                z-index: 999;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .auth-buttons {
-                display: none;
-            }
-            
-            .auth-buttons.active {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                margin-top: 1rem;
             }
         }
 
@@ -1124,145 +619,82 @@
                 font-size: 2.5rem;
             }
             
-            .hero-subtitle {
-                font-size: 1.2rem;
+            .dashboard-header {
+                flex-direction: column;
+                gap: 1rem;
             }
             
-            .chat-bot-container {
-                width: 90%;
-                right: 5%;
-            }
-            
-            .quiz-categories {
-                grid-template-columns: 1fr;
+            .user-info {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Chat Bot -->
-    <div class="chat-bot-btn" onclick="toggleChatBot()">
-        <i class="fas fa-comment-medical"></i>
-    </div>
-
-    <div class="chat-bot-container" id="chat-bot">
-        <div class="chat-header">
-            <h4>MDCAT Study Assistant</h4>
-            <button class="close-modal" onclick="toggleChatBot()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="chat-messages" id="chat-messages">
-            <div class="message bot">
-                👋 Hello! I'm your MDCAT study assistant. How can I help you today?
-            </div>
-        </div>
-        <div class="chat-input">
-            <form id="chat-form">
-                <input type="text" id="chat-input" placeholder="Type your question..." autocomplete="off">
-                <button type="submit" class="btn btn-primary btn-sm">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </form>
-        </div>
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#home-page" class="logo">
+            <a href="#home" class="logo">
                 <div class="logo-icon">
                     <i class="fas fa-stethoscope"></i>
                 </div>
                 <div class="logo-text">
-                    <h1>PAK-MED STUDY CORNER</h1>
-                    <span>MDCAT PREMIUM PLATFORM</span>
+                    <h1>Medical Prep Pro</h1>
+                    <span>Premium Preparation Platform</span>
                 </div>
             </a>
 
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-
             <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#home-page" class="nav-link active" onclick="showPage('home-page')">
-                        <i class="fas fa-home"></i> Home
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#quiz-page" class="nav-link" onclick="showPage('quiz-page')">
-                        <i class="fas fa-brain"></i> Quiz Tests
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#resources-page" class="nav-link" onclick="showPage('resources-page')">
-                        <i class="fas fa-book"></i> Study Resources
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#admin-dashboard" class="nav-link hidden" id="admin-nav-link" onclick="showPage('admin-dashboard')">
-                        <i class="fas fa-cog"></i> Admin
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact-page" class="nav-link" onclick="showPage('contact-page')">
-                        <i class="fas fa-headset"></i> Support
-                    </a>
-                </li>
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#tests" class="nav-link">Practice Tests</a></li>
+                <li><a href="#resources" class="nav-link">Resources</a></li>
             </ul>
 
-            <div class="auth-buttons">
+            <div class="auth-buttons" id="auth-buttons">
+                <button class="btn btn-primary btn-sm" onclick="showFreeTrialModal()">
+                    <i class="fas fa-rocket"></i> Free Trial
+                </button>
                 <button class="btn btn-outline btn-sm" onclick="showLoginModal()">
                     <i class="fas fa-sign-in-alt"></i> Login
                 </button>
-                <button class="btn btn-primary btn-sm" onclick="showRegisterModal()">
-                    <i class="fas fa-user-plus"></i> Register
+            </div>
+
+            <div class="user-menu hidden" id="user-menu">
+                <span id="user-name"></span>
+                <button class="btn btn-sm" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
                 </button>
-                <button class="btn btn-secondary btn-sm" onclick="guestLogin()">
-                    <i class="fas fa-user-friends"></i> Guest
-                </button>
-                <div class="user-info hidden" id="user-info">
-                    <span id="user-name"></span>
-                    <button class="btn btn-sm" onclick="logout()">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </button>
-                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Admin Login Modal -->
-    <div class="modal" id="admin-login-modal">
-        <div class="modal-content admin-login-modal">
+    <!-- Free Trial Modal -->
+    <div class="modal" id="free-trial-modal">
+        <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Admin Login</h3>
-                <button class="close-modal" onclick="closeModal('admin-login-modal')">
+                <h3 class="modal-title">Start Your Free Trial</h3>
+                <button class="close-modal" onclick="closeModal('free-trial-modal')">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div class="text-center mb-3">
-                <span class="admin-badge">Administrator Access</span>
-            </div>
-            <form id="admin-login-form">
-                <div class="form-group">
-                    <label class="form-label">Admin Email</label>
-                    <input type="email" class="form-control" id="admin-email" 
-                           placeholder="doctormotivation29@gmail.com" required>
+            
+            <div class="trial-options">
+                <div class="trial-option" onclick="showLoginModal()">
+                    <h4><i class="fas fa-sign-in-alt"></i> Existing User Login</h4>
+                    <p>Already have an account? Login to continue your trial</p>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Admin Password</label>
-                    <input type="password" class="form-control" id="admin-password" 
-                           placeholder="Admin@123" required>
+                
+                <div class="trial-option" onclick="showRegisterModal()">
+                    <h4><i class="fas fa-user-plus"></i> New User Signup</h4>
+                    <p>Create new account and start free trial</p>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">
-                    <i class="fas fa-lock"></i> Login as Admin
-                </button>
-            </form>
-            <div class="mt-3 text-center">
-                <p class="text-sm text-gray">Default Admin Credentials:</p>
-                <p><strong>Email:</strong> doctormotivation29@gmail.com</p>
-                <p><strong>Password:</strong> Admin@123</p>
+                
+                <div class="trial-option" onclick="guestTrial()">
+                    <h4><i class="fas fa-user-friends"></i> Guest Trial</h4>
+                    <p>Try platform without registration (limited features)</p>
+                </div>
             </div>
         </div>
     </div>
@@ -1276,75 +708,55 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div class="text-center mb-3">
-                <button class="btn btn-outline btn-sm" onclick="showAdminLogin()">
-                    <i class="fas fa-user-shield"></i> Admin Login
-                </button>
-            </div>
+            
             <form id="login-form">
                 <div class="form-group">
-                    <label class="form-label">Email or Mobile Number</label>
+                    <label class="form-label">Email or Username</label>
                     <input type="text" class="form-control" id="login-identifier" required>
                 </div>
+                
                 <div class="form-group">
                     <label class="form-label">Password</label>
                     <input type="password" class="form-control" id="login-password" required>
                 </div>
+                
                 <button type="submit" class="btn btn-primary w-100">
                     <i class="fas fa-sign-in-alt"></i> Login
                 </button>
             </form>
-
-            <div class="social-login mt-3">
-                <button class="btn btn-secondary w-100" onclick="showMobileLogin()">
-                    <i class="fas fa-mobile-alt"></i> Login with Mobile OTP
+            
+            <div class="text-center mt-3">
+                <button class="btn btn-outline btn-sm" onclick="showAdminLogin()">
+                    <i class="fas fa-user-shield"></i> Admin Login
                 </button>
-            </div>
-
-            <div class="mt-3 text-center">
-                <p>Don't have an account? <a href="#" onclick="showRegisterModal()">Register here</a></p>
             </div>
         </div>
     </div>
 
-    <!-- Mobile OTP Modal -->
-    <div class="modal" id="mobile-otp-modal">
+    <!-- Admin Login Modal -->
+    <div class="modal" id="admin-login-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Mobile OTP Login</h3>
-                <button class="close-modal" onclick="closeModal('mobile-otp-modal')">
+                <h3 class="modal-title">Admin Login</h3>
+                <button class="close-modal" onclick="closeModal('admin-login-modal')">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <form id="mobile-otp-form">
+            
+            <form id="admin-login-form">
                 <div class="form-group">
-                    <label class="form-label">Mobile Number</label>
-                    <input type="tel" class="form-control" id="mobile-number" 
-                           placeholder="+92 300 1234567" required>
+                    <label class="form-label">Admin Email</label>
+                    <input type="email" class="form-control" id="admin-email" required>
                 </div>
-                <button type="button" class="btn btn-secondary w-100" onclick="sendOTP()">
-                    <i class="fas fa-paper-plane"></i> Send OTP
-                </button>
                 
-                <div class="form-group mt-3 hidden" id="otp-input-group">
-                    <label class="form-label">Enter OTP</label>
-                    <div class="otp-container d-flex gap-2">
-                        <input type="text" class="form-control text-center otp-input" maxlength="1" data-index="0">
-                        <input type="text" class="form-control text-center otp-input" maxlength="1" data-index="1">
-                        <input type="text" class="form-control text-center otp-input" maxlength="1" data-index="2">
-                        <input type="text" class="form-control text-center otp-input" maxlength="1" data-index="3">
-                        <input type="text" class="form-control text-center otp-input" maxlength="1" data-index="4">
-                        <input type="text" class="form-control text-center otp-input" maxlength="1" data-index="5">
-                    </div>
-                    <div class="mt-2 text-center">
-                        <button type="button" class="btn btn-sm btn-outline" onclick="autoFillOTP()">
-                            <i class="fas fa-bolt"></i> Auto-fill OTP
-                        </button>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100 mt-2">
-                        <i class="fas fa-check"></i> Verify OTP
-                    </button>
+                <div class="form-group">
+                    <label class="form-label">Admin Password</label>
+                    <input type="password" class="form-control" id="admin-password" required>
                 </div>
+                
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-lock"></i> Login as Admin
+                </button>
             </form>
         </div>
     </div>
@@ -1358,1573 +770,641 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
+            
             <form id="register-form">
                 <div class="form-group">
                     <label class="form-label">Full Name</label>
                     <input type="text" class="form-control" id="register-name" required>
                 </div>
+                
                 <div class="form-group">
                     <label class="form-label">Email</label>
                     <input type="email" class="form-control" id="register-email" required>
                 </div>
+                
                 <div class="form-group">
-                    <label class="form-label">Mobile Number</label>
-                    <input type="tel" class="form-control" id="register-mobile" required>
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" id="register-username" required>
                 </div>
+                
                 <div class="form-group">
                     <label class="form-label">Password</label>
                     <input type="password" class="form-control" id="register-password" required>
                 </div>
+                
                 <div class="form-group">
                     <label class="form-label">Confirm Password</label>
                     <input type="password" class="form-control" id="register-confirm-password" required>
                 </div>
+                
                 <button type="submit" class="btn btn-primary w-100">
-                    <i class="fas fa-user-plus"></i> Create Account
+                    <i class="fas fa-user-plus"></i> Create Account & Start Free Trial
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- Home Page -->
-    <section id="home-page" class="page active">
-        <div class="hero">
-            <div class="medical-animation-container">
-                <div class="floating-icon heartbeat-animation">
-                    <i class="fas fa-heartbeat"></i>
-                </div>
-                <div class="floating-icon dna-animation">
-                    <i class="fas fa-dna"></i>
-                </div>
-                <div class="floating-icon stethoscope-animation">
-                    <i class="fas fa-stethoscope"></i>
-                </div>
-                <div class="floating-icon book-flip">
-                    <i class="fas fa-book-medical"></i>
-                </div>
-                <div class="floating-icon">
-                    <i class="fas fa-pills"></i>
-                </div>
-            </div>
-            <div class="particles-container">
-                <!-- Particles added via JavaScript -->
-            </div>
-            <div class="hero-content">
-                <h1 class="hero-title" id="typed-text"></h1>
-                <p class="hero-subtitle">Comprehensive study materials, interactive quizzes, and personalized progress tracking for Pakistan's top medical aspirants. Join thousands of successful MDCAT candidates!</p>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <h1 class="hero-title">Ace Your Medical Exams with Confidence</h1>
+                <p class="hero-subtitle">Comprehensive preparation platform with personalized learning, practice tests, and expert resources for medical aspirants.</p>
                 
                 <div class="hero-buttons">
-                    <button class="btn btn-primary btn-lg pulse-glow" onclick="showPage('quiz-page')">
-                        <i class="fas fa-play-circle"></i> Start Quiz Now
+                    <button class="btn btn-primary btn-lg" onclick="showFreeTrialModal()">
+                        <i class="fas fa-rocket"></i> Start Free Trial
                     </button>
-                    <button class="btn btn-secondary btn-lg" onclick="showRegisterModal()">
-                        <i class="fas fa-rocket"></i> Join Free Trial
+                    <button class="btn btn-secondary btn-lg" onclick="showLoginModal()">
+                        <i class="fas fa-sign-in-alt"></i> User Login
+                    </button>
+                    <button class="btn btn-accent btn-lg" onclick="showAdminLogin()">
+                        <i class="fas fa-user-shield"></i> Admin Login
                     </button>
                 </div>
-
-                <div class="stats">
-                    <div class="stat-item">
-                        <div class="stat-number">5000+</div>
-                        <div class="stat-label">Practice Questions</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">95%</div>
-                        <div class="stat-label">Success Rate</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">100+</div>
-                        <div class="stat-label">Video Lectures</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Expert Support</div>
-                    </div>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Quiz Page -->
-    <section id="quiz-page" class="page hidden">
-        <div class="quiz-container">
+        <!-- User Dashboard (Hidden by default) -->
+        <section id="user-dashboard" class="user-dashboard hidden">
             <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">MDCAT Quiz Tests</h2>
-                    <p class="section-subtitle">Test your knowledge with our comprehensive quiz series. Each test has 10 questions with 10 minutes time limit.</p>
-                </div>
-
-                <div class="quiz-categories">
-                    <div class="quiz-category" onclick="showQuizTests('physics')">
-                        <div class="quiz-category-icon">
-                            <i class="fas fa-atom"></i>
+                <div class="dashboard-header">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <i class="fas fa-user-md"></i>
                         </div>
-                        <h3>Physics</h3>
-                        <p>5 Tests × 10 Questions Each</p>
-                        <p><strong>Time:</strong> 10 minutes per test</p>
+                        <div>
+                            <h2 id="dashboard-user-name">User Name</h2>
+                            <div class="trial-badge" id="trial-status">Free Trial - 7 Days Remaining</div>
+                        </div>
                     </div>
-
-                    <div class="quiz-category" onclick="showQuizTests('chemistry')">
-                        <div class="quiz-category-icon">
-                            <i class="fas fa-flask"></i>
-                        </div>
-                        <h3>Chemistry</h3>
-                        <p>5 Tests × 10 Questions Each</p>
-                        <p><strong>Time:</strong> 10 minutes per test</p>
-                    </div>
-
-                    <div class="quiz-category" onclick="showQuizTests('biology')">
-                        <div class="quiz-category-icon">
-                            <i class="fas fa-dna"></i>
-                        </div>
-                        <h3>Biology</h3>
-                        <p>5 Tests × 10 Questions Each</p>
-                        <p><strong>Time:</strong> 10 minutes per test</p>
-                    </div>
-
-                    <div class="quiz-category" onclick="showQuizTests('english')">
-                        <div class="quiz-category-icon">
-                            <i class="fas fa-language"></i>
-                        </div>
-                        <h3>English</h3>
-                        <p>5 Tests × 10 Questions Each</p>
-                        <p><strong>Time:</strong> 10 minutes per test</p>
+                    <div class="user-actions">
+                        <button class="btn btn-outline" onclick="takeTest()">
+                            <i class="fas fa-play"></i> Take Test
+                        </button>
                     </div>
                 </div>
 
-                <div class="quiz-tests-grid" id="quiz-tests-grid">
-                    <!-- Quiz tests will be loaded here -->
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>My Profile</h3>
+                        <div class="profile-info">
+                            <p><strong>Email:</strong> <span id="profile-email">user@example.com</span></p>
+                            <p><strong>Member Since:</strong> <span id="member-since">2024-01-01</span></p>
+                            <p><strong>Trial Ends:</strong> <span id="trial-ends">2024-01-08</span></p>
+                            <p><strong>Tests Taken:</strong> <span id="tests-taken">0</span></p>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>Recent Test Results</h3>
+                        <div class="test-results" id="test-results">
+                            <!-- Test results loaded dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>Study Resources</h3>
+                        <div class="resources-list" id="user-resources">
+                            <!-- Resources loaded dynamically -->
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Quiz Taking Page -->
-    <section id="quiz-taking-page" class="page hidden">
-        <div class="quiz-taking-container">
+        <!-- Admin Dashboard (Hidden by default) -->
+        <section id="admin-dashboard" class="admin-dashboard hidden">
             <div class="container">
-                <div class="quiz-header-bar">
-                    <div class="test-timer">
-                        <i class="fas fa-clock"></i>
-                        <span id="quiz-timer">10:00</span>
-                    </div>
-                    <div class="quiz-progress">
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="quiz-progress-fill"></div>
-                        </div>
-                    </div>
-                    <div class="question-counter">
-                        <span id="current-question">1</span>/<span id="total-questions">10</span>
-                    </div>
-                </div>
-
-                <div class="quiz-question-container">
-                    <div class="question-number" id="question-number">Question 1</div>
-                    <div class="question-text" id="question-text"></div>
-                    
-                    <div class="options-container" id="options-container">
-                        <!-- Options loaded dynamically -->
-                    </div>
-                    
-                    <div class="quiz-navigation">
-                        <button class="btn btn-outline" onclick="previousQuestion()">
-                            <i class="fas fa-arrow-left"></i> Previous
-                        </button>
-                        <button class="btn btn-secondary" onclick="nextQuestion()">
-                            Next <i class="fas fa-arrow-right"></i>
-                        </button>
-                        <button class="btn btn-primary hidden" id="submit-btn" onclick="submitQuiz()">
-                            <i class="fas fa-paper-plane"></i> Submit Quiz
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Quiz Result Page -->
-    <section id="quiz-result-page" class="page hidden">
-        <div class="quiz-taking-container">
-            <div class="container">
-                <div class="result-card">
-                    <div class="result-icon heartbeat-animation">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <h2 class="section-title">Quiz Completed!</h2>
-                    <div class="score-display" id="final-score">0%</div>
-                    <p class="section-subtitle" id="score-message"></p>
-                    
-                    <div class="score-breakdown">
-                        <div class="score-item">
-                            <h4>Correct Answers</h4>
-                            <div class="score-number" id="correct-answers">0</div>
-                        </div>
-                        <div class="score-item">
-                            <h4>Wrong Answers</h4>
-                            <div class="score-number text-danger" id="wrong-answers">0</div>
-                        </div>
-                        <div class="score-item">
-                            <h4>Score</h4>
-                            <div class="score-number" id="score-percentage">0%</div>
-                        </div>
-                        <div class="score-item">
-                            <h4>Time Taken</h4>
-                            <div class="score-number" id="time-taken">0:00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-4">
-                        <button class="btn btn-primary btn-lg" onclick="showPage('quiz-page')">
-                            <i class="fas fa-redo"></i> Take Another Quiz
-                        </button>
-                        <button class="btn btn-secondary btn-lg" onclick="showPage('home-page')">
-                            <i class="fas fa-home"></i> Back to Home
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Study Resources Page -->
-    <section id="resources-page" class="page hidden">
-        <div class="quiz-container">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Study Resources</h2>
-                    <p class="section-subtitle">Download books, notes, videos, and other study materials</p>
-                </div>
-
-                <div class="resources-grid" id="resources-grid">
-                    <!-- Resources loaded dynamically -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Admin Dashboard -->
-    <section id="admin-dashboard" class="page hidden">
-        <div class="admin-dashboard">
-            <div class="admin-container">
-                <div class="container">
-                    <div class="admin-welcome">
-                        <div class="admin-avatar">
+                <div class="dashboard-header">
+                    <div class="user-info">
+                        <div class="user-avatar" style="background: var(--gradient-accent);">
                             <i class="fas fa-user-shield"></i>
                         </div>
                         <div>
-                            <h2>Welcome, Administrator!</h2>
-                            <p class="text-gray">Manage platform content, users, and messages</p>
+                            <h2>Admin Dashboard</h2>
+                            <div class="trial-badge">Administrator</div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="admin-stats">
-                        <div class="admin-stat-card">
-                            <div class="admin-stat-number" id="total-users">0</div>
-                            <div class="admin-stat-label">Total Users</div>
-                        </div>
-                        <div class="admin-stat-card">
-                            <div class="admin-stat-number" id="total-resources">0</div>
-                            <div class="admin-stat-label">Resources</div>
-                        </div>
-                        <div class="admin-stat-card">
-                            <div class="admin-stat-number" id="total-messages">0</div>
-                            <div class="admin-stat-label">Messages</div>
-                        </div>
-                        <div class="admin-stat-card">
-                            <div class="admin-stat-number" id="total-quizzes">0</div>
-                            <div class="admin-stat-label">Quizzes Taken</div>
-                        </div>
+                <div class="admin-stats">
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-number" id="total-users">0</div>
+                        <div class="admin-stat-label">Total Users</div>
                     </div>
-
-                    <div class="admin-tabs">
-                        <button class="admin-tab active" onclick="showAdminTab('upload')">
-                            <i class="fas fa-upload"></i> Upload Resources
-                        </button>
-                        <button class="admin-tab" onclick="showAdminTab('messages')">
-                            <i class="fas fa-comments"></i> User Messages
-                        </button>
-                        <button class="admin-tab" onclick="showAdminTab('users')">
-                            <i class="fas fa-users"></i> Manage Users
-                        </button>
-                        <button class="admin-tab" onclick="showAdminTab('content')">
-                            <i class="fas fa-book"></i> Manage Content
-                        </button>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-number" id="online-users">0</div>
+                        <div class="admin-stat-label">Online Users</div>
                     </div>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-number" id="active-trials">0</div>
+                        <div class="admin-stat-label">Active Trials</div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-number" id="total-tests">0</div>
+                        <div class="admin-stat-label">Tests Taken</div>
+                    </div>
+                </div>
 
-                    <div class="admin-content">
-                        <div id="upload-tab" class="admin-tab-content">
-                            <h3 class="mb-3">Upload Study Resources</h3>
-                            <div class="upload-form">
-                                <div class="upload-area" onclick="document.getElementById('resource-file').click()">
-                                    <i class="fas fa-cloud-upload-alt fa-3x mb-3" style="color: var(--secondary);"></i>
-                                    <h4>Click to upload or drag and drop</h4>
-                                    <p class="text-gray">PDF, DOC, PPT, Videos, Images (Max: 50MB)</p>
-                                </div>
-                                <input type="file" id="resource-file" class="hidden" onchange="previewResource()" multiple>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Resource Title</label>
-                                    <input type="text" class="form-control" id="resource-title" placeholder="Enter resource title">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Subject</label>
-                                    <select class="form-control" id="resource-subject">
-                                        <option value="physics">Physics</option>
-                                        <option value="chemistry">Chemistry</option>
-                                        <option value="biology">Biology</option>
-                                        <option value="english">English</option>
-                                        <option value="general">General</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Resource Type</label>
-                                    <select class="form-control" id="resource-type">
-                                        <option value="book">Book</option>
-                                        <option value="notes">Notes</option>
-                                        <option value="video">Video</option>
-                                        <option value="pdf">PDF</option>
-                                        <option value="quiz">Quiz</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Description</label>
-                                    <textarea class="form-control" id="resource-description" rows="3" placeholder="Enter resource description"></textarea>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">YouTube/Drive Link (Optional)</label>
-                                    <input type="url" class="form-control" id="resource-link" placeholder="https://youtube.com/... or https://drive.google.com/...">
-                                </div>
-                                
-                                <div id="upload-preview" class="upload-preview hidden"></div>
-                                
-                                <button class="btn btn-primary w-100 mt-3" onclick="uploadResource()">
-                                    <i class="fas fa-upload"></i> Upload Resource
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div id="messages-tab" class="admin-tab-content hidden">
-                            <h3 class="mb-3">User Messages</h3>
-                            <div class="messages-container">
-                                <table class="messages-table">
-                                    <thead>
-                                        <tr>
-                                            <th>User</th>
-                                            <th>Message</th>
-                                            <th>Time</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="messages-table-body">
-                                        <!-- Messages loaded dynamically -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        
-                        <div id="users-tab" class="admin-tab-content hidden">
-                            <h3 class="mb-3">Manage Users</h3>
-                            <table class="messages-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Mobile</th>
-                                        <th>Quizzes</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="users-table-body">
-                                    <!-- Users loaded dynamically -->
-                                </tbody>
-                            </table>
-                        </div>
-                        
-                        <div id="content-tab" class="admin-tab-content hidden">
-                            <h3 class="mb-3">Manage Content</h3>
-                            <div id="content-list">
-                                <!-- Content loaded dynamically -->
-                            </div>
-                        </div>
+                <div class="dashboard-card">
+                    <h3>All Users</h3>
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Trial Status</th>
+                                <th>Tests</th>
+                                <th>Last Active</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                            <!-- Users loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- File Upload Section (Admin Only) -->
+                <div class="upload-container">
+                    <h3>Upload Files</h3>
+                    <div class="upload-area" onclick="document.getElementById('file-input').click()">
+                        <i class="fas fa-cloud-upload-alt fa-3x mb-3" style="color: var(--secondary);"></i>
+                        <h4>Click to upload files</h4>
+                        <p class="text-gray">PDF, DOC, PPT, Videos, Images, ZIP (Max: 100MB)</p>
+                    </div>
+                    <input type="file" id="file-input" class="hidden" multiple>
+                    
+                    <div class="form-group mt-3">
+                        <label class="form-label">File Description</label>
+                        <input type="text" class="form-control" id="file-description" placeholder="Enter file description">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select class="form-control" id="file-category">
+                            <option value="study-material">Study Material</option>
+                            <option value="practice-test">Practice Test</option>
+                            <option value="video-lecture">Video Lecture</option>
+                            <option value="notes">Notes</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-primary w-100 mt-3" onclick="uploadFile()">
+                        <i class="fas fa-upload"></i> Upload File & Generate Link
+                    </button>
+                    
+                    <div class="file-list" id="file-list">
+                        <!-- Uploaded files list -->
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Contact Page -->
-    <section id="contact-page" class="page hidden">
-        <div class="quiz-container">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Contact Support</h2>
-                    <p class="section-subtitle">We're here to help you with your MDCAT preparation</p>
-                </div>
-                <div class="text-center p-5">
-                    <i class="fas fa-headset fa-5x text-secondary mb-3"></i>
-                    <h3>Need Help?</h3>
-                    <p>Click the chat button at the bottom right to get instant support!</p>
-                    <p>Or email us at: support@pakmedstudycorner.com</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Notification System -->
+    <div class="notification hidden" id="notification">
+        <span id="notification-text"></span>
+    </div>
 
     <script>
         // ========== APPLICATION STATE ==========
         let currentUser = null;
         let isAdmin = false;
-        let currentQuiz = null;
-        let currentSubject = null;
-        let currentQuestionIndex = 0;
-        let userAnswers = [];
-        let quizTimer = null;
-        let timeLeft = 600; // 10 minutes
-        let quizStartTime = null;
-
-        // ========== ADMIN CREDENTIALS ==========
-        const ADMIN_CREDENTIALS = {
-            email: "doctormotivation29@gmail.com",
-            password: "Admin@123"
-        };
-
-        // ========== DATABASE (LocalStorage) ==========
-        let users = JSON.parse(localStorage.getItem('pakmed_users')) || [];
-        let resources = JSON.parse(localStorage.getItem('pakmed_resources')) || [];
-        let messages = JSON.parse(localStorage.getItem('pakmed_messages')) || [];
-        let quizResults = JSON.parse(localStorage.getItem('pakmed_quiz_results')) || [];
-
-        // ========== QUIZ DATA ==========
-        const QUIZ_DATABASE = {
-            physics: [
-                {
-                    id: 1,
-                    title: "Physics Quiz 1: Mechanics",
-                    questions: [
-                        { 
-                            id: 1, 
-                            text: "What is the SI unit of force?", 
-                            options: ["Newton", "Joule", "Watt", "Pascal"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 2, 
-                            text: "Which law states that for every action there is an equal and opposite reaction?", 
-                            options: ["Newton's First Law", "Newton's Second Law", "Newton's Third Law", "Law of Gravitation"], 
-                            correct: 2 
-                        },
-                        { 
-                            id: 3, 
-                            text: "What is the acceleration due to gravity on Earth's surface?", 
-                            options: ["9.8 m/s²", "10 m/s²", "8.9 m/s²", "11 m/s²"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 4, 
-                            text: "Which of the following is a scalar quantity?", 
-                            options: ["Force", "Velocity", "Speed", "Acceleration"], 
-                            correct: 2 
-                        },
-                        { 
-                            id: 5, 
-                            text: "What is the formula for kinetic energy?", 
-                            options: ["½mv²", "mgh", "Fd", "Pt"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 6, 
-                            text: "Which device is used to measure atmospheric pressure?", 
-                            options: ["Barometer", "Thermometer", "Hygrometer", "Anemometer"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 7, 
-                            text: "What is the unit of electric current?", 
-                            options: ["Ampere", "Volt", "Ohm", "Watt"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 8, 
-                            text: "Which law relates voltage, current, and resistance?", 
-                            options: ["Ohm's Law", "Newton's Law", "Boyle's Law", "Faraday's Law"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 9, 
-                            text: "What is the speed of light in vacuum?", 
-                            options: ["3 × 10⁸ m/s", "3 × 10⁶ m/s", "3 × 10⁵ m/s", "3 × 10⁷ m/s"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 10, 
-                            text: "Which type of lens is used to correct short-sightedness?", 
-                            options: ["Concave lens", "Convex lens", "Plano-convex lens", "Cylindrical lens"], 
-                            correct: 0 
-                        }
-                    ]
-                },
-                {
-                    id: 2,
-                    title: "Physics Quiz 2: Thermodynamics",
-                    questions: [
-                        { 
-                            id: 1, 
-                            text: "What is the SI unit of temperature?", 
-                            options: ["Kelvin", "Celsius", "Fahrenheit", "Rankine"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 2, 
-                            text: "Which law of thermodynamics states that energy cannot be created or destroyed?", 
-                            options: ["Zeroth Law", "First Law", "Second Law", "Third Law"], 
-                            correct: 1 
-                        },
-                        { 
-                            id: 3, 
-                            text: "What is absolute zero temperature?", 
-                            options: ["0°C", "-273.15°C", "-100°C", "0 K"], 
-                            correct: 1 
-                        },
-                        { 
-                            id: 4, 
-                            text: "Which process occurs at constant temperature?", 
-                            options: ["Adiabatic", "Isobaric", "Isothermal", "Isochoric"], 
-                            correct: 2 
-                        },
-                        { 
-                            id: 5, 
-                            text: "What is the specific heat capacity of water?", 
-                            options: ["4.18 J/g°C", "1.0 J/g°C", "2.1 J/g°C", "0.9 J/g°C"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 6, 
-                            text: "Which device converts heat into mechanical work?", 
-                            options: ["Heat engine", "Refrigerator", "Heat pump", "Thermocouple"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 7, 
-                            text: "What is the efficiency of a Carnot engine?", 
-                            options: ["1 - (T₂/T₁)", "T₁/(T₁ - T₂)", "(T₁ - T₂)/T₁", "T₂/(T₁ - T₂)"], 
-                            correct: 2 
-                        },
-                        { 
-                            id: 8, 
-                            text: "Which law relates pressure and volume at constant temperature?", 
-                            options: ["Boyle's Law", "Charles's Law", "Gay-Lussac's Law", "Avogadro's Law"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 9, 
-                            text: "What is entropy a measure of?", 
-                            options: ["Disorder", "Temperature", "Pressure", "Volume"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 10, 
-                            text: "Which process has no heat transfer?", 
-                            options: ["Adiabatic", "Isothermal", "Isobaric", "Isochoric"], 
-                            correct: 0 
-                        }
-                    ]
-                },
-                // Add 3 more physics quizzes...
-            ],
-            chemistry: [
-                {
-                    id: 1,
-                    title: "Chemistry Quiz 1: Atomic Structure",
-                    questions: [
-                        { 
-                            id: 1, 
-                            text: "What is the atomic number of Carbon?", 
-                            options: ["6", "12", "14", "8"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 2, 
-                            text: "Who discovered the electron?", 
-                            options: ["J.J. Thomson", "Ernest Rutherford", "John Dalton", "Niels Bohr"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 3, 
-                            text: "How many electrons can occupy the first shell?", 
-                            options: ["2", "8", "18", "32"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 4, 
-                            text: "What are isotopes?", 
-                            options: ["Same atomic number, different mass", "Same mass, different atomic number", "Different elements", "Same neutrons"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 5, 
-                            text: "Which subatomic particle has no charge?", 
-                            options: ["Neutron", "Proton", "Electron", "Positron"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 6, 
-                            text: "What is the mass number?", 
-                            options: ["Protons + Neutrons", "Protons + Electrons", "Neutrons + Electrons", "Protons only"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 7, 
-                            text: "Which element has the electron configuration 1s²2s²2p⁶3s²?", 
-                            options: ["Magnesium", "Neon", "Sodium", "Aluminum"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 8, 
-                            text: "What is the maximum number of electrons in p orbital?", 
-                            options: ["2", "6", "10", "14"], 
-                            correct: 1 
-                        },
-                        { 
-                            id: 9, 
-                            text: "Which quantum number describes the shape of orbital?", 
-                            options: ["Principal", "Azimuthal", "Magnetic", "Spin"], 
-                            correct: 1 
-                        },
-                        { 
-                            id: 10, 
-                            text: "Who proposed the nuclear model of atom?", 
-                            options: ["Rutherford", "Thomson", "Bohr", "Dalton"], 
-                            correct: 0 
-                        }
-                    ]
-                },
-                // Add 4 more chemistry quizzes...
-            ],
-            biology: [
-                {
-                    id: 1,
-                    title: "Biology Quiz 1: Cell Biology",
-                    questions: [
-                        { 
-                            id: 1, 
-                            text: "What is the powerhouse of the cell?", 
-                            options: ["Mitochondria", "Nucleus", "Ribosome", "Golgi Apparatus"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 2, 
-                            text: "Which organelle is responsible for protein synthesis?", 
-                            options: ["Ribosome", "Lysosome", "Endoplasmic Reticulum", "Vacuole"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 3, 
-                            text: "What is the control center of the cell?", 
-                            options: ["Nucleus", "Mitochondria", "Chloroplast", "Cytoplasm"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 4, 
-                            text: "Which cell organelle contains digestive enzymes?", 
-                            options: ["Lysosome", "Ribosome", "Golgi", "Mitochondria"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 5, 
-                            text: "What is the process of cell division called?", 
-                            options: ["Mitosis", "Meiosis", "Both", "None"], 
-                            correct: 2 
-                        },
-                        { 
-                            id: 6, 
-                            text: "Which type of cell has no nucleus?", 
-                            options: ["Prokaryotic", "Eukaryotic", "Animal cell", "Plant cell"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 7, 
-                            text: "What is the cell wall made of in plant cells?", 
-                            options: ["Cellulose", "Chitin", "Peptidoglycan", "Protein"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 8, 
-                            text: "Which organelle is found only in plant cells?", 
-                            options: ["Chloroplast", "Mitochondria", "Nucleus", "Ribosome"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 9, 
-                            text: "What is the fluid inside the cell called?", 
-                            options: ["Cytoplasm", "Nucleoplasm", "Protoplasm", "All of these"], 
-                            correct: 3 
-                        },
-                        { 
-                            id: 10, 
-                            text: "Who discovered the cell?", 
-                            options: ["Robert Hooke", "Leeuwenhoek", "Schleiden", "Schwann"], 
-                            correct: 0 
-                        }
-                    ]
-                },
-                // Add 4 more biology quizzes...
-            ],
-            english: [
-                {
-                    id: 1,
-                    title: "English Quiz 1: Vocabulary",
-                    questions: [
-                        { 
-                            id: 1, 
-                            text: "What is the synonym of 'beautiful'?", 
-                            options: ["Pretty", "Ugly", "Big", "Small"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 2, 
-                            text: "What is the antonym of 'hot'?", 
-                            options: ["Cold", "Warm", "Sweet", "High"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 3, 
-                            text: "What is the plural of 'child'?", 
-                            options: ["Children", "Childs", "Childes", "Childer"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 4, 
-                            text: "What is the past tense of 'go'?", 
-                            options: ["Went", "Gone", "Goed", "Going"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 5, 
-                            text: "Which is correct: He ___ to school.", 
-                            options: ["goes", "go", "going", "went"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 6, 
-                            text: "Which article is used before 'hour'?", 
-                            options: ["an", "a", "the", "none"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 7, 
-                            text: "What is the comparative of 'good'?", 
-                            options: ["better", "gooder", "more good", "best"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 8, 
-                            text: "What is the opposite of 'begin'?", 
-                            options: ["End", "Start", "Continue", "Middle"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 9, 
-                            text: "'I am hungry' is a:", 
-                            options: ["Statement", "Question", "Command", "Exclamation"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 10, 
-                            text: "What is the capital of Pakistan?", 
-                            options: ["Islamabad", "Karachi", "Lahore", "Peshawar"], 
-                            correct: 0 
-                        }
-                    ]
-                },
-                // Add 4 more english quizzes...
-            ]
-        };
+        let users = JSON.parse(localStorage.getItem('med_users')) || [];
+        let adminFiles = JSON.parse(localStorage.getItem('admin_files')) || [];
+        let testResults = JSON.parse(localStorage.getItem('test_results')) || [];
+        let onlineUsers = [];
 
         // ========== INITIALIZATION ==========
         document.addEventListener('DOMContentLoaded', function() {
-            initializeApp();
             checkLoginStatus();
-            createParticles();
-            startTypingAnimation();
-            loadResources();
             loadAdminStats();
+            loadFiles();
         });
 
-        function initializeApp() {
-            // Setup event listeners
-            setupEventListeners();
+        // ========== FREE TRIAL SYSTEM ==========
+        function showFreeTrialModal() {
+            showModal('free-trial-modal');
+        }
+
+        function guestTrial() {
+            currentUser = {
+                id: 'guest_' + Date.now(),
+                name: 'Guest User',
+                email: 'guest@example.com',
+                role: 'guest',
+                trialStart: new Date().toISOString(),
+                trialEnd: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+            };
             
-            // Setup mobile menu
-            document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-                const navMenu = document.querySelector('.nav-menu');
-                navMenu.classList.toggle('active');
-                this.innerHTML = navMenu.classList.contains('active') ? 
-                    '<i class="fas fa-times"></i>' : 
-                    '<i class="fas fa-bars"></i>';
-            });
-
-            // Close dropdowns on outside click
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.dropdown')) {
-                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                        menu.classList.remove('active');
-                    });
-                }
-            });
+            localStorage.setItem('current_user', JSON.stringify(currentUser));
+            showUserDashboard();
+            closeModal('free-trial-modal');
+            showNotification('Welcome to free trial! Enjoy 7 days access.', 'success');
         }
 
-        function setupEventListeners() {
-            // Login form
-            document.getElementById('login-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const identifier = document.getElementById('login-identifier').value;
-                const password = document.getElementById('login-password').value;
-                loginUser(identifier, password);
-            });
-
-            // Admin login form
-            document.getElementById('admin-login-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = document.getElementById('admin-email').value;
-                const password = document.getElementById('admin-password').value;
-                adminLogin(email, password);
-            });
-
-            // Register form
-            document.getElementById('register-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const name = document.getElementById('register-name').value;
-                const email = document.getElementById('register-email').value;
-                const mobile = document.getElementById('register-mobile').value;
-                const password = document.getElementById('register-password').value;
-                const confirmPassword = document.getElementById('register-confirm-password').value;
-                
-                if (password !== confirmPassword) {
-                    showNotification('Passwords do not match!', 'error');
-                    return;
-                }
-                
-                registerUser(name, email, mobile, password);
-            });
-
-            // Mobile OTP form
-            document.getElementById('mobile-otp-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                verifyOTP();
-            });
-
-            // Chat form
-            document.getElementById('chat-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const input = document.getElementById('chat-input');
-                if (input.value.trim()) {
-                    sendChatMessage(input.value);
-                    input.value = '';
-                }
-            });
-
-            // OTP input handling
-            document.querySelectorAll('.otp-input').forEach(input => {
-                input.addEventListener('input', function(e) {
-                    if (this.value.length === 1) {
-                        const next = this.nextElementSibling;
-                        if (next && next.classList.contains('otp-input')) {
-                            next.focus();
-                        }
-                    }
-                });
-                
-                input.addEventListener('keydown', function(e) {
-                    if (e.key === 'Backspace' && !this.value && this.previousElementSibling) {
-                        this.previousElementSibling.focus();
-                    }
-                });
-            });
-        }
-
-        // ========== ANIMATIONS ==========
-        function createParticles() {
-            const container = document.querySelector('.particles-container');
-            if (!container) return;
-            
-            for (let i = 0; i < 20; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
-                particle.style.background = `rgba(255, 255, 255, ${0.2 + Math.random() * 0.3})`;
-                particle.style.width = particle.style.height = (2 + Math.random() * 4) + 'px';
-                container.appendChild(particle);
-            }
-        }
-
-        function startTypingAnimation() {
-            const typed = new Typed('#typed-text', {
-                strings: [
-                    'Ace Your MDCAT with Confidence',
-                    'Pakistan\'s #1 Medical Prep Platform',
-                    'Smart Study. Smarter Results.',
-                    'Your Path to Medical College'
-                ],
-                typeSpeed: 50,
-                backSpeed: 30,
-                backDelay: 2000,
-                startDelay: 500,
-                loop: true,
-                showCursor: true,
-                cursorChar: '|'
-            });
-        }
-
-        // ========== AUTHENTICATION ==========
+        // ========== USER AUTHENTICATION ==========
         function checkLoginStatus() {
             const user = JSON.parse(localStorage.getItem('current_user'));
             if (user) {
                 currentUser = user;
-                updateUIForUser();
-                
-                // Check if admin
-                if (user.email === ADMIN_CREDENTIALS.email) {
+                if (user.role === 'admin') {
                     isAdmin = true;
-                    document.getElementById('admin-nav-link').classList.remove('hidden');
+                    showAdminDashboard();
+                } else {
+                    showUserDashboard();
                 }
             }
         }
 
-        function loginUser(identifier, password) {
-            // Check if user exists
-            let user = users.find(u => 
-                (u.email === identifier || u.mobile === identifier) && 
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const identifier = document.getElementById('login-identifier').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Find user by email or username
+            const user = users.find(u => 
+                (u.email === identifier || u.username === identifier) && 
                 u.password === password
             );
             
             if (user) {
                 currentUser = user;
                 localStorage.setItem('current_user', JSON.stringify(user));
-                updateUIForUser();
+                
+                if (user.role === 'admin') {
+                    isAdmin = true;
+                    showAdminDashboard();
+                } else {
+                    showUserDashboard();
+                }
+                
                 closeModal('login-modal');
                 showNotification('Login successful!', 'success');
             } else {
                 showNotification('Invalid credentials!', 'error');
             }
-        }
+        });
 
-        function adminLogin(email, password) {
-            if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
+        document.getElementById('admin-login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('admin-email').value;
+            const password = document.getElementById('admin-password').value;
+            
+            // Default admin credentials
+            if (email === 'admin@medicalprep.com' && password === 'Admin@123') {
                 currentUser = {
-                    name: "Administrator",
+                    id: 'admin',
+                    name: 'Administrator',
                     email: email,
-                    role: "admin",
+                    role: 'admin',
                     isAdmin: true
                 };
                 
                 isAdmin = true;
                 localStorage.setItem('current_user', JSON.stringify(currentUser));
-                updateUIForUser();
-                document.getElementById('admin-nav-link').classList.remove('hidden');
+                showAdminDashboard();
                 closeModal('admin-login-modal');
-                showPage('admin-dashboard');
                 showNotification('Admin login successful!', 'success');
             } else {
                 showNotification('Invalid admin credentials!', 'error');
             }
-        }
+        });
 
-        function registerUser(name, email, mobile, password) {
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                showNotification('Passwords do not match!', 'error');
+                return;
+            }
+            
             // Check if user already exists
-            if (users.find(u => u.email === email)) {
+            if (users.find(u => u.email === email || u.username === username)) {
                 showNotification('User already exists!', 'error');
                 return;
             }
-
+            
             const newUser = {
                 id: Date.now(),
                 name: name,
                 email: email,
-                mobile: mobile,
+                username: username,
                 password: password,
                 role: 'user',
-                joined: new Date().toISOString()
+                trialStart: new Date().toISOString(),
+                trialEnd: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+                joined: new Date().toISOString(),
+                status: 'active'
             };
-
+            
             users.push(newUser);
-            localStorage.setItem('pakmed_users', JSON.stringify(users));
+            localStorage.setItem('med_users', JSON.stringify(users));
             
             currentUser = newUser;
             localStorage.setItem('current_user', JSON.stringify(newUser));
             
-            updateUIForUser();
+            showUserDashboard();
             closeModal('register-modal');
-            showNotification('Registration successful!', 'success');
-        }
-
-        function guestLogin() {
-            currentUser = {
-                id: 'guest_' + Date.now(),
-                name: 'Guest User',
-                email: 'guest@example.com',
-                role: 'guest',
-                isGuest: true
-            };
-            
-            localStorage.setItem('current_user', JSON.stringify(currentUser));
-            updateUIForUser();
-            showNotification('Welcome Guest! Enjoy limited features.', 'success');
-        }
+            showNotification('Account created! Free trial started for 7 days.', 'success');
+        });
 
         function logout() {
             currentUser = null;
             isAdmin = false;
             localStorage.removeItem('current_user');
-            updateUIForGuest();
+            showHomePage();
             showNotification('Logged out successfully!', 'success');
         }
 
-        function updateUIForUser() {
-            document.querySelectorAll('.auth-buttons .btn').forEach(btn => btn.classList.add('hidden'));
-            document.getElementById('user-info').classList.remove('hidden');
+        // ========== DASHBOARD FUNCTIONS ==========
+        function showHomePage() {
+            document.getElementById('user-dashboard').classList.add('hidden');
+            document.getElementById('admin-dashboard').classList.add('hidden');
+            document.getElementById('auth-buttons').classList.remove('hidden');
+            document.getElementById('user-menu').classList.add('hidden');
+        }
+
+        function showUserDashboard() {
+            if (!currentUser) return;
             
-            if (currentUser.name) {
-                document.getElementById('user-name').textContent = currentUser.name;
-            }
+            document.getElementById('user-dashboard').classList.remove('hidden');
+            document.getElementById('admin-dashboard').classList.add('hidden');
+            document.getElementById('auth-buttons').classList.add('hidden');
+            document.getElementById('user-menu').classList.remove('hidden');
+            
+            // Update user info
+            document.getElementById('dashboard-user-name').textContent = currentUser.name;
+            document.getElementById('user-name').textContent = currentUser.name;
+            document.getElementById('profile-email').textContent = currentUser.email;
+            document.getElementById('member-since').textContent = new Date(currentUser.joined).toLocaleDateString();
+            document.getElementById('trial-ends').textContent = new Date(currentUser.trialEnd).toLocaleDateString();
+            
+            // Calculate remaining days
+            const remainingDays = Math.ceil((new Date(currentUser.trialEnd) - new Date()) / (1000 * 60 * 60 * 24));
+            document.getElementById('trial-status').textContent = `Free Trial - ${remainingDays} Days Remaining`;
+            
+            // Load user's test results
+            loadUserTestResults();
+            loadUserResources();
         }
 
-        function updateUIForGuest() {
-            document.querySelectorAll('.auth-buttons .btn').forEach(btn => btn.classList.remove('hidden'));
-            document.getElementById('user-info').classList.add('hidden');
-            document.getElementById('admin-nav-link').classList.add('hidden');
+        function showAdminDashboard() {
+            if (!isAdmin) return;
+            
+            document.getElementById('user-dashboard').classList.add('hidden');
+            document.getElementById('admin-dashboard').classList.remove('hidden');
+            document.getElementById('auth-buttons').classList.add('hidden');
+            document.getElementById('user-menu').classList.remove('hidden');
+            
+            document.getElementById('user-name').textContent = 'Administrator';
+            loadAdminStats();
+            loadUsersTable();
+            loadFiles();
         }
 
-        // ========== MOBILE OTP ==========
-        function showMobileLogin() {
-            closeModal('login-modal');
-            showModal('mobile-otp-modal');
-        }
-
-        function sendOTP() {
-            const mobile = document.getElementById('mobile-number').value;
-            if (!mobile) {
-                showNotification('Please enter mobile number!', 'error');
+        // ========== USER TEST RESULTS ==========
+        function loadUserTestResults() {
+            const container = document.getElementById('test-results');
+            const userTests = testResults.filter(t => t.userId === currentUser.id);
+            
+            document.getElementById('tests-taken').textContent = userTests.length;
+            
+            if (userTests.length === 0) {
+                container.innerHTML = '<p class="text-center text-gray">No tests taken yet</p>';
                 return;
             }
             
-            showNotification('OTP sent to your mobile!', 'success');
-            document.getElementById('otp-input-group').classList.remove('hidden');
-        }
-
-        function autoFillOTP() {
-            const otp = '123456'; // Demo OTP
-            document.querySelectorAll('.otp-input').forEach((input, index) => {
-                input.value = otp[index];
-            });
-            showNotification('OTP auto-filled!', 'success');
-        }
-
-        function verifyOTP() {
-            // Simulate OTP verification
-            showNotification('OTP verified successfully!', 'success');
-            closeModal('mobile-otp-modal');
-            guestLogin(); // Login as guest for demo
-        }
-
-        // ========== PAGE NAVIGATION ==========
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.add('hidden');
-            });
-            
-            document.getElementById(pageId).classList.remove('hidden');
-            
-            // Update active nav link
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('onclick')?.includes(pageId)) {
-                    link.classList.add('active');
-                }
-            });
-            
-            // Close mobile menu
-            const navMenu = document.querySelector('.nav-menu');
-            navMenu.classList.remove('active');
-            document.querySelector('.mobile-menu-btn').innerHTML = '<i class="fas fa-bars"></i>';
-            
-            // Special handling for pages
-            if (pageId === 'quiz-page') {
-                loadQuizCategories();
-            } else if (pageId === 'admin-dashboard') {
-                if (!isAdmin) {
-                    showAdminLogin();
-                    return;
-                }
-                loadAdminStats();
-            }
-        }
-
-        // ========== QUIZ SYSTEM ==========
-        function showQuizTests(subject) {
-            currentSubject = subject;
-            const container = document.getElementById('quiz-tests-grid');
             container.innerHTML = '';
-            
-            const quizzes = QUIZ_DATABASE[subject];
-            quizzes.forEach(quiz => {
-                const quizCard = document.createElement('div');
-                quizCard.className = 'quiz-test-card';
-                quizCard.innerHTML = `
-                    <div class="test-header">
-                        <span class="test-tag">${subject.toUpperCase()}</span>
-                        <span class="test-difficulty">Medium</span>
+            userTests.slice(-5).reverse().forEach(test => {
+                const testDiv = document.createElement('div');
+                testDiv.className = 'test-result-item';
+                testDiv.innerHTML = `
+                    <div>
+                        <strong>${test.subject}</strong>
+                        <div class="text-sm text-gray">${new Date(test.date).toLocaleDateString()}</div>
                     </div>
-                    <h3 class="test-title">${quiz.title}</h3>
-                    <p class="test-description">10 questions • 10 minutes</p>
-                    <div class="test-meta">
-                        <div class="meta-item">
-                            <i class="fas fa-question-circle"></i>
-                            <span>10 Questions</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-clock"></i>
-                            <span>10 Minutes</span>
-                        </div>
+                    <div class="text-right">
+                        <div class="font-bold">${test.score}%</div>
+                        <div class="text-sm">${test.correct}/${test.total} correct</div>
                     </div>
-                    <button class="btn btn-primary w-100" onclick="startQuiz('${subject}', ${quiz.id})">
-                        <i class="fas fa-play"></i> Start Quiz
-                    </button>
                 `;
-                container.appendChild(quizCard);
+                container.appendChild(testDiv);
             });
         }
 
-        function startQuiz(subject, quizId) {
-            if (!currentUser && !confirm('Please login to save your progress. Continue as guest?')) {
-                showLoginModal();
-                return;
-            }
+        function takeTest() {
+            // Simulate taking a test
+            const test = {
+                id: Date.now(),
+                userId: currentUser.id,
+                subject: 'Biology',
+                correct: Math.floor(Math.random() * 8) + 3,
+                total: 10,
+                score: Math.floor(Math.random() * 30) + 70,
+                date: new Date().toISOString()
+            };
             
-            const quizzes = QUIZ_DATABASE[subject];
-            currentQuiz = quizzes.find(q => q.id === quizId);
+            testResults.push(test);
+            localStorage.setItem('test_results', JSON.stringify(testResults));
             
-            if (!currentQuiz) {
-                showNotification('Quiz not found!', 'error');
-                return;
-            }
-            
-            currentQuestionIndex = 0;
-            userAnswers = new Array(currentQuiz.questions.length).fill(null);
-            timeLeft = 600; // 10 minutes
-            quizStartTime = Date.now();
-            
-            showPage('quiz-taking-page');
-            loadQuestion();
-            startTimer();
-        }
-
-        function loadQuestion() {
-            const question = currentQuiz.questions[currentQuestionIndex];
-            
-            document.getElementById('question-number').textContent = `Question ${currentQuestionIndex + 1}`;
-            document.getElementById('question-text').textContent = question.text;
-            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
-            document.getElementById('total-questions').textContent = currentQuiz.questions.length;
-            
-            // Update progress bar
-            const progress = ((currentQuestionIndex + 1) / currentQuiz.questions.length) * 100;
-            document.getElementById('quiz-progress-fill').style.width = `${progress}%`;
-            
-            // Load options
-            const container = document.getElementById('options-container');
-            container.innerHTML = '';
-            
-            question.options.forEach((option, index) => {
-                const isSelected = userAnswers[currentQuestionIndex] === index;
-                const optionDiv = document.createElement('div');
-                optionDiv.className = `option ${isSelected ? 'selected' : ''}`;
-                optionDiv.innerHTML = `
-                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
-                    <div class="option-text">${option}</div>
-                `;
-                optionDiv.onclick = () => selectOption(index);
-                container.appendChild(optionDiv);
-            });
-            
-            // Show submit button on last question
-            document.getElementById('submit-btn').classList.toggle('hidden', 
-                currentQuestionIndex < currentQuiz.questions.length - 1);
-        }
-
-        function selectOption(optionIndex) {
-            userAnswers[currentQuestionIndex] = optionIndex;
-            loadQuestion(); // Reload to show selection
-        }
-
-        function nextQuestion() {
-            if (currentQuestionIndex < currentQuiz.questions.length - 1) {
-                currentQuestionIndex++;
-                loadQuestion();
-            }
-        }
-
-        function previousQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                loadQuestion();
-            }
-        }
-
-        function startTimer() {
-            clearInterval(quizTimer);
-            updateTimerDisplay();
-            
-            quizTimer = setInterval(() => {
-                timeLeft--;
-                updateTimerDisplay();
-                
-                if (timeLeft <= 0) {
-                    clearInterval(quizTimer);
-                    submitQuiz();
-                }
-            }, 1000);
-        }
-
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            document.getElementById('quiz-timer').textContent = 
-                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-
-        function submitQuiz() {
-            clearInterval(quizTimer);
-            
-            // Calculate score
-            let correct = 0;
-            currentQuiz.questions.forEach((question, index) => {
-                if (userAnswers[index] === question.correct) {
-                    correct++;
-                }
-            });
-            
-            const total = currentQuiz.questions.length;
-            const score = (correct / total) * 100;
-            const timeTaken = 600 - timeLeft;
-            
-            // Save result
-            if (currentUser && !currentUser.isGuest) {
-                const result = {
-                    userId: currentUser.id,
-                    userName: currentUser.name,
-                    subject: currentSubject,
-                    quizId: currentQuiz.id,
-                    quizTitle: currentQuiz.title,
-                    correct: correct,
-                    total: total,
-                    score: score,
-                    timeTaken: timeTaken,
-                    date: new Date().toISOString()
-                };
-                
-                quizResults.push(result);
-                localStorage.setItem('pakmed_quiz_results', JSON.stringify(quizResults));
-            }
-            
-            // Show results
-            showQuizResults(correct, total, score, timeTaken);
-        }
-
-        function showQuizResults(correct, total, score, timeTaken) {
-            const minutes = Math.floor(timeTaken / 60);
-            const seconds = timeTaken % 60;
-            
-            document.getElementById('final-score').textContent = `${score.toFixed(1)}%`;
-            document.getElementById('correct-answers').textContent = correct;
-            document.getElementById('wrong-answers').textContent = total - correct;
-            document.getElementById('score-percentage').textContent = `${score.toFixed(1)}%`;
-            document.getElementById('time-taken').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-            
-            // Set message based on score
-            let message = '';
-            if (score >= 90) message = 'Excellent! You are MDCAT ready! 🎯';
-            else if (score >= 70) message = 'Good job! Keep practicing! 👍';
-            else if (score >= 50) message = 'Not bad, but needs improvement! 📚';
-            else message = 'Need more practice! Study harder! 💪';
-            
-            document.getElementById('score-message').textContent = message;
-            
-            showPage('quiz-result-page');
-        }
-
-        // ========== RESOURCES SYSTEM ==========
-        function loadResources() {
-            const container = document.getElementById('resources-grid');
-            if (!container) return;
-            
-            container.innerHTML = '';
-            
-            if (resources.length === 0) {
-                // Add sample resources
-                resources = [
-                    {
-                        id: 1,
-                        title: 'Physics Complete Notes',
-                        type: 'pdf',
-                        subject: 'physics',
-                        description: 'Complete physics notes for MDCAT',
-                        url: '#',
-                        uploadedBy: 'Admin',
-                        date: '2024-01-15'
-                    },
-                    {
-                        id: 2,
-                        title: 'Chemistry Reactions Guide',
-                        type: 'video',
-                        subject: 'chemistry',
-                        description: 'Important chemical reactions explained',
-                        url: '#',
-                        uploadedBy: 'Admin',
-                        date: '2024-01-14'
-                    },
-                    {
-                        id: 3,
-                        title: 'Biology Diagrams PDF',
-                        type: 'pdf',
-                        subject: 'biology',
-                        description: 'Important biological diagrams',
-                        url: '#',
-                        uploadedBy: 'Admin',
-                        date: '2024-01-13'
-                    },
-                    {
-                        id: 4,
-                        title: 'English Grammar Rules',
-                        type: 'pdf',
-                        subject: 'english',
-                        description: 'Complete English grammar for MDCAT',
-                        url: '#',
-                        uploadedBy: 'Admin',
-                        date: '2024-01-12'
-                    }
-                ];
-                localStorage.setItem('pakmed_resources', JSON.stringify(resources));
-            }
-            
-            resources.forEach(resource => {
-                const resourceCard = document.createElement('div');
-                resourceCard.className = 'quiz-test-card';
-                resourceCard.innerHTML = `
-                    <div class="test-header">
-                        <span class="test-tag">${resource.subject.toUpperCase()}</span>
-                        <span class="test-difficulty">${resource.type.toUpperCase()}</span>
-                    </div>
-                    <h3 class="test-title">${resource.title}</h3>
-                    <p class="test-description">${resource.description}</p>
-                    <div class="test-meta">
-                        <div class="meta-item">
-                            <i class="fas fa-user"></i>
-                            <span>${resource.uploadedBy}</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-calendar"></i>
-                            <span>${resource.date}</span>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary w-100" onclick="downloadResource(${resource.id})">
-                        <i class="fas fa-download"></i> Download
-                    </button>
-                `;
-                container.appendChild(resourceCard);
-            });
-        }
-
-        function downloadResource(resourceId) {
-            const resource = resources.find(r => r.id === resourceId);
-            if (resource) {
-                showNotification(`Downloading ${resource.title}...`, 'success');
-                // In real app, this would trigger actual download
-            }
+            loadUserTestResults();
+            showNotification('Test completed! Score: ' + test.score + '%', 'success');
         }
 
         // ========== ADMIN FUNCTIONS ==========
-        function showAdminLogin() {
-            showModal('admin-login-modal');
-        }
-
         function loadAdminStats() {
             if (!isAdmin) return;
             
             document.getElementById('total-users').textContent = users.length;
-            document.getElementById('total-resources').textContent = resources.length;
-            document.getElementById('total-messages').textContent = messages.length;
-            document.getElementById('total-quizzes').textContent = quizResults.length;
             
-            // Load messages
-            const messagesBody = document.getElementById('messages-table-body');
-            if (messagesBody) {
-                messagesBody.innerHTML = '';
-                messages.slice(-10).reverse().forEach(msg => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${msg.user || 'Guest'}</td>
-                        <td>${msg.text}</td>
-                        <td>${new Date(msg.time).toLocaleTimeString()}</td>
-                        <td><span class="badge ${msg.status || 'new'}">${msg.status || 'New'}</span></td>
-                    `;
-                    messagesBody.appendChild(row);
-                });
-            }
+            // Simulate online users (2 for demo)
+            document.getElementById('online-users').textContent = 2;
             
-            // Load users
-            const usersBody = document.getElementById('users-table-body');
-            if (usersBody) {
-                usersBody.innerHTML = '';
-                users.forEach(user => {
-                    const userQuizzes = quizResults.filter(q => q.userId === user.id).length;
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${user.name}</td>
-                        <td>${user.email}</td>
-                        <td>${user.mobile || 'N/A'}</td>
-                        <td>${userQuizzes}</td>
-                        <td>${user.role}</td>
-                    `;
-                    usersBody.appendChild(row);
-                });
-            }
+            // Active trials (users with trial not expired)
+            const activeTrials = users.filter(u => new Date(u.trialEnd) > new Date()).length;
+            document.getElementById('active-trials').textContent = activeTrials;
+            
+            document.getElementById('total-tests').textContent = testResults.length;
         }
 
-        function showAdminTab(tabId) {
-            document.querySelectorAll('.admin-tab').forEach(tab => {
-                tab.classList.remove('active');
+        function loadUsersTable() {
+            const tbody = document.getElementById('users-table-body');
+            tbody.innerHTML = '';
+            
+            users.forEach(user => {
+                const userTests = testResults.filter(t => t.userId === user.id).length;
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>
+                        <span class="user-status ${user.status === 'active' ? 'online' : 'offline'}">
+                            ${user.status}
+                        </span>
+                    </td>
+                    <td>
+                        ${new Date(user.trialEnd) > new Date() ? 'Active' : 'Expired'}
+                        (${Math.ceil((new Date(user.trialEnd) - new Date()) / (1000 * 60 * 60 * 24))} days)
+                    </td>
+                    <td>${userTests}</td>
+                    <td>${new Date(user.joined).toLocaleDateString()}</td>
+                `;
+                tbody.appendChild(row);
             });
-            document.querySelectorAll('.admin-tab-content').forEach(content => {
-                content.classList.add('hidden');
+        }
+
+        // ========== FILE UPLOAD SYSTEM ==========
+        function loadFiles() {
+            const container = document.getElementById('file-list');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            adminFiles.forEach(file => {
+                const fileDiv = document.createElement('div');
+                fileDiv.className = 'file-item';
+                fileDiv.innerHTML = `
+                    <div class="d-flex align-center">
+                        <div class="file-icon">
+                            <i class="fas fa-${getFileIcon(file.type)}"></i>
+                        </div>
+                        <div>
+                            <strong>${file.name}</strong>
+                            <div class="text-sm text-gray">${file.description} • ${file.date}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="copy-link" onclick="copyLink('${file.link}')">
+                            <i class="fas fa-copy"></i> Copy Link
+                        </button>
+                    </div>
+                `;
+                container.appendChild(fileDiv);
             });
-            
-            event.target.classList.add('active');
-            document.getElementById(tabId + '-tab').classList.remove('hidden');
         }
 
-        function previewResource() {
-            const file = document.getElementById('resource-file').files[0];
-            const preview = document.getElementById('upload-preview');
-            
-            if (file) {
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
-                        preview.classList.remove('hidden');
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    preview.innerHTML = `<p>${file.name} (${(file.size/1024/1024).toFixed(2)} MB)</p>`;
-                    preview.classList.remove('hidden');
-                }
-            }
+        function getFileIcon(type) {
+            const icons = {
+                'pdf': 'file-pdf',
+                'doc': 'file-word',
+                'video': 'file-video',
+                'image': 'file-image',
+                'zip': 'file-archive'
+            };
+            return icons[type] || 'file';
         }
 
-        function uploadResource() {
-            const title = document.getElementById('resource-title').value;
-            const subject = document.getElementById('resource-subject').value;
-            const type = document.getElementById('resource-type').value;
-            const description = document.getElementById('resource-description').value;
-            const link = document.getElementById('resource-link').value;
-            const file = document.getElementById('resource-file').files[0];
+        function uploadFile() {
+            const fileInput = document.getElementById('file-input');
+            const description = document.getElementById('file-description').value;
+            const category = document.getElementById('file-category').value;
             
-            if (!title || !description) {
-                showNotification('Please fill all required fields!', 'error');
+            if (!fileInput.files.length && !description) {
+                showNotification('Please select a file and add description!', 'error');
                 return;
             }
             
-            const newResource = {
+            const file = fileInput.files[0];
+            if (!file) {
+                // Create a demo file link
+                const demoFile = {
+                    id: Date.now(),
+                    name: 'Demo_' + category + '_' + Date.now(),
+                    description: description || 'No description',
+                    type: getFileType(category),
+                    category: category,
+                    link: 'https://medicalprep.com/files/' + Date.now(),
+                    date: new Date().toLocaleDateString(),
+                    uploadedBy: 'Admin'
+                };
+                
+                adminFiles.push(demoFile);
+                localStorage.setItem('admin_files', JSON.stringify(adminFiles));
+                
+                loadFiles();
+                document.getElementById('file-description').value = '';
+                fileInput.value = '';
+                
+                showNotification('File uploaded successfully! Link generated.', 'success');
+                return;
+            }
+            
+            // In real app, you would upload to server here
+            const newFile = {
                 id: Date.now(),
-                title: title,
-                type: type,
-                subject: subject,
+                name: file.name,
                 description: description,
-                url: link || '#',
+                type: file.type.split('/')[1] || 'file',
+                category: category,
+                link: URL.createObjectURL(file), // Demo link
+                date: new Date().toLocaleDateString(),
                 uploadedBy: 'Admin',
-                date: new Date().toISOString().split('T')[0],
-                file: file ? file.name : null
+                size: (file.size / 1024 / 1024).toFixed(2) + ' MB'
             };
             
-            resources.push(newResource);
-            localStorage.setItem('pakmed_resources', JSON.stringify(resources));
+            adminFiles.push(newFile);
+            localStorage.setItem('admin_files', JSON.stringify(adminFiles));
             
-            // Clear form
-            document.getElementById('resource-title').value = '';
-            document.getElementById('resource-description').value = '';
-            document.getElementById('resource-link').value = '';
-            document.getElementById('resource-file').value = '';
-            document.getElementById('upload-preview').classList.add('hidden');
-            document.getElementById('upload-preview').innerHTML = '';
+            loadFiles();
+            document.getElementById('file-description').value = '';
+            fileInput.value = '';
             
-            showNotification('Resource uploaded successfully!', 'success');
-            loadResources();
-            loadAdminStats();
+            showNotification('File uploaded successfully! Link generated.', 'success');
         }
 
-        // ========== CHAT BOT ==========
-        function toggleChatBot() {
-            document.getElementById('chat-bot').classList.toggle('active');
+        function getFileType(category) {
+            const types = {
+                'study-material': 'pdf',
+                'practice-test': 'pdf',
+                'video-lecture': 'video',
+                'notes': 'doc'
+            };
+            return types[category] || 'file';
         }
 
-        function sendChatMessage(text) {
-            if (!text.trim()) return;
-            
-            // Add user message
-            addChatMessage(text, 'user');
-            
-            // Save message for admin
-            if (currentUser) {
-                const message = {
-                    id: Date.now(),
-                    user: currentUser.name,
-                    text: text,
-                    time: new Date().toISOString(),
-                    status: 'unread'
-                };
-                messages.push(message);
-                localStorage.setItem('pakmed_messages', JSON.stringify(messages));
-            }
-            
-            // Generate bot response
-            setTimeout(() => {
-                const response = generateBotResponse(text);
-                addChatMessage(response, 'bot');
-            }, 1000);
+        function copyLink(link) {
+            navigator.clipboard.writeText(link)
+                .then(() => showNotification('Link copied to clipboard!', 'success'))
+                .catch(() => showNotification('Failed to copy link', 'error'));
         }
 
-        function addChatMessage(text, sender) {
-            const container = document.getElementById('chat-messages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}`;
-            messageDiv.textContent = text;
-            container.appendChild(messageDiv);
-            container.scrollTop = container.scrollHeight;
+        function loadUserResources() {
+            const container = document.getElementById('user-resources');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            // Show all admin files to user (in real app, this would be filtered by permissions)
+            adminFiles.slice(-3).forEach(file => {
+                const resourceDiv = document.createElement('div');
+                resourceDiv.className = 'test-result-item';
+                resourceDiv.innerHTML = `
+                    <div>
+                        <strong>${file.name}</strong>
+                        <div class="text-sm text-gray">${file.description}</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline" onclick="downloadResource('${file.link}')">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                `;
+                container.appendChild(resourceDiv);
+            });
         }
 
-        function generateBotResponse(text) {
-            const lowerText = text.toLowerCase();
-            
-            if (lowerText.includes('hello') || lowerText.includes('hi')) {
-                return "Hello! I'm your MDCAT study assistant. How can I help you today?";
-            } else if (lowerText.includes('physics') || lowerText.includes('chemistry') || lowerText.includes('biology')) {
-                return "I can help you with that subject! Check the resources section for study materials or take a quiz to test your knowledge.";
-            } else if (lowerText.includes('quiz') || lowerText.includes('test')) {
-                return "Go to the Quiz Tests section to practice. Each quiz has 10 questions with 10 minutes time limit.";
-            } else if (lowerText.includes('book') || lowerText.includes('material')) {
-                return "You can find all study resources in the Study Resources section. Admin uploads new materials regularly.";
-            } else if (lowerText.includes('contact') || lowerText.includes('support')) {
-                return "For support, email us at support@pakmedstudycorner.com or use this chat for quick help.";
-            } else if (lowerText.includes('mdcat') || lowerText.includes('exam')) {
-                return "MDCAT preparation requires consistent practice. Use our quizzes and study materials regularly for best results.";
-            } else {
-                return "I'm here to help with your MDCAT preparation. You can ask me about subjects, quizzes, study materials, or general questions about the platform.";
-            }
+        function downloadResource(link) {
+            showNotification('Starting download...', 'success');
+            // In real app, this would trigger actual download
+            window.open(link, '_blank');
         }
 
         // ========== MODAL FUNCTIONS ==========
@@ -2940,34 +1420,60 @@
             showModal('login-modal');
         }
 
+        function showAdminLogin() {
+            showModal('admin-login-modal');
+        }
+
         function showRegisterModal() {
             showModal('register-modal');
         }
 
         // ========== UTILITY FUNCTIONS ==========
         function showNotification(message, type = 'info') {
-            // Create notification element
-            const notification = document.createElement('div');
-            notification.className = `notification ${type} show`;
-            notification.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-                <span>${message}</span>
-            `;
+            const notification = document.getElementById('notification');
+            const text = document.getElementById('notification-text');
             
-            // Add to body
-            document.body.appendChild(notification);
+            text.textContent = message;
+            notification.className = 'notification ' + type;
+            notification.classList.remove('hidden');
             
-            // Remove after 3 seconds
             setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => notification.remove(), 300);
+                notification.classList.add('hidden');
             }, 3000);
         }
-
-        // Load quiz categories
-        function loadQuizCategories() {
-            // Already loaded in HTML
-        }
     </script>
+
+    <style>
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            z-index: 3000;
+            min-width: 300px;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .notification.error {
+            border-left: 4px solid var(--danger);
+        }
+
+        .notification.info {
+            border-left: 4px solid var(--secondary);
+        }
+
+        .notification:not(.hidden) {
+            transform: translateX(0);
+        }
+    </style>
 </body>
 </html>
