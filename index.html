@@ -4,22 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAK-MED STUDY CORNER MDCAT</title>
+    <title>PAK-MED STUDY CORNER MDCAT - Premium Platform</title>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     
     <style>
-        /* ========== RESET & BASE STYLES ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* ========== VARIABLES & RESET ========== */
         :root {
             --primary: #1a237e;
             --secondary: #00bcd4;
@@ -29,87 +28,210 @@
             --danger: #f44336;
             --dark: #0d1b2a;
             --light: #f8f9fa;
+            --gray: #6c757d;
+            --text: #2d3748;
+            --text-light: #718096;
             --border: #e2e8f0;
-            --shadow: 0 4px 12px rgba(0,0,0,0.1);
-            --radius: 10px;
-            --transition: all 0.3s ease;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.12);
+            --radius: 16px;
+            --radius-sm: 8px;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #00bcd4 0%, #00838f 100%);
+            --gradient-accent: linear-gradient(135deg, #ff4081 0%, #c2185b 100%);
+            --gradient-success: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+            --gradient-dark: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: #333;
+            line-height: 1.7;
+            color: var(--text);
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
+        /* ========== CUSTOM SCROLLBAR ========== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+
+        /* ========== CONTAINER ========== */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        .hidden {
-            display: none !important;
+        .container-fluid {
+            width: 100%;
+            padding: 0 20px;
         }
+
+        /* ========== UTILITY CLASSES ========== */
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .d-flex { display: flex; }
+        .align-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-1 { gap: 1rem; }
+        .gap-2 { gap: 2rem; }
+        .w-100 { width: 100%; }
+        .h-100 { height: 100%; }
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mt-3 { margin-top: 3rem; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mb-3 { margin-bottom: 3rem; }
+        .p-1 { padding: 1rem; }
+        .p-2 { padding: 2rem; }
+        .p-3 { padding: 3rem; }
 
         /* ========== NAVIGATION ========== */
         .navbar {
-            background: white;
-            box-shadow: var(--shadow);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
             padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow);
         }
 
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            cursor: pointer;
+            gap: 12px;
+            text-decoration: none;
+            transition: var(--transition);
         }
 
-        .logo i {
-            font-size: 2rem;
-            color: var(--secondary);
+        .logo:hover {
+            transform: translateY(-2px);
         }
 
-        .logo h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .nav-links {
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
             display: flex;
             align-items: center;
-            gap: 2rem;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            font-size: 14px;
+            color: var(--secondary);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
         }
 
         .nav-link {
-            text-decoration: none;
             color: var(--text);
-            font-weight: 500;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 8px;
-            cursor: pointer;
-            padding: 8px 16px;
-            border-radius: 5px;
-            transition: var(--transition);
+            position: relative;
         }
 
         .nav-link:hover,
         .nav-link.active {
-            background: rgba(0, 188, 212, 0.1);
             color: var(--secondary);
+            background: rgba(0, 188, 212, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 80%;
         }
 
         .auth-buttons {
@@ -119,22 +241,62 @@
         }
 
         .btn {
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 50px;
             font-weight: 600;
-            transition: var(--transition);
+            font-size: 15px;
+            text-decoration: none;
             border: none;
             cursor: pointer;
-            display: flex;
+            transition: var(--transition);
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            font-family: inherit;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         .btn-primary {
-            background: var(--secondary);
+            background: var(--gradient-primary);
             color: white;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--gradient-secondary);
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 188, 212, 0.3);
+        }
+
+        .btn-accent {
+            background: var(--gradient-accent);
+            color: white;
+            box-shadow: 0 8px 20px rgba(255, 64, 129, 0.3);
         }
 
         .btn-outline {
@@ -143,132 +305,551 @@
             color: var(--secondary);
         }
 
-        /* ========== HOMEPAGE ========== */
-        #home-page {
-            padding-top: 80px;
-        }
-
-        .hero {
-            padding: 4rem 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .btn-outline:hover {
+            background: var(--secondary);
             color: white;
         }
 
-        /* ========== AUTH PAGES ========== */
-        .auth-page {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 2rem;
+        .btn-sm {
+            padding: 8px 20px;
+            font-size: 14px;
         }
 
-        .auth-box {
+        .btn-lg {
+            padding: 16px 40px;
+            font-size: 18px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(0, 188, 212, 0.1);
+        }
+
+        /* ========== MODAL ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
             background: white;
             border-radius: var(--radius);
             padding: 3rem;
-            width: 100%;
             max-width: 500px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
         }
 
-        .auth-tabs {
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
             display: flex;
-            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 2rem;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 1rem;
         }
 
-        .auth-tab {
-            flex: 1;
-            padding: 1rem;
-            text-align: center;
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-light);
             cursor: pointer;
-            font-weight: 600;
-            color: var(--text);
-            border-radius: 5px;
+            padding: 8px;
+            border-radius: 8px;
+            transition: var(--transition);
         }
 
-        .auth-tab.active {
-            background: var(--secondary);
-            color: white;
+        .close-modal:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: var(--danger);
         }
 
         .form-group {
             margin-bottom: 1.5rem;
         }
 
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
         .form-control {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px 18px;
             border: 2px solid var(--border);
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 1rem;
+            border-radius: var(--radius-sm);
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
         }
 
         .social-login {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-direction: column;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-top: 2rem;
         }
 
         .social-btn {
-            padding: 12px;
+            padding: 14px;
+            border-radius: var(--radius-sm);
             border: 2px solid var(--border);
-            border-radius: 8px;
             background: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            cursor: pointer;
+        }
+
+        .social-btn.facebook {
+            color: #1877f2;
+            border-color: #1877f2;
+        }
+
+        .social-btn.facebook:hover {
+            background: #1877f2;
+            color: white;
+        }
+
+        .social-btn.google {
+            color: #db4437;
+            border-color: #db4437;
+        }
+
+        .social-btn.google:hover {
+            background: #db4437;
+            color: white;
+        }
+
+        .otp-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .otp-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
             transition: var(--transition);
         }
 
-        /* ========== DASHBOARD ========== */
-        #dashboard-page {
+        .otp-input:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
+        }
+
+        /* ========== HERO SECTION ========== */
+        #home-page {
             padding-top: 80px;
-            min-height: 100vh;
         }
 
-        .dashboard-container {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 2rem;
-            padding: 2rem 0;
+        .hero {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.9), rgba(0, 188, 212, 0.8)),
+                        url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            position: relative;
+            overflow: hidden;
         }
 
-        .user-profile {
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-1000px) rotate(720deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
             text-align: center;
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border);
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .user-avatar {
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            font-family: 'Montserrat', sans-serif;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #ffffff 0%, #e0f7fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #00bcd4 0%, #ff4081 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* ========== FEATURES ========== */
+        .features {
+            padding: 8rem 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-primary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
             width: 80px;
             height: 80px;
-            margin: 0 auto 1rem;
-            background: var(--secondary);
+            margin: 0 auto 2rem;
+            background: var(--gradient-secondary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 188, 212, 0.3);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-description {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* ========== SUBJECTS ========== */
+        .subjects {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .subject-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(0, 188, 212, 0.05) 100%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .subject-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary);
+        }
+
+        .subject-card:hover::before {
+            opacity: 1;
+        }
+
+        .subject-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 3rem;
             color: white;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+            transition: var(--transition);
+        }
+
+        .subject-card:hover .subject-icon {
+            transform: rotateY(180deg) scale(1.1);
+        }
+
+        .subject-title {
+            font-size: 1.8rem;
             font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .subject-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .subject-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
         }
 
         /* ========== TESTS PAGE ========== */
+        #tests-page {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+
+        .tests-container {
+            padding: 3rem 0;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 24px;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
         .tests-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
         }
 
         .test-card {
@@ -276,1014 +857,1789 @@
             border-radius: var(--radius);
             padding: 2rem;
             box-shadow: var(--shadow);
-            cursor: pointer;
             transition: var(--transition);
+            border: 2px solid transparent;
         }
 
         .test-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary);
         }
 
-        /* ========== QUIZ PAGE ========== */
-        .quiz-container {
-            max-width: 800px;
-            margin: 2rem auto;
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .test-tag {
+            padding: 6px 16px;
+            background: var(--gradient-success);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .test-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .test-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .test-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ========== TEST TAKING ========== */
+        .test-taking-container {
+            padding: 100px 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .test-header-bar {
             background: white;
+            padding: 1.5rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .test-progress {
+            flex: 1;
+            margin: 0 2rem;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: var(--border);
+            border-radius: 5px;
             overflow: hidden;
         }
 
-        /* ========== ADMIN PAGE ========== */
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-secondary);
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .test-question-container {
+            background: white;
+            border-radius: var(--radius);
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .question-number {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            padding: 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .option:hover {
+            border-color: var(--secondary);
+            background: rgba(0, 188, 212, 0.05);
+            transform: translateX(10px);
+        }
+
+        .option.selected {
+            border-color: var(--secondary);
+            background: rgba(0, 188, 212, 0.1);
+        }
+
+        .option-letter {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .option.selected .option-letter {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .test-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        /* ========== ADMIN DASHBOARD ========== */
+        .admin-dashboard {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            padding: 3rem 0;
+        }
+
         .admin-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            gap: 2rem;
             margin-bottom: 3rem;
         }
 
+        .admin-stat-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .admin-stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-stat-label {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .users-table-container {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+        }
+
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .users-table th,
+        .users-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .users-table th {
+            background: var(--light);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .user-status {
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .user-status.online {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--success);
+        }
+
+        .user-status.offline {
+            background: rgba(244, 67, 54, 0.1);
+            color: var(--danger);
+        }
+
+        /* ========== PROGRESS REPORT ========== */
+        .progress-report {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+
+        .progress-container {
+            padding: 3rem 0;
+        }
+
+        .progress-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .progress-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .progress-chart {
+            width: 100%;
+            height: 200px;
+            margin-top: 1rem;
+        }
+
+        /* ========== DROPDOWN MENU ========== */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text);
+            padding: 8px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .dropdown-toggle:hover {
+            background: rgba(0, 188, 212, 0.1);
+            color: var(--secondary);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            min-width: 200px;
+            display: none;
+            z-index: 100;
+        }
+
+        .dropdown-menu.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 1rem;
+            text-decoration: none;
+            color: var(--text);
+            transition: var(--transition);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 188, 212, 0.1);
+            color: var(--secondary);
+        }
+
         /* ========== RESPONSIVE ========== */
-        @media (max-width: 768px) {
-            .nav-links {
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .nav-menu {
                 display: none;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: var(--shadow);
+                z-index: 999;
             }
             
             .mobile-menu-btn {
                 display: block;
             }
             
-            .dashboard-container {
+            .auth-buttons {
+                display: none;
+            }
+            
+            .auth-buttons.active {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .tests-grid {
                 grid-template-columns: 1fr;
             }
             
-            .social-login {
-                grid-template-columns: 1fr;
+            .test-navigation {
+                flex-direction: column;
+                gap: 1rem;
             }
+        }
+
+        /* ========== NOTIFICATION ========== */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .notification.error {
+            border-left: 4px solid var(--danger);
+        }
+
+        .notification.warning {
+            border-left: 4px solid var(--warning);
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="container">
-            <div class="nav-container">
-                <div class="logo" onclick="showPage('home')">
-                    <i class="fas fa-stethoscope"></i>
-                    <h1>PAK-MED STUDY CORNER</h1>
+        <div class="nav-container">
+            <a href="#home-page" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
                 </div>
-                
-                <div class="nav-links">
-                    <a class="nav-link active" onclick="showPage('home')">
+                <div class="logo-text">
+                    <h1>PAK-MED STUDY CORNER</h1>
+                    <span>MDCAT PREMIUM PLATFORM</span>
+                </div>
+            </a>
+
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home-page" class="nav-link active" onclick="showPage('home-page')">
                         <i class="fas fa-home"></i> Home
                     </a>
-                    <a class="nav-link" onclick="showPage('tests')">
-                        <i class="fas fa-file-alt"></i> Tests
+                </li>
+                <li class="nav-item">
+                    <a href="#tests-page" class="nav-link" onclick="showPage('tests-page')">
+                        <i class="fas fa-file-alt"></i> Practice Tests
                     </a>
-                    <a class="nav-link" onclick="showPage('subjects')">
-                        <i class="fas fa-book"></i> Subjects
+                </li>
+                <li class="nav-item">
+                    <a href="#progress-report" class="nav-link" onclick="showPage('progress-report')">
+                        <i class="fas fa-chart-line"></i> Progress Report
                     </a>
-                    <a class="nav-link" onclick="showPage('dashboard')">
-                        <i class="fas fa-user"></i> Dashboard
+                </li>
+                <li class="nav-item">
+                    <a href="#admin-dashboard" class="nav-link hidden" id="admin-link" onclick="showPage('admin-dashboard')">
+                        <i class="fas fa-cog"></i> Admin
                     </a>
-                </div>
-                
-                <div class="auth-buttons">
-                    <button class="btn btn-outline" onclick="showPage('login')">
-                        <i class="fas fa-sign-in-alt"></i> Login
+                </li>
+                <li class="nav-item dropdown">
+                    <button class="dropdown-toggle">
+                        <i class="fas fa-ellipsis-v"></i>
                     </button>
-                    <button class="btn btn-primary" onclick="showPage('login')">
-                        <i class="fas fa-user-plus"></i> Sign Up
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item" onclick="showBooks()">
+                            <i class="fas fa-book"></i> Books & Notes
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-video"></i> Video Lectures
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-question-circle"></i> Help Center
+                        </a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="auth-buttons">
+                <button class="btn btn-outline btn-sm" onclick="showLoginModal()">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button class="btn btn-primary btn-sm" onclick="showRegisterModal()">
+                    <i class="fas fa-user-plus"></i> Register
+                </button>
+                <div class="user-info hidden" id="user-info">
+                    <span id="user-name"></span>
+                    <button class="btn btn-sm" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
                     </button>
-                </div>
-                
-                <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
-                    <i class="fas fa-bars"></i>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- ========== HOMEPAGE ========== -->
-    <div id="home-page" class="page">
-        <section class="hero">
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Login to Your Account</h3>
+                <button class="close-modal" onclick="closeModal('login-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label class="form-label">Email or Mobile Number</label>
+                    <input type="text" class="form-control" id="login-identifier" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+
+            <div class="social-login">
+                <button class="social-btn facebook" onclick="loginWithFacebook()">
+                    <i class="fab fa-facebook-f"></i> Continue with Facebook
+                </button>
+                <button class="social-btn google" onclick="loginWithGoogle()">
+                    <i class="fab fa-google"></i> Continue with Google
+                </button>
+            </div>
+
+            <div class="mt-2 text-center">
+                <a href="#" onclick="showMobileLogin()" style="color: var(--secondary); text-decoration: none;">
+                    <i class="fas fa-mobile-alt"></i> Login with Mobile OTP
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile OTP Modal -->
+    <div class="modal" id="mobile-otp-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Mobile OTP Login</h3>
+                <button class="close-modal" onclick="closeModal('mobile-otp-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="mobile-otp-form">
+                <div class="form-group">
+                    <label class="form-label">Mobile Number</label>
+                    <input type="tel" class="form-control" id="mobile-number" required>
+                </div>
+                <button type="button" class="btn btn-secondary w-100" onclick="sendOTP()">
+                    <i class="fas fa-paper-plane"></i> Send OTP
+                </button>
+
+                <div class="form-group mt-2 hidden" id="otp-input-group">
+                    <label class="form-label">Enter OTP</label>
+                    <div class="otp-container">
+                        <input type="text" class="otp-input" maxlength="1" data-index="0">
+                        <input type="text" class="otp-input" maxlength="1" data-index="1">
+                        <input type="text" class="otp-input" maxlength="1" data-index="2">
+                        <input type="text" class="otp-input" maxlength="1" data-index="3">
+                        <input type="text" class="otp-input" maxlength="1" data-index="4">
+                        <input type="text" class="otp-input" maxlength="1" data-index="5">
+                    </div>
+                    <div class="mt-1 text-center">
+                        <a href="#" onclick="autoFillOTP()" style="color: var(--secondary); text-decoration: none;">
+                            <i class="fas fa-bolt"></i> Auto-fill OTP
+                        </a>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mt-2">
+                        <i class="fas fa-check"></i> Verify OTP
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Create New Account</h3>
+                <button class="close-modal" onclick="closeModal('register-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="register-form">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="register-name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mobile Number</label>
+                    <input type="tel" class="form-control" id="register-mobile" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" id="register-password" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="register-confirm-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </form>
+
+            <div class="social-login">
+                <button class="social-btn facebook" onclick="registerWithFacebook()">
+                    <i class="fab fa-facebook-f"></i> Sign up with Facebook
+                </button>
+                <button class="social-btn google" onclick="registerWithGoogle()">
+                    <i class="fab fa-google"></i> Sign up with Google
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Books & Notes Modal -->
+    <div class="modal" id="books-modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Books & Notes</h3>
+                <button class="close-modal" onclick="closeModal('books-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="books-content">
+                <!-- Books will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Page -->
+    <section id="home-page" class="page active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Ace Your MDCAT with Confidence</h1>
+                <p class="hero-subtitle">Comprehensive study materials, practice tests, and personalized progress tracking for Pakistan's top medical aspirants.</p>
+                
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-lg" onclick="showPage('tests-page')">
+                        <i class="fas fa-play-circle"></i> Start Practice Test
+                    </button>
+                    <button class="btn btn-secondary btn-lg" onclick="showRegisterModal()">
+                        <i class="fas fa-rocket"></i> Join Free Trial
+                    </button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">5000+</div>
+                        <div class="stat-label">Practice Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Video Lectures</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Expert Support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="features">
             <div class="container">
-                <h1>MDCAT Preparation Platform</h1>
-                <p>Complete study materials and practice tests</p>
+                <div class="section-header">
+                    <h2 class="section-title">Why Choose Pak-Med Study Corner?</h2>
+                    <p class="section-subtitle">We provide everything you need to succeed in your MDCAT journey</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="feature-title">Smart Practice Tests</h3>
+                        <p class="feature-description">Adaptive tests that identify your weak areas and provide targeted practice to improve your score.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Detailed Analytics</h3>
+                        <p class="feature-description">Track your progress with comprehensive analytics and performance reports.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3 class="feature-title">Comprehensive Material</h3>
+                        <p class="feature-description">Access to complete syllabus coverage with expert-curated study materials.</p>
+                    </div>
+                </div>
             </div>
         </section>
-    </div>
 
-    <!-- ========== LOGIN/REGISTER PAGE ========== -->
-    <div id="login-page" class="page hidden">
-        <div class="auth-page">
-            <div class="auth-box">
-                <div class="auth-tabs">
-                    <div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
-                    <div class="auth-tab" onclick="switchAuthTab('register')">Register</div>
+        <section class="subjects">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Subjects Covered</h2>
+                    <p class="section-subtitle">Master all subjects with our comprehensive test series</p>
                 </div>
-                
-                <!-- Login Form -->
-                <div id="login-form">
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="login-email" placeholder="Email Address">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="login-password" placeholder="Password">
-                    </div>
-                    <button class="btn btn-primary w-100" onclick="handleLogin()">
-                        <i class="fas fa-sign-in-alt"></i> Login
-                    </button>
-                    
-                    <div style="margin: 2rem 0; text-align: center; color: #666;">
-                        OR CONTINUE WITH
-                    </div>
-                    
-                    <div class="social-login">
-                        <button class="social-btn" onclick="loginWithFacebook()">
-                            <i class="fab fa-facebook"></i> Facebook
-                        </button>
-                        <button class="social-btn" onclick="loginWithGoogle()">
-                            <i class="fab fa-google"></i> Google
-                        </button>
-                    </div>
-                    
-                    <div class="phone-login" style="margin-top: 1.5rem;">
-                        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-                            <select class="form-control" style="flex: 0 0 100px;">
-                                <option>+92</option>
-                                <option>+1</option>
-                                <option>+44</option>
-                            </select>
-                            <input type="tel" class="form-control" placeholder="Phone Number">
+
+                <div class="subjects-grid">
+                    <div class="subject-card" onclick="showSubjectTests('physics')">
+                        <div class="subject-icon">
+                            <i class="fas fa-atom"></i>
                         </div>
-                        <button class="btn btn-outline w-100" onclick="loginWithPhone()">
-                            <i class="fas fa-mobile-alt"></i> Send OTP
-                        </button>
+                        <h3 class="subject-title">Physics</h3>
+                        <p class="subject-description">Complete physics syllabus with numerical practice and concept clarity.</p>
+                        <div class="subject-stats">
+                            <div class="stat">
+                                <span class="stat-number">5</span>
+                                <span class="stat-label">Tests</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">200+</span>
+                                <span class="stat-label">Questions</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Register Form -->
-                <div id="register-form" class="hidden">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="reg-name" placeholder="Full Name">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="reg-email" placeholder="Email Address">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="reg-password" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="reg-confirm" placeholder="Confirm Password">
-                    </div>
-                    <button class="btn btn-primary w-100" onclick="handleRegister()">
-                        <i class="fas fa-user-plus"></i> Create Account
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- ========== DASHBOARD ========== -->
-    <div id="dashboard-page" class="page hidden">
-        <div class="container">
-            <div class="dashboard-container">
-                <div class="sidebar">
-                    <div class="user-profile">
-                        <div class="user-avatar" id="user-avatar">U</div>
-                        <h3 id="user-name">User Name</h3>
-                        <p id="user-email">user@example.com</p>
+                    <div class="subject-card" onclick="showSubjectTests('chemistry')">
+                        <div class="subject-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3 class="subject-title">Chemistry</h3>
+                        <p class="subject-description">Organic, inorganic and physical chemistry with reaction mechanisms.</p>
+                        <div class="subject-stats">
+                            <div class="stat">
+                                <span class="stat-number">5</span>
+                                <span class="stat-label">Tests</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">200+</span>
+                                <span class="stat-label">Questions</span>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div style="margin-bottom: 2rem;">
-                        <h4 style="margin-bottom: 1rem;">My Progress</h4>
-                        <div id="progress-stats">
-                            <!-- Progress will be loaded here -->
+
+                    <div class="subject-card" onclick="showSubjectTests('biology')">
+                        <div class="subject-icon">
+                            <i class="fas fa-dna"></i>
+                        </div>
+                        <h3 class="subject-title">Biology</h3>
+                        <p class="subject-description">Complete biological concepts with diagrams and memorization techniques.</p>
+                        <div class="subject-stats">
+                            <div class="stat">
+                                <span class="stat-number">5</span>
+                                <span class="stat-label">Tests</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">200+</span>
+                                <span class="stat-label">Questions</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="main-content">
-                    <h2>Welcome Back!</h2>
-                    <p>Your personalized dashboard</p>
+            </div>
+        </section>
+    </section>
+
+    <!-- Tests Page -->
+    <section id="tests-page" class="page hidden">
+        <div class="tests-container">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Practice Tests</h2>
+                    <p class="section-subtitle">Select a subject and start your practice test</p>
+                </div>
+
+                <div class="filters">
+                    <button class="filter-btn active" onclick="filterTests('all')">All Tests</button>
+                    <button class="filter-btn" onclick="filterTests('physics')">Physics</button>
+                    <button class="filter-btn" onclick="filterTests('chemistry')">Chemistry</button>
+                    <button class="filter-btn" onclick="filterTests('biology')">Biology</button>
+                </div>
+
+                <div class="tests-grid" id="tests-grid">
+                    <!-- Tests will be loaded here dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Taking Page -->
+    <section id="test-taking-page" class="page hidden">
+        <div class="test-taking-container">
+            <div class="container">
+                <div class="test-header-bar">
+                    <div class="test-timer">
+                        <i class="fas fa-clock"></i>
+                        <span id="timer">20:00</span>
+                    </div>
+                    <div class="test-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="question-counter">
+                        <span id="current-question">1</span>/<span id="total-questions">10</span>
+                    </div>
+                </div>
+
+                <div class="test-question-container">
+                    <div class="question-number" id="question-number">Question 1</div>
+                    <div class="question-text" id="question-text"></div>
                     
-                    <div class="stats-grid" id="user-stats">
-                        <!-- User stats will be loaded here -->
+                    <div class="options-container" id="options-container">
+                        <!-- Options will be loaded here -->
+                    </div>
+                    
+                    <div class="test-navigation">
+                        <button class="btn btn-outline" onclick="previousQuestion()">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </button>
+                        <button class="btn btn-secondary" onclick="nextQuestion()">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button class="btn btn-primary hidden" id="submit-btn" onclick="submitTest()">
+                            <i class="fas fa-paper-plane"></i> Submit Test
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ========== TESTS PAGE ========== -->
-    <div id="tests-page" class="page hidden">
-        <div class="container">
-            <h2 style="margin-top: 100px; margin-bottom: 2rem;">Practice Tests</h2>
-            
-            <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
-                <button class="btn" onclick="filterTests('all')" id="filter-all">All Tests</button>
-                <button class="btn" onclick="filterTests('biology')" id="filter-bio">Biology</button>
-                <button class="btn" onclick="filterTests('chemistry')" id="filter-chem">Chemistry</button>
-                <button class="btn" onclick="filterTests('physics')" id="filter-phy">Physics</button>
-                <button class="btn" onclick="filterTests('english')" id="filter-eng">English</button>
-            </div>
-            
-            <div class="tests-grid" id="tests-container">
-                <!-- Tests will be loaded dynamically -->
+    <!-- Progress Report Page -->
+    <section id="progress-report" class="page hidden">
+        <div class="progress-container">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Your Progress Report</h2>
+                    <p class="section-subtitle">Track your performance and improvement over time</p>
+                </div>
+
+                <div class="progress-summary">
+                    <div class="progress-card">
+                        <h3>Overall Score</h3>
+                        <div class="admin-stat-number" id="overall-score">0%</div>
+                        <canvas class="progress-chart" id="score-chart"></canvas>
+                    </div>
+                    
+                    <div class="progress-card">
+                        <h3>Subject-wise Performance</h3>
+                        <div id="subject-performance">
+                            <!-- Subject performance will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div class="progress-card">
+                        <h3>Test History</h3>
+                        <div id="test-history">
+                            <!-- Test history will be loaded here -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ========== QUIZ PAGE ========== -->
-    <div id="quiz-page" class="page hidden">
-        <div class="quiz-container">
-            <div id="quiz-content">
-                <!-- Quiz content will be loaded here -->
-            </div>
-        </div>
-    </div>
+    <!-- Admin Dashboard -->
+    <section id="admin-dashboard" class="page hidden">
+        <div class="admin-container">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Admin Dashboard</h2>
+                    <p class="section-subtitle">Manage users, tests, and platform analytics</p>
+                </div>
 
-    <!-- ========== ADMIN PAGE ========== -->
-    <div id="admin-page" class="page hidden">
-        <div class="container">
-            <div style="padding-top: 100px;">
-                <h1>Admin Dashboard</h1>
-                
                 <div class="admin-stats">
-                    <div style="background: #667eea; color: white; padding: 2rem; border-radius: 10px;">
-                        <h3 id="total-users">0</h3>
-                        <p>Total Users</p>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-number" id="total-users">0</div>
+                        <div class="admin-stat-label">Total Users</div>
                     </div>
-                    <div style="background: #00bcd4; color: white; padding: 2rem; border-radius: 10px;">
-                        <h3 id="online-users">0</h3>
-                        <p>Online Now</p>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-number" id="online-users">0</div>
+                        <div class="admin-stat-label">Online Users</div>
                     </div>
-                    <div style="background: #4caf50; color: white; padding: 2rem; border-radius: 10px;">
-                        <h3 id="active-users">0</h3>
-                        <p>Active Today</p>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-number" id="total-tests">0</div>
+                        <div class="admin-stat-label">Tests Taken</div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-number" id="avg-score">0%</div>
+                        <div class="admin-stat-label">Average Score</div>
                     </div>
                 </div>
-                
-                <div style="background: white; padding: 2rem; border-radius: 10px; margin-top: 2rem;">
+
+                <div class="users-table-container mt-3">
                     <h3>All Users</h3>
-                    <div id="users-list">
-                        <!-- Users will be listed here -->
-                    </div>
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Status</th>
+                                <th>Tests Taken</th>
+                                <th>Average Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                            <!-- Users will be loaded here -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Notification -->
+    <div class="notification hidden" id="notification">
+        <i class="fas fa-info-circle"></i>
+        <span id="notification-text"></span>
     </div>
 
-    <!-- ========== JavaScript ========== -->
     <script>
-        // ========== APPLICATION STATE ==========
-        const appState = {
-            currentUser: null,
-            isLoggedIn: false,
-            isAdmin: false,
-            users: JSON.parse(localStorage.getItem('mdcatUsers')) || [
-                {
-                    id: 1,
-                    name: 'Admin',
-                    email: 'doctormotivation29@gmail.com',
-                    password: 'Admin@123',
-                    role: 'admin',
-                    progress: {}
-                }
-            ],
-            currentTest: null,
-            currentQuestion: 0,
-            userAnswers: [],
-            userProgress: {},
-            onlineUsers: []
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC4R6AN1F7RZQlQpD8qYQJw3BqKQvXvT8Y",
+            authDomain: "pak-med-study-corner.firebaseapp.com",
+            projectId: "pak-med-study-corner",
+            storageBucket: "pak-med-study-corner.appspot.com",
+            messagingSenderId: "123456789012",
+            appId: "1:123456789012:web:abcdef1234567890"
         };
 
-        // ========== DIFFERENT TEST QUESTIONS ==========
-        const testQuestions = {
-            biology: [
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // State Management
+        let currentUser = null;
+        let currentTest = null;
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let timerInterval = null;
+        let timeLeft = 1200; // 20 minutes in seconds
+
+        // Test Data (Each subject has 5 tests, each test has 10 unique questions)
+        const testData = {
+            physics: [
                 {
-                    question: "What is the powerhouse of the cell?",
-                    options: ["Nucleus", "Mitochondria", "Ribosome", "Golgi Apparatus"],
-                    correct: 1
+                    id: 1,
+                    title: "Physics Test 1: Mechanics",
+                    description: "Covering kinematics, dynamics, and laws of motion",
+                    questions: [
+                        {
+                            id: 1,
+                            text: "What is the SI unit of force?",
+                            options: [
+                                { id: 'A', text: 'Newton', correct: true },
+                                { id: 'B', text: 'Joule', correct: false },
+                                { id: 'C', text: 'Watt', correct: false },
+                                { id: 'D', text: 'Pascal', correct: false }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            text: "Which law states that for every action there is an equal and opposite reaction?",
+                            options: [
+                                { id: 'A', text: 'Newton\'s First Law', correct: false },
+                                { id: 'B', text: 'Newton\'s Second Law', correct: false },
+                                { id: 'C', text: 'Newton\'s Third Law', correct: true },
+                                { id: 'D', text: 'Law of Conservation of Energy', correct: false }
+                            ]
+                        },
+                        // Add 8 more unique questions...
+                    ]
                 },
-                {
-                    question: "Which process produces ATP?",
-                    options: ["Photosynthesis", "Cellular Respiration", "Mitosis", "Meiosis"],
-                    correct: 1
-                },
-                {
-                    question: "What is the function of ribosomes?",
-                    options: ["Energy production", "Protein synthesis", "Cell division", "Waste removal"],
-                    correct: 1
-                }
+                // Add 4 more physics tests...
             ],
             chemistry: [
                 {
-                    question: "What is the atomic number of Hydrogen?",
-                    options: ["1", "2", "6", "8"],
-                    correct: 0
+                    id: 1,
+                    title: "Chemistry Test 1: Atomic Structure",
+                    description: "Covering atomic models, electron configuration, and periodic table",
+                    questions: [
+                        {
+                            id: 1,
+                            text: "What is the atomic number of Carbon?",
+                            options: [
+                                { id: 'A', text: '6', correct: true },
+                                { id: 'B', text: '12', correct: false },
+                                { id: 'C', text: '14', correct: false },
+                                { id: 'D', text: '8', correct: false }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            text: "Which element has the electron configuration 1s²2s²2p⁶3s²3p⁶4s²?",
+                            options: [
+                                { id: 'A', text: 'Calcium', correct: true },
+                                { id: 'B', text: 'Potassium', correct: false },
+                                { id: 'C', text: 'Argon', correct: false },
+                                { id: 'D', text: 'Titanium', correct: false }
+                            ]
+                        },
+                        // Add 8 more unique questions...
+                    ]
                 },
-                {
-                    question: "Which element is a noble gas?",
-                    options: ["Oxygen", "Nitrogen", "Helium", "Carbon"],
-                    correct: 2
-                },
-                {
-                    question: "What is the pH of pure water?",
-                    options: ["5", "7", "8", "14"],
-                    correct: 1
-                }
+                // Add 4 more chemistry tests...
             ],
-            physics: [
+            biology: [
                 {
-                    question: "What is the SI unit of force?",
-                    options: ["Joule", "Watt", "Newton", "Pascal"],
-                    correct: 2
+                    id: 1,
+                    title: "Biology Test 1: Cell Biology",
+                    description: "Covering cell structure, organelles, and cellular processes",
+                    questions: [
+                        {
+                            id: 1,
+                            text: "What is the powerhouse of the cell?",
+                            options: [
+                                { id: 'A', text: 'Mitochondria', correct: true },
+                                { id: 'B', text: 'Nucleus', correct: false },
+                                { id: 'C', text: 'Ribosome', correct: false },
+                                { id: 'D', text: 'Golgi Apparatus', correct: false }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            text: "Which organelle is responsible for protein synthesis?",
+                            options: [
+                                { id: 'A', text: 'Ribosome', correct: true },
+                                { id: 'B', text: 'Lysosome', correct: false },
+                                { id: 'C', text: 'Endoplasmic Reticulum', correct: false },
+                                { id: 'D', text: 'Vacuole', correct: false }
+                            ]
+                        },
+                        // Add 8 more unique questions...
+                    ]
                 },
-                {
-                    question: "Who discovered gravity?",
-                    options: ["Einstein", "Newton", "Galileo", "Tesla"],
-                    correct: 1
-                },
-                {
-                    question: "What is the speed of light?",
-                    options: ["3x10^5 m/s", "3x10^8 m/s", "3x10^3 m/s", "3x10^10 m/s"],
-                    correct: 1
-                }
-            ],
-            english: [
-                {
-                    question: "What is a synonym for 'happy'?",
-                    options: ["Sad", "Angry", "Joyful", "Tired"],
-                    correct: 2
-                },
-                {
-                    question: "Which is a preposition?",
-                    options: ["Run", "Beautiful", "In", "Quickly"],
-                    correct: 2
-                },
-                {
-                    question: "Past tense of 'go' is:",
-                    options: ["Goed", "Went", "Gone", "Going"],
-                    correct: 1
-                }
+                // Add 4 more biology tests...
             ]
         };
 
-        // ========== INITIALIZATION ==========
+        // Initialize Application
         document.addEventListener('DOMContentLoaded', function() {
-            // Check if user is already logged in
-            const savedUser = localStorage.getItem('currentUser');
-            if (savedUser) {
-                const user = JSON.parse(savedUser);
-                appState.currentUser = user;
-                appState.isLoggedIn = true;
-                appState.isAdmin = user.role === 'admin';
-                
-                // Mark user as online
-                if (!appState.onlineUsers.includes(user.id)) {
-                    appState.onlineUsers.push(user.id);
-                }
-            }
-            
-            // Load initial page
-            const hash = window.location.hash.substring(1);
-            if (hash) {
-                showPage(hash);
-            }
+            initializeApp();
+            setupEventListeners();
+            loadTests();
+            checkAuthState();
         });
 
-        // ========== PAGE NAVIGATION ==========
-        function showPage(page) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(el => {
-                el.classList.add('hidden');
+        function initializeApp() {
+            // Setup dropdown menus
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const menu = this.nextElementSibling;
+                    menu.classList.toggle('active');
+                });
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.classList.remove('active');
+                });
+            });
+
+            // Mobile menu
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            mobileMenuBtn.addEventListener('click', function() {
+                const navMenu = document.querySelector('.nav-menu');
+                navMenu.classList.toggle('active');
+                this.innerHTML = navMenu.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : 
+                    '<i class="fas fa-bars"></i>';
+            });
+        }
+
+        function setupEventListeners() {
+            // Login form
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const identifier = document.getElementById('login-identifier').value;
+                const password = document.getElementById('login-password').value;
+                
+                if (identifier.includes('@')) {
+                    loginWithEmail(identifier, password);
+                } else {
+                    loginWithMobile(identifier, password);
+                }
+            });
+
+            // Register form
+            document.getElementById('register-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('register-name').value;
+                const email = document.getElementById('register-email').value;
+                const mobile = document.getElementById('register-mobile').value;
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('register-confirm-password').value;
+                
+                if (password !== confirmPassword) {
+                    showNotification('Passwords do not match!', 'error');
+                    return;
+                }
+                
+                registerWithEmail(name, email, mobile, password);
+            });
+
+            // Mobile OTP form
+            document.getElementById('mobile-otp-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                verifyOTP();
+            });
+
+            // OTP input auto-focus
+            const otpInputs = document.querySelectorAll('.otp-input');
+            otpInputs.forEach((input, index) => {
+                input.addEventListener('input', function(e) {
+                    if (this.value.length === 1 && index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                });
+                
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && !this.value && index > 0) {
+                        otpInputs[index - 1].focus();
+                    }
+                });
+            });
+        }
+
+        // Authentication Functions
+        async function loginWithEmail(email, password) {
+            try {
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                currentUser = userCredential.user;
+                showNotification('Login successful!', 'success');
+                closeModal('login-modal');
+                updateUIForUser();
+                saveUserToFirestore();
+            } catch (error) {
+                showNotification('Invalid email or password!', 'error');
+            }
+        }
+
+        async function loginWithMobile(mobile, password) {
+            // In a real app, you would verify mobile with your backend
+            showNotification('Mobile login coming soon!', 'warning');
+        }
+
+        async function registerWithEmail(name, email, mobile, password) {
+            try {
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                currentUser = userCredential.user;
+                
+                // Update user profile
+                await currentUser.updateProfile({
+                    displayName: name
+                });
+                
+                // Save additional user data to Firestore
+                await db.collection('users').doc(currentUser.uid).set({
+                    name: name,
+                    email: email,
+                    mobile: mobile,
+                    role: 'user',
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
+                    progress: {}
+                });
+                
+                showNotification('Registration successful!', 'success');
+                closeModal('register-modal');
+                updateUIForUser();
+            } catch (error) {
+                showNotification(error.message, 'error');
+            }
+        }
+
+        function loginWithFacebook() {
+            showNotification('Redirecting to Facebook login...', 'warning');
+            // In production, implement Facebook OAuth
+            // const provider = new firebase.auth.FacebookAuthProvider();
+            // auth.signInWithPopup(provider);
+        }
+
+        function loginWithGoogle() {
+            showNotification('Redirecting to Google login...', 'warning');
+            // In production, implement Google OAuth
+            // const provider = new firebase.auth.GoogleAuthProvider();
+            // auth.signInWithPopup(provider);
+        }
+
+        function registerWithFacebook() {
+            loginWithFacebook(); // Same as login for now
+        }
+
+        function registerWithGoogle() {
+            loginWithGoogle(); // Same as login for now
+        }
+
+        function showMobileLogin() {
+            closeModal('login-modal');
+            showModal('mobile-otp-modal');
+        }
+
+        function sendOTP() {
+            const mobile = document.getElementById('mobile-number').value;
+            if (!mobile) {
+                showNotification('Please enter mobile number!', 'error');
+                return;
+            }
+            
+            showNotification('OTP sent to your mobile!', 'success');
+            document.getElementById('otp-input-group').classList.remove('hidden');
+        }
+
+        function autoFillOTP() {
+            // Simulate auto-filling OTP
+            const otpInputs = document.querySelectorAll('.otp-input');
+            const otp = '123456'; // Demo OTP
+            otpInputs.forEach((input, index) => {
+                input.value = otp[index];
+            });
+            showNotification('OTP auto-filled!', 'success');
+        }
+
+        function verifyOTP() {
+            // Simulate OTP verification
+            showNotification('OTP verified successfully!', 'success');
+            closeModal('mobile-otp-modal');
+            simulateMobileLogin();
+        }
+
+        function simulateMobileLogin() {
+            currentUser = {
+                uid: 'mobile-user-' + Date.now(),
+                displayName: 'Mobile User',
+                email: 'mobile@example.com'
+            };
+            updateUIForUser();
+            showNotification('Mobile login successful!', 'success');
+        }
+
+        async function saveUserToFirestore() {
+            if (!currentUser) return;
+            
+            await db.collection('users').doc(currentUser.uid).update({
+                lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
+                status: 'online'
+            });
+        }
+
+        function checkAuthState() {
+            auth.onAuthStateChanged(async (user) => {
+                if (user) {
+                    currentUser = user;
+                    updateUIForUser();
+                    
+                    // Check if user is admin
+                    const userDoc = await db.collection('users').doc(user.uid).get();
+                    if (userDoc.exists && userDoc.data().role === 'admin') {
+                        document.getElementById('admin-link').classList.remove('hidden');
+                    }
+                    
+                    // Load user progress
+                    loadUserProgress();
+                } else {
+                    currentUser = null;
+                    updateUIForGuest();
+                }
+            });
+        }
+
+        function updateUIForUser() {
+            document.querySelectorAll('.auth-buttons .btn').forEach(btn => btn.classList.add('hidden'));
+            document.getElementById('user-info').classList.remove('hidden');
+            
+            if (currentUser.displayName) {
+                document.getElementById('user-name').textContent = currentUser.displayName;
+            }
+            
+            // Show user-specific content
+            document.querySelectorAll('.user-only').forEach(el => el.classList.remove('hidden'));
+        }
+
+        function updateUIForGuest() {
+            document.querySelectorAll('.auth-buttons .btn').forEach(btn => btn.classList.remove('hidden'));
+            document.getElementById('user-info').classList.add('hidden');
+            
+            // Hide user-specific content
+            document.querySelectorAll('.user-only').forEach(el => el.classList.add('hidden'));
+            document.getElementById('admin-link').classList.add('hidden');
+        }
+
+        function logout() {
+            auth.signOut();
+            currentUser = null;
+            updateUIForGuest();
+            showNotification('Logged out successfully!', 'success');
+        }
+
+        // Page Navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
             });
             
-            // Update navigation
+            document.getElementById(pageId).classList.remove('hidden');
+            
+            // Update active nav link
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
             });
             
-            // Show requested page
-            const pageElement = document.getElementById(`${page}-page`);
-            if (pageElement) {
-                pageElement.classList.remove('hidden');
-                
-                // Update navigation for main pages
-                if (['home', 'tests', 'subjects', 'dashboard'].includes(page)) {
-                    document.querySelector(`[onclick="showPage('${page}')"]`)?.classList.add('active');
-                }
-                
-                // Initialize page content
-                switch(page) {
-                    case 'home':
-                        break;
-                    case 'login':
-                        switchAuthTab('login');
-                        break;
-                    case 'tests':
-                        loadTestsPage();
-                        break;
-                    case 'dashboard':
-                        if (!appState.isLoggedIn) {
-                            showPage('login');
-                            return;
-                        }
-                        loadDashboard();
-                        break;
-                    case 'admin':
-                        if (!appState.isAdmin) {
-                            showPage('home');
-                            return;
-                        }
-                        loadAdminDashboard();
-                        break;
-                }
-            }
-        }
-
-        // ========== AUTHENTICATION ==========
-        function switchAuthTab(tab) {
-            document.querySelectorAll('.auth-tab').forEach(t => {
-                t.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            document.getElementById('login-form').classList.toggle('hidden', tab !== 'login');
-            document.getElementById('register-form').classList.toggle('hidden', tab !== 'register');
-        }
-
-        function handleRegister() {
-            const name = document.getElementById('reg-name').value;
-            const email = document.getElementById('reg-email').value;
-            const password = document.getElementById('reg-password').value;
-            const confirm = document.getElementById('reg-confirm').value;
-            
-            // Validation
-            if (!name || !email || !password || !confirm) {
-                alert('Please fill all fields');
-                return;
+            if (pageId === 'tests-page') {
+                loadTests();
+            } else if (pageId === 'progress-report') {
+                loadProgressReport();
+            } else if (pageId === 'admin-dashboard') {
+                loadAdminDashboard();
             }
             
-            if (password !== confirm) {
-                alert('Passwords do not match');
-                return;
-            }
-            
-            if (password.length < 6) {
-                alert('Password must be at least 6 characters');
-                return;
-            }
-            
-            // Check if user already exists
-            const existingUser = appState.users.find(u => u.email === email);
-            if (existingUser) {
-                alert('User already exists with this email');
-                return;
-            }
-            
-            // Create new user
-            const newUser = {
-                id: Date.now(),
-                name: name,
-                email: email,
-                password: password,
-                role: 'student',
-                progress: {},
-                joined: new Date().toISOString()
-            };
-            
-            // Add to users array
-            appState.users.push(newUser);
-            localStorage.setItem('mdcatUsers', JSON.stringify(appState.users));
-            
-            // Auto login
-            completeLogin(newUser, false);
-            
-            alert('Registration successful! Welcome ' + name);
+            // Close mobile menu
+            document.querySelector('.nav-menu').classList.remove('active');
+            document.querySelector('.mobile-menu-btn').innerHTML = '<i class="fas fa-bars"></i>';
         }
 
-        function handleLogin() {
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            
-            // Find user
-            const user = appState.users.find(u => 
-                u.email === email && u.password === password
-            );
-            
-            if (!user) {
-                alert('Invalid email or password');
-                return;
-            }
-            
-            completeLogin(user, user.role === 'admin');
+        // Modal Functions
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
         }
 
-        function completeLogin(user, isAdmin) {
-            appState.currentUser = user;
-            appState.isLoggedIn = true;
-            appState.isAdmin = isAdmin;
-            
-            // Mark as online
-            if (!appState.onlineUsers.includes(user.id)) {
-                appState.onlineUsers.push(user.id);
-            }
-            
-            // Save to localStorage
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            
-            // Redirect to dashboard
-            if (isAdmin) {
-                showPage('admin');
-            } else {
-                showPage('dashboard');
-            }
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
         }
 
-        // ========== SOCIAL LOGIN ==========
-        function loginWithFacebook() {
-            // Simulate Facebook login flow
-            const facebookWindow = window.open('', 'Facebook Login', 'width=600,height=400');
-            
-            // In real app, this would be actual Facebook login URL
-            // For demo, simulate login
-            setTimeout(() => {
-                facebookWindow.close();
-                
-                // Create or find Facebook user
-                let user = appState.users.find(u => u.email === 'facebook@user.com');
-                
-                if (!user) {
-                    user = {
-                        id: Date.now(),
-                        name: 'Facebook User',
-                        email: 'facebook@user.com',
-                        role: 'student',
-                        progress: {},
-                        joined: new Date().toISOString()
-                    };
-                    appState.users.push(user);
-                    localStorage.setItem('mdcatUsers', JSON.stringify(appState.users));
-                }
-                
-                completeLogin(user, false);
-                alert('Logged in with Facebook successfully!');
-            }, 1500);
+        function showLoginModal() {
+            showModal('login-modal');
         }
 
-        function loginWithGoogle() {
-            // Simulate Google login flow
-            const googleWindow = window.open('', 'Google Login', 'width=600,height=400');
-            
-            // In real app, this would redirect to Google OAuth
-            setTimeout(() => {
-                googleWindow.close();
-                
-                // Create or find Google user
-                let user = appState.users.find(u => u.email === 'google@user.com');
-                
-                if (!user) {
-                    user = {
-                        id: Date.now(),
-                        name: 'Google User',
-                        email: 'google@user.com',
-                        role: 'student',
-                        progress: {},
-                        joined: new Date().toISOString()
-                    };
-                    appState.users.push(user);
-                    localStorage.setItem('mdcatUsers', JSON.stringify(appState.users));
-                }
-                
-                completeLogin(user, false);
-                alert('Logged in with Google successfully!');
-            }, 1500);
+        function showRegisterModal() {
+            showModal('register-modal');
         }
 
-        function loginWithPhone() {
-            const phoneNumber = document.querySelector('.phone-login input[type="tel"]').value;
+        // Tests Functions
+        function loadTests() {
+            const testsGrid = document.getElementById('tests-grid');
+            testsGrid.innerHTML = '';
             
-            if (!phoneNumber) {
-                alert('Please enter phone number');
-                return;
-            }
-            
-            // Simulate OTP sending
-            const otp = Math.floor(1000 + Math.random() * 9000);
-            
-            // Show OTP input
-            const phoneDiv = document.querySelector('.phone-login');
-            phoneDiv.innerHTML = `
-                <div style="text-align: center; margin-bottom: 1rem;">
-                    <p>OTP sent to +92${phoneNumber}</p>
-                    <p style="font-weight: bold; font-size: 1.5rem;">${otp}</p>
-                </div>
-                <input type="text" class="form-control" id="otp-input" placeholder="Enter OTP" style="margin-bottom: 1rem;">
-                <button class="btn btn-primary w-100" onclick="verifyOTP(${otp}, '${phoneNumber}')">
-                    <i class="fas fa-check"></i> Verify OTP
-                </button>
-            `;
-        }
-
-        function verifyOTP(otp, phoneNumber) {
-            const enteredOTP = document.getElementById('otp-input').value;
-            
-            if (enteredOTP === otp.toString()) {
-                // Create or find phone user
-                let user = appState.users.find(u => u.email === `phone${phoneNumber}@user.com`);
-                
-                if (!user) {
-                    user = {
-                        id: Date.now(),
-                        name: `Phone User ${phoneNumber.slice(-4)}`,
-                        email: `phone${phoneNumber}@user.com`,
-                        phone: phoneNumber,
-                        role: 'student',
-                        progress: {},
-                        joined: new Date().toISOString()
-                    };
-                    appState.users.push(user);
-                    localStorage.setItem('mdcatUsers', JSON.stringify(appState.users));
-                }
-                
-                completeLogin(user, false);
-                alert('Phone verification successful!');
-            } else {
-                alert('Invalid OTP. Please try again.');
-            }
-        }
-
-        // ========== DASHBOARD ==========
-        function loadDashboard() {
-            if (!appState.currentUser) return;
-            
-            // Update user info
-            document.getElementById('user-name').textContent = appState.currentUser.name;
-            document.getElementById('user-email').textContent = appState.currentUser.email;
-            document.getElementById('user-avatar').textContent = appState.currentUser.name.charAt(0).toUpperCase();
-            
-            // Load user's personal progress
-            loadUserProgress();
-        }
-
-        function loadUserProgress() {
-            const userProgress = appState.currentUser.progress || {};
-            const statsDiv = document.getElementById('user-stats');
-            
-            const totalTests = Object.keys(userProgress).length;
-            const totalScore = Object.values(userProgress).reduce((sum, test) => sum + test.score, 0);
-            const averageScore = totalTests > 0 ? Math.round(totalScore / totalTests) : 0;
-            
-            statsDiv.innerHTML = `
-                <div style="background: #667eea; color: white; padding: 1.5rem; border-radius: 10px;">
-                    <h3>${totalTests}</h3>
-                    <p>Tests Completed</p>
-                </div>
-                <div style="background: #00bcd4; color: white; padding: 1.5rem; border-radius: 10px;">
-                    <h3>${averageScore}%</h3>
-                    <p>Average Score</p>
-                </div>
-                <div style="background: #4caf50; color: white; padding: 1.5rem; border-radius: 10px;">
-                    <h3>#${Math.floor(Math.random() * 100) + 1}</h3>
-                    <p>Rank</p>
-                </div>
-            `;
-            
-            // Load progress details
-            const progressDiv = document.getElementById('progress-stats');
-            if (totalTests > 0) {
-                progressDiv.innerHTML = Object.entries(userProgress).slice(0, 5).map(([testId, test]) => `
-                    <div style="margin-bottom: 0.5rem; padding: 10px; background: #f5f5f5; border-radius: 5px;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Test ${testId}</span>
-                            <span style="font-weight: bold; color: ${test.score >= 70 ? '#4caf50' : '#f44336'}">
-                                ${test.score}%
-                            </span>
+            Object.keys(testData).forEach(subject => {
+                testData[subject].forEach(test => {
+                    const testCard = document.createElement('div');
+                    testCard.className = 'test-card';
+                    testCard.innerHTML = `
+                        <div class="test-header">
+                            <span class="test-tag">${subject.toUpperCase()}</span>
+                            <span class="test-difficulty">Medium</span>
                         </div>
-                    </div>
-                `).join('');
-            } else {
-                progressDiv.innerHTML = '<p style="color: #666;">No tests completed yet</p>';
-            }
-        }
-
-        // ========== TESTS PAGE ==========
-        function loadTestsPage() {
-            const container = document.getElementById('tests-container');
-            
-            const tests = [
-                { id: 1, title: "Biology Test 1", subject: "biology", difficulty: "Easy", questions: 10 },
-                { id: 2, title: "Biology Test 2", subject: "biology", difficulty: "Medium", questions: 10 },
-                { id: 3, title: "Chemistry Test 1", subject: "chemistry", difficulty: "Easy", questions: 10 },
-                { id: 4, title: "Chemistry Test 2", subject: "chemistry", difficulty: "Medium", questions: 10 },
-                { id: 5, title: "Physics Test 1", subject: "physics", difficulty: "Medium", questions: 10 },
-                { id: 6, title: "Physics Test 2", subject: "physics", difficulty: "Hard", questions: 10 },
-                { id: 7, title: "English Test 1", subject: "english", difficulty: "Easy", questions: 10 },
-                { id: 8, title: "English Test 2", subject: "english", difficulty: "Medium", questions: 10 }
-            ];
-            
-            container.innerHTML = tests.map(test => {
-                const userProgress = appState.currentUser?.progress || {};
-                const testResult = userProgress[test.id];
-                
-                return `
-                    <div class="test-card" onclick="startTest(${test.id}, '${test.subject}')">
-                        <h3>${test.title}</h3>
-                        <p style="color: #666; margin: 10px 0;">
-                            <span style="background: ${getSubjectColor(test.subject)}; color: white; padding: 3px 10px; border-radius: 15px; font-size: 0.9rem;">
-                                ${test.subject.toUpperCase()}
-                            </span>
-                            <span style="margin-left: 10px;">${test.questions} Questions</span>
-                        </p>
-                        <p>Difficulty: <strong>${test.difficulty}</strong></p>
-                        ${testResult ? `
-                            <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #eee;">
-                                <p style="color: ${testResult.score >= 70 ? '#4caf50' : '#f44336'}; font-weight: bold;">
-                                    Score: ${testResult.score}%
-                                </p>
+                        <h3 class="test-title">${test.title}</h3>
+                        <p class="test-description">${test.description}</p>
+                        <div class="test-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-question-circle"></i>
+                                <span>${test.questions.length} Questions</span>
                             </div>
-                        ` : `
-                            <button class="btn btn-primary" style="margin-top: 15px;" onclick="event.stopPropagation(); startTest(${test.id}, '${test.subject}')">
-                                Start Test
-                            </button>
-                        `}
-                    </div>
-                `;
-            }).join('');
-            
-            // Reset filters
-            document.querySelectorAll('#tests-page .btn').forEach(btn => {
-                btn.style.background = '';
-                btn.style.color = '';
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>20 Minutes</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary w-100" onclick="startTest('${subject}', ${test.id})">
+                            <i class="fas fa-play"></i> Start Test
+                        </button>
+                    `;
+                    testsGrid.appendChild(testCard);
+                });
             });
-            document.getElementById('filter-all').style.background = '#667eea';
-            document.getElementById('filter-all').style.color = 'white';
         }
 
         function filterTests(subject) {
-            const tests = document.querySelectorAll('.test-card');
-            const filterBtns = document.querySelectorAll('#tests-page .btn');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
             
-            // Update button styles
-            filterBtns.forEach(btn => {
-                btn.style.background = '';
-                btn.style.color = '';
-            });
-            event.target.style.background = '#667eea';
-            event.target.style.color = 'white';
-            
-            // Filter tests
-            tests.forEach(test => {
-                if (subject === 'all' || test.textContent.toLowerCase().includes(subject)) {
-                    test.style.display = 'block';
-                } else {
-                    test.style.display = 'none';
-                }
-            });
+            // In a real app, filter tests by subject
+            loadTests(); // For demo, just reload all tests
         }
 
-        function getSubjectColor(subject) {
-            const colors = {
-                biology: '#4caf50',
-                chemistry: '#2196f3',
-                physics: '#ff9800',
-                english: '#9c27b0'
-            };
-            return colors[subject] || '#667eea';
+        function showSubjectTests(subject) {
+            showPage('tests-page');
+            filterTests(subject);
         }
 
-        // ========== QUIZ FUNCTIONS ==========
-        function startTest(testId, subject) {
-            if (!appState.isLoggedIn) {
-                showPage('login');
+        function startTest(subject, testId) {
+            if (!currentUser) {
+                showNotification('Please login to take tests!', 'warning');
+                showLoginModal();
                 return;
             }
             
-            appState.currentTest = { id: testId, subject: subject };
-            appState.currentQuestion = 0;
-            appState.userAnswers = [];
+            currentTest = testData[subject][testId - 1];
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            timeLeft = 1200;
             
-            // Load first question
+            showPage('test-taking-page');
             loadQuestion();
-            showPage('quiz');
+            startTimer();
         }
 
         function loadQuestion() {
-            const container = document.getElementById('quiz-content');
-            const subject = appState.currentTest.subject;
-            const questions = testQuestions[subject];
+            const question = currentTest.questions[currentQuestionIndex];
+            if (!question) return;
             
-            if (!questions || appState.currentQuestion >= questions.length) {
-                finishTest();
-                return;
+            document.getElementById('question-number').textContent = `Question ${currentQuestionIndex + 1}`;
+            document.getElementById('question-text').textContent = question.text;
+            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+            document.getElementById('total-questions').textContent = currentTest.questions.length;
+            
+            // Update progress bar
+            const progress = ((currentQuestionIndex + 1) / currentTest.questions.length) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            
+            // Load options
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach(option => {
+                const isSelected = userAnswers[currentQuestionIndex] === option.id;
+                const optionDiv = document.createElement('div');
+                optionDiv.className = `option ${isSelected ? 'selected' : ''}`;
+                optionDiv.innerHTML = `
+                    <div class="option-letter">${option.id}</div>
+                    <div class="option-text">${option.text}</div>
+                `;
+                optionDiv.onclick = () => selectOption(option.id);
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            // Update navigation buttons
+            document.getElementById('submit-btn').classList.add('hidden');
+            if (currentQuestionIndex === currentTest.questions.length - 1) {
+                document.getElementById('submit-btn').classList.remove('hidden');
             }
-            
-            const question = questions[appState.currentQuestion];
-            
-            container.innerHTML = `
-                <div style="background: white; padding: 2rem; border-radius: 10px;">
-                    <h2 style="margin-bottom: 2rem;">${appState.currentTest.subject.toUpperCase()} Test</h2>
-                    
-                    <div style="margin-bottom: 2rem;">
-                        <h3>Question ${appState.currentQuestion + 1} of ${questions.length}</h3>
-                        <p style="font-size: 1.2rem; margin: 1rem 0;">${question.question}</p>
-                    </div>
-                    
-                    <div style="display: grid; gap: 1rem;">
-                        ${question.options.map((option, index) => `
-                            <div style="padding: 1rem; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; 
-                                 ${appState.userAnswers[appState.currentQuestion] === index ? 'background: #e3f2fd; border-color: #2196f3;' : ''}"
-                                 onclick="selectAnswer(${index})">
-                                ${String.fromCharCode(65 + index)}. ${option}
-                            </div>
-                        `).join('')}
-                    </div>
-                    
-                    <div style="margin-top: 2rem; display: flex; justify-content: space-between;">
-                        <button class="btn" onclick="prevQuestion()" ${appState.currentQuestion === 0 ? 'disabled' : ''}>
-                            <i class="fas fa-arrow-left"></i> Previous
-                        </button>
-                        <button class="btn btn-primary" onclick="nextQuestion()">
-                            ${appState.currentQuestion === questions.length - 1 ? 'Finish Test' : 'Next Question'} 
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
         }
 
-        function selectAnswer(answerIndex) {
-            appState.userAnswers[appState.currentQuestion] = answerIndex;
-            loadQuestion();
-        }
-
-        function prevQuestion() {
-            if (appState.currentQuestion > 0) {
-                appState.currentQuestion--;
-                loadQuestion();
-            }
+        function selectOption(optionId) {
+            userAnswers[currentQuestionIndex] = optionId;
+            loadQuestion(); // Reload to show selection
         }
 
         function nextQuestion() {
-            const subject = appState.currentTest.subject;
-            const questions = testQuestions[subject];
-            
-            if (appState.currentQuestion < questions.length - 1) {
-                appState.currentQuestion++;
+            if (currentQuestionIndex < currentTest.questions.length - 1) {
+                currentQuestionIndex++;
                 loadQuestion();
-            } else {
-                finishTest();
             }
         }
 
-        function finishTest() {
-            const subject = appState.currentTest.subject;
-            const questions = testQuestions[subject];
-            let correct = 0;
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        async function submitTest() {
+            clearInterval(timerInterval);
             
             // Calculate score
-            questions.forEach((q, index) => {
-                if (appState.userAnswers[index] === q.correct) {
-                    correct++;
+            let score = 0;
+            currentTest.questions.forEach((question, index) => {
+                const selectedOption = userAnswers[index];
+                const correctOption = question.options.find(opt => opt.correct);
+                if (selectedOption === correctOption?.id) {
+                    score++;
                 }
             });
             
-            const score = Math.round((correct / questions.length) * 100);
+            const percentage = (score / currentTest.questions.length) * 100;
             
-            // Save to user's progress
-            if (appState.currentUser) {
-                if (!appState.currentUser.progress) {
-                    appState.currentUser.progress = {};
-                }
-                
-                appState.currentUser.progress[appState.currentTest.id] = {
+            // Save result to Firestore
+            if (currentUser) {
+                await db.collection('testResults').add({
+                    userId: currentUser.uid,
+                    userName: currentUser.displayName,
+                    subject: currentTest.title.split(':')[0].toLowerCase(),
+                    testId: currentTest.id,
                     score: score,
-                    correct: correct,
-                    total: questions.length,
-                    subject: subject,
-                    date: new Date().toISOString()
-                };
+                    totalQuestions: currentTest.questions.length,
+                    percentage: percentage,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    answers: userAnswers
+                });
                 
-                // Update in users array
-                const userIndex = appState.users.findIndex(u => u.id === appState.currentUser.id);
-                if (userIndex !== -1) {
-                    appState.users[userIndex] = appState.currentUser;
-                    localStorage.setItem('mdcatUsers', JSON.stringify(appState.users));
-                    localStorage.setItem('currentUser', JSON.stringify(appState.currentUser));
-                }
+                // Update user progress
+                await updateUserProgress(percentage);
             }
             
-            // Show results
-            const container = document.getElementById('quiz-content');
-            container.innerHTML = `
-                <div style="background: white; padding: 3rem; border-radius: 10px; text-align: center;">
-                    <h2>Test Completed!</h2>
-                    <div style="width: 150px; height: 150px; margin: 2rem auto; 
-                         background: ${score >= 70 ? '#4caf50' : '#f44336'}; 
-                         color: white; border-radius: 50%; display: flex; 
-                         align-items: center; justify-content: center; font-size: 3rem; font-weight: bold;">
-                        ${score}%
+            showNotification(`Test submitted! Score: ${score}/${currentTest.questions.length} (${percentage.toFixed(1)}%)`, 'success');
+            showPage('tests-page');
+        }
+
+        async function updateUserProgress(score) {
+            if (!currentUser) return;
+            
+            const userRef = db.collection('users').doc(currentUser.uid);
+            const userDoc = await userRef.get();
+            const progress = userDoc.data().progress || {};
+            
+            const subject = currentTest.title.split(':')[0].toLowerCase();
+            if (!progress[subject]) {
+                progress[subject] = [];
+            }
+            
+            progress[subject].push({
+                score: score,
+                date: new Date().toISOString(),
+                testId: currentTest.id
+            });
+            
+            await userRef.update({ progress: progress });
+        }
+
+        // Progress Report Functions
+        async function loadProgressReport() {
+            if (!currentUser) {
+                showNotification('Please login to view progress!', 'warning');
+                return;
+            }
+            
+            const userDoc = await db.collection('users').doc(currentUser.uid).get();
+            const progress = userDoc.data().progress || {};
+            
+            // Calculate overall score
+            let totalScore = 0;
+            let totalTests = 0;
+            
+            Object.values(progress).forEach(subjectTests => {
+                subjectTests.forEach(test => {
+                    totalScore += test.score;
+                    totalTests++;
+                });
+            });
+            
+            const overallScore = totalTests > 0 ? (totalScore / totalTests).toFixed(1) : 0;
+            document.getElementById('overall-score').textContent = `${overallScore}%`;
+            
+            // Load subject performance
+            const subjectPerformance = document.getElementById('subject-performance');
+            subjectPerformance.innerHTML = '';
+            
+            Object.keys(progress).forEach(subject => {
+                const subjectTests = progress[subject];
+                const subjectScore = subjectTests.reduce((sum, test) => sum + test.score, 0) / subjectTests.length;
+                
+                const subjectDiv = document.createElement('div');
+                subjectDiv.className = 'mt-1';
+                subjectDiv.innerHTML = `
+                    <div class="d-flex justify-between align-center">
+                        <span>${subject.charAt(0).toUpperCase() + subject.slice(1)}</span>
+                        <span class="font-bold">${subjectScore.toFixed(1)}%</span>
                     </div>
-                    <p>You scored ${correct} out of ${questions.length} questions</p>
-                    <div style="margin-top: 2rem;">
-                        <button class="btn btn-primary" onclick="showPage('dashboard')">
-                            <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+                    <div class="progress-bar mt-1">
+                        <div class="progress-fill" style="width: ${subjectScore}%"></div>
+                    </div>
+                `;
+                subjectPerformance.appendChild(subjectDiv);
+            });
+            
+            // Load test history
+            const testHistory = document.getElementById('test-history');
+            testHistory.innerHTML = '';
+            
+            const testResults = await db.collection('testResults')
+                .where('userId', '==', currentUser.uid)
+                .orderBy('timestamp', 'desc')
+                .limit(10)
+                .get();
+            
+            testResults.forEach(doc => {
+                const result = doc.data();
+                const testDiv = document.createElement('div');
+                testDiv.className = 'p-2 border-bottom';
+                testDiv.innerHTML = `
+                    <div class="d-flex justify-between">
+                        <span>${result.subject} Test ${result.testId}</span>
+                        <span class="font-bold">${result.percentage.toFixed(1)}%</span>
+                    </div>
+                    <div class="text-sm text-gray">${new Date(result.timestamp?.toDate()).toLocaleDateString()}</div>
+                `;
+                testHistory.appendChild(testDiv);
+            });
+        }
+
+        // Admin Functions
+        async function loadAdminDashboard() {
+            if (!currentUser) {
+                showNotification('Please login as admin!', 'warning');
+                return;
+            }
+            
+            // Check if user is admin
+            const userDoc = await db.collection('users').doc(currentUser.uid).get();
+            if (userDoc.data().role !== 'admin') {
+                showNotification('Access denied! Admin only.', 'error');
+                showPage('home-page');
+                return;
+            }
+            
+            // Load user statistics
+            const usersSnapshot = await db.collection('users').get();
+            const testResultsSnapshot = await db.collection('testResults').get();
+            
+            const totalUsers = usersSnapshot.size;
+            const onlineUsers = usersSnapshot.docs.filter(doc => doc.data().status === 'online').length;
+            const totalTests = testResultsSnapshot.size;
+            
+            // Calculate average score
+            let totalScore = 0;
+            testResultsSnapshot.forEach(doc => {
+                totalScore += doc.data().percentage;
+            });
+            const avgScore = totalTests > 0 ? (totalScore / totalTests).toFixed(1) : 0;
+            
+            document.getElementById('total-users').textContent = totalUsers;
+            document.getElementById('online-users').textContent = onlineUsers;
+            document.getElementById('total-tests').textContent = totalTests;
+            document.getElementById('avg-score').textContent = `${avgScore}%`;
+            
+            // Load users table
+            const usersTableBody = document.getElementById('users-table-body');
+            usersTableBody.innerHTML = '';
+            
+            usersSnapshot.forEach(doc => {
+                const user = doc.data();
+                const userTests = testResultsSnapshot.docs.filter(testDoc => testDoc.data().userId === doc.id);
+                const avgUserScore = userTests.length > 0 ? 
+                    (userTests.reduce((sum, test) => sum + test.data().percentage, 0) / userTests.length).toFixed(1) : 0;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.name || 'N/A'}</td>
+                    <td>${user.email || 'N/A'}</td>
+                    <td>${user.mobile || 'N/A'}</td>
+                    <td>
+                        <span class="user-status ${user.status === 'online' ? 'online' : 'offline'}">
+                            ${user.status || 'offline'}
+                        </span>
+                    </td>
+                    <td>${userTests.length}</td>
+                    <td>${avgUserScore}%</td>
+                `;
+                usersTableBody.appendChild(row);
+            });
+        }
+
+        // Books & Notes Functions
+        async function showBooks() {
+            showModal('books-modal');
+            
+            const booksContent = document.getElementById('books-content');
+            booksContent.innerHTML = `
+                <div class="text-center p-3">
+                    <i class="fas fa-book fa-3x text-secondary mb-2"></i>
+                    <h3>Books & Notes Library</h3>
+                    <p class="text-gray">Upload and manage your study materials</p>
+                    
+                    <div class="mt-3">
+                        <button class="btn btn-primary" onclick="uploadBook()">
+                            <i class="fas fa-upload"></i> Upload New Book
                         </button>
-                        <button class="btn" onclick="showPage('tests')" style="margin-left: 1rem;">
-                            <i class="fas fa-list"></i> More Tests
-                        </button>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <div class="book-card p-3 border rounded">
+                            <div class="d-flex align-center gap-2">
+                                <i class="fas fa-file-pdf fa-2x text-danger"></i>
+                                <div>
+                                    <h4>MDCAT Chemistry Guide</h4>
+                                    <p class="text-sm text-gray">Complete chemistry syllabus with solved examples</p>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <button class="btn btn-sm btn-outline">
+                                    <i class="fas fa-download"></i> Download
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
         }
 
-        // ========== ADMIN FUNCTIONS ==========
-        function loadAdminDashboard() {
-            // Update stats
-            document.getElementById('total-users').textContent = appState.users.length;
-            document.getElementById('online-users').textContent = appState.onlineUsers.length;
-            document.getElementById('active-users').textContent = appState.users.length; // For demo
-            
-            // Load users list
-            const usersList = document.getElementById('users-list');
-            usersList.innerHTML = appState.map(user => `
-                <div style="padding: 1rem; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 1rem;">
-                    <div style="width: 40px; height: 40px; background: #667eea; color: white; 
-                         border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-                         font-weight: bold;">
-                        ${user.name.charAt(0).toUpperCase()}
-                    </div>
-                    <div style="flex: 1;">
-                        <div style="font-weight: bold;">${user.name}</div>
-                        <div style="color: #666; font-size: 0.9rem;">${user.email}</div>
-                    </div>
-                    <div>
-                        <span style="background: ${user.role === 'admin' ? '#f44336' : '#4caf50'}; 
-                              color: white; padding: 3px 10px; border-radius: 15px; font-size: 0.8rem;">
-                            ${user.role}
-                        </span>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // ========== MOBILE MENU ==========
-        function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            const icon = document.querySelector('.mobile-menu-btn i');
-            
-            if (navLinks.style.display === 'flex') {
-                navLinks.style.display = 'none';
-                icon.className = 'fas fa-bars';
-            } else {
-                navLinks.style.display = 'flex';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '100%';
-                navLinks.style.left = '0';
-                navLinks.style.right = '0';
-                navLinks.style.background = 'white';
-                navLinks.style.padding = '2rem';
-                navLinks.style.boxShadow = 'var(--shadow)';
-                icon.className = 'fas fa-times';
-            }
-        }
-
-        // ========== BOOK UPLOAD ==========
         function uploadBook() {
-            // This would handle file upload in real app
-            const book = {
-                title: "Chemistry Textbook",
-                subject: "chemistry",
-                thumbnail: "https://via.placeholder.com/200x300/2196f3/ffffff?text=Chemistry+Book",
-                link: "#",
-                uploadedBy: appState.currentUser?.name || "Admin"
-            };
-            
-            alert(`Book "${book.title}" uploaded successfully!\nThumbnail added: ${book.thumbnail}`);
+            showNotification('Book upload feature coming soon!', 'warning');
         }
 
-        // Logout function
-        function logout() {
-            // Remove from online users
-            if (appState.currentUser) {
-                const index = appState.onlineUsers.indexOf(appState.currentUser.id);
-                if (index > -1) {
-                    appState.onlineUsers.splice(index, 1);
-                }
-            }
+        // Utility Functions
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notification-text');
             
-            appState.currentUser = null;
-            appState.isLoggedIn = false;
-            appState.isAdmin = false;
+            notificationText.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
             
-            localStorage.removeItem('currentUser');
-            showPage('home');
-            alert('Logged out successfully');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
         }
+
+        // Scroll effect for navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Prevent default form submission
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+            });
+        });
+
+        // Close modals on outside click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
