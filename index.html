@@ -814,6 +814,24 @@
             box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
         }
 
+        /* Upload Progress Bar */
+        .upload-progress {
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            margin-top: 1rem;
+            overflow: hidden;
+            display: none;
+        }
+
+        .upload-progress-fill {
+            height: 100%;
+            background: var(--gradient-secondary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
         /* ========== HERO SECTION ========== */
         #home-page {
             padding-top: 80px;
@@ -1843,12 +1861,12 @@
                 <div class="form-group">
                     <label class="form-label">Admin Email</label>
                     <input type="email" class="form-control" id="admin-email" 
-                           placeholder="doctormotivation29@gmail.com" required>
+                           value="doctormotivation29@gmail.com" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Admin Password</label>
                     <input type="password" class="form-control" id="admin-password" 
-                           placeholder="Admin@123" required>
+                           value="Admin@123" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">
                     <i class="fas fa-lock"></i> Login as Admin
@@ -1873,8 +1891,8 @@
             </div>
             <form id="login-form">
                 <div class="form-group">
-                    <label class="form-label">Email or Mobile Number</label>
-                    <input type="text" class="form-control" id="login-identifier" required>
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" id="login-email" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password</label>
@@ -2333,8 +2351,11 @@
                                         <i class="fas fa-cloud-upload-alt fa-3x mb-3" style="color: var(--secondary);"></i>
                                         <h4>Click to upload or drag and drop</h4>
                                         <p class="text-gray">PDF, DOC, PPT, MP4, Images (Max: 50MB)</p>
+                                        <div class="upload-progress" id="upload-progress">
+                                            <div class="upload-progress-fill" id="upload-progress-fill"></div>
+                                        </div>
                                     </div>
-                                    <input type="file" id="resource-file" class="hidden" onchange="previewResource()" multiple>
+                                    <input type="file" id="resource-file" class="hidden" onchange="previewResource()" accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.mp4">
                                     
                                     <div id="upload-preview" class="upload-preview hidden"></div>
                                 </div>
@@ -2383,8 +2404,8 @@
                                     <textarea class="form-control" id="resource-description" rows="3" placeholder="Enter resource description"></textarea>
                                 </div>
                                 
-                                <button class="btn btn-primary w-100 mt-3" onclick="uploadResource()">
-                                    <i class="fas fa-upload"></i> Upload Resource
+                                <button type="button" class="btn btn-primary w-100 mt-3" onclick="uploadResource()">
+                                    <i class="fas fa-upload"></i> <span id="upload-btn-text">Upload Resource</span>
                                 </button>
                             </div>
                         </div>
@@ -2514,6 +2535,7 @@
         let onlineUsers = [];
         let currentResourceType = 'file';
         let editingResourceId = null;
+        let isUploading = false;
 
         // ========== ADMIN CREDENTIALS ==========
         const ADMIN_CREDENTIALS = {
@@ -2523,7 +2545,18 @@
         };
 
         // ========== DATABASE (LocalStorage) ==========
-        let users = JSON.parse(localStorage.getItem('pakmed_users')) || [];
+        let users = JSON.parse(localStorage.getItem('pakmed_users')) || [
+            {
+                id: 1,
+                name: "Admin User",
+                email: "doctormotivation29@gmail.com",
+                password: "Admin@123",
+                mobile: "+923001234567",
+                role: "admin",
+                joined: new Date().toISOString(),
+                lastActive: new Date().toISOString()
+            }
+        ];
         let resources = JSON.parse(localStorage.getItem('pakmed_resources')) || [];
         let messages = JSON.parse(localStorage.getItem('pakmed_messages')) || [];
         let quizResults = JSON.parse(localStorage.getItem('pakmed_quiz_results')) || [];
@@ -2546,123 +2579,9 @@
                             text: "Which law states that for every action there is an equal and opposite reaction?", 
                             options: ["Newton's First Law", "Newton's Second Law", "Newton's Third Law", "Law of Gravitation"], 
                             correct: 2 
-                        },
-                        { 
-                            id: 3, 
-                            text: "What is the acceleration due to gravity on Earth's surface?", 
-                            options: ["9.8 m/s²", "10 m/s²", "8.9 m/s²", "11 m/s²"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 4, 
-                            text: "Which of the following is a scalar quantity?", 
-                            options: ["Force", "Velocity", "Speed", "Acceleration"], 
-                            correct: 2 
-                        },
-                        { 
-                            id: 5, 
-                            text: "What is the formula for kinetic energy?", 
-                            options: ["½mv²", "mgh", "Fd", "Pt"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 6, 
-                            text: "Which device is used to measure atmospheric pressure?", 
-                            options: ["Barometer", "Thermometer", "Hygrometer", "Anemometer"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 7, 
-                            text: "What is the unit of electric current?", 
-                            options: ["Ampere", "Volt", "Ohm", "Watt"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 8, 
-                            text: "Which law relates voltage, current, and resistance?", 
-                            options: ["Ohm's Law", "Newton's Law", "Boyle's Law", "Faraday's Law"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 9, 
-                            text: "What is the speed of light in vacuum?", 
-                            options: ["3 × 10⁸ m/s", "3 × 10⁶ m/s", "3 × 10⁵ m/s", "3 × 10⁷ m/s"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 10, 
-                            text: "Which type of lens is used to correct short-sightedness?", 
-                            options: ["Concave lens", "Convex lens", "Plano-convex lens", "Cylindrical lens"], 
-                            correct: 0 
                         }
                     ]
-                },
-                {
-                    id: 2,
-                    title: "Physics Quiz 2: Thermodynamics",
-                    questions: [
-                        { 
-                            id: 1, 
-                            text: "What is the SI unit of temperature?", 
-                            options: ["Kelvin", "Celsius", "Fahrenheit", "Rankine"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 2, 
-                            text: "Which law of thermodynamics states that energy cannot be created or destroyed?", 
-                            options: ["Zeroth Law", "First Law", "Second Law", "Third Law"], 
-                            correct: 1 
-                        },
-                        { 
-                            id: 3, 
-                            text: "What is absolute zero temperature?", 
-                            options: ["0°C", "-273.15°C", "-100°C", "0 K"], 
-                            correct: 1 
-                        },
-                        { 
-                            id: 4, 
-                            text: "Which process occurs at constant temperature?", 
-                            options: ["Adiabatic", "Isobaric", "Isothermal", "Isochoric"], 
-                            correct: 2 
-                        },
-                        { 
-                            id: 5, 
-                            text: "What is the specific heat capacity of water?", 
-                            options: ["4.18 J/g°C", "1.0 J/g°C", "2.1 J/g°C", "0.9 J/g°C"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 6, 
-                            text: "Which device converts heat into mechanical work?", 
-                            options: ["Heat engine", "Refrigerator", "Heat pump", "Thermocouple"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 7, 
-                            text: "What is the efficiency of a Carnot engine?", 
-                            options: ["1 - (T₂/T₁)", "T₁/(T₁ - T₂)", "(T₁ - T₂)/T₁", "T₂/(T₁ - T₂)"], 
-                            correct: 2 
-                        },
-                        { 
-                            id: 8, 
-                            text: "Which law relates pressure and volume at constant temperature?", 
-                            options: ["Boyle's Law", "Charles's Law", "Gay-Lussac's Law", "Avogadro's Law"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 9, 
-                            text: "What is entropy a measure of?", 
-                            options: ["Disorder", "Temperature", "Pressure", "Volume"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 10, 
-                            text: "Which process has no heat transfer?", 
-                            options: ["Adiabatic", "Isothermal", "Isobaric", "Isochoric"], 
-                            correct: 0 
-                        }
-                    ]
-                },
+                }
             ],
             chemistry: [
                 {
@@ -2674,63 +2593,9 @@
                             text: "What is the atomic number of Carbon?", 
                             options: ["6", "12", "14", "8"], 
                             correct: 0 
-                        },
-                        { 
-                            id: 2, 
-                            text: "Who discovered the electron?", 
-                            options: ["J.J. Thomson", "Ernest Rutherford", "John Dalton", "Niels Bohr"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 3, 
-                            text: "How many electrons can occupy the first shell?", 
-                            options: ["2", "8", "18", "32"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 4, 
-                            text: "What are isotopes?", 
-                            options: ["Same atomic number, different mass", "Same mass, different atomic number", "Different elements", "Same neutrons"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 5, 
-                            text: "Which subatomic particle has no charge?", 
-                            options: ["Neutron", "Proton", "Electron", "Positron"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 6, 
-                            text: "What is the mass number?", 
-                            options: ["Protons + Neutrons", "Protons + Electrons", "Neutrons + Electrons", "Protons only"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 7, 
-                            text: "Which element has the electron configuration 1s²2s²2p⁶3s²?", 
-                            options: ["Magnesium", "Neon", "Sodium", "Aluminum"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 8, 
-                            text: "What is the maximum number of electrons in p orbital?", 
-                            options: ["2", "6", "10", "14"], 
-                            correct: 1 
-                        },
-                        { 
-                            id: 9, 
-                            text: "Which quantum number describes the shape of orbital?", 
-                            options: ["Principal", "Azimuthal", "Magnetic", "Spin"], 
-                            correct: 1 
-                        },
-                        { 
-                            id: 10, 
-                            text: "Who proposed the nuclear model of atom?", 
-                            options: ["Rutherford", "Thomson", "Bohr", "Dalton"], 
-                            correct: 0 
                         }
                     ]
-                },
+                }
             ],
             biology: [
                 {
@@ -2742,63 +2607,9 @@
                             text: "What is the powerhouse of the cell?", 
                             options: ["Mitochondria", "Nucleus", "Ribosome", "Golgi Apparatus"], 
                             correct: 0 
-                        },
-                        { 
-                            id: 2, 
-                            text: "Which organelle is responsible for protein synthesis?", 
-                            options: ["Ribosome", "Lysosome", "Endoplasmic Reticulum", "Vacuole"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 3, 
-                            text: "What is the control center of the cell?", 
-                            options: ["Nucleus", "Mitochondria", "Chloroplast", "Cytoplasm"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 4, 
-                            text: "Which cell organelle contains digestive enzymes?", 
-                            options: ["Lysosome", "Ribosome", "Golgi", "Mitochondria"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 5, 
-                            text: "What is the process of cell division called?", 
-                            options: ["Mitosis", "Meiosis", "Both", "None"], 
-                            correct: 2 
-                        },
-                        { 
-                            id: 6, 
-                            text: "Which type of cell has no nucleus?", 
-                            options: ["Prokaryotic", "Eukaryotic", "Animal cell", "Plant cell"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 7, 
-                            text: "What is the cell wall made of in plant cells?", 
-                            options: ["Cellulose", "Chitin", "Peptidoglycan", "Protein"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 8, 
-                            text: "Which organelle is found only in plant cells?", 
-                            options: ["Chloroplast", "Mitochondria", "Nucleus", "Ribosome"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 9, 
-                            text: "What is the fluid inside the cell called?", 
-                            options: ["Cytoplasm", "Nucleoplasm", "Protoplasm", "All of these"], 
-                            correct: 3 
-                        },
-                        { 
-                            id: 10, 
-                            text: "Who discovered the cell?", 
-                            options: ["Robert Hooke", "Leeuwenhoek", "Schleiden", "Schwann"], 
-                            correct: 0 
                         }
                     ]
-                },
+                }
             ],
             english: [
                 {
@@ -2810,63 +2621,9 @@
                             text: "What is the synonym of 'beautiful'?", 
                             options: ["Pretty", "Ugly", "Big", "Small"], 
                             correct: 0 
-                        },
-                        { 
-                            id: 2, 
-                            text: "What is the antonym of 'hot'?", 
-                            options: ["Cold", "Warm", "Sweet", "High"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 3, 
-                            text: "What is the plural of 'child'?", 
-                            options: ["Children", "Childs", "Childes", "Childer"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 4, 
-                            text: "What is the past tense of 'go'?", 
-                            options: ["Went", "Gone", "Goed", "Going"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 5, 
-                            text: "Which is correct: He ___ to school.", 
-                            options: ["goes", "go", "going", "went"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 6, 
-                            text: "Which article is used before 'hour'?", 
-                            options: ["an", "a", "the", "none"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 7, 
-                            text: "What is the comparative of 'good'?", 
-                            options: ["better", "gooder", "more good", "best"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 8, 
-                            text: "What is the opposite of 'begin'?", 
-                            options: ["End", "Start", "Continue", "Middle"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 9, 
-                            text: "'I am hungry' is a:", 
-                            options: ["Statement", "Question", "Command", "Exclamation"], 
-                            correct: 0 
-                        },
-                        { 
-                            id: 10, 
-                            text: "What is the capital of Pakistan?", 
-                            options: ["Islamabad", "Karachi", "Lahore", "Peshawar"], 
-                            correct: 0 
                         }
                     ]
-                },
+                }
             ]
         };
 
@@ -2911,9 +2668,9 @@
             // Login form
             document.getElementById('login-form').addEventListener('submit', function(e) {
                 e.preventDefault();
-                const identifier = document.getElementById('login-identifier').value;
+                const email = document.getElementById('login-email').value;
                 const password = document.getElementById('login-password').value;
-                loginUser(identifier, password);
+                loginUser(email, password);
             });
 
             // Admin login form
@@ -3042,12 +2799,9 @@
             }
         }
 
-        function loginUser(identifier, password) {
+        function loginUser(email, password) {
             // Check if user exists
-            let user = users.find(u => 
-                (u.email === identifier || u.mobile === identifier) && 
-                u.password === password
-            );
+            let user = users.find(u => u.email === email && u.password === password);
             
             if (user) {
                 currentUser = user;
@@ -3055,9 +2809,12 @@
                 updateUIForUser();
                 closeModal('login-modal');
                 showNotification('Login successful!', 'success');
+                showPage('home-page'); // Automatically go to home page
                 
                 // Show profile link
-                document.getElementById('profile-nav-link').classList.remove('hidden');
+                if (!isAdmin) {
+                    document.getElementById('profile-nav-link').classList.remove('hidden');
+                }
                 
                 // Update online users
                 updateOnlineUsers();
@@ -3069,6 +2826,7 @@
         function adminLogin(email, password) {
             if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
                 currentUser = {
+                    id: 1,
                     name: ADMIN_CREDENTIALS.name,
                     email: email,
                     role: "admin",
@@ -3081,7 +2839,7 @@
                 document.getElementById('admin-nav-link').classList.remove('hidden');
                 document.getElementById('profile-nav-link').classList.add('hidden');
                 closeModal('admin-login-modal');
-                showPage('admin-dashboard');
+                showPage('home-page'); // Automatically go to home page
                 showNotification('Admin login successful!', 'success');
                 
                 // Update online users
@@ -3119,6 +2877,7 @@
             document.getElementById('profile-nav-link').classList.remove('hidden');
             closeModal('register-modal');
             showNotification('Registration successful!', 'success');
+            showPage('home-page'); // Automatically go to home page
             
             // Update online users
             updateOnlineUsers();
@@ -3138,6 +2897,7 @@
             updateUIForUser();
             closeModal('free-trial-modal');
             showNotification('Welcome Guest! Enjoy limited features.', 'success');
+            showPage('home-page'); // Automatically go to home page
             
             // Update online users
             updateOnlineUsers();
@@ -3161,7 +2921,7 @@
             document.querySelectorAll('.auth-buttons .btn').forEach(btn => btn.classList.add('hidden'));
             document.getElementById('user-info').classList.remove('hidden');
             
-            if (currentUser.name) {
+            if (currentUser && currentUser.name) {
                 document.getElementById('user-name').textContent = currentUser.name;
             }
         }
@@ -3247,6 +3007,20 @@
                 }
                 loadAdminStats();
             }
+        }
+
+        function showLoginModal() {
+            closeModal('free-trial-modal');
+            showModal('login-modal');
+        }
+
+        function showAdminLogin() {
+            showModal('admin-login-modal');
+        }
+
+        function showRegisterModal() {
+            closeModal('free-trial-modal');
+            showModal('register-modal');
         }
 
         // ========== PROFILE PAGE ==========
@@ -3562,21 +3336,15 @@
                 return;
             }
             
-            // For demo purposes, we'll create a sample download
-            // In a real app, this would be the actual file URL
-            if (resource.uploadType === 'file') {
-                // Create a temporary download link for demo
+            // For demo purposes, create a sample PDF file
+            if (resource.fileData) {
+                // If we have file data (for uploaded files)
                 const link = document.createElement('a');
-                const content = "This is a sample file content for: " + resource.title + "\n\nDescription: " + resource.description;
-                const blob = new Blob([content], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                
-                link.href = url;
-                link.download = resource.title.replace(/\s+/g, '_') + '.txt';
+                link.href = resource.fileData;
+                link.download = resource.title.replace(/\s+/g, '_') + '.pdf';
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-                URL.revokeObjectURL(url);
                 
                 showNotification(`Downloading ${resource.title}...`, 'success');
             } else if (resource.url && resource.url !== '#') {
@@ -3584,7 +3352,83 @@
                 window.open(resource.url, '_blank');
                 showNotification(`Opening ${resource.title}...`, 'success');
             } else {
-                showNotification('File not available for download.', 'error');
+                // Create a sample PDF content
+                const pdfContent = `%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+/Resources <<
+/Font <<
+/F1 5 0 R
+>>
+>>
+>>
+endobj
+4 0 obj
+<<
+/Length 73
+>>
+stream
+BT
+/F1 24 Tf
+100 700 Td
+(${resource.title}) Tj
+100 650 Td
+(${resource.description}) Tj
+ET
+endstream
+endobj
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+xref
+0 6
+0000000000 65535 f
+0000000010 00000 n
+0000000053 00000 n
+0000000116 00000 n
+0000000234 00000 n
+0000000309 00000 n
+trailer
+<<
+/Size 6
+/Root 1 0 R
+>>
+startxref
+360
+%%EOF`;
+                
+                const blob = new Blob([pdfContent], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = resource.title.replace(/\s+/g, '_') + '.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                
+                showNotification(`Downloading ${resource.title}...`, 'success');
             }
         }
 
@@ -3615,6 +3459,9 @@
             
             // Set editing mode
             editingResourceId = resourceId;
+            
+            // Update button text
+            document.getElementById('upload-btn-text').textContent = 'Update Resource';
             
             // Switch to upload tab
             showAdminTab('upload');
@@ -3647,10 +3494,6 @@
         }
 
         // ========== ADMIN FUNCTIONS ==========
-        function showAdminLogin() {
-            showModal('admin-login-modal');
-        }
-
         function loadAdminStats() {
             if (!isAdmin) return;
             
@@ -3830,8 +3673,8 @@
             event.target.classList.add('active');
             document.getElementById(tabId + '-tab').classList.remove('hidden');
             
-            // Reset form if switching to upload tab
-            if (tabId === 'upload') {
+            // Reset form if switching to upload tab and not editing
+            if (tabId === 'upload' && !editingResourceId) {
                 resetUploadForm();
             }
         }
@@ -3890,11 +3733,16 @@
             document.getElementById('resource-file').value = '';
             document.getElementById('upload-preview').classList.add('hidden');
             document.getElementById('upload-preview').innerHTML = '';
+            document.getElementById('upload-progress').style.display = 'none';
+            document.getElementById('upload-progress-fill').style.width = '0%';
+            document.getElementById('upload-btn-text').textContent = 'Upload Resource';
             editingResourceId = null;
             selectResourceType('file');
         }
 
         function uploadResource() {
+            if (isUploading) return;
+            
             const title = document.getElementById('resource-title').value.trim();
             const subject = document.getElementById('resource-subject').value;
             const type = document.getElementById('resource-type').value;
@@ -3912,58 +3760,124 @@
                 return;
             }
             
-            // Check if we're editing or creating new
-            if (editingResourceId) {
-                // Edit existing resource
-                const resourceIndex = resources.findIndex(r => r.id === editingResourceId);
-                if (resourceIndex !== -1) {
-                    resources[resourceIndex].title = title;
-                    resources[resourceIndex].subject = subject;
-                    resources[resourceIndex].type = type;
-                    resources[resourceIndex].description = description;
+            isUploading = true;
+            document.getElementById('upload-progress').style.display = 'block';
+            document.getElementById('upload-btn-text').textContent = 'Uploading...';
+            
+            // Simulate upload progress
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 10;
+                document.getElementById('upload-progress-fill').style.width = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
                     
-                    if (currentResourceType !== 'file' && link) {
-                        resources[resourceIndex].url = link;
-                        resources[resourceIndex].uploadType = 'link';
+                    // Check if we're editing or creating new
+                    if (editingResourceId) {
+                        // Edit existing resource
+                        const resourceIndex = resources.findIndex(r => r.id === editingResourceId);
+                        if (resourceIndex !== -1) {
+                            resources[resourceIndex].title = title;
+                            resources[resourceIndex].subject = subject;
+                            resources[resourceIndex].type = type;
+                            resources[resourceIndex].description = description;
+                            
+                            if (currentResourceType !== 'file' && link) {
+                                resources[resourceIndex].url = link;
+                                resources[resourceIndex].uploadType = 'link';
+                            } else if (file) {
+                                // Simulate file reading
+                                const reader = new FileReader();
+                                reader.onload = function(e) {
+                                    resources[resourceIndex].fileData = e.target.result;
+                                    resources[resourceIndex].fileName = file.name;
+                                    resources[resourceIndex].fileSize = file.size;
+                                    resources[resourceIndex].uploadType = 'file';
+                                    
+                                    localStorage.setItem('pakmed_resources', JSON.stringify(resources));
+                                    showNotification('Resource updated successfully!', 'success');
+                                    isUploading = false;
+                                    resetUploadForm();
+                                    loadResources();
+                                    loadAdminStats();
+                                };
+                                reader.readAsDataURL(file);
+                                return;
+                            }
+                            
+                            localStorage.setItem('pakmed_resources', JSON.stringify(resources));
+                            showNotification('Resource updated successfully!', 'success');
+                        }
+                    } else {
+                        // Create new resource
+                        let url = '#';
+                        let uploadType = 'file';
+                        let fileData = null;
+                        let fileName = null;
+                        let fileSize = null;
+                        
+                        if (currentResourceType !== 'file' && link) {
+                            url = link;
+                            uploadType = 'link';
+                        } else if (file) {
+                            // Simulate file reading
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                fileData = e.target.result;
+                                fileName = file.name;
+                                fileSize = file.size;
+                                
+                                const newResource = {
+                                    id: Date.now(),
+                                    title: title,
+                                    type: type,
+                                    subject: subject,
+                                    description: description,
+                                    url: url,
+                                    fileData: fileData,
+                                    fileName: fileName,
+                                    fileSize: fileSize,
+                                    uploadedBy: 'Admin',
+                                    date: new Date().toISOString().split('T')[0],
+                                    uploadType: uploadType
+                                };
+                                
+                                resources.push(newResource);
+                                localStorage.setItem('pakmed_resources', JSON.stringify(resources));
+                                showNotification('Resource uploaded successfully!', 'success');
+                                isUploading = false;
+                                resetUploadForm();
+                                loadResources();
+                                loadAdminStats();
+                            };
+                            reader.readAsDataURL(file);
+                            return;
+                        }
+                        
+                        const newResource = {
+                            id: Date.now(),
+                            title: title,
+                            type: type,
+                            subject: subject,
+                            description: description,
+                            url: url,
+                            uploadedBy: 'Admin',
+                            date: new Date().toISOString().split('T')[0],
+                            uploadType: uploadType
+                        };
+                        
+                        resources.push(newResource);
+                        localStorage.setItem('pakmed_resources', JSON.stringify(resources));
+                        showNotification('Resource uploaded successfully!', 'success');
                     }
                     
-                    localStorage.setItem('pakmed_resources', JSON.stringify(resources));
-                    showNotification('Resource updated successfully!', 'success');
-                    editingResourceId = null;
+                    isUploading = false;
+                    resetUploadForm();
+                    loadResources();
+                    loadAdminStats();
                 }
-            } else {
-                // Create new resource
-                let url = '#';
-                let uploadType = 'file';
-                
-                if (currentResourceType !== 'file' && link) {
-                    url = link;
-                    uploadType = 'link';
-                }
-                
-                const newResource = {
-                    id: Date.now(),
-                    title: title,
-                    type: type,
-                    subject: subject,
-                    description: description,
-                    url: url,
-                    uploadedBy: 'Admin',
-                    date: new Date().toISOString().split('T')[0],
-                    uploadType: uploadType
-                };
-                
-                resources.push(newResource);
-                localStorage.setItem('pakmed_resources', JSON.stringify(resources));
-                showNotification('Resource uploaded successfully!', 'success');
-            }
-            
-            // Reset form
-            resetUploadForm();
-            
-            // Reload resources
-            loadResources();
-            loadAdminStats();
+            }, 200);
         }
 
         function editUser(userId) {
@@ -4043,16 +3957,6 @@
 
         function closeModal(modalId) {
             document.getElementById(modalId).classList.remove('active');
-        }
-
-        function showLoginModal() {
-            closeModal('free-trial-modal');
-            showModal('login-modal');
-        }
-
-        function showRegisterModal() {
-            closeModal('free-trial-modal');
-            showModal('register-modal');
         }
 
         // ========== UTILITY FUNCTIONS ==========
