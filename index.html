@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -228,6 +227,73 @@
         .p-1 { padding: 1rem; }
         .p-2 { padding: 2rem; }
         .p-3 { padding: 3rem; }
+
+        /* ========== SOCIAL MEDIA BUTTONS ========== */
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-left: 20px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-medical);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(26, 35, 126, 0.4);
+        }
+
+        .social-icon.whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+        }
+
+        .social-icon.tiktok {
+            background: linear-gradient(135deg, #000000 0%, #69C9D0 100%);
+        }
+
+        .social-icon.facebook {
+            background: linear-gradient(135deg, #1877F2 0%, #0A4E9B 100%);
+        }
+
+        .social-icon.youtube {
+            background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float-btn {
+            position: fixed;
+            bottom: 100px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            z-index: 100;
+            transition: var(--transition);
+            animation: pulse-glow 2s infinite;
+        }
+
+        .whatsapp-float-btn:hover {
+            transform: scale(1.1);
+        }
 
         /* ========== NAVIGATION ========== */
         .navbar {
@@ -1282,6 +1348,39 @@
             animation: pulse-glow 2s infinite;
         }
 
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .action-btn.edit {
+            background: var(--warning);
+            color: white;
+        }
+
+        .action-btn.delete {
+            background: var(--danger);
+            color: white;
+        }
+
+        .action-btn.download {
+            background: var(--success);
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+
         /* ========== RESPONSIVE ========== */
         @media (max-width: 992px) {
             .hero-title {
@@ -1324,6 +1423,15 @@
                 flex-direction: column;
                 text-align: center;
             }
+            
+            .social-icons {
+                display: none;
+            }
+            
+            .whatsapp-float-btn {
+                left: 20px;
+                bottom: 180px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1355,6 +1463,11 @@
     </style>
 </head>
 <body>
+    <!-- Floating WhatsApp Button -->
+    <div class="whatsapp-float-btn" onclick="openWhatsApp()">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
     <!-- Chat Bot -->
     <div class="chat-bot-btn" onclick="toggleChatBot()">
         <i class="fas fa-comment-medical"></i>
@@ -1394,6 +1507,19 @@
                     <span>MDCAT PREMIUM PLATFORM</span>
                 </div>
             </a>
+
+            <!-- Social Media Icons -->
+            <div class="social-icons">
+                <a href="https://whatsapp.com/channel/0029VaFeriBKwqSZYmzh5d0j" target="_blank" class="social-icon whatsapp" title="WhatsApp Channel">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.tiktok.com/@doctormotivation5?_r=1&_t=ZN-92bPR2hpZd0" target="_blank" class="social-icon tiktok" title="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://www.facebook.com/groups/6814909018522660/?ref=share&mibextid=NSMWBT" target="_blank" class="social-icon facebook" title="Facebook Group">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
 
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
@@ -2634,6 +2760,14 @@
             });
         }
 
+        // ========== WHATSAPP FUNCTION ==========
+        function openWhatsApp() {
+            const phoneNumber = "+923369618640";
+            const message = encodeURIComponent("Hello! I'm interested in PAK-MED STUDY CORNER MDCAT platform. Can you provide more information?");
+            const url = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(url, '_blank');
+        }
+
         // ========== AUTHENTICATION ==========
         function checkLoginStatus() {
             const user = JSON.parse(localStorage.getItem('current_user'));
@@ -3122,6 +3256,7 @@
                         subject: 'physics',
                         description: 'Complete physics notes for MDCAT',
                         url: '#',
+                        fileUrl: 'sample-physics.pdf',
                         uploadedBy: 'Admin',
                         date: '2024-01-15'
                     },
@@ -3132,6 +3267,7 @@
                         subject: 'chemistry',
                         description: 'Important chemical reactions explained',
                         url: '#',
+                        fileUrl: 'chemistry-video.mp4',
                         uploadedBy: 'Admin',
                         date: '2024-01-14'
                     },
@@ -3142,6 +3278,7 @@
                         subject: 'biology',
                         description: 'Important biological diagrams',
                         url: '#',
+                        fileUrl: 'biology-diagrams.pdf',
                         uploadedBy: 'Admin',
                         date: '2024-01-13'
                     },
@@ -3152,6 +3289,7 @@
                         subject: 'english',
                         description: 'Complete English grammar for MDCAT',
                         url: '#',
+                        fileUrl: 'english-grammar.pdf',
                         uploadedBy: 'Admin',
                         date: '2024-01-12'
                     }
@@ -3179,9 +3317,19 @@
                             <span>${resource.date}</span>
                         </div>
                     </div>
-                    <button class="btn btn-primary w-100" onclick="downloadResource(${resource.id})">
-                        <i class="fas fa-download"></i> Download
-                    </button>
+                    <div class="action-buttons mt-2">
+                        <button class="action-btn download w-100" onclick="downloadResource(${resource.id})">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        ${isAdmin ? `
+                            <button class="action-btn edit" onclick="editResource(${resource.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete" onclick="deleteResource(${resource.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        ` : ''}
+                    </div>
                 `;
                 container.appendChild(resourceCard);
             });
@@ -3190,8 +3338,65 @@
         function downloadResource(resourceId) {
             const resource = resources.find(r => r.id === resourceId);
             if (resource) {
-                showNotification(`Downloading ${resource.title}...`, 'success');
-                // In real app, this would trigger actual download
+                if (resource.fileUrl) {
+                    // Create a temporary download link
+                    const link = document.createElement('a');
+                    link.href = resource.fileUrl;
+                    link.download = resource.title.replace(/\s+/g, '-') + '.' + resource.type;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    showNotification(`Downloading ${resource.title}...`, 'success');
+                } else if (resource.url) {
+                    // For external links
+                    window.open(resource.url, '_blank');
+                    showNotification(`Opening ${resource.title}...`, 'success');
+                } else {
+                    showNotification('File not available for download.', 'error');
+                }
+            }
+        }
+
+        function editResource(resourceId) {
+            if (!isAdmin) {
+                showNotification('Admin access required!', 'error');
+                return;
+            }
+            
+            const resource = resources.find(r => r.id === resourceId);
+            if (resource) {
+                // Fill form with resource data
+                document.getElementById('resource-title').value = resource.title;
+                document.getElementById('resource-subject').value = resource.subject;
+                document.getElementById('resource-type').value = resource.type;
+                document.getElementById('resource-description').value = resource.description;
+                
+                if (resource.url && resource.url !== '#') {
+                    document.getElementById('resource-link').value = resource.url;
+                    selectResourceType('link');
+                }
+                
+                showNotification(`Editing ${resource.title}...`, 'info');
+                showAdminTab('upload');
+                
+                // Set a flag to know we're editing
+                resource.editing = true;
+                resource.editId = resourceId;
+            }
+        }
+
+        function deleteResource(resourceId) {
+            if (!isAdmin) {
+                showNotification('Admin access required!', 'error');
+                return;
+            }
+            
+            if (confirm('Are you sure you want to delete this resource?')) {
+                resources = resources.filter(r => r.id !== resourceId);
+                localStorage.setItem('pakmed_resources', JSON.stringify(resources));
+                showNotification('Resource deleted successfully!', 'success');
+                loadResources();
+                loadAdminStats();
             }
         }
 
@@ -3259,6 +3464,36 @@
                         </td>
                     `;
                     usersBody.appendChild(row);
+                });
+            }
+            
+            // Load resources for content tab
+            const contentList = document.getElementById('content-list');
+            if (contentList) {
+                contentList.innerHTML = '';
+                resources.forEach(resource => {
+                    const resourceDiv = document.createElement('div');
+                    resourceDiv.className = 'admin-card mb-2 p-3';
+                    resourceDiv.innerHTML = `
+                        <div class="d-flex justify-between align-center">
+                            <div>
+                                <h4>${resource.title}</h4>
+                                <p class="text-sm text-gray">${resource.subject} • ${resource.type} • ${resource.date}</p>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="action-btn download" onclick="downloadResource(${resource.id})">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="action-btn edit" onclick="editResource(${resource.id})">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="action-btn delete" onclick="deleteResource(${resource.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    contentList.appendChild(resourceDiv);
                 });
             }
             
@@ -3398,27 +3633,56 @@
                 return;
             }
             
-            let url = '#';
-            if (currentResourceType === 'file' && file) {
-                url = `#file_${file.name}`;
-            } else if (link) {
-                url = link;
+            // Check if we're editing
+            const editingResource = resources.find(r => r.editing === true);
+            
+            if (editingResource) {
+                // Update existing resource
+                editingResource.title = title;
+                editingResource.subject = subject;
+                editingResource.type = type;
+                editingResource.description = description;
+                
+                if (currentResourceType !== 'file' && link) {
+                    editingResource.url = link;
+                }
+                
+                delete editingResource.editing;
+                delete editingResource.editId;
+                
+                showNotification('Resource updated successfully!', 'success');
+            } else {
+                // Create new resource
+                let url = '#';
+                let fileUrl = null;
+                
+                if (currentResourceType === 'file' && file) {
+                    // In a real app, you would upload the file to a server
+                    // For demo, we'll just save the filename
+                    fileUrl = 'sample-file.' + file.name.split('.').pop();
+                    url = '#';
+                } else if (link) {
+                    url = link;
+                }
+                
+                const newResource = {
+                    id: Date.now(),
+                    title: title,
+                    type: type,
+                    subject: subject,
+                    description: description,
+                    url: url,
+                    fileUrl: fileUrl,
+                    uploadedBy: 'Admin',
+                    date: new Date().toISOString().split('T')[0],
+                    uploadType: currentResourceType
+                };
+                
+                resources.push(newResource);
+                showNotification('Resource uploaded successfully!', 'success');
             }
             
-            const newResource = {
-                id: Date.now(),
-                title: title,
-                type: type,
-                subject: subject,
-                description: description,
-                url: url,
-                uploadedBy: 'Admin',
-                date: new Date().toISOString().split('T')[0],
-                file: file ? file.name : null,
-                uploadType: currentResourceType
-            };
-            
-            resources.push(newResource);
+            // Save to localStorage
             localStorage.setItem('pakmed_resources', JSON.stringify(resources));
             
             // Clear form
@@ -3429,7 +3693,7 @@
             document.getElementById('upload-preview').classList.add('hidden');
             document.getElementById('upload-preview').innerHTML = '';
             
-            showNotification('Resource uploaded successfully!', 'success');
+            // Reload resources
             loadResources();
             loadAdminStats();
         }
@@ -3497,6 +3761,8 @@
                 return "For support, email us at support@pakmedstudycorner.com or use this chat for quick help.";
             } else if (lowerText.includes('mdcat') || lowerText.includes('exam')) {
                 return "MDCAT preparation requires consistent practice. Use our quizzes and study materials regularly for best results.";
+            } else if (lowerText.includes('whatsapp')) {
+                return "Click the WhatsApp button on the left side to contact us directly! You can also join our WhatsApp channel using the icon in the header.";
             } else {
                 return "I'm here to help with your MDCAT preparation. You can ask me about subjects, quizzes, study materials, or general questions about the platform.";
             }
